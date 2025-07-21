@@ -1,0 +1,252 @@
+<html><head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  body { font-family: Arial, Helvetica, sans-serif; background: #f8f8f8; color: #000; padding: 20px; }
+    h1 { margin-top: 0; color: #FFD700; }
+    select { font-size: 1em; padding: 6px 10px; margin: 10px 0 20px 0; border: 1px solid #bbb; border-radius: 4px; width: 100%; box-sizing: border-box; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 30px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #FFD700; color: #000; cursor: pointer; }
+    th.sortable::after { content: ' '; margin-left: 5px; color: #555; }
+    th.asc::after { content: ' ?'; color: #000; }
+    th.desc::after { content: ' ?'; color: #000; }
+    th.pts-head { background: #FFD700; color: #000; }
+    td.pts-cell { background: #fffde7; font-weight: bold; color: #000; }
+    td.gf { background: #d0eaff; } 
+    td.ga { background: #ffe0d0; } 
+    td.gd { background: #d0ffe0; }
+    tr:nth-child(even) { background: #f9f9f9; }
+    tr:nth-child(odd) { background: #ffffff; }
+    .form-cell span { padding: 2px 6px; border-radius: 4px; color: #fff; font-weight: bold; margin-right: 2px; }
+    .W { background: #00B050; }
+    .D { background: #007BFF; }
+    .L { background: #C00000; }
+    th:first-child, td:first-child { background: #f0f0f0; font-weight: bold; }
+    .date-cell { background: #000; color: #FFD700; }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #101010; color: #e0e0e0; }
+      select { background: #222; color: #fff; border-color: #555; }
+      table { border-color: #333; }
+      th, td { border-color: #333; }
+      th { background: #222; color: #fff; }
+      th.pts-head { background: #FFD700; color: #000; }
+      td.pts-cell { background: #444; color: #FFD700; }
+      td.gf { background: #1a2a40; } 
+      td.ga { background: #402a1a; } 
+      td.gd { background: #1a402a; }
+      tr:nth-child(even) { background: #181818; }
+      tr:nth-child(odd) { background: #141414; }
+      .W { background: #00FF99; }
+      .D { background: #00BFFF; }
+      .L { background: #FF4444; }
+      th:first-child, td:first-child { background: #202020; font-weight: bold; }
+      .date-cell { background: #000; color: #FFD700; }
+    }
+  </style></head><body><h1>U15 League Tables</h1><label for="division-filter">Division:</label><select id="division-filter"><option value="ALL">All Divisions</option><option value="Division 1">Division 1</option><option value="Division 2A">Division 2A</option><option value="Division 2B">Division 2B</option><option value="Division 3A">Division 3A</option><option value="Division 3B">Division 3B</option><option value="Division 4">Division 4</option></select><div class="division-block" data-division="Division 1">
+      <h2>Division 1 ? Last Updated 4/6/2025</h2>
+      <table class="sortable"><thead><tr>
+      <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
+      <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
+      <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>HUTCHISON VALE FC</td><td>19</td><td>14</td>
+        <td>2</td><td>3</td><td class="pts-cell">44</td>
+        <td class="gf">85</td><td class="ga">31</td><td class="gd">54</td>
+        <td class="form-cell" data-form="WLDWW"><span class="W">W</span><span class="L">L</span><span class="D">D</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>LOCHEND FA</td><td>19</td><td>12</td>
+        <td>5</td><td>2</td><td class="pts-cell">41</td>
+        <td class="gf">71</td><td class="ga">39</td><td class="gd">32</td>
+        <td class="form-cell" data-form="DWWWW"><span class="D">D</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>3</td><td>BAYSIDE ATHLETIC</td><td>20</td><td>10</td>
+        <td>3</td><td>7</td><td class="pts-cell">33</td>
+        <td class="gf">54</td><td class="ga">46</td><td class="gd">8</td>
+        <td class="form-cell" data-form="DLWWL"><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="L">L</span></td></tr><tr><td>4</td><td>EDINBURGH SOUTH CFC</td><td>20</td><td>9</td>
+        <td>4</td><td>7</td><td class="pts-cell">31</td>
+        <td class="gf">48</td><td class="ga">49</td><td class="gd">-1</td>
+        <td class="form-cell" data-form="DWDWL"><span class="D">D</span><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="L">L</span></td></tr><tr><td>5</td><td>MUSSELBURGH WINDSOR FC</td><td>19</td><td>10</td>
+        <td>1</td><td>8</td><td class="pts-cell">31</td>
+        <td class="gf">37</td><td class="ga">44</td><td class="gd">-7</td>
+        <td class="form-cell" data-form="WLWWW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>6</td><td>LIVINGSTON CFC</td><td>19</td><td>8</td>
+        <td>6</td><td>5</td><td class="pts-cell">30</td>
+        <td class="gf">44</td><td class="ga">39</td><td class="gd">5</td>
+        <td class="form-cell" data-form="LWDDL"><span class="L">L</span><span class="W">W</span><span class="D">D</span><span class="D">D</span><span class="L">L</span></td></tr><tr><td>7</td><td>SPARTANS FC YOUTH</td><td>14</td><td>9</td>
+        <td>2</td><td>3</td><td class="pts-cell">29</td>
+        <td class="gf">39</td><td class="ga">18</td><td class="gd">21</td>
+        <td class="form-cell" data-form="WLLDD"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="D">D</span></td></tr><tr><td>8</td><td>PORTOBELLO CFA</td><td>18</td><td>6</td>
+        <td>3</td><td>9</td><td class="pts-cell">21</td>
+        <td class="gf">38</td><td class="ga">46</td><td class="gd">-8</td>
+        <td class="form-cell" data-form="LLWLD"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="D">D</span></td></tr><tr><td>9</td><td>NORTH MERCHISTON FC</td><td>19</td><td>3</td>
+        <td>5</td><td>11</td><td class="pts-cell">14</td>
+        <td class="gf">24</td><td class="ga">56</td><td class="gd">-32</td>
+        <td class="form-cell" data-form="LLLLD"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td></tr><tr><td>10</td><td>DALKEITH THISTLE CFC</td><td>21</td><td>4</td>
+        <td>1</td><td>16</td><td class="pts-cell">13</td>
+        <td class="gf">29</td><td class="ga">59</td><td class="gd">-30</td>
+        <td class="form-cell" data-form="LLLWL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td></tr><tr><td>11</td><td>CURRIE STAR FC</td><td>18</td><td>2</td>
+        <td>0</td><td>16</td><td class="pts-cell">6</td>
+        <td class="gf">31</td><td class="ga">73</td><td class="gd">-42</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 2A">
+      <h2>Division 2A ? Last Updated 15/6/2025</h2>
+      <table class="sortable"><thead><tr>
+      <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
+      <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
+      <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>EDINBURGH CITY WHITES</td><td>2</td><td>2</td>
+        <td>0</td><td>0</td><td class="pts-cell">6</td>
+        <td class="gf">8</td><td class="ga">0</td><td class="gd">8</td>
+        <td class="form-cell" data-form="WW"><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>GALA FAIRYDEAN ROVERS</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">6</td><td class="ga">2</td><td class="gd">4</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>3</td><td>SPARTANS FC WHITES</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">5</td><td class="ga">3</td><td class="gd">2</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>4</td><td>CRAIGROYSTON CYFC</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">2</td><td class="ga">6</td><td class="gd">-4</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>5</td><td>LINLITHGOW ROSE MAROON</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">0</td><td class="ga">4</td><td class="gd">-4</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>6</td><td>CRAMOND FC</td><td>2</td><td>0</td>
+        <td>0</td><td>2</td><td class="pts-cell">0</td>
+        <td class="gf">3</td><td class="ga">9</td><td class="gd">-6</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 2B">
+      <h2>Division 2B ? Last Updated 15/6/2025</h2>
+      <table class="sortable"><thead><tr>
+      <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
+      <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
+      <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>MUSSELBURGH WINDSOR WHITES</td><td>2</td><td>2</td>
+        <td>0</td><td>0</td><td class="pts-cell">6</td>
+        <td class="gf">8</td><td class="ga">2</td><td class="gd">6</td>
+        <td class="form-cell" data-form="WW"><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>LEITHEN VALE SC</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">4</td><td class="ga">1</td><td class="gd">3</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>3</td><td>CURRIE STAR BLUES</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">3</td><td class="ga">0</td><td class="gd">3</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>4</td><td>LONGNIDDRY VILLA</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">3</td><td class="ga">0</td><td class="gd">3</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>5</td><td>AC OXGANGS CFC</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">1</td><td class="ga">4</td><td class="gd">-3</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>6</td><td>CIVIL SERVICE STROLLERS</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">1</td><td class="ga">4</td><td class="gd">-3</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>7</td><td>CURRIE FC LIONS</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">1</td><td class="ga">4</td><td class="gd">-3</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>8</td><td>DALKEITH THISTLE CARDO</td><td>2</td><td>0</td>
+        <td>0</td><td>2</td><td class="pts-cell">0</td>
+        <td class="gf">0</td><td class="ga">6</td><td class="gd">-6</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 3A">
+      <h2>Division 3A ? Last Updated 15/6/2025</h2>
+      <table class="sortable"><thead><tr>
+      <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
+      <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
+      <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>CURRIE STAR FC WHITES</td><td>2</td><td>2</td>
+        <td>0</td><td>0</td><td class="pts-cell">6</td>
+        <td class="gf">13</td><td class="ga">1</td><td class="gd">12</td>
+        <td class="form-cell" data-form="WW"><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>PORTOBELLO CFA THISTLE</td><td>2</td><td>1</td>
+        <td>1</td><td>0</td><td class="pts-cell">4</td>
+        <td class="gf">5</td><td class="ga">3</td><td class="gd">2</td>
+        <td class="form-cell" data-form="DW"><span class="D">D</span><span class="W">W</span></td></tr><tr><td>3</td><td>CRAMOND LIONS</td><td>2</td><td>1</td>
+        <td>0</td><td>1</td><td class="pts-cell">3</td>
+        <td class="gf">4</td><td class="ga">7</td><td class="gd">-3</td>
+        <td class="form-cell" data-form="WL"><span class="W">W</span><span class="L">L</span></td></tr><tr><td>4</td><td>DALKEITH THISTLE CFC BALOMPIE</td><td>1</td><td>0</td>
+        <td>1</td><td>0</td><td class="pts-cell">1</td>
+        <td class="gf">2</td><td class="ga">2</td><td class="gd">0</td>
+        <td class="form-cell" data-form="D"><span class="D">D</span></td></tr><tr><td>5</td><td>SALVESEN CFC</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">3</td><td class="ga">4</td><td class="gd">-1</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>6</td><td>EDINBURGH CITY BLACKS</td><td>2</td><td>0</td>
+        <td>0</td><td>2</td><td class="pts-cell">0</td>
+        <td class="gf">2</td><td class="ga">12</td><td class="gd">-10</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 3B">
+      <h2>Division 3B ? Last Updated 10/6/2025</h2>
+      <table class="sortable"><thead><tr>
+      <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
+      <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
+      <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>CASTLEVALE WHITES</td><td>2</td><td>2</td>
+        <td>0</td><td>0</td><td class="pts-cell">6</td>
+        <td class="gf">10</td><td class="ga">7</td><td class="gd">3</td>
+        <td class="form-cell" data-form="WW"><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>EDINBURGH SOUTH REDS</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">5</td><td class="ga">6</td><td class="gd">-1</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>3</td><td>MELROSE FC</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">2</td><td class="ga">4</td><td class="gd">-2</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 4">
+      <h2>Division 4 ? Last Updated 15/6/2025</h2>
+      <table class="sortable"><thead><tr>
+      <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
+      <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
+      <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>KSQ RAPIDS</td><td>3</td><td>2</td>
+        <td>1</td><td>0</td><td class="pts-cell">7</td>
+        <td class="gf">12</td><td class="ga">5</td><td class="gd">7</td>
+        <td class="form-cell" data-form="DWW"><span class="D">D</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>DUNBAR UNITED WHITES</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">5</td><td class="ga">0</td><td class="gd">5</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>3</td><td>ANCRUM JFC</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">6</td><td class="ga">4</td><td class="gd">2</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>4</td><td>PENICUIK ATHLETIC REDS</td><td>1</td><td>0</td>
+        <td>1</td><td>0</td><td class="pts-cell">1</td>
+        <td class="gf">2</td><td class="ga">2</td><td class="gd">0</td>
+        <td class="form-cell" data-form="D"><span class="D">D</span></td></tr><tr><td>5</td><td>CURRIE STAR FC YELLOWS</td><td>2</td><td>0</td>
+        <td>0</td><td>2</td><td class="pts-cell">0</td>
+        <td class="gf">6</td><td class="ga">10</td><td class="gd">-4</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td></tr><tr><td>6</td><td>AC OXGANGS CALCIO</td><td>2</td><td>0</td>
+        <td>0</td><td>2</td><td class="pts-cell">0</td>
+        <td class="gf">1</td><td class="ga">11</td><td class="gd">-10</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td></tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><script>
+  function cleanNumeric(val) {
+    if (!val) return 0;
+    return parseFloat(val.replace(/[\u00A0\s]/g, '').replace(/[^\d.-]/g, '').trim()) || 0;
+  }
+
+  document.getElementById('division-filter').addEventListener('change', function() {
+    const selected = this.value;
+    document.querySelectorAll('.division-block').forEach(div => {
+      div.style.display = (selected === 'ALL' || div.dataset.division === selected) ? 'block' : 'none';
+    });
+  });
+
+  document.querySelectorAll("table.sortable th.sortable").forEach(function(header) {
+    header.addEventListener("click", function() {
+      const table = header.closest("table");
+      const tbody = table.querySelector("tbody");
+      const rows = Array.from(tbody.querySelectorAll("tr"));
+      const index = Array.from(header.parentNode.children).indexOf(header);
+      const numericColumns = [2,3,4,5,6,7,8,9];
+      const formColumn = 10;
+      const currentSort = header.dataset.sort || "none";
+      const newSort = currentSort === "asc" ? "desc" : "asc";
+      table.querySelectorAll("th").forEach(h => { h.dataset.sort = ""; h.classList.remove("asc", "desc"); });
+      header.dataset.sort = newSort; header.classList.add(newSort);
+
+      rows.sort((a, b) => {
+        let aVal = a.children[index].textContent.trim();
+        let bVal = b.children[index].textContent.trim();
+        if (numericColumns.includes(index)) {
+          aVal = cleanNumeric(aVal);
+          bVal = cleanNumeric(bVal);
+          if (aVal !== bVal) return newSort === "asc" ? aVal - bVal : bVal - aVal;
+          const aPts = cleanNumeric(a.children[6].textContent);
+          const bPts = cleanNumeric(b.children[6].textContent);
+          if (aPts !== bPts) return bPts - aPts;
+          const aGD = cleanNumeric(a.children[9].textContent);
+          const bGD = cleanNumeric(b.children[9].textContent);
+          if (aGD !== bGD) return bGD - aGD;
+          const aGF = cleanNumeric(a.children[7].textContent);
+          const bGF = cleanNumeric(b.children[7].textContent);
+          if (aGF !== bGF) return bGF - aGF;
+          return a.children[1].textContent.localeCompare(b.children[1].textContent);
+        }
+        if (index === formColumn) {
+          const formScore = s => (s.match(/W/g)||[]).length*3 + (s.match(/D/g)||[]).length;
+          aVal = formScore(a.querySelector('.form-cell').dataset.form);
+          bVal = formScore(b.querySelector('.form-cell').dataset.form);
+          return newSort === "asc" ? aVal - bVal : bVal - aVal;
+        }
+        return newSort === "asc" ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+      });
+
+      rows.forEach((row, i) => { tbody.appendChild(row); row.children[0].textContent = i+1; });
+    });
+  });
+  </script></body></html>
