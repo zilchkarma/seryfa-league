@@ -8,13 +8,18 @@
 <style>
   body {
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    color: #333;
     text-align: center;
     padding: 50px 20px;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: #f5f5f5;
+    color: #333;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  body.dark-mode {
+    background: #121212;
+    color: #ddd;
   }
   h1 {
     margin-bottom: 40px;
@@ -36,19 +41,53 @@
     border-radius: 8px;
     transition: background-color 0.3s ease;
   }
+  body.dark-mode a {
+    background-color: #3399ff;
+  }
   a:hover {
     background-color: #005a99;
   }
+  body.dark-mode a:hover {
+    background-color: #1e6fbf;
+  }
   footer {
     font-size: 0.85em;
-    color: #666;
     margin-top: 40px;
     border-top: 1px solid #ccc;
     padding-top: 10px;
+    color: #666;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  body.dark-mode footer {
+    color: #aaa;
+    border-color: #444;
+  }
+  .toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 14px;
+    background: #007acc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.3s ease;
+  }
+  .toggle-btn:hover {
+    background: #005a99;
+  }
+  body.dark-mode .toggle-btn {
+    background: #3399ff;
+  }
+  body.dark-mode .toggle-btn:hover {
+    background: #1e6fbf;
   }
 </style>
 </head>
 <body>
+  <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
   <h1>SERYFA League Tables</h1>
   <div class="link-container">
     <a href="https://zilchkarma.github.io/seryfa-league/U13.html">Under 13</a>
@@ -62,5 +101,15 @@
     Website not affiliated to SERYFA — automation created due to the delay in official site league tables updating. 
     Results not warranted. Errors and omissions excepted.
   </footer>
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+    // Load preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
 </body>
 </html>
