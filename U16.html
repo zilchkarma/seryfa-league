@@ -7,9 +7,6 @@
     table { border-collapse: collapse; width: 100%; margin-bottom: 30px; }
     th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
     th { background: #FFD700; color: #000; cursor: pointer; }
-    th.sortable::after { content: ' '; margin-left: 5px; color: #555; }
-    th.asc::after { content: ' ?'; color: #000; }
-    th.desc::after { content: ' ?'; color: #000; }
     th.pts-head { background: #FFD700; color: #000; }
     td.pts-cell { background: #fffde7; font-weight: bold; color: #000; }
     td.gf { background: #d0eaff; } 
@@ -43,68 +40,22 @@
       th:first-child, td:first-child { background: #202020; font-weight: bold; }
       .date-cell { background: #000; color: #FFD700; }
     }
-  </style></head><body> 
-  <nav style="background-color: #333; padding: 10px;">
-    <a href="U13.html" style="color: white; margin-right: 15px; text-decoration: none;">U13</a>
-    <a href="U14.html" style="color: white; margin-right: 15px; text-decoration: none;">U14</a>
-    <a href="U15.html" style="color: white; margin-right: 15px; text-decoration: none;">U15</a>
-    <a href="U16.html" style="color: white; margin-right: 15px; text-decoration: none;">U16</a>
-    <a href="U17.html" style="color: white; margin-right: 15px; text-decoration: none;">U17</a>
-    <a href="U18.html" style="color: white; margin-right: 15px; text-decoration: none;">U18</a>
-  </nav><h1>U16 League Tables</h1><label for="division-filter">Division:</label><select id="division-filter"><option value="ALL">All Divisions</option></select><h2>Recent Matches (Last 7 Days)</h2><script>
-  function cleanNumeric(val) {
-    if (!val) return 0;
-    return parseFloat(val.replace(/[\u00A0\s]/g, '').replace(/[^\d.-]/g, '').trim()) || 0;
-  }
-
-  document.getElementById('division-filter').addEventListener('change', function() {
-    const selected = this.value;
-    document.querySelectorAll('.division-block').forEach(div => {
-      div.style.display = (selected === 'ALL' || div.dataset.division === selected) ? 'block' : 'none';
-    });
-  });
-
-  document.querySelectorAll("table.sortable th.sortable").forEach(function(header) {
-    header.addEventListener("click", function() {
-      const table = header.closest("table");
-      const tbody = table.querySelector("tbody");
-      const rows = Array.from(tbody.querySelectorAll("tr"));
-      const index = Array.from(header.parentNode.children).indexOf(header);
-      const numericColumns = [2,3,4,5,6,7,8,9];
-      const formColumn = 10;
-      const currentSort = header.dataset.sort || "none";
-      const newSort = currentSort === "asc" ? "desc" : "asc";
-      table.querySelectorAll("th").forEach(h => { h.dataset.sort = ""; h.classList.remove("asc", "desc"); });
-      header.dataset.sort = newSort; header.classList.add(newSort);
-
-      rows.sort((a, b) => {
-        let aVal = a.children[index].textContent.trim();
-        let bVal = b.children[index].textContent.trim();
-        if (numericColumns.includes(index)) {
-          aVal = cleanNumeric(aVal);
-          bVal = cleanNumeric(bVal);
-          if (aVal !== bVal) return newSort === "asc" ? aVal - bVal : bVal - aVal;
-          const aPts = cleanNumeric(a.children[6].textContent);
-          const bPts = cleanNumeric(b.children[6].textContent);
-          if (aPts !== bPts) return bPts - aPts;
-          const aGD = cleanNumeric(a.children[9].textContent);
-          const bGD = cleanNumeric(b.children[9].textContent);
-          if (aGD !== bGD) return bGD - aGD;
-          const aGF = cleanNumeric(a.children[7].textContent);
-          const bGF = cleanNumeric(b.children[7].textContent);
-          if (aGF !== bGF) return bGF - aGF;
-          return a.children[1].textContent.localeCompare(b.children[1].textContent);
-        }
-        if (index === formColumn) {
-          const formScore = s => (s.match(/W/g)||[]).length*3 + (s.match(/D/g)||[]).length;
-          aVal = formScore(a.querySelector('.form-cell').dataset.form);
-          bVal = formScore(b.querySelector('.form-cell').dataset.form);
-          return newSort === "asc" ? aVal - bVal : bVal - aVal;
-        }
-        return newSort === "asc" ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+  </style></head><body><h1>U16 League Tables</h1><label for="division-filter">Division:</label><select id="division-filter"><option value="ALL">All Divisions</option></select><h2>Recent Matches (Last 7 Days)</h2><h2>Upcoming Matches</h2><label for="future-division-filter">Division:</label><select id="future-division-filter"><option value="ALL">All Divisions</option></select><script>
+  (function(){
+    const divFilter = document.getElementById('division-filter');
+    if (divFilter) divFilter.addEventListener('change', function() {
+      const selected = this.value;
+      document.querySelectorAll('.division-block').forEach(div => {
+        div.style.display = (selected === 'ALL' || div.dataset.division === selected) ? 'block' : 'none';
       });
-
-      rows.forEach((row, i) => { tbody.appendChild(row); row.children[0].textContent = i+1; });
     });
-  });
+
+    const futureFilter = document.getElementById('future-division-filter');
+    if (futureFilter) futureFilter.addEventListener('change', function() {
+      const selected = this.value;
+      document.querySelectorAll('.future-division-block').forEach(div => {
+        div.style.display = (selected === 'ALL' || div.dataset.division === selected) ? 'block' : 'none';
+      });
+    });
+  })();
   </script></body></html>
