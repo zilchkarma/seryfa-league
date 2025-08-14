@@ -1,128 +1,108 @@
-<html><head>
-  <meta name="viewport" content="width=device-width, initial-scale=1" , charset="UTF-8">
-  <style>
-  body { font-family: Arial, Helvetica, sans-serif; background: #f8f8f8; color: #000; padding: 20px; }
-    h1 { margin-top: 0; color: #FFD700; }
-    select { font-size: 1em; padding: 6px 10px; margin: 10px 0 20px 0; border: 1px solid #bbb; border-radius: 4px; width: 100%; box-sizing: border-box; }
-    table { border-collapse: collapse; width: 100%; margin-bottom: 30px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-    th { background: #FFD700; color: #000; cursor: pointer; }
-    th.pts-head { background: #FFD700; color: #000; }
-    td.pts-cell { background: #fffde7; font-weight: bold; color: #000; }
-    td.gf { background: #d0eaff; } 
-    td.ga { background: #ffe0d0; } 
-    td.gd { background: #d0ffe0; }
-    tr:nth-child(even) { background: #f9f9f9; }
-    tr:nth-child(odd) { background: #ffffff; }
-    .form-cell span { padding: 2px 6px; border-radius: 4px; color: #fff; font-weight: bold; margin-right: 2px; }
-    .W { background: #00B050; }
-    .D { background: #007BFF; }
-    .L { background: #C00000; }
-    th:first-child, td:first-child { background: #f0f0f0; font-weight: bold; }
-    .date-cell { background: #000; color: #FFD700; }
-
-    @media (prefers-color-scheme: dark) {
-      body { background: #101010; color: #e0e0e0; }
-      select { background: #222; color: #fff; border-color: #555; }
-      table { border-color: #333; }
-      th, td { border-color: #333; }
-      th { background: #222; color: #fff; }
-      th.pts-head { background: #FFD700; color: #000; }
-      td.pts-cell { background: #444; color: #FFD700; }
-      td.gf { background: #1a2a40; } 
-      td.ga { background: #402a1a; } 
-      td.gd { background: #1a402a; }
-      tr:nth-child(even) { background: #181818; }
-      tr:nth-child(odd) { background: #141414; }
-      .W { background: #00FF99; }
-      .D { background: #00BFFF; }
-      .L { background: #FF4444; }
-      th:first-child, td:first-child { background: #202020; font-weight: bold; }
-      .date-cell { background: #000; color: #FFD700; }
-    }
-  </style></head><body><nav style="background-color: #333; padding: 10px;">
-      <a href="U13.html" style="color: white; margin-right: 15px; text-decoration: none;">U13</a>
-      <a href="U14.html" style="color: white; margin-right: 15px; text-decoration: none;">U14</a>
-      <a href="U15.html" style="color: white; margin-right: 15px; text-decoration: none;">U15</a>
-      <a href="U16.html" style="color: white; margin-right: 15px; text-decoration: none;">U16</a>
-      <a href="U17.html" style="color: white; margin-right: 15px; text-decoration: none;">U17</a>
-      <a href="U18.html" style="color: white; margin-right: 15px; text-decoration: none;">U18</a>
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1" , charset="UTF-8"><style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+  h1{margin-top:0;color:#FFD700}
+  select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+  table{border-collapse:collapse;width:100%;margin-bottom:30px}
+  th,td{border:1px solid #ccc;padding:8px;text-align:center}
+  th{background:#FFD700;color:#000;cursor:pointer}
+  th.pts-head{background:#FFD700;color:#000}
+  td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
+  td.gf{background:#d0eaff}
+  td.ga{background:#ffe0d0}
+  td.gd{background:#d0ffe0}
+  tr:nth-child(even){background:#f9f9f9}
+  tr:nth-child(odd){background:#fff}
+  .form-cell span{padding:2px 6px;border-radius:4px;color:#fff;font-weight:bold;margin-right:2px}
+  .W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}
+  th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+  .date-cell{background:#000;color:#FFD700}
+  @media (prefers-color-scheme: dark){
+    body{background:#101010;color:#e0e0e0}
+    select{background:#222;color:#fff;border-color:#555}
+    table,th,td{border-color:#333}
+    th{background:#222;color:#fff}
+    th.pts-head{background:#FFD700;color:#000}
+    td.pts-cell{background:#444;color:#FFD700}
+    td.gf{background:#1a2a40} td.ga{background:#402a1a} td.gd{background:#1a402a}
+    tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+    .W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}
+    th:first-child,td:first-child{background:#202020;font-weight:bold}
+    .date-cell{background:#000;color:#FFD700}
+  }
+  </style></head><body><nav style="background-color:#333;padding:10px">
+      <a href="U13.html" style="color:#fff;margin-right:15px;text-decoration:none">U13</a>
+      <a href="U14.html" style="color:#fff;margin-right:15px;text-decoration:none">U14</a>
+      <a href="U15.html" style="color:#fff;margin-right:15px;text-decoration:none">U15</a>
+      <a href="U16.html" style="color:#fff;margin-right:15px;text-decoration:none">U16</a>
+      <a href="U17.html" style="color:#fff;margin-right:15px;text-decoration:none">U17</a>
+      <a href="U18.html" style="color:#fff;margin-right:15px;text-decoration:none">U18</a>
     </nav><h1>U17 League Tables</h1><label for="division-filter">Division:</label><select id="division-filter"><option value="ALL">All Divisions</option></select><h2>Recent Matches (Last 7 Days)</h2><h2>Upcoming Matches</h2><label for="future-division-filter">Division:</label><select id="future-division-filter"><option value="ALL">All Divisions</option><option value="Division 1">Division 1</option><option value="Division 2">Division 2</option></select><div class="future-division-block" data-division="Division 1"><h3>Division 1</h3><table><thead><tr><th class="date-cell">Date</th><th>Home</th><th>Away</th><th>Referee</th><th>Location</th></tr></thead><tbody><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>Blackburn United</td>
         <td>Spartans FC Blues</td>
         <td></td>
         <td></td>
       </tr><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>East Calder Blacks</td>
         <td>Edinburgh South Whites</td>
         <td></td>
         <td></td>
       </tr><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>KSQ Galaxy</td>
         <td>Musselburgh Windsor FC</td>
         <td></td>
         <td></td>
       </tr><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>Tynecastle FC Whites</td>
         <td>Spartans FC Colts</td>
         <td></td>
         <td></td>
       </tr><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>Spartans FC Youth</td>
         <td>Dalkeith Thistle Deportivo</td>
         <td></td>
         <td></td>
       </tr></tbody></table></div><div class="future-division-block" data-division="Division 2"><h3>Division 2</h3><table><thead><tr><th class="date-cell">Date</th><th>Home</th><th>Away</th><th>Referee</th><th>Location</th></tr></thead><tbody><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>Edinburgh South Reds</td>
         <td>East Calder United</td>
         <td></td>
         <td></td>
       </tr><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>Hillfield Swifts</td>
         <td>Murieston United Navy</td>
         <td></td>
         <td></td>
       </tr><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>Kelso FC</td>
         <td>Penicuik Athletic Reds</td>
         <td></td>
         <td></td>
       </tr><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>Bathgate Juniors</td>
         <td>KSQ Rapids</td>
         <td></td>
         <td></td>
       </tr><tr>
-<td class="date-cell"></td>        
+        <td class="date-cell"></td>
         <td>Tranent FC</td>
         <td>Broxburn Athletic Colts</td>
         <td></td>
         <td></td>
-      </tr></tbody></table></div><script>
-  (function(){
+      </tr></tbody></table></div><script>(function(){
     const divFilter = document.getElementById('division-filter');
-    if (divFilter) divFilter.addEventListener('change', function() {
-      const selected = this.value;
-      document.querySelectorAll('.division-block').forEach(div => {
-        div.style.display = (selected === 'ALL' || div.dataset.division === selected) ? 'block' : 'none';
-      });
+    if (divFilter) divFilter.addEventListener('change', function(){
+      const sel = this.value; document.querySelectorAll('.division-block').forEach(d=>{ d.style.display = (sel==='ALL'||d.dataset.division===sel)?'block':'none'; });
     });
-
     const futureFilter = document.getElementById('future-division-filter');
-    if (futureFilter) futureFilter.addEventListener('change', function() {
-      const selected = this.value;
-      document.querySelectorAll('.future-division-block').forEach(div => {
-        div.style.display = (selected === 'ALL' || div.dataset.division === selected) ? 'block' : 'none';
-      });
+    if (futureFilter) futureFilter.addEventListener('change', function(){
+      const sel = this.value; document.querySelectorAll('.future-division-block').forEach(d=>{ d.style.display=(sel==='ALL'||d.dataset.division===sel)?'block':'none'; });
     });
-  })();
-  </script></body></html>
+  })();</script></body></html>
