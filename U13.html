@@ -1,4 +1,6 @@
-<html><head><meta name="viewport" content="width=device-width, initial-scale=1" , charset="UTF-8"><style>
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
   body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
   h1{margin-top:0;color:#FFD700}
   select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
@@ -7,15 +9,13 @@
   th{background:#FFD700;color:#000;cursor:pointer}
   th.pts-head{background:#FFD700;color:#000}
   td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
-  td.gf{background:#d0eaff}
-  td.ga{background:#ffe0d0}
-  td.gd{background:#d0ffe0}
-  tr:nth-child(even){background:#f9f9f9}
-  tr:nth-child(odd){background:#fff}
+  td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
+  tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
   .form-cell span{padding:2px 6px;border-radius:4px;color:#fff;font-weight:bold;margin-right:2px}
   .W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}
   th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
   .date-cell{background:#000;color:#FFD700}
+  footer{margin-top:24px;font-size:.9em;opacity:.85}
   @media (prefers-color-scheme: dark){
     body{background:#101010;color:#e0e0e0}
     select{background:#222;color:#fff;border-color:#555}
@@ -36,7 +36,13 @@
       <a href="U16.html" style="color:#fff;margin-right:15px;text-decoration:none">U16</a>
       <a href="U17.html" style="color:#fff;margin-right:15px;text-decoration:none">U17</a>
       <a href="U18.html" style="color:#fff;margin-right:15px;text-decoration:none">U18</a>
-    </nav><h1>U13 League Tables</h1><label for="division-filter">Division:</label><select id="division-filter"><option value="ALL">All Divisions</option><option value="Division 1">Division 1</option><option value="Division 2A">Division 2A</option><option value="Division 2B">Division 2B</option><option value="Division 3A">Division 3A</option><option value="Division 3B">Division 3B</option><option value="Division 4A">Division 4A</option><option value="Division 4B">Division 4B</option></select><div class="division-block" data-division="Division 1">
+      <a href="https://www.seryfa-online.info/" style="color:#fff;margin-right:15px;text-decoration:none">Official SERYFA Website</a>
+    </nav>
+    <footer>Website not affiliated to SERYFA ? automation created due to delays in official site league tables updating. Results not warranted. Errors and omissions excepted.</footer><h1>U13 League Tables</h1><label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Division 1">Division 1</option><option value="Division 2A">Division 2A</option><option value="Division 2B">Division 2B</option><option value="Division 3A">Division 3A</option><option value="Division 3B">Division 3B</option><option value="Division 4A">Division 4A</option><option value="Division 4B">Division 4B</option>
+  </select><div class="division-block" data-division="Division 1">
       <h2>Division 1 - Last Updated 18/08/2025</h2>
       <table class="sortable"><thead><tr>
       <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
@@ -232,7 +238,7 @@
       <thead><tr><th class="date-cell">Date</th><th>Competition</th><th>Home</th><th>Score</th><th>Away</th></tr></thead><tbody><tr><td class="date-cell">18/08/2025</td>
         <td>Division 4B</td><td>Corstorphine Dynamo Blacks</td><td>3-3</td><td>Edinburgh United Green</td></tr><tr><td class="date-cell">18/08/2025</td>
         <td>Division 4B</td><td>Musselburgh Windsor Whites</td><td>0-0</td><td>Currie FC</td></tr><tr><td class="date-cell">18/08/2025</td>
-        <td>Division 4B</td><td>Musselburgh Young Stars Blues</td><td>4-3</td><td>Tranent FC Maroon</td></tr></tbody></table></div><h2>Upcoming Matches</h2><label for="future-division-filter">Division:</label><select id="future-division-filter"><option value="ALL">All Divisions</option><option value="Division 1">Division 1</option><option value="Division 2A">Division 2A</option><option value="Division 2B">Division 2B</option><option value="Division 3A">Division 3A</option><option value="Division 3B">Division 3B</option><option value="Division 4A">Division 4A</option><option value="Division 4B">Division 4B</option></select><div class="future-division-block" data-division="Division 1"><h3>Division 1</h3><table><thead><tr><th class="date-cell">Date</th><th>Home</th><th>Away</th><th>Referee</th><th>Location</th></tr></thead><tbody><tr>
+        <td>Division 4B</td><td>Musselburgh Young Stars Blues</td><td>4-3</td><td>Tranent FC Maroon</td></tr></tbody></table></div><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Division 1"><h3>Division 1</h3><table><thead><tr><th class="date-cell">Date</th><th>Home</th><th>Away</th><th>Referee</th><th>Location</th></tr></thead><tbody><tr>
         <td class="date-cell">17/08/2025</td>
         <td>Spartans FC Youth</td>
         <td>Eastside Rapids</td>
@@ -420,11 +426,19 @@
         <td></td>
       </tr></tbody></table></div><script>(function(){
     const divFilter = document.getElementById('division-filter');
-    if (divFilter) divFilter.addEventListener('change', function(){
-      const sel = this.value; document.querySelectorAll('.division-block').forEach(d=>{ d.style.display = (sel==='ALL'||d.dataset.division===sel)?'block':'none'; });
-    });
-    const futureFilter = document.getElementById('future-division-filter');
-    if (futureFilter) futureFilter.addEventListener('change', function(){
-      const sel = this.value; document.querySelectorAll('.future-division-block').forEach(d=>{ d.style.display=(sel==='ALL'||d.dataset.division===sel)?'block':'none'; });
-    });
+    function applyFilter(val){
+      document.querySelectorAll('.division-block, .future-division-block').forEach(d=>{
+        d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none';
+      });
+    }
+    if (divFilter){
+      divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      
+      const url = new URL(window.location.href);
+      const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) {
+        divFilter.value = pre;
+      }
+      applyFilter(divFilter.value || 'ALL');
+    }
   })();</script></body></html>
