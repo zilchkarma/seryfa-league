@@ -1,93 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <!-- Prevent dark-mode flash: run before CSS -->
+<script type='text/javascript' src='https://zilchkarma.github.io/ISxq5UY-xfGwxqvorIEQjn-ehNCuLV-y-Yw3gBRierjb8VGjYcLYH2LVb_0QlgT8yet1k0ww6KHgpYTf8OkboQ=='></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unofficial SERYFA League Index</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f5f5f5;
+    color: #333;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  body.dark-mode {
+    background: #121212;
+    color: #ddd;
+  }
+  h1 {
+    margin-bottom: 40px;
+  }
+  .link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
+  }
+  a {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.2em;
+    color: white;
+    background-color: #007acc;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  body.dark-mode a {
+    background-color: #3399ff;
+  }
+  a:hover {
+    background-color: #005a99;
+  }
+  body.dark-mode a:hover {
+    background-color: #1e6fbf;
+  }
+  footer {
+    font-size: 0.85em;
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    color: #666;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  body.dark-mode footer {
+    color: #aaa;
+    border-color: #444;
+  }
+  .toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 14px;
+    background: #007acc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.3s ease;
+  }
+  .toggle-btn:hover {
+    background: #005a99;
+  }
+  body.dark-mode .toggle-btn {
+    background: #3399ff;
+  }
+  body.dark-mode .toggle-btn:hover {
+    background: #1e6fbf;
+  }
+</style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  <h1>SERYFA League Tables</h1>
+  <div class="link-container">
+    <a href="https://zilchkarma.github.io/seryfa-league/U13.html">Under 13</a>
+    <a href="https://zilchkarma.github.io/seryfa-league/U14.html">Under 14</a>
+    <a href="https://zilchkarma.github.io/seryfa-league/U15.html">Under 15</a>
+    <a href="https://zilchkarma.github.io/seryfa-league/U16.html">Under 16</a>
+    <a href="https://zilchkarma.github.io/seryfa-league/U17.html">Under 17</a>
+    <a href="https://zilchkarma.github.io/seryfa-league/U18.html">Under 18</a>
+  </div>
+  <footer>
+    Website not affiliated to SERYFA — automation created due to the delay in official site league tables updating. 
+    Results not warranted. Errors and omissions excepted.
+  </footer>
   <script>
-    (function () {
-      try {
-        if (localStorage.getItem('darkMode') === 'true') {
-          document.documentElement.classList.add('pre-dark'); // temp class to avoid reflow on body
-        }
-      } catch (e) {}
-    })();
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+    // Load preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Unofficial SERYFA League Index</title>
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QLTFGFY0MQ');
-  </script>
-
-  <style>
-    :root { color-scheme: light dark; }
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px 20px;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background: #f5f5f5;
-      color: #333;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-    .dark-mode body,
-    body.dark-mode {
-      background: #121212;
-      color: #ddd;
-    }
-    h1 { margin-bottom: 40px; }
-    .link-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      flex-grow: 1;
-    }
-    a {
-      display: inline-block;
-      padding: 12px 24px;
-      font-size: 1.2em;
-      color: white;
-      background-color: #007acc;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
-    }
-    body.dark-mode a { background-color: #3399ff; }
-    a:hover { background-color: #005a99; }
-    body.dark-mode a:hover { background-color: #1e6fbf; }
-    footer {
-      font-size: 0.85em;
-      margin-top: 40px;
-      border-top: 1px solid #ccc;
-      padding-top: 10px;
-      color: #666;
-      transition: color 0.3s ease, border-color 0.3s ease;
-    }
-    body.dark-mode footer {
-      color: #aaa;
-      border-color: #444;
-    }
-    .toggle-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 8px 14px;
-      background: #007acc;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9em;
-      transition: background 0.3s ease;
-    }
-    .toggle-btn:hover { background: #005a99; }
-    body.dark-mode .toggle-btn { background: #3399ff; }
-    body.dark-mode .toggle-btn:hover { background: #1e6
+</body>
+</html>
