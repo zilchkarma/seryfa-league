@@ -14,6 +14,9 @@
   table{border-collapse:collapse;width:100%;margin-bottom:30px}
   th,td{border:1px solid #ccc;padding:8px;text-align:center}
   th{background:#FFD700;color:#000;cursor:pointer}
+  th.asc::after{content:' ?'} th.desc::after{content:' ?'}
+  .highlight{background-color:#d4edda;font-weight:bold}
+  .highlight-low{background-color:#fff3cd;font-weight:bold}
   th.pts-head{background:#FFD700;color:#000}
   td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
   td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
@@ -54,7 +57,7 @@
       <table class="sortable"><thead><tr>
       <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
       <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
-      <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>LEITH ATHLETIC FC</td><td>1</td><td>1</td>
+       <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>LEITH ATHLETIC FC</td><td>1</td><td>1</td>
         <td>0</td><td>0</td><td class="pts-cell">3</td>
         <td class="gf">7</td><td class="ga">2</td><td class="gd">5</td>
         <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>2</td><td>CURRIE STAR BLUES</td><td>1</td><td>1</td>
@@ -83,7 +86,7 @@
       <table class="sortable"><thead><tr>
       <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
       <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
-      <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>EDINA HIBS</td><td>1</td><td>1</td>
+       <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>EDINA HIBS</td><td>1</td><td>1</td>
         <td>0</td><td>0</td><td class="pts-cell">3</td>
         <td class="gf">6</td><td class="ga">2</td><td class="gd">4</td>
         <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>2</td><td>SPARTANS FC WHITES</td><td>1</td><td>1</td>
@@ -151,7 +154,7 @@
         <td>Spartans FC Whites</td>
         <td>R Soso</td>
         <td></td>
-      </tr></tbody></table></div><script>(function(){
+      </tr></tbody></table></div><script>function sortTable(t,i){const b=t.querySelector('tbody');const rows=[...b.querySelectorAll('tr')];const th=t.querySelectorAll('th')[i];const asc=!th.classList.contains('asc');rows.sort((a,c)=>{let x=a.children[i].textContent.trim(), y=c.children[i].textContent.trim(); const nx=parseFloat(x.replace(/[^d.-]/g,''))||0; const ny=parseFloat(y.replace(/[^d.-]/g,''))||0; return asc? nx-ny : ny-nx;}); t.querySelectorAll('th').forEach(h=>h.classList.remove('asc','desc')); th.classList.add(asc?'asc':'desc'); rows.forEach(r=>b.appendChild(r));} document.querySelectorAll('table').forEach(t=>{t.querySelectorAll('th').forEach((th,i)=>{th.addEventListener('click',()=>sortTable(t,i));});});</script><script>(function(){
     const divFilter = document.getElementById('division-filter');
     function applyFilter(val){
       document.querySelectorAll('.division-block, .future-division-block').forEach(d=>{
