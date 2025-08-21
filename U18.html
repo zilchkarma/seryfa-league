@@ -4,7 +4,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-QLTFGFY0MQ');
 </script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
@@ -13,7 +12,8 @@
   select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
   table{border-collapse:collapse;width:100%;margin-bottom:30px}
   th,td{border:1px solid #ccc;padding:8px;text-align:center}
-  th{background:#FFD700;color:#000;cursor:pointer}
+  th{background:#FFD700;color:#000}
+  th.sortable{cursor:pointer}
   th.asc::after{content:' ?'} th.desc::after{content:' ?'}
   .highlight{background-color:#d4edda;font-weight:bold}
   .highlight-low{background-color:#fff3cd;font-weight:bold}
@@ -55,9 +55,18 @@
   </select><div class="division-block" data-division="Division 1">
       <h2>Division 1 - Last Updated 16/08/2025</h2>
       <table class="sortable"><thead><tr>
-      <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
-      <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
-       <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>LEITH ATHLETIC FC</td><td>1</td><td>1</td>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr><td>1</td><td>LEITH ATHLETIC FC</td><td>1</td><td>1</td>
         <td>0</td><td>0</td><td class="pts-cell">3</td>
         <td class="gf">7</td><td class="ga">2</td><td class="gd">5</td>
         <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>2</td><td>CURRIE STAR BLUES</td><td>1</td><td>1</td>
@@ -84,9 +93,18 @@
         <td class="form-cell" data-form="L"><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 2">
       <h2>Division 2 - Last Updated 16/08/2025</h2>
       <table class="sortable"><thead><tr>
-      <th>#</th><th class="sortable">Team</th><th class="sortable">P</th><th class="sortable">W</th><th class="sortable">D</th>
-      <th class="sortable">L</th><th class="sortable pts-head">Pts</th><th class="sortable gf">GF</th>
-       <th class="sortable ga">GA</th><th class="sortable gd">GD</th><th class="sortable">Form</th></tr></thead><tbody><tr><td>1</td><td>EDINA HIBS</td><td>1</td><td>1</td>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr><td>1</td><td>EDINA HIBS</td><td>1</td><td>1</td>
         <td>0</td><td>0</td><td class="pts-cell">3</td>
         <td class="gf">6</td><td class="ga">2</td><td class="gd">4</td>
         <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>2</td><td>SPARTANS FC WHITES</td><td>1</td><td>1</td>
@@ -99,62 +117,212 @@
         <td>0</td><td>1</td><td class="pts-cell">0</td>
         <td class="gf">2</td><td class="ga">6</td><td class="gd">-4</td>
         <td class="form-cell" data-form="L"><span class="L">L</span></td></tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><div class="division-block" data-division="Division 1"><h3>Division 1</h3><table>
-      <thead><tr><th class="date-cell">Date</th><th>Competition</th><th>Home</th><th>Score</th><th>Away</th></tr></thead><tbody><tr><td class="date-cell">16/08/2025</td>
-        <td>Division 1</td><td>Currie Star Blues</td><td>7-4</td><td>Edinburgh South Magpies</td></tr><tr><td class="date-cell">16/08/2025</td>
-        <td>Division 1</td><td>Dunbar United Colts</td><td>1-3</td><td>Musselburgh Windsor Whites</td></tr><tr><td class="date-cell">16/08/2025</td>
-        <td>Division 1</td><td>Castlevale YDC</td><td>2-7</td><td>Leith Athletic FC</td></tr><tr><td class="date-cell">16/08/2025</td>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2025-08-16">16/08/2025</td>
+        <td>Division 1</td><td>Currie Star Blues</td><td>7-4</td><td>Edinburgh South Magpies</td></tr><tr><td class="date-cell" data-iso="2025-08-16">16/08/2025</td>
+        <td>Division 1</td><td>Dunbar United Colts</td><td>1-3</td><td>Musselburgh Windsor Whites</td></tr><tr><td class="date-cell" data-iso="2025-08-16">16/08/2025</td>
+        <td>Division 1</td><td>Castlevale YDC</td><td>2-7</td><td>Leith Athletic FC</td></tr><tr><td class="date-cell" data-iso="2025-08-16">16/08/2025</td>
         <td>Division 1</td><td>Cramond Wolves</td><td>1-0</td><td>Tranent FC</td></tr></tbody></table></div><div class="division-block" data-division="Division 2"><h3>Division 2</h3><table>
-      <thead><tr><th class="date-cell">Date</th><th>Competition</th><th>Home</th><th>Score</th><th>Away</th></tr></thead><tbody><tr><td class="date-cell">16/08/2025</td>
-        <td>Division 2</td><td>Edina Hibs</td><td>6-2</td><td>Edinburgh South Phoenix</td></tr><tr><td class="date-cell">16/08/2025</td>
-        <td>Division 2</td><td>Spartans FC Whites</td><td>4-3</td><td>East Calder United</td></tr></tbody></table></div><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Division 1"><h3>Division 1</h3><table><thead><tr><th class="date-cell">Date</th><th>Home</th><th>Away</th><th>Referee</th><th>Location</th></tr></thead><tbody><tr>
-        <td class="date-cell">23/08/2025</td>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2025-08-16">16/08/2025</td>
+        <td>Division 2</td><td>Edina Hibs</td><td>6-2</td><td>Edinburgh South Phoenix</td></tr><tr><td class="date-cell" data-iso="2025-08-16">16/08/2025</td>
+        <td>Division 2</td><td>Spartans FC Whites</td><td>4-3</td><td>East Calder United</td></tr></tbody></table></div><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Division 1"><h3>Division 1</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th>
+      <th class="sortable" data-type="text">Home</th>
+      <th class="sortable" data-type="text">Away</th>
+      <th class="sortable" data-type="text">Referee</th>
+      <th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr>
+        <td class="date-cell" data-iso="">23/08/2025</td>
         <td>Leith Athletic FC</td>
         <td>Broxburn Athletic Colts</td>
         <td>J Thomson</td>
         <td>Leith Academy 3G 3pm</td>
       </tr><tr>
-        <td class="date-cell">23/08/2025</td>
+        <td class="date-cell" data-iso="">23/08/2025</td>
         <td>Musselburgh Windsor Whites</td>
         <td>Castlevale YDC</td>
         <td>R White</td>
         <td></td>
       </tr><tr>
-        <td class="date-cell">23/08/2025</td>
+        <td class="date-cell" data-iso="">23/08/2025</td>
         <td>Currie Star Blues</td>
         <td>Spartans FC Youth</td>
         <td>P Peace</td>
         <td>Balerno HS 3G 3pm</td>
       </tr><tr>
-        <td class="date-cell">23/08/2025</td>
+        <td class="date-cell" data-iso="">23/08/2025</td>
         <td>Edinburgh United</td>
         <td>Blackburn United</td>
         <td>I Baillie</td>
         <td></td>
-      </tr></tbody></table></div><div class="future-division-block" data-division="Division 2"><h3>Division 2</h3><table><thead><tr><th class="date-cell">Date</th><th>Home</th><th>Away</th><th>Referee</th><th>Location</th></tr></thead><tbody><tr>
-        <td class="date-cell">23/08/2025</td>
+      </tr></tbody></table></div><div class="future-division-block" data-division="Division 2"><h3>Division 2</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th>
+      <th class="sortable" data-type="text">Home</th>
+      <th class="sortable" data-type="text">Away</th>
+      <th class="sortable" data-type="text">Referee</th>
+      <th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr>
+        <td class="date-cell" data-iso="">23/08/2025</td>
         <td>Bonnyrigg Rose Dundas</td>
         <td>Dalkeith Thistle Deportivo</td>
         <td>D Thomson</td>
         <td></td>
       </tr><tr>
-        <td class="date-cell">23/08/2025</td>
+        <td class="date-cell" data-iso="">23/08/2025</td>
         <td>East Calder United</td>
         <td>Edina Hibs</td>
         <td>D Donnelly-Kay</td>
         <td></td>
       </tr><tr>
-        <td class="date-cell">23/08/2025</td>
+        <td class="date-cell" data-iso="">23/08/2025</td>
         <td>Edinburgh South Phoenix</td>
         <td>Gala fairydean Rovers</td>
         <td>A McLaren</td>
         <td></td>
       </tr><tr>
-        <td class="date-cell">23/08/2025</td>
+        <td class="date-cell" data-iso="">23/08/2025</td>
         <td>Tranent FC Blacks</td>
         <td>Spartans FC Whites</td>
         <td>R Soso</td>
         <td></td>
-      </tr></tbody></table></div><script>function sortTable(t,i){const b=t.querySelector('tbody');const rows=[...b.querySelectorAll('tr')];const th=t.querySelectorAll('th')[i];const asc=!th.classList.contains('asc');rows.sort((a,c)=>{let x=a.children[i].textContent.trim(), y=c.children[i].textContent.trim(); const nx=parseFloat(x.replace(/[^d.-]/g,''))||0; const ny=parseFloat(y.replace(/[^d.-]/g,''))||0; return asc? nx-ny : ny-nx;}); t.querySelectorAll('th').forEach(h=>h.classList.remove('asc','desc')); th.classList.add(asc?'asc':'desc'); rows.forEach(r=>b.appendChild(r));} document.querySelectorAll('table').forEach(t=>{t.querySelectorAll('th').forEach((th,i)=>{th.addEventListener('click',()=>sortTable(t,i));});});</script><script>(function(){
+      </tr></tbody></table></div><script>
+(function(){
+  function parseDMY(s){
+    
+    const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec((s||'').trim());
+    if(!m) return NaN;
+    const d = Number(m[1]), mo = Number(m[2]) - 1, y = Number(m[3]);
+    const dt = new Date(y, mo, d);
+    return dt.getTime();
+  }
+
+  function getIsoOrParseDate(td){
+    const iso = td && td.dataset ? td.dataset.iso : '';
+    if (iso){
+      const t = Date.parse(iso);
+      return isNaN(t) ? NaN : t;
+    }
+    return parseDMY(td ? td.textContent : '');
+  }
+
+  function scoreValue(s){
+    
+    const m = /^\s*(\d+)\s*[-?]\s*(\d+)\s*$/.exec(s || '');
+    if(!m) return [NaN, NaN];
+    return [Number(m[1]), Number(m[2])];
+  }
+
+  function formValue(row){
+    
+    const el = row.querySelector('.form-cell');
+    if(!el) return -Infinity;
+    const seq = (el.dataset.form || '').trim();
+    let sum = 0;
+    for(const ch of seq){
+      if(ch === 'W') sum += 3;
+      else if(ch === 'D') sum += 1;
+      else if(ch === 'L') sum += 0;
+    }
+    return sum;
+  }
+
+  function getComparator(type, i, asc){
+    if(type === 'num'){
+      return (a,b)=>{
+        const ax = parseFloat(a.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0;
+        const bx = parseFloat(b.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0;
+        return asc ? (ax - bx) : (bx - ax);
+      };
+    }
+    if(type === 'text'){
+      return (a,b)=>{
+        const ax = a.children[i].textContent.trim();
+        const bx = b.children[i].textContent.trim();
+        const cmp = ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'});
+        return asc ? cmp : -cmp;
+      };
+    }
+    if(type === 'date'){
+      return (a,b)=>{
+        const ax = getIsoOrParseDate(a.children[i]);
+        const bx = getIsoOrParseDate(b.children[i]);
+        return asc ? (ax - bx) : (bx - ax);
+      };
+    }
+    if(type === 'score'){
+      return (a,b)=>{
+        const [ah, aa] = scoreValue(a.children[i].textContent);
+        const [bh, ba] = scoreValue(b.children[i].textContent);
+        if(ah !== bh) return asc ? (ah - bh) : (bh - ah);
+        if(aa !== ba) return asc ? (aa - ba) : (ba - aa);
+        return 0;
+      };
+    }
+    if(type === 'form'){
+      return (a,b)=>{
+        const av = formValue(a);
+        const bv = formValue(b);
+        return asc ? (av - bv) : (bv - av);
+      };
+    }
+    
+    return (a,b)=>{
+      const ax = a.children[i].textContent.trim();
+      const bx = b.children[i].textContent.trim();
+      const cmp = ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'});
+      return asc ? cmp : -cmp;
+    };
+  }
+
+  function sortTable(table, colIdx, type, clickedTh){
+    const tbody = table.querySelector('tbody');
+    if(!tbody) return;
+
+    
+    const hasState = clickedTh.classList.contains('asc') || clickedTh.classList.contains('desc');
+    const firstClickAsc = (type === 'text');
+    const asc = hasState ? clickedTh.classList.contains('desc') : firstClickAsc;
+
+    
+    const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r, idx]);
+    const cmp = getComparator(type, colIdx, asc);
+    rows.sort((A,B)=>{
+      const res = cmp(A[0], B[0]);
+      if(res !== 0) return res;
+      return A[1] - B[1]; 
+    });
+
+    
+    table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+    clickedTh.classList.add(asc ? 'asc' : 'desc');
+
+    
+    rows.forEach(pair=>tbody.appendChild(pair[0]));
+  }
+
+  
+  document.querySelectorAll('table').forEach(table=>{
+    table.querySelectorAll('thead th.sortable').forEach((th)=>{
+      th.addEventListener('click', ()=>{
+        const type = th.dataset.type || 'text';
+        const colIdx = th.cellIndex; 
+        sortTable(table, colIdx, type, th);
+      });
+    });
+  });
+})();
+</script><script>(function(){
     const divFilter = document.getElementById('division-filter');
     function applyFilter(val){
       document.querySelectorAll('.division-block, .future-division-block').forEach(d=>{
