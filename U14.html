@@ -14,7 +14,7 @@
   th,td{border:1px solid #ccc;padding:8px;text-align:center}
   th{background:#FFD700;color:#000}
   th.sortable{cursor:pointer}
-  th.asc::after{content:' ?'} th.desc::after{content:' ?'}
+  th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
   .highlight{background-color:#d4edda;font-weight:bold}
   .highlight-low{background-color:#fff3cd;font-weight:bold}
   th.pts-head{background:#FFD700;color:#000}
@@ -52,12 +52,12 @@
   </style>
   <style id="theme-override"></style></head><body>
   <div class="theme-toggle" title="Toggle dark mode" role="group" aria-label="Theme toggle">
-  <span aria-hidden="true">??</span>
+  <span aria-hidden="true">☀️</span>
   <label class="switch">
     <input type="checkbox" id="theme-toggle" aria-label="Dark mode">
     <span class="slider"></span>
   </label>
-  <span aria-hidden="true">?</span>
+  <span aria-hidden="true">🌙</span>
 </div><nav style="background-color:#333;padding:10px">
       <a href="U13.html" style="color:#fff;margin-right:15px;text-decoration:none">U13</a>
       <a href="U14.html" style="color:#fff;margin-right:15px;text-decoration:none">U14</a>
@@ -703,7 +703,7 @@
 
   function scoreValue(s){
     
-    const m = /^\s*(\d+)\s*[-?]\s*(\d+)\s*$/.exec(s || '');
+    const m = /^\s*(\d+)\s*[-–]\s*(\d+)\s*$/.exec(s || '');
     if(!m) return [NaN, NaN];
     return [Number(m[1]), Number(m[2])];
   }
