@@ -47,7 +47,34 @@
   .slider:before{position:absolute;content:"";height:22px;width:22px;left:3px;bottom:3px;background:#fff;transition:.2s;border-radius:50%}
   .switch input:checked + .slider{background:#4CAF50}
   .switch input:checked + .slider:before{transform:translateX(24px)}
-
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropbtn {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    min-width: 160px;
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: #fff;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown-content a:hover {
+    background-color: #666;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
   
   </style>
   <style id="theme-override"></style></head><body>
@@ -58,15 +85,60 @@
     <span class="slider"></span>
   </label>
   <span aria-hidden="true">🌙</span>
-</div><nav style="background-color:#333;padding:10px">
-      <a href="U13.html" style="color:#fff;margin-right:15px;text-decoration:none">U13</a>
-      <a href="U14.html" style="color:#fff;margin-right:15px;text-decoration:none">U14</a>
-      <a href="U15.html" style="color:#fff;margin-right:15px;text-decoration:none">U15</a>
-      <a href="U16.html" style="color:#fff;margin-right:15px;text-decoration:none">U16</a>
-      <a href="U17.html" style="color:#fff;margin-right:15px;text-decoration:none">U17</a>
-      <a href="U18.html" style="color:#fff;margin-right:15px;text-decoration:none">U18</a>
-      <a href="https://www.seryfa-online.info/" style="color:#fff;margin-right:15px;text-decoration:none">Official SERYFA Website</a>
-    </nav>
+</div><nav style="background-color:#333;padding:10px;display:flex;gap:15px">
+  <a href="javascript:history.back()" style="color:#fff;text-decoration:none">⬅ Back</a>
+
+  <div class="dropdown">
+    <a href="U13.html" class="dropbtn">U13 ▾</a>
+    <div class="dropdown-content">
+      <a href="U13.html">Overview</a>
+      <a href="U13-stats.html">Team Stats</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <a href="U14.html" class="dropbtn">U14 ▾</a>
+    <div class="dropdown-content">
+      <a href="U14.html">Overview</a>
+      <a href="U14-stats.html">Team Stats</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <a href="U15.html" class="dropbtn">U15 ▾</a>
+    <div class="dropdown-content">
+      <a href="U15.html">Overview</a>
+      <a href="U15-stats.html">Team Stats</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <a href="U16.html" class="dropbtn">U16 ▾</a>
+    <div class="dropdown-content">
+      <a href="U16.html">Overview</a>
+      <a href="U16-stats.html">Team Stats</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <a href="U17.html" class="dropbtn">U17 ▾</a>
+    <div class="dropdown-content">
+      <a href="U17.html">Overview</a>
+      <a href="U17-stats.html">Team Stats</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <a href="U18.html" class="dropbtn">U18 ▾</a>
+    <div class="dropdown-content">
+      <a href="U18.html">Overview</a>
+      <a href="U18-stats.html">Team Stats</a>
+    </div>
+  </div>
+
+  <a href="https://www.seryfa-online.info/" style="color:#fff;text-decoration:none">Official SERYFA Website</a>
+</nav>
+
     <footer>Website not affiliated to SERYFA - automation created due to delays in official site league tables updating. Results not warranted. Errors and omissions excepted.</footer><h1>U13 League Tables</h1><label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
