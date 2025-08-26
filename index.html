@@ -1,123 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-QLTFGFY0MQ');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QLTFGFY0MQ');
+  </script>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="google-site-verification" content="A_72EL5KkKf5x5DwAcx7uzdZkrLQTIGWH22OsEpeIbI" />
 
-<title>Unofficial SERYFA League Index | Youth Football Tables</title>
+  <title>Unofficial SERYFA League Index | Youth Football Tables</title>
 
-<!-- SEO Meta Tags -->
-<meta name="description" content="Unofficial SERYFA League Index — updated youth football league tables for U13, U14, U15, U16, U17, and U18. Quickly check the latest standings and results.">
-<meta name="keywords" content="SERYFA, youth football, Edinburgh football, football league tables, U13, U14, U15, U16, U17, U18, Scottish youth football">
-<meta name="author" content="Unofficial SERYFA League Automation">
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Unofficial SERYFA League Index — updated youth football league tables for U13, U14, U15, U16, U17, and U18. Quickly check the latest standings and results.">
+  <meta name="keywords" content="SERYFA, youth football, Edinburgh football, football league tables, U13, U14, U15, U16, U17, U18, Scottish youth football">
+  <meta name="author" content="Unofficial SERYFA League Automation">
 
-<!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
-<meta property="og:title" content="Unofficial SERYFA League Index | Youth Football Tables">
-<meta property="og:description" content="Check unofficial SERYFA youth football league tables for U13–U18 divisions. Updated automatically for faster results.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://zilchkarma.github.io/seryfa-league/">
-<meta property="og:image" content="https://zilchkarma.github.io/seryfa-league/og-preview.png">
+  <!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
+  <meta property="og:title" content="Unofficial SERYFA League Index | Youth Football Tables">
+  <meta property="og:description" content="Check unofficial SERYFA youth football league tables for U13–U18 divisions. Updated automatically for faster results.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zilchkarma.github.io/seryfa-league/">
+  <meta property="og:image" content="https://zilchkarma.github.io/seryfa-league/og-preview.png">
 
-<!-- Twitter Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Unofficial SERYFA League Index | Youth Football Tables">
-<meta name="twitter:description" content="Follow the unofficial SERYFA youth football league standings (U13–U18). Faster updates, easy access.">
-<meta name="twitter:image" content="https://zilchkarma.github.io/seryfa-league/og-preview.png">
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Unofficial SERYFA League Index | Youth Football Tables">
+  <meta name="twitter:description" content="Follow the unofficial SERYFA youth football league standings (U13–U18). Faster updates, easy access.">
+  <meta name="twitter:image" content="https://zilchkarma.github.io/seryfa-league/og-preview.png">
 
-<style>
-  @media (prefers-color-scheme: dark){
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 50px 20px;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background: #f5f5f5;
-    color: #333;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-  body.dark-mode {
-    background: #121212;
-    color: #ddd;
-  }
-  h1 {
-    margin-bottom: 40px;
-  }
-  .link-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    flex-grow: 1;
-  }
-  a {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 1.2em;
-    color: white;
-    background-color: #007acc;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-  }
-  body.dark-mode a {
-    background-color: #3399ff;
-  }
-  a:hover {
-    background-color: #005a99;
-  }
-  body.dark-mode a:hover {
-    background-color: #1e6fbf;
-  }
-  footer {
-    font-size: 0.85em;
-    margin-top: 40px;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-    color: #666;
-    transition: color 0.3s ease, border-color 0.3s ease;
-  }
-  body.dark-mode footer {
-    color: #aaa;
-    border-color: #444;
-  }
-  .toggle-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 8px 14px;
-    background: #007acc;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background 0.3s ease;
-  }
-  .toggle-btn:hover {
-    background: #005a99;
-  }
-  body.dark-mode .toggle-btn {
-    background: #3399ff;
-  }
-  body.dark-mode .toggle-btn:hover {
-    background: #1e6fbf;
-  }}
-</style>
+  <style>
+    /* Base (Light) */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px 20px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #f5f5f5;
+      color: #333;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    h1 { margin-bottom: 40px; }
+    .link-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      flex-grow: 1;
+    }
+    a {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 1.2em;
+      color: #fff;
+      background-color: #007acc;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    a:hover { background-color: #005a99; }
+
+    footer {
+      font-size: 0.85em;
+      margin-top: 40px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      color: #666;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 14px;
+      background: #007acc;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background 0.3s ease;
+    }
+    .toggle-btn:hover { background: #005a99; }
+
+    /* Auto Dark (system preference) */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #121212;
+        color: #ddd;
+      }
+      a { background-color: #3399ff; }
+      a:hover { background-color: #1e6fbf; }
+      footer { color: #aaa; border-color: #444; }
+      .toggle-btn { background: #3399ff; }
+      .toggle-btn:hover { background: #1e6fbf; }
+    }
+
+    /* Manual Dark Toggle — overrides both light and prefers-color-scheme */
+    body.dark-mode {
+      background: #121212 !important;
+      color: #ddd !important;
+    }
+    body.dark-mode a { background-color: #3399ff !important; }
+    body.dark-mode a:hover { background-color: #1e6fbf !important; }
+    body.dark-mode footer { color: #aaa !important; border-color: #444 !important; }
+    body.dark-mode .toggle-btn { background: #3399ff !important; }
+    body.dark-mode .toggle-btn:hover { background: #1e6fbf !important; }
+  </style>
 </head>
 <body>
   <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
   <h1>SERYFA League Tables</h1>
+
   <div class="link-container">
     <a href="https://zilchkarma.github.io/seryfa-league/U13.html">Under 13</a>
     <a href="https://zilchkarma.github.io/seryfa-league/U14.html">Under 14</a>
@@ -126,20 +129,24 @@
     <a href="https://zilchkarma.github.io/seryfa-league/U17.html">Under 17</a>
     <a href="https://zilchkarma.github.io/seryfa-league/U18.html">Under 18</a>
   </div>
+
   <footer>
-    Website not affiliated to SERYFA — automation created due to the delay in official site league tables updating. 
+    Website not affiliated to SERYFA — automation created due to the delay in official site league tables updating.
     Results not warranted. Errors and omissions excepted.
   </footer>
+
   <script>
+    // Manual dark-mode toggle (persists)
     function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+      const isDark = document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', isDark ? 'true' : 'false');
     }
-    // Load preference
-    if (localStorage.getItem('darkMode') === 'true') {
-      document.body.classList.add('dark-mode');
-    }
+    // Load persisted preference
+    (function initTheme(){
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+      }
+    })();
   </script>
-  <meta name="google-site-verification" content="A_72EL5KkKf5x5DwAcx7uzdZkrLQTIGWH22OsEpeIbI" />
 </body>
 </html>
