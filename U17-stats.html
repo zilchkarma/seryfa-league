@@ -41,7 +41,6 @@
   <style>
      
     .sfy-nav{position:sticky;top:0;z-index:1000;background:#222;color:#fff}
-    .sfy-nav .bar{display:flex;align-items:center;gap:12px;padding:10px 14px}
     .sfy-brand{font-weight:700;letter-spacing:.3px}
     .sfy-spacer{flex:1}
     .sfy-cta{white-space:nowrap}
@@ -67,6 +66,18 @@
     .sfy-drawer .menu-grid{display:grid;grid-template-columns:1fr;gap:8px}
     .sfy-drawer a{display:block;padding:10px 12px;border-radius:10px;border:1px solid #333;color:#fff;text-decoration:none}
     .sfy-drawer a:hover{background:#242424}
+
+    .sfy-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #222;
+  color: #fff;
+  transition: transform .25s ease;   
+}
+.sfy-nav.hide {
+  transform: translateY(-100%);
+}
 
      
     @media (min-width: 820px){
@@ -120,6 +131,21 @@
       drawer.addEventListener('click', (e)=>{ if(e.target === drawer) close(); });
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && drawer.classList.contains('open')) close(); });
     })();
+    
+let lastScrollY = window.scrollY;
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.sfy-nav');
+  if (!nav) return;
+  const current = window.scrollY;
+  if (current > lastScrollY && current > 80) {
+    
+    nav.classList.add('hide');
+  } else {
+    
+    nav.classList.remove('hide');
+  }
+  lastScrollY = current;
+});
   </script></head><body><h1>U17 Team Stats</h1><label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
