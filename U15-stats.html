@@ -37,16 +37,90 @@
   .min-cell { background:#804000; color:#fff }
     }
   </style>
- <nav style="background-color:#333;padding:10px"> 
-      <a href="javascript:history.back()" style="color:#fff;margin-right:15px;text-decoration:none">⬅ Back</a>
-      <a href="U13.html" style="color:#fff;margin-right:15px;text-decoration:none">U13</a>
-      <a href="U14.html" style="color:#fff;margin-right:15px;text-decoration:none">U14</a>
-      <a href="U15.html" style="color:#fff;margin-right:15px;text-decoration:none">U15</a>
-      <a href="U16.html" style="color:#fff;margin-right:15px;text-decoration:none">U16</a>
-      <a href="U17.html" style="color:#fff;margin-right:15px;text-decoration:none">U17</a>
-      <a href="U18.html" style="color:#fff;margin-right:15px;text-decoration:none">U18</a>
-      <a href="https://www.seryfa-online.info/" style="color:#fff;margin-right:15px;text-decoration:none">Official SERYFA Website</a>
-    </nav> </head><body><h1>U15 Team Stats</h1><label for="division-filter">Division:</label>
+ 
+  <style>
+     
+    .sfy-nav{position:sticky;top:0;z-index:1000;background:#222;color:#fff}
+    .sfy-nav .bar{display:flex;align-items:center;gap:12px;padding:10px 14px}
+    .sfy-brand{font-weight:700;letter-spacing:.3px}
+    .sfy-spacer{flex:1}
+    .sfy-cta{white-space:nowrap}
+    .sfy-btn{border:1px solid #555;background:transparent;color:#fff;border-radius:10px;padding:6px 10px;font-size:.95rem}
+
+     
+    .hamburger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid #555;border-radius:10px}
+    .hamburger:focus{outline:2px solid #FFD700;outline-offset:2px}
+
+     
+    .sfy-tabs,.sfy-subtabs{display:flex;gap:6px;overflow:auto hidden;padding:6px 10px}
+    .nav-link{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid #444;color:#fff;text-decoration:none;white-space:nowrap}
+    .nav-link:hover{background:#333}
+    .nav-link.active{background:#FFD700;color:#000;border-color:#FFD700}
+
+     
+    .sfy-drawer{position:fixed;inset:0 0 0 auto;max-width:360px;width:88vw;transform:translateX(100%);
+      transition:transform .2s ease; background:#181818;color:#fff;box-shadow:-6px 0 20px rgba(0,0,0,.35)}
+    .sfy-drawer.open{transform:none}
+    .sfy-drawer header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #333}
+    .sfy-drawer .section{padding:10px 16px}
+    .sfy-drawer .group-title{font-size:.85rem;opacity:.8;margin:12px 0 6px}
+    .sfy-drawer .menu-grid{display:grid;grid-template-columns:1fr;gap:8px}
+    .sfy-drawer a{display:block;padding:10px 12px;border-radius:10px;border:1px solid #333;color:#fff;text-decoration:none}
+    .sfy-drawer a:hover{background:#242424}
+
+     
+    @media (min-width: 820px){
+      .hamburger{display:none}
+      .sfy-drawer{display:none}
+      .sfy-nav .bar{padding:12px 18px}
+    }
+
+     
+    @media (max-width: 819.98px){
+      .hamburger{display:flex}
+      .sfy-cta{display:none}
+    }
+  </style>
+  <nav class="sfy-nav" role="navigation" aria-label="Primary">
+    <div class="bar">
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="sfy-drawer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <div class="sfy-brand">SERYFA Unofficial League Tables</div>
+      <div class="sfy-spacer"></div>
+      <a class="sfy-btn sfy-cta" href="https://www.seryfa-online.info/">Official SERYFA Website</a>
+    </div>
+    
+    <div class="sfy-subtabs" role="tablist" aria-label="U15 views">
+      <a class="nav-link" href="U15.html">U15 League Table</a>
+      <a class="nav-link active" href="U15-stats.html">U15 Team Stats</a>
+    </div>   
+    
+    <div class="sfy-tabs" role="tablist" aria-label="Age groups">
+      <a class="nav-link" href="U13.html">U13</a><a class="nav-link" href="U14.html">U14</a><a class="nav-link" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a>
+    </div>
+  </nav>
+
+  
+
+  <script>
+    (function(){
+      const drawer = document.getElementById('sfy-drawer');
+      const btn = document.querySelector('.hamburger');
+      const closeBtn = drawer.querySelector('[data-close]');
+      const focusable = () => Array.from(drawer.querySelectorAll('a,button,input,select,textarea,[tabindex]')).filter(el=>!el.hasAttribute('disabled'));
+
+      function open(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); btn.setAttribute('aria-expanded','true'); (focusable()[0]||closeBtn).focus(); document.body.style.overflow='hidden'; }
+      function close(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); btn.setAttribute('aria-expanded','false'); btn.focus(); document.body.style.overflow=''; }
+
+      btn && btn.addEventListener('click', open);
+      closeBtn && closeBtn.addEventListener('click', close);
+      drawer.addEventListener('click', (e)=>{ if(e.target === drawer) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && drawer.classList.contains('open')) close(); });
+    })();
+  </script></head><body><h1>U15 Team Stats</h1><label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
     <option value="Division 1">Division 1</option><option value="Division 2">Division 2</option><option value="Division 3A">Division 3A</option><option value="Division 3B">Division 3B</option><option value="Division 4">Division 4</option>
