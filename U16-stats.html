@@ -39,8 +39,17 @@
   </style>
  
   <style>
-     
-    .sfy-nav{position:sticky;top:0;z-index:1000;background:#222;color:#fff}
+    .sfy-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #222;
+      color: #fff;
+      transition: transform .25s ease;
+    }
+    .sfy-nav.hide { transform: translateY(-100%); }
+
+    .sfy-nav .bar{display:flex;align-items:center;gap:12px;padding:10px 14px}
     .sfy-brand{font-weight:700;letter-spacing:.3px}
     .sfy-spacer{flex:1}
     .sfy-cta{white-space:nowrap}
@@ -66,18 +75,6 @@
     .sfy-drawer .menu-grid{display:grid;grid-template-columns:1fr;gap:8px}
     .sfy-drawer a{display:block;padding:10px 12px;border-radius:10px;border:1px solid #333;color:#fff;text-decoration:none}
     .sfy-drawer a:hover{background:#242424}
-
-    .sfy-nav {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #222;
-  color: #fff;
-  transition: transform .25s ease;   
-}
-.sfy-nav.hide {
-  transform: translateY(-100%);
-}
 
      
     @media (min-width: 820px){
@@ -107,14 +104,30 @@
     <div class="sfy-subtabs" role="tablist" aria-label="U16 views">
       <a class="nav-link" href="U16.html">U16 League Table</a>
       <a class="nav-link active" href="U16-stats.html">U16 Team Stats</a>
-    </div>   
-    
+    </div>
     <div class="sfy-tabs" role="tablist" aria-label="Age groups">
       <a class="nav-link" href="U13.html">U13</a><a class="nav-link" href="U14.html">U14</a><a class="nav-link" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a>
     </div>
   </nav>
 
   
+  <div id="sfy-drawer" class="sfy-drawer" aria-hidden="true">
+    <header>
+      <strong>Menu</strong>
+      <button class="sfy-btn" data-close>Close</button>
+    </header>
+    <div class="section">
+      <div class="group-title">Overview</div>
+      <div class="menu-grid"><a class="nav-link" href="U13.html">U13 Overview</a><a class="nav-link" href="U14.html">U14 Overview</a><a class="nav-link" href="U15.html">U15 Overview</a><a class="nav-link" href="U16.html">U16 Overview</a><a class="nav-link" href="U17.html">U17 Overview</a><a class="nav-link" href="U18.html">U18 Overview</a></div>
+    </div>
+    <div class="section">
+      <div class="group-title">Team Stats</div>
+      <div class="menu-grid"><a class="nav-link" href="U13-stats.html">U13 Team Stats</a><a class="nav-link" href="U14-stats.html">U14 Team Stats</a><a class="nav-link" href="U15-stats.html">U15 Team Stats</a><a class="nav-link active" href="U16-stats.html">U16 Team Stats</a><a class="nav-link" href="U17-stats.html">U17 Team Stats</a><a class="nav-link" href="U18-stats.html">U18 Team Stats</a></div>
+    </div>
+    <div class="section">
+      <a class="sfy-btn" href="https://www.seryfa-online.info/">Official SERYFA Website</a>
+    </div>
+  </div>
 
   <script>
     (function(){
@@ -123,29 +136,50 @@
       const closeBtn = drawer.querySelector('[data-close]');
       const focusable = () => Array.from(drawer.querySelectorAll('a,button,input,select,textarea,[tabindex]')).filter(el=>!el.hasAttribute('disabled'));
 
-      function open(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); btn.setAttribute('aria-expanded','true'); (focusable()[0]||closeBtn).focus(); document.body.style.overflow='hidden'; }
-      function close(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); btn.setAttribute('aria-expanded','false'); btn.focus(); document.body.style.overflow=''; }
+      function open(){
+        drawer.classList.add('open');
+        drawer.setAttribute('aria-hidden','false');
+        btn.setAttribute('aria-expanded','true');
+        (focusable()[0]||closeBtn).focus();
+        document.body.style.overflow='hidden';
+        document.body.classList.add('menu-open');
+      }
+      function close(){
+        drawer.classList.remove('open');
+        drawer.setAttribute('aria-hidden','true');
+        btn.setAttribute('aria-expanded','false');
+        btn.focus();
+        document.body.style.overflow='';
+        document.body.classList.remove('menu-open');
+      }
 
       btn && btn.addEventListener('click', open);
       closeBtn && closeBtn.addEventListener('click', close);
       drawer.addEventListener('click', (e)=>{ if(e.target === drawer) close(); });
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && drawer.classList.contains('open')) close(); });
+
+      
+      drawer.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          window.scrollTo(0, 0);
+          close();
+        });
+      });
+
+      
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.sfy-nav');
+        if (!nav || document.body.classList.contains('menu-open')) return;
+        const current = window.scrollY;
+        if (current > lastScrollY && current > 80) {
+          nav.classList.add('hide');
+        } else {
+          nav.classList.remove('hide');
+        }
+        lastScrollY = current;
+      });
     })();
-    
-let lastScrollY = window.scrollY;
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('.sfy-nav');
-  if (!nav) return;
-  const current = window.scrollY;
-  if (current > lastScrollY && current > 80) {
-    
-    nav.classList.add('hide');
-  } else {
-    
-    nav.classList.remove('hide');
-  }
-  lastScrollY = current;
-});
   </script></head><body><h1>U16 Team Stats</h1><label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
