@@ -1,0 +1,846 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>U14 Team Stats</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+    h1{margin-top:0;color:#FFD700}
+    h2{margin-top:24px}
+    select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+    table{border-collapse:collapse;width:100%;margin-bottom:30px}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    th{background:#FFD700;color:#000}
+    th.sortable{cursor:pointer}
+    th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
+    .highlight{background-color:#d4edda;font-weight:bold}
+    .highlight-low{background-color:#fff3cd;font-weight:bold}
+    th.pts-head{background:#FFD700;color:#000}
+    td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
+    td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
+    tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+    th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+    .date-cell{background:#000;color:#FFD700}
+    .max-cell { background-color:#d4edda; font-weight:bold }    
+.min-cell { background-color:#ffe0b2; font-weight:bold }    
+    footer{margin-top:24px;font-size:.9em;opacity:.85}
+    @media (prefers-color-scheme: dark){
+      body{background:#101010;color:#e0e0e0}
+      select{background:#222;color:#fff;border-color:#555}
+      table,th,td{border-color:#333}
+      th{background:#222;color:#fff}
+      th.pts-head{background:#FFD700;color:#000}
+      td.pts-cell{background:#444;color:#FFD700}
+      td.gf{background:#1a2a40} td.ga{background:#402a1a} td.gd{background:#1a402a}
+      tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+      th:first-child,td:first-child{background:#202020;font-weight:bold}
+      .date-cell{background:#000;color:#FFD700}
+        .max-cell { background:#004d00; color:#fff }
+  .min-cell { background:#804000; color:#fff }
+    }
+  </style>
+ 
+  <style>
+    .sfy-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #222;
+      color: #fff;
+      transition: transform .25s ease;
+    }
+    .sfy-nav.hide { transform: translateY(-100%); }
+
+    .sfy-nav .bar{display:flex;align-items:center;gap:12px;padding:10px 14px}
+    .sfy-brand{font-weight:700;letter-spacing:.3px}
+    .sfy-spacer{flex:1}
+    .sfy-cta{white-space:nowrap}
+    .sfy-btn{border:1px solid #555;background:transparent;color:#fff;border-radius:10px;padding:6px 10px;font-size:.95rem}
+
+     
+    .hamburger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid #555;border-radius:10px}
+    .hamburger:focus{outline:2px solid #FFD700;outline-offset:2px}
+
+     
+    .sfy-tabs,.sfy-subtabs{display:flex;gap:6px;overflow:auto hidden;padding:6px 10px}
+    .nav-link{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid #444;color:#fff;text-decoration:none;white-space:nowrap}
+    .nav-link:hover{background:#333}
+    .nav-link.active{background:#FFD700;color:#3f403f;border-color:#FFD700}
+
+     
+    .sfy-drawer{position:fixed;inset:0 0 0 auto;max-width:360px;width:88vw;transform:translateX(100%);
+      transition:transform .2s ease; background:#181818;color:#fff;box-shadow:-6px 0 20px rgba(0,0,0,.35)}
+    .sfy-drawer.open{transform:none}
+    .sfy-drawer header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #333}
+    .sfy-drawer .section{padding:10px 16px}
+    .sfy-drawer .group-title{font-size:.85rem;opacity:.8;margin:12px 0 6px}
+    .sfy-drawer .menu-grid{display:grid;grid-template-columns:1fr;gap:8px}
+    .sfy-drawer a{display:block;padding:10px 12px;border-radius:10px;border:1px solid #333;color:#fff;text-decoration:none}
+    .sfy-drawer a:hover{background:#242424}
+
+     
+    @media (min-width: 820px){
+      .hamburger{display:none}
+      .sfy-drawer{display:none}
+      .sfy-nav .bar{padding:12px 18px}
+    }
+
+     
+    @media (max-width: 819.98px){
+      .hamburger{display:flex}
+      .sfy-cta{display:none}
+    }
+  </style>
+  <nav class="sfy-nav" role="navigation" aria-label="Primary">
+    <div class="bar">
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="sfy-drawer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <div class="sfy-brand">SERYFA Unofficial League Tables</div>
+      <div class="sfy-spacer"></div>
+      <a class="sfy-btn sfy-cta" href="https://www.seryfa-online.info/">Official SERYFA Website</a>
+    </div>
+    
+    <div class="sfy-subtabs" role="tablist" aria-label="U14 views">
+      <a class="nav-link" href="U14.html">U14 League Table</a>
+      <a class="nav-link active" href="U14-stats.html">U14 Team Stats</a>
+    </div>
+    <div class="sfy-tabs" role="tablist" aria-label="Age groups">
+      <a class="nav-link" href="U13.html">U13</a><a class="nav-link" href="U14.html">U14</a><a class="nav-link" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a>
+    </div>
+  </nav>
+
+  
+  <div id="sfy-drawer" class="sfy-drawer" aria-hidden="true">
+    <header>
+      <strong>Menu</strong>
+      <button class="sfy-btn" data-close>Close</button>
+    </header>
+    <div class="section">
+      <div class="group-title">Overview</div>
+      <div class="menu-grid"><a class="nav-link" href="U13.html">U13 Overview</a><a class="nav-link" href="U14.html">U14 Overview</a><a class="nav-link" href="U15.html">U15 Overview</a><a class="nav-link" href="U16.html">U16 Overview</a><a class="nav-link" href="U17.html">U17 Overview</a><a class="nav-link" href="U18.html">U18 Overview</a></div>
+    </div>
+    <div class="section">
+      <div class="group-title">Team Stats</div>
+      <div class="menu-grid"><a class="nav-link" href="U13-stats.html">U13 Team Stats</a><a class="nav-link active" href="U14-stats.html">U14 Team Stats</a><a class="nav-link" href="U15-stats.html">U15 Team Stats</a><a class="nav-link" href="U16-stats.html">U16 Team Stats</a><a class="nav-link" href="U17-stats.html">U17 Team Stats</a><a class="nav-link" href="U18-stats.html">U18 Team Stats</a></div>
+    </div>
+    <div class="section">
+      <a class="sfy-btn" href="https://www.seryfa-online.info/">Official SERYFA Website</a>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const drawer = document.getElementById('sfy-drawer');
+      const btn = document.querySelector('.hamburger');
+      const closeBtn = drawer.querySelector('[data-close]');
+      const focusable = () => Array.from(drawer.querySelectorAll('a,button,input,select,textarea,[tabindex]')).filter(el=>!el.hasAttribute('disabled'));
+
+      function open(){
+        drawer.classList.add('open');
+        drawer.setAttribute('aria-hidden','false');
+        btn.setAttribute('aria-expanded','true');
+        (focusable()[0]||closeBtn).focus();
+        document.body.style.overflow='hidden';
+        document.body.classList.add('menu-open');
+      }
+      function close(){
+        drawer.classList.remove('open');
+        drawer.setAttribute('aria-hidden','true');
+        btn.setAttribute('aria-expanded','false');
+        btn.focus();
+        document.body.style.overflow='';
+        document.body.classList.remove('menu-open');
+      }
+
+      btn && btn.addEventListener('click', open);
+      closeBtn && closeBtn.addEventListener('click', close);
+      drawer.addEventListener('click', (e)=>{ if(e.target === drawer) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && drawer.classList.contains('open')) close(); });
+
+      
+      drawer.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          window.scrollTo(0, 0);
+          close();
+        });
+      });
+
+      
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.sfy-nav');
+        if (!nav || document.body.classList.contains('menu-open')) return;
+        const current = window.scrollY;
+        if (current > lastScrollY && current > 80) {
+          nav.classList.add('hide');
+        } else {
+          nav.classList.remove('hide');
+        }
+        lastScrollY = current;
+      });
+    })();
+  </script></head><body><h1>U14 Team Stats</h1><label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Division 1">Division 1</option><option value="Division 2A">Division 2A</option><option value="Division 2B">Division 2B</option><option value="Division 3A">Division 3A</option><option value="Division 3B">Division 3B</option><option value="Division 4A">Division 4A</option><option value="Division 4B">Division 4B</option>
+  </select><div class="division-block" data-division="Division 1">
+    <h2>Division 1</h2>
+    <table class="sortable">
+      <thead><tr>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable gf" data-type="num">Avg GF</th>
+        <th class="sortable ga" data-type="num">Avg GA</th>
+        <th class="sortable" data-type="text">Biggest Win</th>
+        <th class="sortable" data-type="text">Biggest Loss</th>
+        <th class="sortable gf" data-type="num">Most Scored</th>
+        <th class="sortable ga" data-type="num">Most Conceded</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>BLACKBURN UNITED BLACKS</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="" data-num="2.6666666666666665">2.67</td>
+      <td class="">5–0 vs CURRIE STAR FC</td>
+      <td>0–5 vs LOCHEND FA</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>CURRIE STAR FC</td>
+      <td class="" data-num="0.6666666666666666">0.67</td>
+      <td class="min-cell" data-num="5.333333333333333">5.33</td>
+      <td class="">-</td>
+      <td>1–7 vs EDINBURGH CITY FC</td>
+      <td class="" data-num="1">1</td>
+      <td class="min-cell" data-num="7">7</td>
+    </tr><tr>
+      <td>EDINBURGH SOUTH CFC</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="1.6666666666666667">1.67</td>
+      <td class="">4–1 vs CURRIE STAR FC</td>
+      <td>1–3 vs SPARTANS FC YOUTH</td>
+      <td class="" data-num="4">4</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>KSQ GALAXY</td>
+      <td class="" data-num="0.6666666666666666">0.67</td>
+      <td class="" data-num="3.3333333333333335">3.33</td>
+      <td class="">-</td>
+      <td>1–7 vs HUTCHISON VALE FC</td>
+      <td class="" data-num="1">1</td>
+      <td class="" data-num="7">7</td>
+    </tr><tr>
+      <td>SPARTANS FC WHITES</td>
+      <td class="" data-num="2.6666666666666665">2.67</td>
+      <td class="" data-num="0.3333333333333333">0.33</td>
+      <td class="">4–1 vs HUTCHISON VALE BLACKS</td>
+      <td>-</td>
+      <td class="" data-num="4">4</td>
+      <td class="" data-num="1">1</td>
+    </tr><tr>
+      <td>BONNYRIGG ROSE FC</td>
+      <td class="" data-num="1.3333333333333333">1.33</td>
+      <td class="" data-num="2.6666666666666665">2.67</td>
+      <td class="">-</td>
+      <td>0–2 vs SPARTANS FC WHITES</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="4">4</td>
+    </tr><tr>
+      <td>LOCHEND FA</td>
+      <td class="" data-num="4.333333333333333">4.33</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="">5–0 vs SPARTANS FC YOUTH</td>
+      <td>-</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="0">0</td>
+    </tr><tr>
+      <td>HUTCHISON VALE FC</td>
+      <td class="" data-num="3.6666666666666665">3.67</td>
+      <td class="" data-num="1.6666666666666667">1.67</td>
+      <td class="">7–1 vs KSQ GALAXY</td>
+      <td>0–3 vs LOCHEND FA</td>
+      <td class="max-cell" data-num="7">7</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>MUSSELBURGH WINDSOR FC</td>
+      <td class="" data-num="3.6666666666666665">3.67</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="max-cell">7–0 vs DALKEITH THISTLE CFC</td>
+      <td>1–4 vs HUTCHISON VALE FC</td>
+      <td class="" data-num="7">7</td>
+      <td class="" data-num="4">4</td>
+    </tr><tr>
+      <td>SPARTANS FC YOUTH</td>
+      <td class="" data-num="1.6666666666666667">1.67</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="">3–1 vs EDINBURGH SOUTH CFC</td>
+      <td>0–5 vs LOCHEND FA</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>DALKEITH THISTLE CFC</td>
+      <td class="" data-num="0.5">0.50</td>
+      <td class="" data-num="4.5">4.50</td>
+      <td class="">-</td>
+      <td>0–7 vs MUSSELBURGH WINDSOR FC</td>
+      <td class="" data-num="1">1</td>
+      <td class="" data-num="7">7</td>
+    </tr><tr>
+      <td>EASTSIDE RAPIDS UNITED</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="">2–1 vs DALKEITH THISTLE CFC</td>
+      <td>-</td>
+      <td class="" data-num="2">2</td>
+      <td class="" data-num="1">1</td>
+    </tr><tr>
+      <td>EDINBURGH CITY FC</td>
+      <td class="max-cell" data-num="4.5">4.50</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="">7–1 vs CURRIE STAR FC</td>
+      <td>2–3 vs HUTCHISON VALE BLACKS</td>
+      <td class="" data-num="7">7</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>HUTCHISON VALE BLACKS</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="">3–2 vs EDINBURGH CITY FC</td>
+      <td>1–4 vs SPARTANS FC WHITES</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="4">4</td>
+    </tr></tbody></table></div><div class="division-block" data-division="Division 2A">
+    <h2>Division 2A</h2>
+    <table class="sortable">
+      <thead><tr>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable gf" data-type="num">Avg GF</th>
+        <th class="sortable ga" data-type="num">Avg GA</th>
+        <th class="sortable" data-type="text">Biggest Win</th>
+        <th class="sortable" data-type="text">Biggest Loss</th>
+        <th class="sortable gf" data-type="num">Most Scored</th>
+        <th class="sortable ga" data-type="num">Most Conceded</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>CURRIE FC PUMAS</td>
+      <td class="" data-num="2.3333333333333335">2.33</td>
+      <td class="" data-num="1.6666666666666667">1.67</td>
+      <td class="">2–1 vs EDINA HIBS GREENS</td>
+      <td>-</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>EDINA HIBS GREENS</td>
+      <td class="" data-num="0.3333333333333333">0.33</td>
+      <td class="" data-num="3.3333333333333335">3.33</td>
+      <td class="">-</td>
+      <td>0–6 vs CORSTORPHINE DYNAMO</td>
+      <td class="" data-num="1">1</td>
+      <td class="" data-num="6">6</td>
+    </tr><tr>
+      <td>INVERKEITHING HILLFIELD SWIFTS</td>
+      <td class="" data-num="0.5">0.50</td>
+      <td class="" data-num="1.5">1.50</td>
+      <td class="">-</td>
+      <td>1–2 vs MURIESTON UNITED REDS</td>
+      <td class="" data-num="1">1</td>
+      <td class="" data-num="2">2</td>
+    </tr><tr>
+      <td>MURIESTON UNITED REDS</td>
+      <td class="" data-num="2.6666666666666665">2.67</td>
+      <td class="" data-num="2.3333333333333335">2.33</td>
+      <td class="">5–3 vs NORTH BERWICK FC</td>
+      <td>1–3 vs LOCHEND FA COLTS</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>CORSTORPHINE DYNAMO</td>
+      <td class="max-cell" data-num="5.666666666666667">5.67</td>
+      <td class="" data-num="1.6666666666666667">1.67</td>
+      <td class="">8–2 vs NORTH BERWICK FC</td>
+      <td>-</td>
+      <td class="" data-num="8">8</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>NORTH BERWICK FC</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="min-cell" data-num="7.333333333333333">7.33</td>
+      <td class="">-</td>
+      <td>1–9 vs EDINBURGH CITY CFC</td>
+      <td class="" data-num="3">3</td>
+      <td class="min-cell" data-num="9">9</td>
+    </tr><tr>
+      <td>EDINBURGH CITY CFC</td>
+      <td class="" data-num="5">5.00</td>
+      <td class="" data-num="0.5">0.50</td>
+      <td class="max-cell">9–1 vs NORTH BERWICK FC</td>
+      <td>-</td>
+      <td class="max-cell" data-num="9">9</td>
+      <td class="" data-num="1">1</td>
+    </tr><tr>
+      <td>LOCHEND FA COLTS</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="1.5">1.50</td>
+      <td class="">3–1 vs MURIESTON UNITED REDS</td>
+      <td>1–2 vs CURRIE FC PUMAS</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="2">2</td>
+    </tr><tr>
+      <td>DUNBAR UNITED BLACKS</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="">2–0 vs EDINA HIBS GREENS</td>
+      <td>-</td>
+      <td class="" data-num="2">2</td>
+      <td class="" data-num="0">0</td>
+    </tr></tbody></table></div><div class="division-block" data-division="Division 2B">
+    <h2>Division 2B</h2>
+    <table class="sortable">
+      <thead><tr>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable gf" data-type="num">Avg GF</th>
+        <th class="sortable ga" data-type="num">Avg GA</th>
+        <th class="sortable" data-type="text">Biggest Win</th>
+        <th class="sortable" data-type="text">Biggest Loss</th>
+        <th class="sortable gf" data-type="num">Most Scored</th>
+        <th class="sortable ga" data-type="num">Most Conceded</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>CHIRNSIDE UNITED FC</td>
+      <td class="" data-num="2.6666666666666665">2.67</td>
+      <td class="min-cell" data-num="5">5.00</td>
+      <td class="">5–0 vs LOANHEAD MYFC</td>
+      <td>2–9 vs MELROSE FC</td>
+      <td class="" data-num="5">5</td>
+      <td class="min-cell" data-num="9">9</td>
+    </tr><tr>
+      <td>MELROSE FC</td>
+      <td class="max-cell" data-num="5.5">5.50</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="max-cell">9–2 vs CHIRNSIDE UNITED FC</td>
+      <td>-</td>
+      <td class="max-cell" data-num="9">9</td>
+      <td class="" data-num="2">2</td>
+    </tr><tr>
+      <td>CRAMOND CFC</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="">-</td>
+      <td>0–3 vs EDINBURGH SOUTH ROMA</td>
+      <td class="" data-num="0">0</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>EDINBURGH SOUTH ROMA</td>
+      <td class="" data-num="5">5.00</td>
+      <td class="" data-num="1.3333333333333333">1.33</td>
+      <td class="">6–1 vs CHIRNSIDE UNITED FC</td>
+      <td>-</td>
+      <td class="" data-num="6">6</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>MUSSELBURGH WINDSOR BLUES</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="" data-num="1.5">1.50</td>
+      <td class="">5–3 vs PENICUIK ATHLETIC YFC</td>
+      <td>-</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>PENICUIK ATHLETIC YFC</td>
+      <td class="" data-num="1.3333333333333333">1.33</td>
+      <td class="" data-num="3.3333333333333335">3.33</td>
+      <td class="">-</td>
+      <td>3–5 vs MUSSELBURGH WINDSOR BLUES</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>LONGNIDDRY VILLA</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="" data-num="3.5">3.50</td>
+      <td class="">3–1 vs PENICUIK ATHLETIC YFC</td>
+      <td>3–6 vs EDINBURGH SOUTH ROMA</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="6">6</td>
+    </tr><tr>
+      <td>PRESTON ATHLETIC BLACKS</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="">2–0 vs CRAMOND CFC</td>
+      <td>-</td>
+      <td class="" data-num="2">2</td>
+      <td class="" data-num="0">0</td>
+    </tr><tr>
+      <td>LOANHEAD MYFC</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="" data-num="5">5.00</td>
+      <td class="">-</td>
+      <td>0–5 vs CHIRNSIDE UNITED FC</td>
+      <td class="" data-num="0">0</td>
+      <td class="" data-num="5">5</td>
+    </tr></tbody></table></div><div class="division-block" data-division="Division 3A">
+    <h2>Division 3A</h2>
+    <table class="sortable">
+      <thead><tr>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable gf" data-type="num">Avg GF</th>
+        <th class="sortable ga" data-type="num">Avg GA</th>
+        <th class="sortable" data-type="text">Biggest Win</th>
+        <th class="sortable" data-type="text">Biggest Loss</th>
+        <th class="sortable gf" data-type="num">Most Scored</th>
+        <th class="sortable ga" data-type="num">Most Conceded</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>LOCHEND FA REDS</td>
+      <td class="" data-num="4">4.00</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="">7–2 vs GALA FAIRYDEAN REDS</td>
+      <td>-</td>
+      <td class="max-cell" data-num="7">7</td>
+      <td class="" data-num="2">2</td>
+    </tr><tr>
+      <td>CURRIE FC</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="" data-num="3.5">3.50</td>
+      <td class="">-</td>
+      <td>0–4 vs NORTH BERWICK TOWN</td>
+      <td class="" data-num="0">0</td>
+      <td class="" data-num="4">4</td>
+    </tr><tr>
+      <td>NORTH BERWICK TOWN</td>
+      <td class="" data-num="2.6666666666666665">2.67</td>
+      <td class="" data-num="0.3333333333333333">0.33</td>
+      <td class="">4–0 vs CURRIE FC</td>
+      <td>-</td>
+      <td class="" data-num="4">4</td>
+      <td class="" data-num="1">1</td>
+    </tr><tr>
+      <td>PENICUIK ATHLETIC BLUES</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="1.5">1.50</td>
+      <td class="">3–2 vs PENTLAND ATHLETIC ORANGES</td>
+      <td>-</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="2">2</td>
+    </tr><tr>
+      <td>GALA FAIRYDEAN REDS</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="min-cell" data-num="4.333333333333333">4.33</td>
+      <td class="">-</td>
+      <td>2–7 vs LOCHEND FA REDS</td>
+      <td class="" data-num="2">2</td>
+      <td class="min-cell" data-num="7">7</td>
+    </tr><tr>
+      <td>EDINBURGH SOUTH REDS</td>
+      <td class="" data-num="0.6666666666666666">0.67</td>
+      <td class="" data-num="2.3333333333333335">2.33</td>
+      <td class="">1–0 vs GALA FAIRYDEAN REDS</td>
+      <td>0–5 vs CURRIE STAR FC WHITES</td>
+      <td class="" data-num="1">1</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>SPARTANS FC REDS</td>
+      <td class="" data-num="5">5.00</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="">5–1 vs GALA FAIRYDEAN REDS</td>
+      <td>-</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="1">1</td>
+    </tr><tr>
+      <td>CURRIE STAR FC WHITES</td>
+      <td class="" data-num="2.5">2.50</td>
+      <td class="" data-num="3.5">3.50</td>
+      <td class="">5–0 vs EDINBURGH SOUTH REDS</td>
+      <td>0–7 vs BONNYRIGG ROSE PANTHERS</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="7">7</td>
+    </tr><tr>
+      <td>BONNYRIGG ROSE PANTHERS</td>
+      <td class="max-cell" data-num="7">7.00</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="max-cell">7–0 vs CURRIE STAR FC WHITES</td>
+      <td>-</td>
+      <td class="" data-num="7">7</td>
+      <td class="" data-num="0">0</td>
+    </tr><tr>
+      <td>DALKEITH THISTLE DEPORTIVO</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="">-</td>
+      <td>0–3 vs NORTH BERWICK TOWN</td>
+      <td class="" data-num="0">0</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>PENTLAND ATHLETIC ORANGES</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="">-</td>
+      <td>2–3 vs PENICUIK ATHLETIC BLUES</td>
+      <td class="" data-num="2">2</td>
+      <td class="" data-num="3">3</td>
+    </tr></tbody></table></div><div class="division-block" data-division="Division 3B">
+    <h2>Division 3B</h2>
+    <table class="sortable">
+      <thead><tr>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable gf" data-type="num">Avg GF</th>
+        <th class="sortable ga" data-type="num">Avg GA</th>
+        <th class="sortable" data-type="text">Biggest Win</th>
+        <th class="sortable" data-type="text">Biggest Loss</th>
+        <th class="sortable gf" data-type="num">Most Scored</th>
+        <th class="sortable ga" data-type="num">Most Conceded</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>KSQ RAPIDS</td>
+      <td class="" data-num="3.3333333333333335">3.33</td>
+      <td class="" data-num="3.6666666666666665">3.67</td>
+      <td class="">3–1 vs HADDINGTON ATHLETIC CFC</td>
+      <td>2–4 vs CRAIGROYSTON CYFC</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="6">6</td>
+    </tr><tr>
+      <td>HADDINGTON ATHLETIC CFC</td>
+      <td class="" data-num="1.5">1.50</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="">2–1 vs BONNYRIGG ROSE UNITED</td>
+      <td>1–3 vs KSQ RAPIDS</td>
+      <td class="" data-num="2">2</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>BONNYRIGG ROSE UNITED</td>
+      <td class="" data-num="0.3333333333333333">0.33</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="">-</td>
+      <td>0–3 vs CRAIGROYSTON CYFC</td>
+      <td class="" data-num="1">1</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>CRAIGROYSTON CYFC</td>
+      <td class="" data-num="5">5.00</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="max-cell">8–1 vs HILLFIELD SWIFTS LIGHTNING</td>
+      <td>-</td>
+      <td class="max-cell" data-num="8">8</td>
+      <td class="" data-num="2">2</td>
+    </tr><tr>
+      <td>NORTH MERCHISTON BLACKS</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="" data-num="6">6.00</td>
+      <td class="">-</td>
+      <td>0–6 vs LEITH ATHLETIC FC</td>
+      <td class="" data-num="0">0</td>
+      <td class="" data-num="6">6</td>
+    </tr><tr>
+      <td>LEITH ATHLETIC FC</td>
+      <td class="max-cell" data-num="6">6.00</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="">6–0 vs NORTH MERCHISTON BLACKS</td>
+      <td>-</td>
+      <td class="" data-num="6">6</td>
+      <td class="" data-num="0">0</td>
+    </tr><tr>
+      <td>ANCRUM JFC</td>
+      <td class="" data-num="6">6.00</td>
+      <td class="" data-num="5">5.00</td>
+      <td class="">6–5 vs KSQ RAPIDS</td>
+      <td>-</td>
+      <td class="" data-num="6">6</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>EDINBURGH SOUTH CFC RAMS</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="">1–0 vs BONNYRIGG ROSE UNITED</td>
+      <td>-</td>
+      <td class="" data-num="1">1</td>
+      <td class="" data-num="0">0</td>
+    </tr><tr>
+      <td>HILLFIELD SWIFTS LIGHTNING</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="min-cell" data-num="8">8.00</td>
+      <td class="">-</td>
+      <td>1–8 vs CRAIGROYSTON CYFC</td>
+      <td class="" data-num="1">1</td>
+      <td class="min-cell" data-num="8">8</td>
+    </tr></tbody></table></div><div class="division-block" data-division="Division 4A">
+    <h2>Division 4A</h2>
+    <table class="sortable">
+      <thead><tr>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable gf" data-type="num">Avg GF</th>
+        <th class="sortable ga" data-type="num">Avg GA</th>
+        <th class="sortable" data-type="text">Biggest Win</th>
+        <th class="sortable" data-type="text">Biggest Loss</th>
+        <th class="sortable gf" data-type="num">Most Scored</th>
+        <th class="sortable ga" data-type="num">Most Conceded</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>AC OXGANGS CFC</td>
+      <td class="" data-num="1.6666666666666667">1.67</td>
+      <td class="" data-num="2.3333333333333335">2.33</td>
+      <td class="">4–0 vs KSQ COMETS</td>
+      <td>0–4 vs EDINA HIBS WHITES</td>
+      <td class="" data-num="4">4</td>
+      <td class="" data-num="4">4</td>
+    </tr><tr>
+      <td>KSQ COMETS</td>
+      <td class="" data-num="0.3333333333333333">0.33</td>
+      <td class="min-cell" data-num="7.333333333333333">7.33</td>
+      <td class="">-</td>
+      <td>0–9 vs BONNYRIGG ROSE ATHLETIC</td>
+      <td class="" data-num="1">1</td>
+      <td class="min-cell" data-num="9">9</td>
+    </tr><tr>
+      <td>BONNYRIGG ROSE ATHLETIC</td>
+      <td class="" data-num="6">6.00</td>
+      <td class="" data-num="0.5">0.50</td>
+      <td class="max-cell">9–0 vs KSQ COMETS</td>
+      <td>-</td>
+      <td class="max-cell" data-num="9">9</td>
+      <td class="" data-num="1">1</td>
+    </tr><tr>
+      <td>MUSSELBURGH WINDSOR WHITES</td>
+      <td class="max-cell" data-num="7.5">7.50</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="">9–1 vs KSQ COMETS</td>
+      <td>-</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>EDINA HIBS WHITES</td>
+      <td class="" data-num="4">4.00</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="">4–0 vs AC OXGANGS CFC</td>
+      <td>-</td>
+      <td class="" data-num="4">4</td>
+      <td class="" data-num="0">0</td>
+    </tr><tr>
+      <td>EDINBURGH CITY BLACKS</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="" data-num="6">6.00</td>
+      <td class="">-</td>
+      <td>3–6 vs MUSSELBURGH WINDSOR WHITES</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="6">6</td>
+    </tr></tbody></table></div><div class="division-block" data-division="Division 4B">
+    <h2>Division 4B</h2>
+    <table class="sortable">
+      <thead><tr>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable gf" data-type="num">Avg GF</th>
+        <th class="sortable ga" data-type="num">Avg GA</th>
+        <th class="sortable" data-type="text">Biggest Win</th>
+        <th class="sortable" data-type="text">Biggest Loss</th>
+        <th class="sortable gf" data-type="num">Most Scored</th>
+        <th class="sortable ga" data-type="num">Most Conceded</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>PENICUIK ATHLETIC WHITES</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="">-</td>
+      <td>1–3 vs DUNBAR UNITED WHITES</td>
+      <td class="" data-num="1">1</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>DUNBAR UNITED WHITES</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="0.5">0.50</td>
+      <td class="">3–1 vs PENICUIK ATHLETIC WHITES</td>
+      <td>-</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="1">1</td>
+    </tr><tr>
+      <td>CURRIE STAR FC YELLOWS</td>
+      <td class="" data-num="0.5">0.50</td>
+      <td class="" data-num="8">8.00</td>
+      <td class="">-</td>
+      <td>0–9 vs LOTHIAN COLTS FC</td>
+      <td class="" data-num="1">1</td>
+      <td class="min-cell" data-num="9">9</td>
+    </tr><tr>
+      <td>EDINBURGH UNITED WHITES</td>
+      <td class="max-cell" data-num="8">8.00</td>
+      <td class="" data-num="0.5">0.50</td>
+      <td class="max-cell">9–0 vs PRESTON ATHLETIC DYNAMITE</td>
+      <td>-</td>
+      <td class="max-cell" data-num="9">9</td>
+      <td class="" data-num="1">1</td>
+    </tr><tr>
+      <td>NORTH MERCHISTON WHITES</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="" data-num="1">1.00</td>
+      <td class="">-</td>
+      <td>0–1 vs LOTHIAN COLTS FC</td>
+      <td class="" data-num="0">0</td>
+      <td class="" data-num="1">1</td>
+    </tr><tr>
+      <td>LOTHIAN COLTS FC</td>
+      <td class="" data-num="5">5.00</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="">9–0 vs CURRIE STAR FC YELLOWS</td>
+      <td>-</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="0">0</td>
+    </tr><tr>
+      <td>PRESTON ATHLETIC DYNAMITE</td>
+      <td class="" data-num="0">0.00</td>
+      <td class="min-cell" data-num="9">9.00</td>
+      <td class="">-</td>
+      <td>0–9 vs EDINBURGH UNITED WHITES</td>
+      <td class="" data-num="0">0</td>
+      <td class="" data-num="9">9</td>
+    </tr></tbody></table></div><script>
+  (function(){
+    function numVal(td){
+      const ds = td.getAttribute('data-num');
+      if(ds !== null) return parseFloat(ds);
+      const t = td.textContent.trim().replace(/[^\d.\-]/g,'');
+      const n = parseFloat(t);
+      return isNaN(n) ? 0 : n;
+    }
+    function getComparator(type, i, asc){
+      if(type === 'num'){
+        return (a,b)=>{ const ax=numVal(a.children[i]), bx=numVal(b.children[i]); return asc ? (ax-bx) : (bx-ax); };
+      }
+      
+      return (a,b)=>{
+        const ax=a.children[i].textContent.trim();
+        const bx=b.children[i].textContent.trim();
+        const cmp=ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'});
+        return asc ? cmp : -cmp;
+      };
+    }
+    function sortTable(table, colIdx, type, th){
+      const tbody = table.querySelector('tbody'); if(!tbody) return;
+      const hasState = th.classList.contains('asc') || th.classList.contains('desc');
+      const firstAsc = (type === 'text'); 
+      const asc = hasState ? th.classList.contains('desc') : firstAsc;
+
+      const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r,idx]);
+      const cmp = getComparator(type, colIdx, asc);
+      rows.sort((A,B)=>{ const r=cmp(A[0],B[0]); return r!==0 ? r : (A[1]-B[1]); });
+
+      table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.forEach(pair=>tbody.appendChild(pair[0]));
+    }
+    document.querySelectorAll('table').forEach(t=>{
+      t.querySelectorAll('thead th.sortable').forEach(th=>{
+        th.addEventListener('click', ()=> sortTable(t, th.cellIndex, th.dataset.type||'text', th));
+      });
+    });
+    
+    const divFilter = document.getElementById('division-filter');
+    function applyFilter(val){
+      document.querySelectorAll('.division-block').forEach(d=>{
+        d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none';
+      });
+    }
+    if(divFilter){
+      divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      const url = new URL(window.location.href);
+      const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) divFilter.value = pre;
+      applyFilter(divFilter.value || 'ALL');
+    }
+  })();
+  </script></body></html>
