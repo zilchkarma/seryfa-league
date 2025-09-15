@@ -1,0 +1,946 @@
+<!DOCTYPE html><html><head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QLTFGFY0MQ');
+</script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+  h1{margin-top:0;color:#FFD700}
+  select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+  table{border-collapse:collapse;width:100%;margin-bottom:30px}
+  th,td{border:1px solid #ccc;padding:8px;text-align:center}
+  th{background:#FFD700;color:#000}
+  th.sortable{cursor:pointer}
+  th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
+  .highlight{background-color:#d4edda;font-weight:bold}
+  .highlight-low{background-color:#fff3cd;font-weight:bold}
+  th.pts-head{background:#FFD700;color:#000}
+  td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
+  td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
+  tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+  .form-cell span{padding:2px 6px;border-radius:4px;color:#fff;font-weight:bold;margin-right:2px}
+  .W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}
+  th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+  .date-cell{background:#000;color:#FFD700}
+  footer{margin-top:24px;font-size:.9em;opacity:.85}
+  @media (prefers-color-scheme: dark){
+    body{background:#101010;color:#e0e0e0}
+    select{background:#222;color:#fff;border-color:#555}
+    table,th,td{border-color:#333}
+    th{background:#222;color:#fff}
+    th.pts-head{background:#FFD700;color:#000}
+    td.pts-cell{background:#444;color:#FFD700}
+    td.gf{background:#1a2a40} td.ga{background:#402a1a} td.gd{background:#1a402a}
+    tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+    .W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}
+    th:first-child,td:first-child{background:#202020;font-weight:bold}
+    .date-cell{background:#000;color:#FFD700}
+  }
+     
+  .theme-toggle{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:6px 0 14px 0}
+  .switch{position:relative;display:inline-block;width:52px;height:28px}
+  .switch input{opacity:0;width:0;height:0}
+  .slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#bbb;transition:.2s;border-radius:28px}
+  .slider:before{position:absolute;content:"";height:22px;width:22px;left:3px;bottom:3px;background:#fff;transition:.2s;border-radius:50%}
+  .switch input:checked + .slider{background:#4CAF50}
+  .switch input:checked + .slider:before{transform:translateX(24px)}
+  
+  
+  </style>
+  <style id="theme-override"></style></head><body>
+  <div class="theme-toggle" title="Toggle dark mode" role="group" aria-label="Theme toggle">
+  <span aria-hidden="true">☀️</span>
+  <label class="switch">
+    <input type="checkbox" id="theme-toggle" aria-label="Dark mode">
+    <span class="slider"></span>
+  </label>
+  <span aria-hidden="true">🌙</span>
+</div>
+  <style>
+    .sfy-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #222;
+      color: #fff;
+      transition: transform .25s ease;
+    }
+    .sfy-nav.hide { transform: translateY(-100%); }
+
+    .sfy-nav .bar{display:flex;align-items:center;gap:12px;padding:10px 14px}
+    .sfy-brand{font-weight:700;letter-spacing:.3px}
+    .sfy-spacer{flex:1}
+    .sfy-cta{white-space:nowrap}
+    .sfy-btn{border:1px solid #555;background:transparent;color:#fff;border-radius:10px;padding:6px 10px;font-size:.95rem}
+
+     
+    .hamburger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid #555;border-radius:10px}
+    .hamburger:focus{outline:2px solid #FFD700;outline-offset:2px}
+
+     
+    .sfy-tabs,.sfy-subtabs{display:flex;gap:6px;overflow:auto hidden;padding:6px 10px}
+    .nav-link{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid #444;color:#fff;text-decoration:none;white-space:nowrap}
+    .nav-link:hover{background:#333}
+    .nav-link.active{background:#FFD700;color:#3f403f;border-color:#FFD700}
+
+     
+    .sfy-drawer{position:fixed;inset:0 0 0 auto;max-width:360px;width:88vw;transform:translateX(100%);
+      transition:transform .2s ease; background:#181818;color:#fff;box-shadow:-6px 0 20px rgba(0,0,0,.35)}
+    .sfy-drawer.open{transform:none}
+    .sfy-drawer header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #333}
+    .sfy-drawer .section{padding:10px 16px}
+    .sfy-drawer .group-title{font-size:.85rem;opacity:.8;margin:12px 0 6px}
+    .sfy-drawer .menu-grid{display:grid;grid-template-columns:1fr;gap:8px}
+    .sfy-drawer a{display:block;padding:10px 12px;border-radius:10px;border:1px solid #333;color:#fff;text-decoration:none}
+    .sfy-drawer a:hover{background:#242424}
+
+     
+    @media (min-width: 820px){
+      .hamburger{display:none}
+      .sfy-drawer{display:none}
+      .sfy-nav .bar{padding:12px 18px}
+    }
+
+     
+    @media (max-width: 819.98px){
+      .hamburger{display:flex}
+      .sfy-cta{display:none}
+    }
+  </style>
+  <nav class="sfy-nav" role="navigation" aria-label="Primary">
+    <div class="bar">
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="sfy-drawer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <div class="sfy-brand">SERYFA Unofficial League Tables</div>
+      <div class="sfy-spacer"></div>
+      <a class="sfy-btn sfy-cta" href="https://www.seryfa-online.info/">Official SERYFA Website</a>
+    </div>
+    
+    <div class="sfy-subtabs" role="tablist" aria-label="U15 views">
+      <a class="nav-link active" href="U15.html">U15 League Table</a>
+      <a class="nav-link" href="U15-stats.html">U15 Team Stats</a>
+    </div>
+    <div class="sfy-tabs" role="tablist" aria-label="Age groups">
+      <a class="nav-link" href="U13.html">U13</a><a class="nav-link" href="U14.html">U14</a><a class="nav-link active" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a>
+    </div>
+  </nav>
+
+  
+  <div id="sfy-drawer" class="sfy-drawer" aria-hidden="true">
+    <header>
+      <strong>Menu</strong>
+      <button class="sfy-btn" data-close>Close</button>
+    </header>
+    <div class="section">
+      <div class="group-title">Overview</div>
+      <div class="menu-grid"><a class="nav-link" href="U13.html">U13 Overview</a><a class="nav-link" href="U14.html">U14 Overview</a><a class="nav-link active" href="U15.html">U15 Overview</a><a class="nav-link" href="U16.html">U16 Overview</a><a class="nav-link" href="U17.html">U17 Overview</a><a class="nav-link" href="U18.html">U18 Overview</a></div>
+    </div>
+    <div class="section">
+      <div class="group-title">Team Stats</div>
+      <div class="menu-grid"><a class="nav-link" href="U13-stats.html">U13 Team Stats</a><a class="nav-link" href="U14-stats.html">U14 Team Stats</a><a class="nav-link" href="U15-stats.html">U15 Team Stats</a><a class="nav-link" href="U16-stats.html">U16 Team Stats</a><a class="nav-link" href="U17-stats.html">U17 Team Stats</a><a class="nav-link" href="U18-stats.html">U18 Team Stats</a></div>
+    </div>
+    <div class="section">
+      <a class="sfy-btn" href="https://www.seryfa-online.info/">Official SERYFA Website</a>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const drawer = document.getElementById('sfy-drawer');
+      const btn = document.querySelector('.hamburger');
+      const closeBtn = drawer.querySelector('[data-close]');
+      const focusable = () => Array.from(drawer.querySelectorAll('a,button,input,select,textarea,[tabindex]')).filter(el=>!el.hasAttribute('disabled'));
+
+      function open(){
+        drawer.classList.add('open');
+        drawer.setAttribute('aria-hidden','false');
+        btn.setAttribute('aria-expanded','true');
+        (focusable()[0]||closeBtn).focus();
+        document.body.style.overflow='hidden';
+        document.body.classList.add('menu-open');
+      }
+      function close(){
+        drawer.classList.remove('open');
+        drawer.setAttribute('aria-hidden','true');
+        btn.setAttribute('aria-expanded','false');
+        btn.focus();
+        document.body.style.overflow='';
+        document.body.classList.remove('menu-open');
+      }
+
+      btn && btn.addEventListener('click', open);
+      closeBtn && closeBtn.addEventListener('click', close);
+      drawer.addEventListener('click', (e)=>{ if(e.target === drawer) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && drawer.classList.contains('open')) close(); });
+
+      
+      drawer.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          window.scrollTo(0, 0);
+          close();
+        });
+      });
+
+      
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.sfy-nav');
+        if (!nav || document.body.classList.contains('menu-open')) return;
+        const current = window.scrollY;
+        if (current > lastScrollY && current > 80) {
+          nav.classList.add('hide');
+        } else {
+          nav.classList.remove('hide');
+        }
+        lastScrollY = current;
+      });
+    })();
+  </script>
+   <footer>Website not affiliated to SERYFA - automation created due to delays in official site league tables updating. Results not warranted. Errors and omissions excepted.</footer><h1>U15 League Tables</h1><label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Division 1">Division 1</option><option value="Division 2">Division 2</option><option value="Division 3A">Division 3A</option><option value="Division 3B">Division 3B</option><option value="Division 4">Division 4</option>
+  </select><div class="division-block" data-division="Division 1">
+      <h2>Division 1 - Last Updated 15/09/2025 09:29</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr><td>1</td><td>EDINBURGH CITY FC</td><td>5</td><td>5</td>
+        <td>0</td><td>0</td><td class="pts-cell">15</td>
+        <td class="gf">24</td><td class="ga">6</td><td class="gd">18</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>BROXBURN ATHLETIC COLTS</td><td>4</td><td>3</td>
+        <td>0</td><td>1</td><td class="pts-cell">9</td>
+        <td class="gf">13</td><td class="ga">5</td><td class="gd">8</td>
+        <td class="form-cell" data-form="WWLW"><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td></tr><tr><td>3</td><td>LEITH ATHLETIC FC</td><td>4</td><td>2</td>
+        <td>1</td><td>1</td><td class="pts-cell">7</td>
+        <td class="gf">9</td><td class="ga">6</td><td class="gd">3</td>
+        <td class="form-cell" data-form="LWWD"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="D">D</span></td></tr><tr><td>4</td><td>EAST CALDER CFC</td><td>5</td><td>2</td>
+        <td>1</td><td>2</td><td class="pts-cell">7</td>
+        <td class="gf">8</td><td class="ga">9</td><td class="gd">-1</td>
+        <td class="form-cell" data-form="WDWLL"><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td></tr><tr><td>5</td><td>EDINBURGH UNITED BLACKS</td><td>2</td><td>2</td>
+        <td>0</td><td>0</td><td class="pts-cell">6</td>
+        <td class="gf">5</td><td class="ga">0</td><td class="gd">5</td>
+        <td class="form-cell" data-form="WW"><span class="W">W</span><span class="W">W</span></td></tr><tr><td>6</td><td>EASTSIDE RAPIDS UNITED</td><td>3</td><td>1</td>
+        <td>1</td><td>1</td><td class="pts-cell">4</td>
+        <td class="gf">7</td><td class="ga">7</td><td class="gd">0</td>
+        <td class="form-cell" data-form="WDL"><span class="W">W</span><span class="D">D</span><span class="L">L</span></td></tr><tr><td>7</td><td>CRAMOND CFC</td><td>4</td><td>1</td>
+        <td>1</td><td>2</td><td class="pts-cell">4</td>
+        <td class="gf">8</td><td class="ga">15</td><td class="gd">-7</td>
+        <td class="form-cell" data-form="WLDDL"><span class="W">W</span><span class="L">L</span><span class="D">D</span><span class="D">D</span><span class="L">L</span></td></tr><tr><td>8</td><td>SPARTANS FC YOUTH</td><td>3</td><td>1</td>
+        <td>0</td><td>2</td><td class="pts-cell">3</td>
+        <td class="gf">9</td><td class="ga">5</td><td class="gd">4</td>
+        <td class="form-cell" data-form="LLW"><span class="L">L</span><span class="L">L</span><span class="W">W</span></td></tr><tr><td>9</td><td>BONNYRIGG ROSE FC</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">3</td><td class="ga">1</td><td class="gd">2</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>10</td><td>NORTH BERWICK FC</td><td>2</td><td>1</td>
+        <td>0</td><td>1</td><td class="pts-cell">3</td>
+        <td class="gf">1</td><td class="ga">2</td><td class="gd">-1</td>
+        <td class="form-cell" data-form="WL"><span class="W">W</span><span class="L">L</span></td></tr><tr><td>11</td><td>HUTCHISON VALE FC</td><td>4</td><td>1</td>
+        <td>0</td><td>3</td><td class="pts-cell">3</td>
+        <td class="gf">3</td><td class="ga">10</td><td class="gd">-7</td>
+        <td class="form-cell" data-form="WLLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr><tr><td>12</td><td>HIBERNIAN CFC</td><td>4</td><td>1</td>
+        <td>0</td><td>3</td><td class="pts-cell">3</td>
+        <td class="gf">8</td><td class="ga">17</td><td class="gd">-9</td>
+        <td class="form-cell" data-form="LLWL"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td></tr><tr><td>13</td><td>MUSSELBURGH WINDSOR BLUES</td><td>2</td><td>0</td>
+        <td>0</td><td>2</td><td class="pts-cell">0</td>
+        <td class="gf">2</td><td class="ga">7</td><td class="gd">-5</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td></tr><tr><td>14</td><td>MUSSELBURGH WINDSOR FC</td><td>3</td><td>0</td>
+        <td>0</td><td>3</td><td class="pts-cell">0</td>
+        <td class="gf">5</td><td class="ga">15</td><td class="gd">-10</td>
+        <td class="form-cell" data-form="LLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 2">
+      <h2>Division 2 - Last Updated 15/09/2025 09:29</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr><td>1</td><td>NORTH MERCHISTON BLACKS</td><td>5</td><td>4</td>
+        <td>0</td><td>1</td><td class="pts-cell">12</td>
+        <td class="gf">30</td><td class="ga">6</td><td class="gd">24</td>
+        <td class="form-cell" data-form="WLWWW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>TYNECASTLE FC</td><td>4</td><td>3</td>
+        <td>1</td><td>0</td><td class="pts-cell">10</td>
+        <td class="gf">25</td><td class="ga">10</td><td class="gd">15</td>
+        <td class="form-cell" data-form="WWWD"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="D">D</span></td></tr><tr><td>3</td><td>CASTLEVALE BLUES</td><td>3</td><td>3</td>
+        <td>0</td><td>0</td><td class="pts-cell">9</td>
+        <td class="gf">18</td><td class="ga">9</td><td class="gd">9</td>
+        <td class="form-cell" data-form="WWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>4</td><td>SPARTANS FC WHITES</td><td>4</td><td>2</td>
+        <td>1</td><td>1</td><td class="pts-cell">7</td>
+        <td class="gf">13</td><td class="ga">7</td><td class="gd">6</td>
+        <td class="form-cell" data-form="LWDW"><span class="L">L</span><span class="W">W</span><span class="D">D</span><span class="W">W</span></td></tr><tr><td>5</td><td>LOTHIAN COLTS FC</td><td>3</td><td>2</td>
+        <td>1</td><td>0</td><td class="pts-cell">7</td>
+        <td class="gf">13</td><td class="ga">11</td><td class="gd">2</td>
+        <td class="form-cell" data-form="WWD"><span class="W">W</span><span class="W">W</span><span class="D">D</span></td></tr><tr><td>6</td><td>LAUDER FC</td><td>5</td><td>2</td>
+        <td>0</td><td>3</td><td class="pts-cell">6</td>
+        <td class="gf">21</td><td class="ga">16</td><td class="gd">5</td>
+        <td class="form-cell" data-form="LLLWW"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>7</td><td>HADDINGTON ATHLETIC CFC</td><td>3</td><td>1</td>
+        <td>2</td><td>0</td><td class="pts-cell">5</td>
+        <td class="gf">11</td><td class="ga">10</td><td class="gd">1</td>
+        <td class="form-cell" data-form="DWD"><span class="D">D</span><span class="W">W</span><span class="D">D</span></td></tr><tr><td>8</td><td>KELSO FC</td><td>3</td><td>1</td>
+        <td>1</td><td>1</td><td class="pts-cell">4</td>
+        <td class="gf">7</td><td class="ga">15</td><td class="gd">-8</td>
+        <td class="form-cell" data-form="WLWD"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="D">D</span></td></tr><tr><td>9</td><td>CRAIGROYSTON YELLOWS</td><td>5</td><td>1</td>
+        <td>1</td><td>3</td><td class="pts-cell">4</td>
+        <td class="gf">10</td><td class="ga">20</td><td class="gd">-10</td>
+        <td class="form-cell" data-form="DWLLL"><span class="D">D</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr><tr><td>10</td><td>LEITH ATHLETIC COLTS</td><td>1</td><td>0</td>
+        <td>1</td><td>0</td><td class="pts-cell">1</td>
+        <td class="gf">1</td><td class="ga">1</td><td class="gd">0</td>
+        <td class="form-cell" data-form="D"><span class="D">D</span></td></tr><tr><td>11</td><td>KSQ GALAXY</td><td>3</td><td>0</td>
+        <td>0</td><td>3</td><td class="pts-cell">0</td>
+        <td class="gf">1</td><td class="ga">12</td><td class="gd">-11</td>
+        <td class="form-cell" data-form="LLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr><tr><td>12</td><td>LOCHEND FA</td><td>4</td><td>0</td>
+        <td>0</td><td>4</td><td class="pts-cell">0</td>
+        <td class="gf">7</td><td class="ga">23</td><td class="gd">-16</td>
+        <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr><tr><td>13</td><td>GALA FAIRYDEAN ROVERS</td><td>3</td><td>0</td>
+        <td>0</td><td>3</td><td class="pts-cell">0</td>
+        <td class="gf">5</td><td class="ga">22</td><td class="gd">-17</td>
+        <td class="form-cell" data-form="LLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 3A">
+      <h2>Division 3A - Last Updated 14/09/2025 21:29</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr><td>1</td><td>PEEBLES FC</td><td>2</td><td>2</td>
+        <td>0</td><td>0</td><td class="pts-cell">6</td>
+        <td class="gf">14</td><td class="ga">3</td><td class="gd">11</td>
+        <td class="form-cell" data-form="WW"><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>PENICUIK ATHLETIC WHITES</td><td>3</td><td>2</td>
+        <td>0</td><td>1</td><td class="pts-cell">6</td>
+        <td class="gf">17</td><td class="ga">9</td><td class="gd">8</td>
+        <td class="form-cell" data-form="WLW"><span class="W">W</span><span class="L">L</span><span class="W">W</span></td></tr><tr><td>3</td><td>EDINBURGH SOUTH WARRIORS</td><td>2</td><td>2</td>
+        <td>0</td><td>0</td><td class="pts-cell">6</td>
+        <td class="gf">10</td><td class="ga">6</td><td class="gd">4</td>
+        <td class="form-cell" data-form="WW"><span class="W">W</span><span class="W">W</span></td></tr><tr><td>4</td><td>DALKEITH THISTLE CFC</td><td>2</td><td>2</td>
+        <td>0</td><td>0</td><td class="pts-cell">6</td>
+        <td class="gf">4</td><td class="ga">0</td><td class="gd">4</td>
+        <td class="form-cell" data-form="WW"><span class="W">W</span><span class="W">W</span></td></tr><tr><td>5</td><td>EDINBURGH SOUTH RACERS</td><td>4</td><td>2</td>
+        <td>0</td><td>2</td><td class="pts-cell">6</td>
+        <td class="gf">13</td><td class="ga">10</td><td class="gd">3</td>
+        <td class="form-cell" data-form="WLLW"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td></tr><tr><td>6</td><td>CORSTORPHIN DYNAMO WHITES</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">6</td><td class="ga">3</td><td class="gd">3</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>7</td><td>NORTH BERWICK TOWN</td><td>3</td><td>1</td>
+        <td>0</td><td>2</td><td class="pts-cell">3</td>
+        <td class="gf">7</td><td class="ga">11</td><td class="gd">-4</td>
+        <td class="form-cell" data-form="LWL"><span class="L">L</span><span class="W">W</span><span class="L">L</span></td></tr><tr><td>8</td><td>SALVESEN CFC</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">0</td><td class="ga">1</td><td class="gd">-1</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>9</td><td>BONNYRIGG ROSE PISTONS</td><td>2</td><td>0</td>
+        <td>0</td><td>2</td><td class="pts-cell">0</td>
+        <td class="gf">0</td><td class="ga">7</td><td class="gd">-7</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td></tr><tr><td>10</td><td>DALKEITH THISTLE ESTRELLA</td><td>4</td><td>0</td>
+        <td>0</td><td>4</td><td class="pts-cell">0</td>
+        <td class="gf">7</td><td class="ga">28</td><td class="gd">-21</td>
+        <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 3B">
+      <h2>Division 3B - Last Updated 14/09/2025 21:29</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr><td>1</td><td>SPARTANS FC REDS</td><td>6</td><td>3</td>
+        <td>1</td><td>2</td><td class="pts-cell">10</td>
+        <td class="gf">21</td><td class="ga">19</td><td class="gd">2</td>
+        <td class="form-cell" data-form="WLLWW"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>MUSSELBURGH WINDSOR WHITES</td><td>3</td><td>2</td>
+        <td>1</td><td>0</td><td class="pts-cell">7</td>
+        <td class="gf">16</td><td class="ga">8</td><td class="gd">8</td>
+        <td class="form-cell" data-form="WWD"><span class="W">W</span><span class="W">W</span><span class="D">D</span></td></tr><tr><td>3</td><td>CRAMOND CFC</td><td>4</td><td>2</td>
+        <td>1</td><td>1</td><td class="pts-cell">7</td>
+        <td class="gf">17</td><td class="ga">11</td><td class="gd">6</td>
+        <td class="form-cell" data-form="WLDDL"><span class="W">W</span><span class="L">L</span><span class="D">D</span><span class="D">D</span><span class="L">L</span></td></tr><tr><td>4</td><td>NORTH MERCHISTON WHITES</td><td>3</td><td>2</td>
+        <td>1</td><td>0</td><td class="pts-cell">7</td>
+        <td class="gf">8</td><td class="ga">4</td><td class="gd">4</td>
+        <td class="form-cell" data-form="DWW"><span class="D">D</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>5</td><td>ARNISTON RANGERS YFC</td><td>2</td><td>2</td>
+        <td>0</td><td>0</td><td class="pts-cell">6</td>
+        <td class="gf">6</td><td class="ga">3</td><td class="gd">3</td>
+        <td class="form-cell" data-form="WW"><span class="W">W</span><span class="W">W</span></td></tr><tr><td>6</td><td>TYNECASTLE FC MAROONS</td><td>2</td><td>1</td>
+        <td>0</td><td>1</td><td class="pts-cell">3</td>
+        <td class="gf">10</td><td class="ga">8</td><td class="gd">2</td>
+        <td class="form-cell" data-form="LW"><span class="L">L</span><span class="W">W</span></td></tr><tr><td>7</td><td>CORSTORPHINE DYNAMO BLACKS</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">4</td><td class="ga">2</td><td class="gd">2</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>8</td><td>EDINBURGH SOUTH EAGLES</td><td>4</td><td>1</td>
+        <td>0</td><td>3</td><td class="pts-cell">3</td>
+        <td class="gf">10</td><td class="ga">16</td><td class="gd">-6</td>
+        <td class="form-cell" data-form="LLWL"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td></tr><tr><td>9</td><td>CURRIE STAR BLUES</td><td>3</td><td>0</td>
+        <td>0</td><td>3</td><td class="pts-cell">0</td>
+        <td class="gf">6</td><td class="ga">12</td><td class="gd">-6</td>
+        <td class="form-cell" data-form="LLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr><tr><td>10</td><td>LEITH ATHLETIC BLACKS</td><td>3</td><td>0</td>
+        <td>0</td><td>3</td><td class="pts-cell">0</td>
+        <td class="gf">1</td><td class="ga">8</td><td class="gd">-7</td>
+        <td class="form-cell" data-form="LLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span></td></tr><tr><td>11</td><td>TYNECASTLE MAROON</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">1</td><td class="ga">9</td><td class="gd">-8</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr></tbody></table></div><div class="division-block" data-division="Division 4">
+      <h2>Division 4 - Last Updated 15/09/2025 09:29</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr><td>1</td><td>TRANENT FC</td><td>4</td><td>4</td>
+        <td>0</td><td>0</td><td class="pts-cell">12</td>
+        <td class="gf">19</td><td class="ga">4</td><td class="gd">15</td>
+        <td class="form-cell" data-form="WWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>2</td><td>EDINBURGH SOUTH TITANS</td><td>3</td><td>3</td>
+        <td>0</td><td>0</td><td class="pts-cell">9</td>
+        <td class="gf">16</td><td class="ga">1</td><td class="gd">15</td>
+        <td class="form-cell" data-form="WWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>3</td><td>CRAIGROYSTON BLUES</td><td>4</td><td>3</td>
+        <td>0</td><td>1</td><td class="pts-cell">9</td>
+        <td class="gf">20</td><td class="ga">10</td><td class="gd">10</td>
+        <td class="form-cell" data-form="WLWW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>4</td><td>LONGNIDDRY VILLA</td><td>3</td><td>2</td>
+        <td>0</td><td>1</td><td class="pts-cell">6</td>
+        <td class="gf">12</td><td class="ga">7</td><td class="gd">5</td>
+        <td class="form-cell" data-form="LWW"><span class="L">L</span><span class="W">W</span><span class="W">W</span></td></tr><tr><td>5</td><td>KSQ RAPIDS</td><td>4</td><td>1</td>
+        <td>1</td><td>2</td><td class="pts-cell">4</td>
+        <td class="gf">12</td><td class="ga">10</td><td class="gd">2</td>
+        <td class="form-cell" data-form="DLWL"><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td></tr><tr><td>6</td><td>KELSO FC</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">1</td><td class="ga">0</td><td class="gd">1</td>
+        <td class="form-cell" data-form="WLWD"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="D">D</span></td></tr><tr><td>7</td><td>PENICUIK ATHLETIC YELLOWS</td><td>1</td><td>1</td>
+        <td>0</td><td>0</td><td class="pts-cell">3</td>
+        <td class="gf">1</td><td class="ga">0</td><td class="gd">1</td>
+        <td class="form-cell" data-form="W"><span class="W">W</span></td></tr><tr><td>8</td><td>DALKEITH THISTLE DEPORTIVO</td><td>2</td><td>1</td>
+        <td>0</td><td>1</td><td class="pts-cell">3</td>
+        <td class="gf">1</td><td class="ga">1</td><td class="gd">0</td>
+        <td class="form-cell" data-form="LW"><span class="L">L</span><span class="W">W</span></td></tr><tr><td>9</td><td>CORSTORPHINE DYNAMO BLUES</td><td>3</td><td>1</td>
+        <td>0</td><td>2</td><td class="pts-cell">3</td>
+        <td class="gf">9</td><td class="ga">13</td><td class="gd">-4</td>
+        <td class="form-cell" data-form="LLW"><span class="L">L</span><span class="L">L</span><span class="W">W</span></td></tr><tr><td>10</td><td>GALA FAIRYDEAN REDS</td><td>3</td><td>1</td>
+        <td>0</td><td>2</td><td class="pts-cell">3</td>
+        <td class="gf">9</td><td class="ga">16</td><td class="gd">-7</td>
+        <td class="form-cell" data-form="WLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span></td></tr><tr><td>11</td><td>WALLYFORD ROSE FC</td><td>4</td><td>1</td>
+        <td>0</td><td>3</td><td class="pts-cell">3</td>
+        <td class="gf">11</td><td class="ga">20</td><td class="gd">-9</td>
+        <td class="form-cell" data-form="LLWL"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td></tr><tr><td>12</td><td>PENICUIK ATHLETIC BLUES</td><td>2</td><td>0</td>
+        <td>1</td><td>1</td><td class="pts-cell">1</td>
+        <td class="gf">4</td><td class="ga">8</td><td class="gd">-4</td>
+        <td class="form-cell" data-form="DL"><span class="D">D</span><span class="L">L</span></td></tr><tr><td>13</td><td>EDINBURGH UNITED REDS</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">0</td><td class="ga">1</td><td class="gd">-1</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>14</td><td>SALVESEN BLUES</td><td>1</td><td>0</td>
+        <td>0</td><td>1</td><td class="pts-cell">0</td>
+        <td class="gf">1</td><td class="ga">5</td><td class="gd">-4</td>
+        <td class="form-cell" data-form="L"><span class="L">L</span></td></tr><tr><td>15</td><td>NORTH BERWICK STARS</td><td>2</td><td>0</td>
+        <td>0</td><td>2</td><td class="pts-cell">0</td>
+        <td class="gf">1</td><td class="ga">10</td><td class="gd">-9</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td></tr><tr><td>16</td><td>CURRIE STAR FC WHITES</td><td>2</td><td>0</td>
+        <td>0</td><td>2</td><td class="pts-cell">0</td>
+        <td class="gf">0</td><td class="ga">11</td><td class="gd">-11</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td></tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><div class="division-block" data-division="Division 1"><h3>Division 1</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 1</td><td>Leith Athletic FC</td><td>2-2</td><td>Cramond FC</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 1</td><td>Edinburgh United Blacks</td><td>2-0</td><td>Hutchison Vale FC</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 1</td><td>Broxburn Athletic Colts</td><td>1-0</td><td>East Calder CFC</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 1</td><td>Edinburgh City FC</td><td>5-2</td><td>Hibernian CFC</td></tr></tbody></table></div><div class="division-block" data-division="Division 2"><h3>Division 2</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2025-09-09">9/9/2025</td>
+        <td>Division 2</td><td>Tynecastle FC</td><td>6-6</td><td>Lothian Colts FC</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 2</td><td>Lochend FA</td><td>2-6</td><td>Castlevale Blues</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 2</td><td>Kelso FC</td><td>5-5</td><td>Haddington Athletic CFC</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 2</td><td>North Merchiston Blacks</td><td>6-0</td><td>Craigroyston Yellows</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 2</td><td>Lauder FC</td><td>7-1</td><td>Gala Fairydean Rovers</td></tr></tbody></table></div><div class="division-block" data-division="Division 3A"><h3>Division 3A</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 3A</td><td>Dalkeith Thistle CFC</td><td>1-0</td><td>Salvesen CFC</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 3A</td><td>Dalkeith THistle Estrella</td><td>3-6</td><td>Corstorphin Dynamo Whites</td></tr></tbody></table></div><div class="division-block" data-division="Division 3B"><h3>Division 3B</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 3B</td><td>Cramond CFC</td><td>2-3</td><td>Arniston Rangers YFC</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 3B</td><td>Currie Star Blues</td><td>3-5</td><td>Spartans FC Reds</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 3B</td><td>Edinburgh South Eagles</td><td>2-3</td><td>North Merchiston Whites</td></tr></tbody></table></div><div class="division-block" data-division="Division 4"><h3>Division 4</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 4</td><td>Craigroyston Blues</td><td>5-2</td><td>KSQ Rapids</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 4</td><td>North Berwick Star</td><td>0-1</td><td>Tranent FC</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 4</td><td>Dalkeith Thistle Deportivo</td><td>1-0</td><td>Wallyford Rose FC</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 4</td><td>Gala Fairydean Reds</td><td>5-6</td><td>Corstorphine Dynamo Blue</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 4</td><td>EDinburgh South Titans</td><td>5-1</td><td>Salvesen Blues</td></tr><tr><td class="date-cell" data-iso="2025-09-14">14/9/2025</td>
+        <td>Division 4</td><td>Penicuik Athletic Blues</td><td>2-6</td><td>Longniddry Villa</td></tr></tbody></table></div><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Division 1"><h3>Division 1</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th>
+      <th class="sortable" data-type="text">Home</th>
+      <th class="sortable" data-type="text">Away</th>
+      <th class="sortable" data-type="text">Referee</th>
+      <th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr>
+        <td class="date-cell" data-iso="">14/09/2025</td>
+        <td>North Berwicj FC</td>
+        <td>Eastside Rapids</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">14/09/2025</td>
+        <td>Spartans FC Youth</td>
+        <td>Musselburgh Windsor FC</td>
+        <td>D Gordon</td>
+        <td>Broughton HS 3G 2.30pm</td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Bonnyrigg Rose FC</td>
+        <td>Cramond FC</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Edinburgh City FC</td>
+        <td>Edinburgh United Blacks</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Eastside Rapids</td>
+        <td>Broxburn Athletic Colts</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Hutchison Vale FC</td>
+        <td>East Calder CFC</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Spartans FC Youth</td>
+        <td>Hibernian CFC</td>
+        <td></td>
+        <td>Broughton HS 3G Noon</td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Leith Athletic FC</td>
+        <td>Musselburgh Windsor Blues</td>
+        <td></td>
+        <td>Meadowbank 3G 2pm</td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>North Berwick FC</td>
+        <td>Musselburgh Windsor FC</td>
+        <td></td>
+        <td></td>
+      </tr></tbody></table></div><div class="future-division-block" data-division="Division 2"><h3>Division 2</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th>
+      <th class="sortable" data-type="text">Home</th>
+      <th class="sortable" data-type="text">Away</th>
+      <th class="sortable" data-type="text">Referee</th>
+      <th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Craigroyston Yellows</td>
+        <td>Gala Fairydean Rovers</td>
+        <td></td>
+        <td>Craigie Park</td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Tynecastle FC</td>
+        <td>Lauder FC</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>KSQ Galaxy</td>
+        <td>Spartans FC Whites</td>
+        <td></td>
+        <td>Queensferry HS 3G 2pm</td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Kelso FC</td>
+        <td>Lochend FA</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Leith Athletic Colts</td>
+        <td>Castlevale Blues</td>
+        <td></td>
+        <td>Leith Academy 3G 2.30pm</td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Lothian Colts FC</td>
+        <td>Haddington Athletic CFC</td>
+        <td></td>
+        <td></td>
+      </tr></tbody></table></div><div class="future-division-block" data-division="Division 3A"><h3>Division 3A</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th>
+      <th class="sortable" data-type="text">Home</th>
+      <th class="sortable" data-type="text">Away</th>
+      <th class="sortable" data-type="text">Referee</th>
+      <th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr>
+        <td class="date-cell" data-iso="">14/09/2025</td>
+        <td>Edinburgh South Racers</td>
+        <td>Edinburgh United Whites</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">14/09/2025</td>
+        <td>Penicuik Athletic Whites</td>
+        <td>Peebles FC</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Bonnyrigg Rose Pistons</td>
+        <td>Corstorphine Dynamo Whites</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Edinburgh United White</td>
+        <td>Peebles FC</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Salvesen CFC</td>
+        <td>Penicuik Athletic Whites</td>
+        <td></td>
+        <td>Forrester HS 3G 1pm</td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Dalkeith Thistle CFC</td>
+        <td>North Berwick Town</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Edinburgh South Racers</td>
+        <td>Dalkeith Thistle Estrella</td>
+        <td></td>
+        <td></td>
+      </tr></tbody></table></div><div class="future-division-block" data-division="Division 3B"><h3>Division 3B</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th>
+      <th class="sortable" data-type="text">Home</th>
+      <th class="sortable" data-type="text">Away</th>
+      <th class="sortable" data-type="text">Referee</th>
+      <th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr>
+        <td class="date-cell" data-iso="">14/09/2025</td>
+        <td>Loanhead MYFC</td>
+        <td>Musselburgh Windsor Whites</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">14/09/2025</td>
+        <td>Leith Athletic Blacks</td>
+        <td>TYnecastle FC Maroon</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Arniston Rangers YFC</td>
+        <td>Corstorphine Dynamo Black</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Currie Star Blues</td>
+        <td>Cramond FC</td>
+        <td></td>
+        <td>Balerno HS 3G 1pm</td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>North Merchiston Whites</td>
+        <td>Tynecastle FC Maroon</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Dunbar United Colts</td>
+        <td>Musselburgh Windsor Whites</td>
+        <td></td>
+        <td></td>
+      </tr></tbody></table></div><div class="future-division-block" data-division="Division 4"><h3>Division 4</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th>
+      <th class="sortable" data-type="text">Home</th>
+      <th class="sortable" data-type="text">Away</th>
+      <th class="sortable" data-type="text">Referee</th>
+      <th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>KSQ Rapids</td>
+        <td>Currie Star Whites</td>
+        <td></td>
+        <td>Queensferry HS 3G noon</td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Tranent FC</td>
+        <td>Corstorphine Dynamo Blues</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>Edinburgh South Titans</td>
+        <td>Craigroyston Blues</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell" data-iso="">21/09/2025</td>
+        <td>North Berwick Star</td>
+        <td>Dalkeith Thistle Deportivo</td>
+        <td></td>
+        <td></td>
+      </tr></tbody></table></div><script>
+(function(){
+  const STORAGE_KEY = 'seryfa-theme';
+  const overrideEl = document.getElementById('theme-override');
+
+  function apply(mode){
+    
+    if(mode === 'dark'){
+      overrideEl.textContent =
+        'body{background:#101010;color:#e0e0e0}' +
+        'select{background:#222;color:#fff;border-color:#555}' +
+        'table,th,td{border-color:#333}' +
+        'th{background:#222;color:#fff}' +
+        'th.pts-head{background:#FFD700;color:#000}' +
+        'td.pts-cell{background:#444;color:#FFD700}' +
+        'td.gf{background:#1a2a40}td.ga{background:#402a1a}td.gd{background:#1a402a}' +
+        'tr:nth-child(even){background:#181818}tr:nth-child(odd){background:#141414}' +
+        '.W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}' +
+        'th:first-child,td:first-child{background:#202020;font-weight:bold}' +
+        '.date-cell{background:#000;color:#FFD700}';
+    } else if(mode === 'light'){
+      overrideEl.textContent =
+        'body{background:#f8f8f8;color:#000}' +
+        'select{background:#fff;color:#000;border-color:#bbb}' +
+        'table,th,td{border-color:#ccc}' +
+        'th{background:#FFD700;color:#000}' +
+        'th.pts-head{background:#FFD700;color:#000}' +
+        'td.pts-cell{background:#fffde7;color:#000}' +
+        'td.gf{background:#d0eaff}td.ga{background:#ffe0d0}td.gd{background:#d0ffe0}' +
+        'tr:nth-child(even){background:#f9f9f9}tr:nth-child(odd){background:#fff}' +
+        '.W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}' +
+        'th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}' +
+        '.date-cell{background:#000;color:#FFD700}';
+    } else {
+      
+      overrideEl.textContent = '';
+    }
+  }
+
+  
+  const saved = localStorage.getItem(STORAGE_KEY); 
+  apply(saved || '');
+
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const toggle = document.getElementById('theme-toggle');
+  if(toggle){
+    toggle.checked = saved ? (saved === 'dark') : prefersDark;
+    toggle.addEventListener('change', function(){
+      const mode = this.checked ? 'dark' : 'light';
+      localStorage.setItem(STORAGE_KEY, mode);
+      apply(mode);
+    });
+  }
+})();
+</script>
+<script>
+(function(){
+  function parseDMY(s){
+    
+    const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec((s||'').trim());
+    if(!m) return NaN;
+    const d = Number(m[1]), mo = Number(m[2]) - 1, y = Number(m[3]);
+    const dt = new Date(y, mo, d);
+    return dt.getTime();
+  }
+
+  function getIsoOrParseDate(td){
+    const iso = td && td.dataset ? td.dataset.iso : '';
+    if (iso){
+      const t = Date.parse(iso);
+      return isNaN(t) ? NaN : t;
+    }
+    return parseDMY(td ? td.textContent : '');
+  }
+
+  function scoreValue(s){
+    
+    const m = /^\s*(\d+)\s*[-–]\s*(\d+)\s*$/.exec(s || '');
+    if(!m) return [NaN, NaN];
+    return [Number(m[1]), Number(m[2])];
+  }
+
+  function formValue(row){
+    
+    const el = row.querySelector('.form-cell');
+    if(!el) return -Infinity;
+    const seq = (el.dataset.form || '').trim();
+    let sum = 0;
+    for(const ch of seq){
+      if(ch === 'W') sum += 3;
+      else if(ch === 'D') sum += 1;
+      else if(ch === 'L') sum += 0;
+    }
+    return sum;
+  }
+
+  function getComparator(type, i, asc){
+    if(type === 'num'){
+      return (a,b)=>{
+        const ax = parseFloat(a.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0;
+        const bx = parseFloat(b.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0;
+        return asc ? (ax - bx) : (bx - ax);
+      };
+    }
+    if(type === 'text'){
+      return (a,b)=>{
+        const ax = a.children[i].textContent.trim();
+        const bx = b.children[i].textContent.trim();
+        const cmp = ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'});
+        return asc ? cmp : -cmp;
+      };
+    }
+    if(type === 'date'){
+      return (a,b)=>{
+        const ax = getIsoOrParseDate(a.children[i]);
+        const bx = getIsoOrParseDate(b.children[i]);
+        return asc ? (ax - bx) : (bx - ax);
+      };
+    }
+    if(type === 'score'){
+      return (a,b)=>{
+        const [ah, aa] = scoreValue(a.children[i].textContent);
+        const [bh, ba] = scoreValue(b.children[i].textContent);
+        if(ah !== bh) return asc ? (ah - bh) : (bh - ah);
+        if(aa !== ba) return asc ? (aa - ba) : (ba - aa);
+        return 0;
+      };
+    }
+    if(type === 'form'){
+      return (a,b)=>{
+        const av = formValue(a);
+        const bv = formValue(b);
+        return asc ? (av - bv) : (bv - av);
+      };
+    }
+    
+    return (a,b)=>{
+      const ax = a.children[i].textContent.trim();
+      const bx = b.children[i].textContent.trim();
+      const cmp = ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'});
+      return asc ? cmp : -cmp;
+    };
+  }
+
+  function sortTable(table, colIdx, type, clickedTh){
+    const tbody = table.querySelector('tbody');
+    if(!tbody) return;
+
+    
+    const hasState = clickedTh.classList.contains('asc') || clickedTh.classList.contains('desc');
+    const firstClickAsc = (type === 'text');
+    const asc = hasState ? clickedTh.classList.contains('desc') : firstClickAsc;
+
+    
+    const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r, idx]);
+    const cmp = getComparator(type, colIdx, asc);
+    rows.sort((A,B)=>{
+      const res = cmp(A[0], B[0]);
+      if(res !== 0) return res;
+      return A[1] - B[1]; 
+    });
+
+    
+    table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+    clickedTh.classList.add(asc ? 'asc' : 'desc');
+
+    
+    rows.forEach(pair=>tbody.appendChild(pair[0]));
+  }
+
+  
+  document.querySelectorAll('table').forEach(table=>{
+    table.querySelectorAll('thead th.sortable').forEach((th)=>{
+      th.addEventListener('click', ()=>{
+        const type = th.dataset.type || 'text';
+        const colIdx = th.cellIndex; 
+        sortTable(table, colIdx, type, th);
+      });
+    });
+  });
+})();
+</script><script>(function(){
+    const divFilter = document.getElementById('division-filter');
+    function applyFilter(val){
+      document.querySelectorAll('.division-block, .future-division-block').forEach(d=>{
+        d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none';
+      });
+    }
+    if (divFilter){
+      divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      
+      const url = new URL(window.location.href);
+      const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) {
+        divFilter.value = pre;
+      }
+      applyFilter(divFilter.value || 'ALL');
+    }
+  })();</script></body></html>
