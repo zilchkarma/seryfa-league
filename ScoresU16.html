@@ -1,0 +1,545 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>U16 Scores</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+    h1{margin-top:0;color:#FFD700}
+    table{border-collapse:collapse;width:100%;margin-bottom:30px}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    th{background:#FFD700;color:#000}
+    tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+    .date-cell{background:#000;color:#FFD700}
+    footer{margin-top:24px;font-size:.9em;opacity:.85}
+    @media (prefers-color-scheme: dark){
+      body{background:#101010;color:#e0e0e0}
+      table,th,td{border-color:#333}
+      th{background:#222;color:#fff}
+      tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+      .date-cell{background:#000;color:#FFD700}
+    }
+     
+    .theme-toggle{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:6px 0 14px 0}
+    .switch{position:relative;display:inline-block;width:52px;height:28px}
+    .switch input{opacity:0;width:0;height:0}
+    .slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#bbb;transition:.2s;border-radius:28px}
+    .slider:before{position:absolute;content:"";height:22px;width:22px;left:3px;bottom:3px;background:#fff;transition:.2s;border-radius:50%}
+    .switch input:checked + .slider{background:#4CAF50}
+    .switch input:checked + .slider:before{transform:translateX(24px)}
+  </style>
+  <style id="theme-override"></style></head><body><div class="theme-toggle" title="Toggle dark mode" role="group" aria-label="Theme toggle">
+    <span aria-hidden="true">☀️</span>
+    <label class="switch">
+      <input type="checkbox" id="theme-toggle" aria-label="Dark mode">
+      <span class="slider"></span>
+    </label>
+    <span aria-hidden="true">🌙</span>
+  </div>
+  <style>
+    .sfy-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #222;
+      color: #fff;
+      transition: transform .25s ease;
+    }
+    .sfy-nav.hide { transform: translateY(-100%); }
+
+    .sfy-nav .bar{display:flex;align-items:center;gap:12px;padding:10px 14px}
+    .sfy-brand{font-weight:700;letter-spacing:.3px}
+    .sfy-spacer{flex:1}
+    .sfy-cta{white-space:nowrap}
+    .sfy-btn{border:1px solid #555;background:transparent;color:#fff;border-radius:10px;padding:6px 10px;font-size:.95rem}
+
+    .hamburger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid #555;border-radius:10px}
+    .hamburger:focus{outline:2px solid #FFD700;outline-offset:2px}
+
+    .sfy-tabs,.sfy-subtabs{display:flex;gap:6px;overflow:auto hidden;padding:6px 10px}
+    .nav-link{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid #444;color:#fff;text-decoration:none;white-space:nowrap}
+    .nav-link:hover{background:#333}
+    .nav-link.active{background:#FFD700;color:#3f403f;border-color:#FFD700}
+
+    .sfy-drawer{position:fixed;inset:0 0 0 auto;max-width:360px;width:88vw;transform:translateX(100%);
+      transition:transform .2s ease; background:#181818;color:#fff;box-shadow:-6px 0 20px rgba(0,0,0,.35)}
+    .sfy-drawer.open{transform:none}
+    .sfy-drawer header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #333}
+    .sfy-drawer .section{padding:10px 16px}
+    .sfy-drawer .group-title{font-size:.85rem;opacity:.8;margin:12px 0 6px}
+    .sfy-drawer .menu-grid{display:grid;grid-template-columns:1fr;gap:8px}
+    .sfy-drawer a{display:block;padding:10px 12px;border-radius:10px;border:1px solid #333;color:#fff;text-decoration:none}
+    .sfy-drawer a:hover{background:#242424}
+
+    @media (min-width: 820px){
+      .hamburger{display:none}
+      .sfy-drawer{display:none}
+      .sfy-nav .bar{padding:12px 18px}
+    }
+
+    @media (max-width: 819.98px){
+      .hamburger{display:flex}
+      .sfy-cta{display:none}
+    }
+  </style>
+  <nav class="sfy-nav" role="navigation" aria-label="Primary">
+    <div class="bar">
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="sfy-drawer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <div class="sfy-brand">SERYFA Unofficial League Tables</div>
+      <div class="sfy-spacer"></div>
+      <a class="sfy-btn sfy-cta" href="https://www.seryfa-online.info/">Official SERYFA Website</a>
+    </div>
+    
+    <div class="sfy-tabs" role="tablist" aria-label="Age groups">
+      <a class="nav-link" href="U13.html">U13</a><a class="nav-link" href="U14.html">U14</a><a class="nav-link" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a>
+      <a class="nav-link active" href="Scores.html">Scores</a>
+    </div>
+  </nav>
+
+  <div id="sfy-drawer" class="sfy-drawer" aria-hidden="true">
+    <header>
+      <strong>Menu</strong>
+      <button class="sfy-btn" data-close>Close</button>
+    </header>
+    <div class="section">
+      <div class="group-title">Overview</div>
+      <div class="menu-grid"><a class="nav-link" href="U13.html">U13 Overview</a><a class="nav-link" href="U14.html">U14 Overview</a><a class="nav-link" href="U15.html">U15 Overview</a><a class="nav-link" href="U16.html">U16 Overview</a><a class="nav-link" href="U17.html">U17 Overview</a><a class="nav-link" href="U18.html">U18 Overview</a></div>
+    </div>
+    <div class="section">
+      <div class="group-title">Team Stats</div>
+      <div class="menu-grid"><a class="nav-link" href="U13-stats.html">U13 Team Stats</a><a class="nav-link" href="U14-stats.html">U14 Team Stats</a><a class="nav-link" href="U15-stats.html">U15 Team Stats</a><a class="nav-link" href="U16-stats.html">U16 Team Stats</a><a class="nav-link" href="U17-stats.html">U17 Team Stats</a><a class="nav-link" href="U18-stats.html">U18 Team Stats</a></div>
+    </div>
+     <div class="section">
+      <div class="group-title">Team Stats</div>
+      <div class="menu-grid"><a class="nav-link" href="U13.html">U13 Team Stats</a><a class="nav-link" href="U14.html">U14 Team Stats</a><a class="nav-link" href="U15.html">U15 Team Stats</a><a class="nav-link active" href="U16.html">U16 Team Stats</a><a class="nav-link" href="U17.html">U17 Team Stats</a><a class="nav-link" href="U18.html">U18 Team Stats</a></div>
+    </div>
+    <div class="section">
+      <div class="group-title">Other</div>
+      <div class="menu-grid"><a class="nav-link active" href="Scores.html">Scores</a></div>
+    </div>
+    <div class="section">
+      <a class="sfy-btn" href="https://www.seryfa-online.info/">Official SERYFA Website</a>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const drawer = document.getElementById('sfy-drawer');
+      const btn = document.querySelector('.hamburger');
+      const closeBtn = drawer.querySelector('[data-close]');
+      const focusable = () => Array.from(drawer.querySelectorAll('a,button,input,select,textarea,[tabindex]')).filter(el=>!el.hasAttribute('disabled'));
+
+      function open(){
+        drawer.classList.add('open');
+        drawer.setAttribute('aria-hidden','false');
+        btn.setAttribute('aria-expanded','true');
+        (focusable()[0]||closeBtn).focus();
+        document.body.style.overflow='hidden';
+        document.body.classList.add('menu-open');
+      }
+      function close(){
+        drawer.classList.remove('open');
+        drawer.setAttribute('aria-hidden','true');
+        btn.setAttribute('aria-expanded','false');
+        btn.focus();
+        document.body.style.overflow='';
+        document.body.classList.remove('menu-open');
+      }
+
+      btn && btn.addEventListener('click', open);
+      closeBtn && closeBtn.addEventListener('click', close);
+      drawer.addEventListener('click', (e)=>{ if(e.target === drawer) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && drawer.classList.contains('open')) close(); });
+
+      drawer.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          window.scrollTo(0, 0);
+          close();
+        });
+      });
+
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.sfy-nav');
+        if (!nav || document.body.classList.contains('menu-open')) return;
+        const current = window.scrollY;
+        if (current > lastScrollY && current > 80) {
+          nav.classList.add('hide');
+        } else {
+          nav.classList.remove('hide');
+        }
+        lastScrollY = current;
+      });
+    })();
+  </script><h1>U16 Scores Since Aug 1st</h1><h2>Completed Matches</h2><div class="division-block" data-division="Division 1">
+      <h3>Division 1</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Score</th>
+          <th>Away</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Bayside Athletic</td>
+        <td>1-3</td>
+        <td>Broxburn Colts United</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Hutchison Vale FC</td>
+        <td>9-0</td>
+        <td>Edinburgh South CFC</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Musselburgh Windsor FC</td>
+        <td>1-1</td>
+        <td>Lochend FA</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Portobello CFA</td>
+        <td>2-2</td>
+        <td>North Berwick FC</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Spartans FC Youth</td>
+        <td>4-2</td>
+        <td>Spartans FC Whites</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Dalkeith Thistle CFC</td>
+        <td>1-1</td>
+        <td>Edinburgh City FC</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 2A">
+      <h3>Division 2A</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Score</th>
+          <th>Away</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Bathgate Thistle Reds</td>
+        <td>7-2</td>
+        <td>Gala Fairydean Rovers</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Craigroyston CYFC</td>
+        <td>2-3</td>
+        <td>Edinburgh South Rovers</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Longniddry Villa</td>
+        <td>1-1</td>
+        <td>East Calder CFC</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Central FA</td>
+        <td>0-3</td>
+        <td>Linlithgow Rose Maroon</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Currie Star Blues</td>
+        <td>5-4</td>
+        <td>Cramond FC</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 2B">
+      <h3>Division 2B</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Score</th>
+          <th>Away</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Broxburn Athletic Colts</td>
+        <td>4-2</td>
+        <td>Currie Star Whites</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Civil Service Strollers</td>
+        <td>1-2</td>
+        <td>Musselburgh Windsor Whites</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Salvesen CFC</td>
+        <td>1-4</td>
+        <td>East Calder Colts</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Leithen Vale SC</td>
+        <td>0-1</td>
+        <td>Edinburgh City Whites</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 3">
+      <h3>Division 3</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Score</th>
+          <th>Away</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Musselburgh Windsor Reds</td>
+        <td>4-2</td>
+        <td>Livingston FCC Yellows</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Cramond FC Lions</td>
+        <td>3-1</td>
+        <td>Portobello CFA Thistle</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Edinburgh City Blacks</td>
+        <td>2-3</td>
+        <td>Dalkeith Thistle Balompie</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Spartans FC Reds</td>
+        <td>6-0</td>
+        <td>Broxburn Athletic Badgers</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Hillfield Swifts</td>
+        <td>0-0</td>
+        <td>Murieston United Blues</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 4">
+      <h3>Division 4</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Score</th>
+          <th>Away</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Currie FC Tigers</td>
+        <td>8-1</td>
+        <td>AC Oxgangs Calcio</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>Polbeth United</td>
+        <td>5-2</td>
+        <td>Dalkeith Thistle Estrella</td>
+      </tr><tr>
+        <td class="date-cell">14/9/2025</td>
+        <td>KSQ Rapids</td>
+        <td>5-2</td>
+        <td>Bonnyrigg Rose Blacks</td>
+      </tr></tbody></table></div><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Division 1">
+      <h3>Division 1</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Away</th>
+          <th>Referee</th>
+          <th>Location</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Portobello CFA</td>
+        <td>Bayside Athletic</td>
+        <td></td>
+        <td>Portobello HS 3G 2pm</td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Musselburgh Windsor FC</td>
+        <td>Dalkeith Thistle CFC</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Lochend FA</td>
+        <td>Edinburgh City FC</td>
+        <td></td>
+        <td>Broughton HS 3G 2.30pm</td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Edinburgh South CFC</td>
+        <td>Spartans FC Whites</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Spartans FC Youth</td>
+        <td>North Merchiston FC</td>
+        <td></td>
+        <td>Ainslie Park 3G 3pm</td>
+      </tr></tbody></table></div><div class="future-division-block" data-division="Division 2A">
+      <h3>Division 2A</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Away</th>
+          <th>Referee</th>
+          <th>Location</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>AC Oxgangs CFC</td>
+        <td>Craigroyston CYFC</td>
+        <td></td>
+        <td>Colinton Mains</td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>East Calder CFC</td>
+        <td>Bathgate Thistle Reds</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Gala Fairydean Rovers</td>
+        <td>Longniddry Villa</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Penicuik Athletic White</td>
+        <td>Central Boys FA</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Cramond FC</td>
+        <td>Linlithgow Rose Maroon</td>
+        <td></td>
+        <td>Royal High 3G 2pm</td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Musselburgh Windsor Blues</td>
+        <td>Dalkeith Thistle Cardo</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Currie Star Blues</td>
+        <td>Edinburgh South Rovers</td>
+        <td></td>
+        <td>Balerno HS 3G 3pm</td>
+      </tr></tbody></table></div><div class="future-division-block" data-division="Division 2B">
+      <h3>Division 2B</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Away</th>
+          <th>Referee</th>
+          <th>Location</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>East Calder Colts</td>
+        <td>Civil Service Strollers</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Currie FC Lions</td>
+        <td>Musselburgh Windsor Whites</td>
+        <td></td>
+        <td>Currie HS 3G 3pm</td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Leithen Vale SC</td>
+        <td>Broxburn Athletic Colts</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Castlevale YDC</td>
+        <td>Salvesen CFC</td>
+        <td></td>
+        <td>Castlebrae HS 3G 1pm</td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Edinburgh City Whites</td>
+        <td>Currie Star Whites</td>
+        <td></td>
+        <td>Forrester HS 3G 1pm</td>
+      </tr></tbody></table></div><div class="future-division-block" data-division="Division 3">
+      <h3>Division 3</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Away</th>
+          <th>Referee</th>
+          <th>Location</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Dunbar United</td>
+        <td>Edinburgh City Blacks</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Spartans FC Reds</td>
+        <td>Hillfield Swifts</td>
+        <td></td>
+        <td>Ainslie Park 3G 1pm</td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Musselburgh Windsor Reds</td>
+        <td>Cramond FC Lions</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Dalkeith Thistle Balompie</td>
+        <td>Edinburgh South Reds</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Broxburn Athletic Badgers</td>
+        <td>Murieston United Blues</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Livingston FC Yellows</td>
+        <td>Portobello CFA Thistle</td>
+        <td></td>
+        <td></td>
+      </tr></tbody></table></div><div class="future-division-block" data-division="Division 4">
+      <h3>Division 4</h3>
+      <table>
+        <thead><tr>
+          <th class="date-cell">Date</th>
+          <th>Home</th>
+          <th>Away</th>
+          <th>Referee</th>
+          <th>Location</th>
+        </tr></thead><tbody><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Bonnyrigg Rose Blacks</td>
+        <td>Dalkeith Thistle Estrella</td>
+        <td></td>
+        <td></td>
+      </tr><tr>
+        <td class="date-cell">21/9/2025</td>
+        <td>Currie FC Tigers</td>
+        <td>Currie Star Yellows</td>
+        <td></td>
+        <td>Currie HS 3G 1pm</td>
+      </tr></tbody></table></div><script>(function(){
+    const STORAGE_KEY='seryfa-theme';
+    const overrideEl=document.getElementById('theme-override');
+    function apply(mode){
+      if(mode==='dark'){overrideEl.textContent='body{background:#101010;color:#e0e0e0}';}
+      else if(mode==='light'){overrideEl.textContent='body{background:#f8f8f8;color:#000}';}
+      else{overrideEl.textContent='';}
+    }
+    const saved=localStorage.getItem(STORAGE_KEY);
+    apply(saved||'');
+    const prefersDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const toggle=document.getElementById('theme-toggle');
+    if(toggle){
+      toggle.checked=saved? (saved==='dark'): prefersDark;
+      toggle.addEventListener('change',function(){
+        const mode=this.checked?'dark':'light';
+        localStorage.setItem(STORAGE_KEY,mode);apply(mode);
+      });
+    }
+  })();</script><footer>Website not affiliated to SERYFA - automation created due to delays in official site league tables updating. Results not warranted. Errors and omissions excepted.</footer></body></html>
