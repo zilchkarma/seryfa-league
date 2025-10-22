@@ -478,41 +478,48 @@ updateDivFilter();render();
 <script>
 document.getElementById("matchForm").addEventListener("submit", async function(e) {
   e.preventDefault();
-  const msg=document.getElementById("resultMessage");
-  msg.textContent="Submitting...";
-  msg.style.color="#333";
+  const msg = document.getElementById("resultMessage");
+  msg.textContent = "Submitting...";
+  msg.style.color = "#333";
 
-  const payload={
-    ageGroup:document.getElementById("ageGroup").value,
-    date:document.getElementById("date").value,
-    competition:document.getElementById("competition").value,
-    home:document.getElementById("home").value,
-    away:document.getElementById("away").value,
-    homeScore:parseInt(document.getElementById("homeScore").value),
-    awayScore:parseInt(document.getElementById("awayScore").value),
-    referee:document.getElementById("referee").value,
-    location:document.getElementById("location").value
-  };
+  const body = new URLSearchParams({
+    ageGroup: document.getElementById("ageGroup").value,
+    date: document.getElementById("date").value,
+    competition: document.getElementById("competition").value,
+    home: document.getElementById("home").value,
+    away: document.getElementById("away").value,
+    homeScore: document.getElementById("homeScore").value,
+    awayScore: document.getElementById("awayScore").value,
+    referee: document.getElementById("referee").value,
+    location: document.getElementById("location").value
+  });
 
-  try{
-    const res=await fetch("https://script.google.com/macros/s/AKfycbytk996A8C2OdalIjKAYWFLFyOB9Kp4WRJS8sCXIwvyoLKepHLZyOCf2mPp33h1p29JvA/exec",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(payload)
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbytk996A8C2OdalIjKAYWFLFyOB9Kp4WRJS8sCXIwvyoLKepHLZyOCf2mPp33h1p29JvA/exec", {
+      method: "POST",
+      body: body
     });
-    const result=await res.json();
-    if(result.status==="success"){
-      msg.textContent=`✅ Match ${result.action}: ${result.normalized.home} vs ${result.normalized.away}`;
-      msg.style.color="green";
+
+    const txt = await res.text();
+    let result;
+    try { result = JSON.parse(txt); }
+    catch { result = { status: "error", message: txt || ('HTTP ' + res.status) }; }
+
+    if (result.status === "success") {
+      msg.textContent = "✅ Match " + result.action + ": " + result.normalized.home + " vs " + result.normalized.away;
+      msg.style.color = "green";
       e.target.reset();
-    }else{
-      msg.textContent=`⚠️ Error: ${result.message}`;
-      msg.style.color="red";
+    } else {
+      msg.textContent = "⚠️ Error: " + result.message;
+      msg.style.color = "red";
     }
-  }catch(err){
-    msg.textContent="❌ Network or server error: "+err.message;
-    msg.style.color="red";
+  } catch (err) {
+    msg.textContent = "❌ Network or server error: " + err.message;
+    msg.style.color = "red";
+    console.error(err);
   }
 });
 </script>
+
+
 </body></html>
