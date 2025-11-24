@@ -477,11 +477,11 @@ updateDivFilter();render();
     <div class="content">
       <form id="matchForm">
         <div class="grid">
+
           <div class="full">
             <label for="ageGroup">Age Group</label>
             <select id="ageGroup" required>
               <option value="">Select Age Group</option>
-              
             </select>
           </div>
 
@@ -532,9 +532,10 @@ updateDivFilter();render();
           </div>
 
           <div class="full" style="display:flex;gap:10px;align-items:center;justify-content:flex-start;margin-top:4px">
-            <button type="submit" class="btn">Submit Match</button>
+            <button type="submit" class="btn" id="submitBtn">Submit Match</button>
             <span id="resultMessage" class="result"></span>
           </div>
+
         </div>
       </form>
     </div>
@@ -552,7 +553,7 @@ updateDivFilter();render();
   function populateAges(){
     formAgeSel.innerHTML = '<option value="">Select Age Group</option>';
     Object.keys(data).sort(function(a,b){
-      var na = parseInt(a.replace(/\D+/g,''),10), nb = parseInt(b.replace(/\D+/g,''),10);
+      var na = parseInt(a.replace(/D+/g,''),10), nb = parseInt(b.replace(/D+/g,''),10);
       if(!isNaN(na) && !isNaN(nb)) return na-nb;
       return a.localeCompare(b);
     }).forEach(function(age){
@@ -567,12 +568,11 @@ updateDivFilter();render();
 
     homeSel.innerHTML = '<option value="">Select Home Team</option>';
     awaySel.innerHTML = '<option value="">Select Away Team</option>';
-    homeSel.disabled = true; awaySel.disabled = true;
+    homeSel.disabled = true;
+    awaySel.disabled = true;
 
     if(!age || !data[age]) return;
-    Object.keys(data[age]).sort(function(a,b){
-      return a.localeCompare(b, undefined, {numeric:true,sensitivity:'base'});
-    }).forEach(function(div){
+    Object.keys(data[age]).sort().forEach(function(div){
       formDivSel.innerHTML += '<option value="'+div+'">'+div+'</option>';
     });
   }
@@ -580,16 +580,23 @@ updateDivFilter();render();
   function teamsFor(age, div){
     var set = new Set();
     var matches = (data[age] && data[age][div]) ? data[age][div] : [];
-    matches.forEach(function(m){ if(m.home) set.add(m.home); if(m.away) set.add(m.away); });
-    return Array.from(set).sort(function(a,b){ return a.localeCompare(b, undefined, {sensitivity:'base'}); });
+    matches.forEach(function(m){
+      if(m.home) set.add(m.home);
+      if(m.away) set.add(m.away);
+    });
+    return Array.from(set).sort(function(a,b){
+      return a.localeCompare(b, undefined, {sensitivity:'base'});
+    });
   }
 
   function populateTeams(){
     var age = formAgeSel.value, div = formDivSel.value;
     homeSel.innerHTML = '<option value="">Select Home Team</option>';
     awaySel.innerHTML = '<option value="">Select Away Team</option>';
+
     var enable = !!(age && div);
-    homeSel.disabled = !enable; awaySel.disabled = !enable;
+    homeSel.disabled = !enable;
+    awaySel.disabled = !enable;
     if(!enable) return;
 
     var teams = teamsFor(age, div);
@@ -598,11 +605,10 @@ updateDivFilter();render();
       awaySel.innerHTML += '<option value="'+t+'">'+t+'</option>';
     });
 
-    
     function syncDisables(){
       var h = homeSel.value, a = awaySel.value;
-      Array.from(homeSel.options).forEach(function(opt){ opt.disabled = (opt.value && opt.value === a); });
-      Array.from(awaySel.options).forEach(function(opt){ opt.disabled = (opt.value && opt.value === h); });
+      Array.from(homeSel.options).forEach(opt => opt.disabled = (opt.value && opt.value === a));
+      Array.from(awaySel.options).forEach(opt => opt.disabled = (opt.value && opt.value === h));
       if(h && h === a){ awaySel.value = ''; }
     }
     homeSel.addEventListener('change', syncDisables);
@@ -610,17 +616,8 @@ updateDivFilter();render();
   }
 
   populateAges();
-  formAgeSel.addEventListener('change', function(){ populateDivisions(); });
-  formDivSel.addEventListener('change', function(){ populateTeams(); });
-
-  
-  try{
-    if(typeof ageSel !== 'undefined' && ageSel && ageSel.value !== 'ALL'){
-      formAgeSel.value = ageSel.value; populateDivisions();
-      var topDiv = document.getElementById('divFilter');
-      if(topDiv && topDiv.value !== 'ALL'){ formDivSel.value = topDiv.value; populateTeams(); }
-    }
-  }catch(e){}
+  formAgeSel.addEventListener('change', populateDivisions);
+  formDivSel.addEventListener('change', populateTeams);
 })();
 </script>
 
@@ -630,12 +627,13 @@ document.getElementById("matchForm").addEventListener("submit", async function(e
   e.preventDefault();
 
   const form = e.target;
-  const submitBtn = form.querySelector("button[type=submit]");
+  const btn = document.getElementById("submitBtn");
   const msg = document.getElementById("resultMessage");
 
   
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Submitting…";
+  btn.disabled = true;
+  btn.textContent = "Submitting…";
+
   msg.textContent = "Submitting…";
   msg.style.color = "#333";
 
@@ -658,9 +656,9 @@ document.getElementById("matchForm").addEventListener("submit", async function(e
     });
 
     var txt = await res.text();
-    var result;
+    var result = {};
     try { result = JSON.parse(txt); }
-    catch { result = { status: "error", message: txt || ('HTTP ' + res.status) }; }
+    catch { result = { status: "error", message: txt }; }
 
     if (result.status === "success") {
       msg.textContent = "✅ Match " + result.action + ": " + result.normalized.home + " vs " + result.normalized.away;
@@ -673,32 +671,11 @@ document.getElementById("matchForm").addEventListener("submit", async function(e
   } catch (err) {
     msg.textContent = "❌ Network or server error: " + err.message;
     msg.style.color = "red";
-    console.error(err);
   }
 
   
-  submitBtn.disabled = false;
-  submitBtn.textContent = "Submit Match";
-});
-
-    var txt = await res.text();
-    var result;
-    try { result = JSON.parse(txt); }
-    catch { result = { status: "error", message: txt || ('HTTP ' + res.status) }; }
-
-    if (result.status === "success") {
-      msg.textContent = "✅ Match " + result.action + ": " + result.normalized.home + " vs " + result.normalized.away;
-      msg.style.color = "green";
-      e.target.reset();
-    } else {
-      msg.textContent = "⚠️ Error: " + result.message;
-      msg.style.color = "red";
-    }
-  } catch (err) {
-    msg.textContent = "❌ Network or server error: " + err.message;
-    msg.style.color = "red";
-    console.error(err);
-  }
+  btn.disabled = false;
+  btn.textContent = "Submit Match";
 });
 </script>
 </body></html>
