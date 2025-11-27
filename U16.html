@@ -198,7 +198,105 @@
       });
     })();
   </script>
-   <footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer><h1>U16 League Tables</h1>
+   <footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer>
+  
+  <div id="sfy-chat-widget" style="position:fixed; bottom:20px; right:20px; z-index:9999; font-family:sans-serif;">
+    <button id="chat-btn" onclick="toggleChat()" style="
+        background:#FFD700; color:#000; border:none; border-radius:50%; width:56px; height:56px; 
+        font-size:24px; box-shadow:0 4px 10px rgba(0,0,0,0.3); cursor:pointer; transition:transform 0.2s;">
+      💬
+    </button>
+
+    <div id="chat-window" style="
+        display:none; position:absolute; bottom:70px; right:0; width:340px; height:450px; 
+        background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.25); 
+        flex-direction:column; overflow:hidden; border:1px solid #ccc;">
+        
+      <div style="background:#222; color:#FFD700; padding:12px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;">
+        <span>U16 Assistant</span>
+        <button onclick="toggleChat()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
+
+      <div id="chat-msgs" style="flex:1; padding:15px; overflow-y:auto; background:#f5f5f5; display:flex; flex-direction:column; gap:10px;">
+        <div style="align-self:flex-start; background:#e0e0e0; color:#000; padding:8px 12px; border-radius:12px; font-size:0.9rem; max-width:85%;">
+          Hi! Ask me about league tables, form, or recent scores for U16.
+        </div>
+      </div>
+
+      <div style="padding:10px; background:#fff; border-top:1px solid #ddd; display:flex; gap:6px;">
+        <input type="text" id="chat-input" placeholder="Ask a question..." 
+               style="flex:1; padding:10px; border:1px solid #ccc; border-radius:20px; outline:none; font-size:0.95rem;"
+               onkeydown="if(event.key==='Enter') sendChat()">
+        <button onclick="sendChat()" style="background:#FFD700; border:none; border-radius:50%; width:38px; height:38px; cursor:pointer; font-weight:bold;">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleChat() {
+      const w = document.getElementById('chat-window');
+      const b = document.getElementById('chat-btn');
+      const isHidden = w.style.display === 'none';
+      w.style.display = isHidden ? 'flex' : 'none';
+      b.style.transform = isHidden ? 'scale(0.9)' : 'scale(1)';
+      if(isHidden) setTimeout(() => document.getElementById('chat-input').focus(), 100);
+    }
+
+    function sendChat() {
+      const input = document.getElementById('chat-input');
+      const txt = input.value.trim();
+      if(!txt) return;
+
+      addMsg(txt, 'user');
+      input.value = '';
+      input.disabled = true;
+      input.placeholder = "Thinking...";
+
+      
+      google.script.run
+        .withSuccessHandler(res => {
+          input.disabled = false;
+          input.placeholder = "Ask a question...";
+          input.focus();
+          if(res.error) addMsg("Error: " + res.error, 'bot');
+          else addMsg(res.answer, 'bot');
+        })
+        .withFailureHandler(err => {
+          input.disabled = false;
+          input.placeholder = "Ask a question...";
+          addMsg("Connection failed.", 'bot');
+        })
+        .processChatQuery(txt, "U16");
+    }
+
+    function addMsg(txt, sender) {
+      const div = document.createElement('div');
+      div.style.padding = '8px 12px';
+      div.style.borderRadius = '12px';
+      div.style.fontSize = '0.9rem';
+      div.style.maxWidth = '85%';
+      div.style.wordWrap = 'break-word';
+      div.style.lineHeight = '1.4';
+
+      if(sender === 'user') {
+        div.style.alignSelf = 'flex-end';
+        div.style.background = '#FFD700';
+        div.style.color = '#000';
+        div.textContent = txt;
+      } else {
+        div.style.alignSelf = 'flex-start';
+        div.style.background = '#e0e0e0';
+        div.style.color = '#000';
+        
+        div.innerHTML = txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+      }
+
+      const box = document.getElementById('chat-msgs');
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+  </script>
+  <h1>U16 League Tables</h1>
   <label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
