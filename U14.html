@@ -247,26 +247,49 @@
       const txt = input.value.trim();
       if(!txt) return;
 
+      
       addMsg(txt, 'user');
       input.value = '';
       input.disabled = true;
       input.placeholder = "Thinking...";
 
       
-      google.script.run
-        .withSuccessHandler(res => {
-          input.disabled = false;
-          input.placeholder = "Ask a question...";
-          input.focus();
-          if(res.error) addMsg("Error: " + res.error, 'bot');
-          else addMsg(res.answer, 'bot');
-        })
-        .withFailureHandler(err => {
-          input.disabled = false;
-          input.placeholder = "Ask a question...";
-          addMsg("Connection failed.", 'bot');
-        })
-        .processChatQuery(txt, "U14");
+      const payload = {
+        type: 'chat',
+        question: txt,
+        ageGroup: "U14" 
+      };
+
+      
+      
+      const ENDPOINT = "https://script.google.com/macros/s/AKfycbytk996A8C2OdalIjKAYWFLFyOB9Kp4WRJS8sCXIwvyoLKepHLZyOCf2mPp33h1p29JvA/exec"; 
+
+      fetch(ENDPOINT, {
+        method: "POST",
+        
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        input.disabled = false;
+        input.placeholder = "Ask a question...";
+        input.focus();
+        
+        if (data.error) {
+          addMsg("⚠️ " + data.error, 'bot');
+        } else if (data.answer) {
+          addMsg(data.answer, 'bot');
+        } else {
+          addMsg("⚠️ No response received.", 'bot');
+        }
+      })
+      .catch(error => {
+        console.error("Chat Error:", error);
+        input.disabled = false;
+        input.placeholder = "Ask a question...";
+        addMsg("⛔ Connection Failed. Please try again.", 'bot');
+      });
     }
 
     function addMsg(txt, sender) {
