@@ -233,6 +233,9 @@
   </div>
 
   <script>
+    
+    let conversationHistory = [];
+
     function toggleChat() {
       const w = document.getElementById('chat-window');
       const b = document.getElementById('chat-btn');
@@ -257,16 +260,15 @@
       const payload = {
         type: 'chat',
         question: txt,
-        ageGroup: "U17" 
+        ageGroup: "U17",
+        history: conversationHistory 
       };
 
-      
       
       const ENDPOINT = "https://script.google.com/macros/s/AKfycbytk996A8C2OdalIjKAYWFLFyOB9Kp4WRJS8sCXIwvyoLKepHLZyOCf2mPp33h1p29JvA/exec"; 
 
       fetch(ENDPOINT, {
         method: "POST",
-        
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(payload)
       })
@@ -280,6 +282,13 @@
           addMsg("⚠️ " + data.error, 'bot');
         } else if (data.answer) {
           addMsg(data.answer, 'bot');
+          
+          
+          
+          if (conversationHistory.length > 6) conversationHistory.shift(); 
+          conversationHistory.push({ role: 'user', content: txt });
+          conversationHistory.push({ role: 'model', content: data.answer });
+          
         } else {
           addMsg("⚠️ No response received.", 'bot');
         }
@@ -288,7 +297,7 @@
         console.error("Chat Error:", error);
         input.disabled = false;
         input.placeholder = "Ask a question...";
-        addMsg("⛔ Connection Failed. Please try again.", 'bot');
+        addMsg("⛔ Connection Failed.", 'bot');
       });
     }
 
@@ -310,7 +319,6 @@
         div.style.alignSelf = 'flex-start';
         div.style.background = '#e0e0e0';
         div.style.color = '#000';
-        
         div.innerHTML = txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
       }
 
