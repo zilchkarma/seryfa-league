@@ -1,128 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QLTFGFY0MQ');
-  </script>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  <meta name="google-site-verification" content="A_72EL5KkKf5x5DwAcx7uzdZkrLQTIGWH22OsEpeIbI" />
-
-  <title>Unofficial Realtime Updated SERYFA League Tables | South East Region Youth Football Association</title>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Unofficial SERYFA League Index — realtime updated SERYFA league tables for U13, U14, U15, U16, U17, and U18. Quickly check the latest standings and results.">
-  <meta name="keywords" content="SERYFA, youth football, Edinburgh football, football league tables, U13, U14, U15, U16, U17, U18, Scottish youth football, seryfa league tables,South East Region Football Association">
-  <meta name="author" content="Unofficial SERYFA League Table Automation">
-
-  <!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
-  <meta property="og:title" content="Unofficial SERYFA League Index | Youth Football Tables">
-  <meta property="og:description" content="Check unofficial SERYFA youth football league tables for U13–U18 divisions. Updated automatically for faster results.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://zilchkarma.github.io/seryfa-league/">
-  <meta property="og:image" content="https://zilchkarma.github.io/seryfa-league/og-preview.png">
-
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Unofficial SERYFA League Index | Youth Football Tables">
-  <meta name="twitter:description" content="Follow the unofficial SERYFA youth football league standings (U13–U18). Faster updates, easy access.">
-  <meta name="twitter:image" content="https://zilchkarma.github.io/seryfa-league/og-preview.png">
-
-  <style>
-    /* Base (Light) */
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px 20px;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background: #f5f5f5;
-      color: #333;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-    h1 { margin-bottom: 40px; }
-    .link-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      flex-grow: 1;
-    }
-    a {
-      display: inline-block;
-      padding: 12px 24px;
-      font-size: 1.2em;
-      color: #fff;
-      background-color: #007acc;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
-    }
-    a:hover { background-color: #005a99; }
-
-    footer {
-      font-size: 0.85em;
-      margin-top: 40px;
-      border-top: 1px solid #ccc;
-      padding-top: 10px;
-      color: #666;
-      transition: color 0.3s ease, border-color 0.3s ease;
-    }
-
-   
-
-    /* Auto Dark (system preference) */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #121212;
-        color: #ddd;
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SERYFA Unofficial Leagues</title>
+    <style>
+      body{font-family:Arial,sans-serif; background:#f8f8f8; color:#333; margin:0; padding:0; text-align:center}
+      .hero{background:#000; color:#FFD700; padding:60px 20px; border-bottom:5px solid #FFD700}
+      .container{max-width:1000px; margin:30px auto; padding:0 20px}
+      .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px}
+      .card{background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); text-align:left}
+      h1,h2,h3{margin-top:0}
+      .btn-large{display:block; background:#FFD700; color:#000; padding:15px; margin:10px 0; border-radius:8px; text-decoration:none; font-weight:bold; text-align:center; transition:0.2s}
+      .btn-large:hover{background:#000; color:#FFD700}
+      .race-item{border-left:4px solid #FFD700; padding-left:15px; margin-bottom:15px}
+      .race-item small{color:#888; display:block; text-transform:uppercase; font-size:0.75rem}
+      @media (prefers-color-scheme: dark){
+        body{background:#121212; color:#eee} .card{background:#1e1e1e} .race-item{border-color:#555}
       }
-      a { background-color: #3399ff; }
-      a:hover { background-color: #1e6fbf; }
-      footer { color: #aaa; border-color: #444; }
-      .toggle-btn { background: #3399ff; }
-      .toggle-btn:hover { background: #1e6fbf; }
-    }
-
-    /* Manual Dark Toggle — overrides both light and prefers-color-scheme */
-    body.dark-mode {
-      background: #121212 !important;
-      color: #ddd !important;
-    }
-    body.dark-mode a { background-color: #3399ff !important; }
-    body.dark-mode a:hover { background-color: #1e6fbf !important; }
-    body.dark-mode footer { color: #aaa !important; border-color: #444 !important; }
-    body.dark-mode .toggle-btn { background: #3399ff !important; }
-    body.dark-mode .toggle-btn:hover { background: #1e6fbf !important; }
-  </style>
-</head>
-<body>
-
-  <h1>Unofficial Realtime SERYFA League Tables</h1>
-
-  <div class="link-container">
-    <a href="https://zilchkarma.github.io/seryfa-league/U13.html">Under 13</a>
-    <a href="https://zilchkarma.github.io/seryfa-league/U14.html">Under 14</a>
-    <a href="https://zilchkarma.github.io/seryfa-league/U15.html">Under 15</a>
-    <a href="https://zilchkarma.github.io/seryfa-league/U16.html">Under 16</a>
-    <a href="https://zilchkarma.github.io/seryfa-league/U17.html">Under 17</a>
-    <a href="https://zilchkarma.github.io/seryfa-league/U18.html">Under 18</a>
-  </div>
-
-  <footer>
-    Website not affiliated to SERYFA — automation created due to the delay in official site league tables updating.
-    Results not warranted. Errors and omissions excepted.
-  </footer>
-
-
-   
-</body>
-</html>
+    </style></head><body>
+    <div class="hero">
+      <h1>SERYFA Unofficial Results</h1>
+      <p>Real-time standings, fixtures, and club stats for SERYFA leagues.</p>
+    </div>
+    <div class="container">
+      <div class="grid">
+        <div class="card">
+          <h3>League Tables</h3>
+          <p>Select an age group to view standings and upcoming fixtures.</p>
+          <a class="btn-large" href="U13.html">U13 Leagues</a><a class="btn-large" href="U14.html">U14 Leagues</a><a class="btn-large" href="U15.html">U15 Leagues</a><a class="btn-large" href="U16.html">U16 Leagues</a><a class="btn-large" href="U17.html">U17 Leagues</a><a class="btn-large" href="U18.html">U18 Leagues</a>
+          <a class="btn-large" href="Scores.html" style="background:#000; color:#FFD700">All Recent Scores</a>
+        </div>
+        <div class="card">
+          <h3>🔥 Title Race Highlights</h3>
+          
+            <div class="race-item">
+              <small>U14 - Division 2A</small>
+              <strong>EDINBURGH CITY CFC</strong> leads by only <b>0</b> points!
+            </div>
+          
+            <div class="race-item">
+              <small>U17 - Division 1</small>
+              <strong>SPARTANS FC YOUTH</strong> leads by only <b>0</b> points!
+            </div>
+          
+            <div class="race-item">
+              <small>U13 - Division 2A</small>
+              <strong>EDINBURGH SOUTH TITANS</strong> leads by only <b>1</b> point!
+            </div>
+          
+            <div class="race-item">
+              <small>U13 - Division 1</small>
+              <strong>LEITH ATHLETIC FC</strong> leads by only <b>2</b> points!
+            </div>
+          
+            <div class="race-item">
+              <small>U14 - Division 2B</small>
+              <strong>MELROSE FC</strong> leads by only <b>2</b> points!
+            </div>
+          
+            <div class="race-item">
+              <small>U14 - Division 3B</small>
+              <strong>CRAIGROYSTON CYFC</strong> leads by only <b>2</b> points!
+            </div>
+          
+        </div>
+      </div>
+      <footer style="margin-top:40px; color:#888; font-size:0.8rem">
+        Not affiliated with SERYFA. Results for information purposes only.
+      </footer>
+    </div>
+    </body></html>
