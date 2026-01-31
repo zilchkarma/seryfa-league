@@ -1,182 +1,178 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>HUTCHISON VALE FC | SERYFA</title><style>
-    body{font-family:Arial, sans-serif; background:#f8f8f8; padding:15px; color:#333; line-height:1.5}
-    .container{max-width:800px; margin:0 auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-    .header{border-bottom:4px solid #FFD700; margin-bottom:20px; padding-bottom:10px}
-    .stats-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:25px}
-    .stat-box{background:#f0f0f0; padding:15px; border-radius:8px; text-align:center}
-    .stat-box strong{display:block; font-size:1.5em; color:#000}
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HUTCHISON VALE FC | Summary</title>
+  <style>
+    body{font-family:Arial,sans-serif; background:#f4f4f4; padding:15px; color:#333; line-height:1.4}
+    .card{max-width:600px; margin:0 auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+    .hdr{border-bottom:3px solid #FFD700; margin-bottom:15px}
+    .stats{display:flex; justify-content:space-between; background:#eee; padding:10px; border-radius:5px; margin:15px 0}
+    .stats div{text-align:center; flex:1}
+    .stats b{display:block; font-size:1.2rem}
     table{width:100%; border-collapse:collapse; font-size:0.9rem}
-    th,td{padding:10px; border-bottom:1px solid #eee; text-align:left}
-    th{background:#fafafa; font-weight:bold}
-    .win{color:#00B050; font-weight:bold} .loss{color:#C00000} .draw{color:#007BFF}
-    .back-link{display:inline-block; margin-bottom:15px; text-decoration:none; color:#666}
+    th,td{padding:8px; border-bottom:1px solid #eee; text-align:left}
+    th{background:#f9f9f9}
+    .W{color:green; font-weight:bold} .L{color:red}
+    .btn{display:inline-block; margin-bottom:10px; text-decoration:none; color:#666; font-size:0.8rem}
     @media (prefers-color-scheme: dark){
-      body{background:#121212; color:#eee} .container{background:#1e1e1e} .stat-box{background:#2a2a2a} th{background:#252525} td{border-color:#333} .back-link{color:#aaa}
+      body{background:#121212; color:#eee} .card{background:#1e1e1e} .stats{background:#2a2a2a} th{background:#252525} td{border-color:#333}
     }
-  </style></head><body><div class="container">
-    <a href="U14.html" class="back-link">← Back to U14 Standings</a>
-    <div class="header">
+  </style></head><body>
+  <div class="card">
+    <a href="U16.html" class="btn">← Back to U16 Table</a>
+    <div class="hdr">
       <h1 style="margin:0">HUTCHISON VALE FC</h1>
-      <div style="color:#888">Division 1</div>
+      <div style="font-size:0.9rem; color:#888">U16 Division 1</div>
     </div>
-    
-    <div class="stats-grid">
-      <div class="stat-box"><small>POINTS</small><strong>18</strong></div>
-      <div class="stat-box"><small>PLAYED</small><strong>8</strong></div>
-      <div class="stat-box"><small>GD</small><strong>26</strong></div>
+    <div class="stats">
+      <div><small>PTS</small><b>33</b></div>
+      <div><small>P</small><b>11</b></div>
+      <div><small>GD</small><b>52</b></div>
     </div>
-
-    <h3>Match History</h3>
+    <h3>Season Results</h3>
     <table>
       <thead><tr><th>Date</th><th>Opponent</th><th>Res</th><th>Score</th></tr></thead>
       <tbody><tr>
       <td>18/01</td>
-      <td>Edinburgh South CFC</td>
-      <td class="win">W</td>
+      <td>Spartans FC Youth</td>
+      <td class="W">W</td>
       <td>4-0</td>
     </tr><tr>
       <td>21/12</td>
-      <td>Currie Star FC</td>
-      <td class="win">W</td>
-      <td>7-1</td>
+      <td>Dalkeith Thistle CFC</td>
+      <td class="W">W</td>
+      <td>1-0</td>
     </tr><tr>
-      <td>16/11</td>
-      <td>Hutchison Vale Blacks</td>
-      <td class="win">W</td>
-      <td>8-0</td>
-    </tr><tr>
-      <td>26/10</td>
-      <td>Eastside Rapids Black</td>
-      <td class="win">W</td>
-      <td>5-2</td>
-    </tr><tr>
-      <td>14/09</td>
-      <td>Spartans FC Youth</td>
-      <td class="loss">L</td>
-      <td>4-5</td>
-    </tr><tr>
-      <td>31/08</td>
-      <td>KSQ Galaxy</td>
-      <td class="win">W</td>
-      <td>7-1</td>
-    </tr><tr>
-      <td>24/08</td>
-      <td>Musselburgh Windsor FC</td>
-      <td class="win">W</td>
-      <td>4-1</td>
-    </tr><tr>
-      <td>17/08</td>
-      <td>Lochend FA</td>
-      <td class="loss">L</td>
-      <td>0-3</td>
-    </tr><tr>
-      <td>01/05</td>
-      <td>Broxburn Athletic Colts</td>
-      <td class="win">W</td>
-      <td>6-2</td>
-    </tr><tr>
-      <td>01/05</td>
-      <td>East Calder CFC</td>
-      <td class="win">W</td>
-      <td>2-1</td>
-    </tr><tr>
-      <td>01/05</td>
-      <td>Eastside Rapids</td>
-      <td class="win">W</td>
+      <td>14/12</td>
+      <td>Portobello CFA</td>
+      <td class="W">W</td>
       <td>6-0</td>
     </tr><tr>
-      <td>01/05</td>
-      <td>Edinburgh City CFC</td>
-      <td class="draw">D</td>
-      <td>1-1</td>
+      <td>07/12</td>
+      <td>Broxburn Athletic United</td>
+      <td class="W">W</td>
+      <td>6-0</td>
     </tr><tr>
-      <td>01/05</td>
-      <td>Edinburgh United</td>
-      <td class="win">W</td>
-      <td>4-1</td>
+      <td>16/11</td>
+      <td>Musselburgh Windsor FC</td>
+      <td class="W">W</td>
+      <td>5-2</td>
     </tr><tr>
-      <td>01/05</td>
-      <td>Gala Fairydean Rovers</td>
-      <td class="win">W</td>
+      <td>26/10</td>
+      <td>Lochend FA</td>
+      <td class="W">W</td>
+      <td>1-0</td>
+    </tr><tr>
+      <td>12/10</td>
+      <td>Spartans FC Whites</td>
+      <td class="W">W</td>
       <td>9-0</td>
     </tr><tr>
-      <td>01/05</td>
-      <td>Hibernian CFC</td>
-      <td class="win">W</td>
-      <td>1-0</td>
+      <td>14/09</td>
+      <td>Edinburgh South CFC</td>
+      <td class="W">W</td>
+      <td>9-0</td>
+    </tr><tr>
+      <td>07/09</td>
+      <td>North Merchiston FC</td>
+      <td class="W">W</td>
+      <td>6-0</td>
+    </tr><tr>
+      <td>31/08</td>
+      <td>Spartans FC Youth</td>
+      <td class="W">W</td>
+      <td>4-0</td>
+    </tr><tr>
+      <td>24/08</td>
+      <td>Edinburgh City FC</td>
+      <td class="W">W</td>
+      <td>4-1</td>
     </tr><tr>
       <td>01/05</td>
-      <td>Broxburn Athletic Colts</td>
-      <td class="win">W</td>
-      <td>3-2</td>
+      <td>Blackburn United</td>
+      <td class="L">L</td>
+      <td>0-9</td>
     </tr><tr>
       <td>01/05</td>
-      <td>East Calder CFC</td>
-      <td class="win">W</td>
-      <td>8-1</td>
+      <td>Bonnyrigg Rose Sherwood</td>
+      <td class="L">L</td>
+      <td>1-8</td>
     </tr><tr>
       <td>01/05</td>
-      <td>Eastside Rapids</td>
-      <td class="win">W</td>
-      <td>2-1</td>
-    </tr><tr>
-      <td>01/05</td>
-      <td>Edinburgh City CFC</td>
-      <td class="win">W</td>
-      <td>4-3</td>
+      <td>Dalkeith Thistle CFC</td>
+      <td class="L">L</td>
+      <td>0-6</td>
     </tr><tr>
       <td>01/05</td>
       <td>Edinburgh United</td>
-      <td class="win">W</td>
-      <td>3-0</td>
+      <td class="L">L</td>
+      <td>0-1</td>
     </tr><tr>
       <td>01/05</td>
-      <td>Gala Fairydean Rovers</td>
-      <td class="win">W</td>
-      <td>9-1</td>
+      <td>Blackburn United</td>
+      <td class="L">L</td>
+      <td>0-9</td>
     </tr><tr>
       <td>01/05</td>
-      <td>Hibernian CFC</td>
-      <td class="win">W</td>
+      <td>Bonnyrigg Rose Sherwood</td>
+      <td class="L">L</td>
+      <td>2-5</td>
+    </tr><tr>
+      <td>01/05</td>
+      <td>Dalkeith Thistle CFC</td>
+      <td class="L">L</td>
+      <td>0-1</td>
+    </tr><tr>
+      <td>01/05</td>
+      <td>Edinburgh United</td>
+      <td class="L">L</td>
+      <td>0-9</td>
+    </tr><tr>
+      <td>01/05</td>
+      <td>Leith Athletic FC</td>
+      <td class="L">L</td>
+      <td>0-7</td>
+    </tr><tr>
+      <td>01/05</td>
+      <td>Lochend FA</td>
+      <td class="L">L</td>
+      <td>0-9</td>
+    </tr><tr>
+      <td>01/05</td>
+      <td>Musselburgh Windsor FC</td>
+      <td class="L">L</td>
+      <td>0-1</td>
+    </tr><tr>
+      <td>01/05</td>
+      <td>Salvesen CFC</td>
+      <td class="L">L</td>
+      <td>0-1</td>
+    </tr><tr>
+      <td>01/05</td>
+      <td>Spartans FC Youth</td>
+      <td class="L">L</td>
+      <td>0-1</td>
+    </tr><tr>
+      <td>01/05</td>
+      <td>Leith Athletic FC</td>
+      <td class="L">L</td>
+      <td>2-7</td>
+    </tr><tr>
+      <td>01/05</td>
+      <td>Lochend FA</td>
+      <td class="W">W</td>
       <td>1-0</td>
     </tr><tr>
       <td>01/05</td>
-      <td>Leith Athletic FC</td>
-      <td class="win">W</td>
-      <td>3-0</td>
-    </tr><tr>
-      <td>01/05</td>
       <td>Musselburgh Windsor FC</td>
-      <td class="win">W</td>
-      <td>2-1</td>
+      <td class="L">L</td>
+      <td>0-9</td>
     </tr><tr>
       <td>01/05</td>
-      <td>North Berwick FC</td>
-      <td class="win">W</td>
-      <td>4-1</td>
+      <td>Salvesen CFC</td>
+      <td class="L">L</td>
+      <td>0-1</td>
     </tr><tr>
       <td>01/05</td>
       <td>Spartans FC Youth</td>
-      <td class="win">W</td>
-      <td>6-2</td>
-    </tr><tr>
-      <td>01/05</td>
-      <td>Leith Athletic FC</td>
-      <td class="win">W</td>
-      <td>4-1</td>
-    </tr><tr>
-      <td>01/05</td>
-      <td>Musselburgh Windsor FC</td>
-      <td class="win">W</td>
-      <td>6-1</td>
-    </tr><tr>
-      <td>01/05</td>
-      <td>North Berwick FC</td>
-      <td class="win">W</td>
-      <td>4-0</td>
-    </tr><tr>
-      <td>01/05</td>
-      <td>Spartans FC Youth</td>
-      <td class="win">W</td>
-      <td>8-1</td>
-    </tr></tbody></table></div></body></html>
+      <td class="L">L</td>
+      <td>2-9</td>
+    </tr></tbody></table><h3>Upcoming</h3><table><tr><td>2026-02-01</td><td>vs Dalkeith Thistle CFC</td></tr><tr><td>2026-02-08</td><td>vs Spartans FC Whites</td></tr></table></div></body></html>
