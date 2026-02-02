@@ -1,0 +1,387 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>U17 Team Stats</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+    h1{margin-top:0;color:#FFD700}
+    h2{margin-top:24px}
+    select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+    table{border-collapse:collapse;width:100%;margin-bottom:30px}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    th{background:#FFD700;color:#000}
+    th.sortable{cursor:pointer}
+    th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
+    .highlight{background-color:#d4edda;font-weight:bold}
+    .highlight-low{background-color:#fff3cd;font-weight:bold}
+    th.pts-head{background:#FFD700;color:#000}
+    td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
+    td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
+    tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+    th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+    .date-cell{background:#000;color:#FFD700}
+    .max-cell { background-color:#d4edda; font-weight:bold }    
+.min-cell { background-color:#ffe0b2; font-weight:bold }    
+    footer{margin-top:24px;font-size:.9em;opacity:.85}
+    @media (prefers-color-scheme: dark){
+      body{background:#101010;color:#e0e0e0}
+      select{background:#222;color:#fff;border-color:#555}
+      table,th,td{border-color:#333}
+      th{background:#222;color:#fff}
+      th.pts-head{background:#FFD700;color:#000}
+      td.pts-cell{background:#444;color:#FFD700}
+      td.gf{background:#1a2a40} td.ga{background:#402a1a} td.gd{background:#1a402a}
+      tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+      th:first-child,td:first-child{background:#202020;font-weight:bold}
+      .date-cell{background:#000;color:#FFD700}
+        .max-cell { background:#004d00; color:#fff }
+  .min-cell { background:#804000; color:#fff }
+    }
+  </style>
+ <style>.sfy-nav{background:#222;color:#fff;padding-bottom:5px}.sfy-nav .bar{padding:12px; font-weight:bold; color:#FFD700; border-bottom:1px solid #333}.sfy-tabs,.sfy-subtabs{display:flex;gap:6px;overflow-x:auto;padding:8px 10px}.nav-link{padding:6px 12px;border-radius:20px;border:1px solid #444;color:#fff;text-decoration:none;white-space:nowrap;font-size:0.9rem}.nav-link.active{background:#FFD700;color:#000;border-color:#FFD700}</style><nav class="sfy-nav"><div class="bar">SERYFA Unofficial Leagues</div><div class="sfy-subtabs"><a class="nav-link" href="U17.html">U17 Table</a><a class="nav-link active" href="U17-stats.html">Stats</a><a class="nav-link" href="Scores.html">Scores</a></div><div class="sfy-tabs"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="U13.html">U13</a><a class="nav-link" href="U14.html">U14</a><a class="nav-link" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a></div></nav></head><body><h1>U17 Team Stats</h1><label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Division 1">Division 1</option><option value="Division 2">Division 2</option>
+  </select><div class="division-block" data-division="Division 1">
+    <h2>Division 1</h2>
+    <table class="sortable">
+      <thead><tr>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable gf" data-type="num">Avg GF</th>
+        <th class="sortable ga" data-type="num">Avg GA</th>
+        <th class="sortable" data-type="text">Biggest Win</th>
+        <th class="sortable" data-type="text">Biggest Loss</th>
+        <th class="sortable gf" data-type="num">Most Scored</th>
+        <th class="sortable ga" data-type="num">Most Conceded</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>EAST CALDER BLACKS</td>
+      <td class="" data-num="3.3636363636363638">3.36</td>
+      <td class="" data-num="1.8181818181818181">1.82</td>
+      <td class="">5–0 vs EDINBURGH SOUTH WHITES</td>
+      <td>1–3 vs KSQ GALAXY</td>
+      <td class="" data-num="6">6</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>EDINBURGH SOUTH WHITES</td>
+      <td class="" data-num="2.230769230769231">2.23</td>
+      <td class="" data-num="3.5384615384615383">3.54</td>
+      <td class="">6–0 vs TYNECASTLE FC</td>
+      <td>0–9 vs CORSTORPHINE DYNAMO WHITES</td>
+      <td class="" data-num="7">7</td>
+      <td class="min-cell" data-num="9">9</td>
+    </tr><tr>
+      <td>SPARTANS FC YOUTH</td>
+      <td class="" data-num="5.363636363636363">5.36</td>
+      <td class="" data-num="1.0909090909090908">1.09</td>
+      <td class="">9–1 vs BONNYRIGG ROSE ASTROS</td>
+      <td>-</td>
+      <td class="max-cell" data-num="9">9</td>
+      <td class="" data-num="2">2</td>
+    </tr><tr>
+      <td>DALKEITH THISTLE DEPORTIVO</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="" data-num="2.5833333333333335">2.58</td>
+      <td class="">9–1 vs TYNECASTLE FC</td>
+      <td>0–7 vs BLACKBURN UNITED</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="7">7</td>
+    </tr><tr>
+      <td>TYNECASTLE FC</td>
+      <td class="" data-num="1.0714285714285714">1.07</td>
+      <td class="min-cell" data-num="5.357142857142857">5.36</td>
+      <td class="">4–2 vs BONNYRIGG ROSE ASTROS</td>
+      <td>0–9 vs ARNISTON RANGERS YFC</td>
+      <td class="" data-num="4">4</td>
+      <td class="" data-num="9">9</td>
+    </tr><tr>
+      <td>SPARTANS FC COLTS</td>
+      <td class="" data-num="2.230769230769231">2.23</td>
+      <td class="" data-num="3.3846153846153846">3.38</td>
+      <td class="">9–3 vs EDINBURGH UNITED YOUTH</td>
+      <td>1–9 vs BLACKBURN UNITED</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="9">9</td>
+    </tr><tr>
+      <td>BLACKBURN UNITED</td>
+      <td class="max-cell" data-num="5.454545454545454">5.45</td>
+      <td class="" data-num="1.1818181818181819">1.18</td>
+      <td class="max-cell">9–0 vs EDINBURGH UNITED YOUTH</td>
+      <td>2–4 vs SPARTANS FC YOUTH</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="4">4</td>
+    </tr><tr>
+      <td>SPARTANS FC BLUES</td>
+      <td class="" data-num="2.7142857142857144">2.71</td>
+      <td class="" data-num="2.9285714285714284">2.93</td>
+      <td class="">7–0 vs TYNECASTLE FC</td>
+      <td>0–7 vs MUSSELBURGH WINDSOR FC</td>
+      <td class="" data-num="7">7</td>
+      <td class="" data-num="7">7</td>
+    </tr><tr>
+      <td>KSQ GALAXY</td>
+      <td class="" data-num="2.642857142857143">2.64</td>
+      <td class="" data-num="2.5714285714285716">2.57</td>
+      <td class="">9–3 vs BONNYRIGG ROSE ASTROS</td>
+      <td>0–8 vs CORSTORPHINE DYNAMO WHITES</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="8">8</td>
+    </tr><tr>
+      <td>MUSSELBURGH WINDSOR FC</td>
+      <td class="" data-num="3.5384615384615383">3.54</td>
+      <td class="" data-num="1.3076923076923077">1.31</td>
+      <td class="">9–1 vs BONNYRIGG ROSE ASTROS</td>
+      <td>0–6 vs SPARTANS FC YOUTH</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="6">6</td>
+    </tr><tr>
+      <td>ARNISTON RANGERS YFC</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="" data-num="2.076923076923077">2.08</td>
+      <td class="">9–0 vs TYNECASTLE FC</td>
+      <td>2–5 vs BLACKBURN UNITED</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>BONNYRIGG ROSE ASTROS</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="" data-num="4.153846153846154">4.15</td>
+      <td class="">5–2 vs DALKEITH THISTLE DEPORTIVO</td>
+      <td>1–9 vs MUSSELBURGH WINDSOR FC</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="9">9</td>
+    </tr><tr>
+      <td>CORSTORPHINE DYNAMO WHITES</td>
+      <td class="" data-num="4.7272727272727275">4.73</td>
+      <td class="" data-num="1.3636363636363635">1.36</td>
+      <td class="">9–0 vs EDINBURGH SOUTH WHITES</td>
+      <td>2–4 vs MUSSELBURGH WINDSOR FC</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="4">4</td>
+    </tr><tr>
+      <td>CURRIE FC RAVENS</td>
+      <td class="" data-num="2.230769230769231">2.23</td>
+      <td class="" data-num="3.769230769230769">3.77</td>
+      <td class="">9–2 vs TYNECASTLE FC</td>
+      <td>0–8 vs SPARTANS FC YOUTH</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="8">8</td>
+    </tr><tr>
+      <td>DALKEITH THISTLE CFC</td>
+      <td class="" data-num="1.7">1.70</td>
+      <td class="" data-num="3.9">3.90</td>
+      <td class="">4–3 vs SPARTANS FC BLUES</td>
+      <td>1–7 vs SPARTANS FC YOUTH</td>
+      <td class="" data-num="4">4</td>
+      <td class="" data-num="7">7</td>
+    </tr><tr>
+      <td>EDINBURGH UNITED YOUTH</td>
+      <td class="" data-num="1.4166666666666667">1.42</td>
+      <td class="" data-num="3.9166666666666665">3.92</td>
+      <td class="">-</td>
+      <td>0–9 vs BLACKBURN UNITED</td>
+      <td class="" data-num="3">3</td>
+      <td class="" data-num="9">9</td>
+    </tr></tbody></table></div><div class="division-block" data-division="Division 2">
+    <h2>Division 2</h2>
+    <table class="sortable">
+      <thead><tr>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable gf" data-type="num">Avg GF</th>
+        <th class="sortable ga" data-type="num">Avg GA</th>
+        <th class="sortable" data-type="text">Biggest Win</th>
+        <th class="sortable" data-type="text">Biggest Loss</th>
+        <th class="sortable gf" data-type="num">Most Scored</th>
+        <th class="sortable ga" data-type="num">Most Conceded</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>EDINBURGH SOUTH REDS</td>
+      <td class="" data-num="2.9166666666666665">2.92</td>
+      <td class="" data-num="2.8333333333333335">2.83</td>
+      <td class="">9–3 vs BATHGATE JUNIORS</td>
+      <td>0–5 vs DALKEITH THISTLE CFC BALOMPIE</td>
+      <td class="max-cell" data-num="9">9</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>EAST CALDER UNITED</td>
+      <td class="" data-num="3.466666666666667">3.47</td>
+      <td class="" data-num="3.2">3.20</td>
+      <td class="max-cell">9–0 vs BATHGATE JUNIORS</td>
+      <td>3–7 vs KSQ RAPIDS</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="8">8</td>
+    </tr><tr>
+      <td>INVERKEITHING HILLFIELD SWIFTS</td>
+      <td class="" data-num="3.9">3.90</td>
+      <td class="" data-num="1.8">1.80</td>
+      <td class="">8–0 vs BATHGATE JUNIORS</td>
+      <td>1–2 vs KSQ RAPIDS</td>
+      <td class="" data-num="8">8</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>MURIESTON UNITED NAVY</td>
+      <td class="" data-num="2.0833333333333335">2.08</td>
+      <td class="" data-num="4">4.00</td>
+      <td class="">5–0 vs BATHGATE JUNIORS</td>
+      <td>1–7 vs NORTH BERWICK FC</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="7">7</td>
+    </tr><tr>
+      <td>KELSO FC</td>
+      <td class="" data-num="3.6923076923076925">3.69</td>
+      <td class="" data-num="1.1538461538461537">1.15</td>
+      <td class="">9–1 vs EYEMOUTH UNITED FC</td>
+      <td>0–1 vs PENICUIK ATHLETIC REDS</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>PENICUIK ATHLETIC REDS</td>
+      <td class="" data-num="3.2666666666666666">3.27</td>
+      <td class="" data-num="1.3333333333333333">1.33</td>
+      <td class="">9–1 vs BROXBURN ATHLETIC COLTS</td>
+      <td>1–2 vs CURRIE STAR FC WHITES</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="4">4</td>
+    </tr><tr>
+      <td>BATHGATE JUNIORS</td>
+      <td class="" data-num="0.6875">0.69</td>
+      <td class="min-cell" data-num="5.3125">5.31</td>
+      <td class="">1–0 vs DALKEITH THISTLE CFC BALOMPIE</td>
+      <td>0–9 vs EAST CALDER UNITED</td>
+      <td class="" data-num="3">3</td>
+      <td class="min-cell" data-num="9">9</td>
+    </tr><tr>
+      <td>KSQ RAPIDS</td>
+      <td class="" data-num="4.25">4.25</td>
+      <td class="" data-num="2.1875">2.19</td>
+      <td class="">7–1 vs CRAMOND FC EAGLES</td>
+      <td>2–5 vs KELSO FC</td>
+      <td class="" data-num="8">8</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>TRANENT FC</td>
+      <td class="" data-num="1.8">1.80</td>
+      <td class="" data-num="2">2.00</td>
+      <td class="">6–0 vs CRAMOND FC EAGLES</td>
+      <td>0–6 vs NORTH BERWICK FC</td>
+      <td class="" data-num="6">6</td>
+      <td class="" data-num="6">6</td>
+    </tr><tr>
+      <td>BROXBURN ATHLETIC COLTS</td>
+      <td class="" data-num="1.7142857142857142">1.71</td>
+      <td class="" data-num="3">3.00</td>
+      <td class="">7–0 vs BATHGATE JUNIORS</td>
+      <td>1–9 vs PENICUIK ATHLETIC REDS</td>
+      <td class="" data-num="7">7</td>
+      <td class="" data-num="9">9</td>
+    </tr><tr>
+      <td>NORTH MERCHISTON FC</td>
+      <td class="" data-num="2.642857142857143">2.64</td>
+      <td class="" data-num="2.357142857142857">2.36</td>
+      <td class="">6–1 vs BATHGATE JUNIORS</td>
+      <td>1–6 vs NORTH BERWICK FC</td>
+      <td class="" data-num="6">6</td>
+      <td class="" data-num="6">6</td>
+    </tr><tr>
+      <td>DALKEITH THISTLE CFC BALOMPIE</td>
+      <td class="" data-num="1.1818181818181819">1.18</td>
+      <td class="" data-num="1.5454545454545454">1.55</td>
+      <td class="">5–0 vs EDINBURGH SOUTH REDS</td>
+      <td>0–3 vs CORSTORPHINE DYNAMO BLACKS</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="3">3</td>
+    </tr><tr>
+      <td>CORSTORPHINE DYNAMO BLACKS</td>
+      <td class="" data-num="3.1538461538461537">3.15</td>
+      <td class="" data-num="1.9230769230769231">1.92</td>
+      <td class="">6–0 vs BATHGATE JUNIORS</td>
+      <td>1–9 vs NORTH BERWICK FC</td>
+      <td class="" data-num="6">6</td>
+      <td class="" data-num="9">9</td>
+    </tr><tr>
+      <td>NORTH BERWICK FC</td>
+      <td class="max-cell" data-num="5.3076923076923075">5.31</td>
+      <td class="" data-num="2.1538461538461537">2.15</td>
+      <td class="">9–0 vs BATHGATE JUNIORS</td>
+      <td>0–4 vs KELSO FC</td>
+      <td class="" data-num="9">9</td>
+      <td class="" data-num="7">7</td>
+    </tr><tr>
+      <td>CURRIE STAR FC WHITES</td>
+      <td class="" data-num="2.7857142857142856">2.79</td>
+      <td class="" data-num="2.2142857142857144">2.21</td>
+      <td class="">5–0 vs EYEMOUTH UNITED FC</td>
+      <td>2–5 vs KELSO FC</td>
+      <td class="" data-num="6">6</td>
+      <td class="" data-num="5">5</td>
+    </tr><tr>
+      <td>EYEMOUTH UNITED FC</td>
+      <td class="" data-num="1.6153846153846154">1.62</td>
+      <td class="" data-num="4">4.00</td>
+      <td class="">6–2 vs BATHGATE JUNIORS</td>
+      <td>1–9 vs NORTH BERWICK FC</td>
+      <td class="" data-num="6">6</td>
+      <td class="" data-num="9">9</td>
+    </tr><tr>
+      <td>CRAMOND FC EAGLES</td>
+      <td class="" data-num="1.4166666666666667">1.42</td>
+      <td class="" data-num="4.5">4.50</td>
+      <td class="">5–3 vs EYEMOUTH UNITED FC</td>
+      <td>0–7 vs PENICUIK ATHLETIC REDS</td>
+      <td class="" data-num="5">5</td>
+      <td class="" data-num="7">7</td>
+    </tr></tbody></table></div><script>
+  (function(){
+    function numVal(td){
+      const ds = td.getAttribute('data-num');
+      if(ds !== null) return parseFloat(ds);
+      const t = td.textContent.trim().replace(/[^\d.\-]/g,'');
+      const n = parseFloat(t);
+      return isNaN(n) ? 0 : n;
+    }
+    function getComparator(type, i, asc){
+      if(type === 'num'){
+        return (a,b)=>{ const ax=numVal(a.children[i]), bx=numVal(b.children[i]); return asc ? (ax-bx) : (bx-ax); };
+      }
+      
+      return (a,b)=>{
+        const ax=a.children[i].textContent.trim();
+        const bx=b.children[i].textContent.trim();
+        const cmp=ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'});
+        return asc ? cmp : -cmp;
+      };
+    }
+    function sortTable(table, colIdx, type, th){
+      const tbody = table.querySelector('tbody'); if(!tbody) return;
+      const hasState = th.classList.contains('asc') || th.classList.contains('desc');
+      const firstAsc = (type === 'text'); 
+      const asc = hasState ? th.classList.contains('desc') : firstAsc;
+
+      const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r,idx]);
+      const cmp = getComparator(type, colIdx, asc);
+      rows.sort((A,B)=>{ const r=cmp(A[0],B[0]); return r!==0 ? r : (A[1]-B[1]); });
+
+      table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.forEach(pair=>tbody.appendChild(pair[0]));
+    }
+    document.querySelectorAll('table').forEach(t=>{
+      t.querySelectorAll('thead th.sortable').forEach(th=>{
+        th.addEventListener('click', ()=> sortTable(t, th.cellIndex, th.dataset.type||'text', th));
+      });
+    });
+    
+    const divFilter = document.getElementById('division-filter');
+    function applyFilter(val){
+      document.querySelectorAll('.division-block').forEach(d=>{
+        d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none';
+      });
+    }
+    if(divFilter){
+      divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      const url = new URL(window.location.href);
+      const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) divFilter.value = pre;
+      applyFilter(divFilter.value || 'ALL');
+    }
+  })();
+  </script></body></html>
