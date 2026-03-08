@@ -443,9 +443,11 @@ document.getElementById("matchForm").addEventListener("submit", async function(e
     away: document.getElementById("away").value,
     homeScore: document.getElementById("homeScore").value,
     awayScore: document.getElementById("awayScore").value,
-    referee: document.getElementById("referee").value,
+  
     location: document.getElementById("location").value
   });
+
+
 
   try {
     var res = await fetch("https://script.google.com/macros/s/AKfycbytk996A8C2OdalIjKAYWFLFyOB9Kp4WRJS8sCXIwvyoLKepHLZyOCf2mPp33h1p29JvA/exec", {
