@@ -1,0 +1,1235 @@
+<!DOCTYPE html><html><head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QLTFGFY0MQ');
+</script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+   
+  body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+  h1{margin-top:0;color:#FFD700}
+  select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+  table{border-collapse:collapse;width:100%;margin-bottom:30px}
+  th,td{border:1px solid #ccc;padding:8px;text-align:center}
+  th{background:#FFD700;color:#000}
+  th.sortable{cursor:pointer}
+  th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
+  th.pts-head{background:#FFD700;color:#000}
+  td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
+  td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
+  tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+  .form-cell span{padding:2px 6px;border-radius:4px;color:#fff;font-weight:bold;margin-right:2px}
+  .W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}
+  th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+  .date-cell{background:#000;color:#FFD700}
+  footer{margin-top:24px;font-size:.9em;opacity:.85}
+
+   
+  @media (max-width: 600px) {
+     
+    th:nth-child(3), td:nth-child(3),  
+    th:nth-child(4), td:nth-child(4),  
+    th:nth-child(5), td:nth-child(5),  
+    th:nth-child(6), td:nth-child(6),  
+    th:nth-child(8), td:nth-child(8),  
+    th:nth-child(9), td:nth-child(9),  
+    th:nth-child(10), td:nth-child(10)   {
+      display: none;
+    }
+    table { font-size: 0.85rem; }
+    .form-cell span { padding: 1px 4px; font-size: 10px; }
+  }
+
+   
+  td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
+  td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
+
+   
+  @media (prefers-color-scheme: dark){
+    body{background:#101010;color:#e0e0e0}
+    select{background:#222;color:#fff;border-color:#555}
+    table,th,td{border-color:#333}
+    th{background:#222;color:#fff}
+    th.pts-head{background:#FFD700;color:#000}
+    td.pts-cell{background:#444;color:#FFD700}
+    td.gf{background:#1a2a40} td.ga{background:#402a1a} td.gd{background:#1a402a}
+    tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+    .W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}
+    th:first-child,td:first-child{background:#202020;font-weight:bold}
+  }
+
+   
+  .theme-toggle{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:6px 0 14px 0}
+  .switch{position:relative;display:inline-block;width:52px;height:28px}
+  .switch input{opacity:0;width:0;height:0}
+  .slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#bbb;transition:.2s;border-radius:28px}
+  .slider:before{position:absolute;content:"";height:22px;width:22px;left:3px;bottom:3px;background:#fff;transition:.2s;border-radius:50%}
+  .switch input:checked + .slider{background:#4CAF50}
+  .switch input:checked + .slider:before{transform:translateX(24px)}
+  </style>
+  <style id="theme-override"></style></head><body>
+  <div class="theme-toggle" title="Toggle dark mode" role="group" aria-label="Theme toggle">
+  <span aria-hidden="true">☀️</span>
+  <label class="switch">
+    <input type="checkbox" id="theme-toggle" aria-label="Dark mode">
+    <span class="slider"></span>
+  </label>
+  <span aria-hidden="true">🌙</span>
+</div><style>.sfy-nav{background:#222;color:#fff;padding-bottom:5px}.sfy-nav .bar{padding:12px; font-weight:bold; color:#FFD700; border-bottom:1px solid #333}.sfy-tabs,.sfy-subtabs{display:flex;gap:6px;overflow-x:auto;padding:8px 10px}.nav-link{padding:6px 12px;border-radius:20px;border:1px solid #444;color:#fff;text-decoration:none;white-space:nowrap;font-size:0.9rem}.nav-link.active{background:#FFD700;color:#000;border-color:#FFD700}</style><nav class="sfy-nav"><div class="bar">SERYFA Unofficial Leagues</div><div class="sfy-subtabs"><a class="nav-link active" href="U14.html">U14 Table</a><a class="nav-link" href="U14-stats.html">Stats</a><a class="nav-link" href="Scores.html">Scores</a></div><div class="sfy-tabs"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="U13.html">U13</a><a class="nav-link active" href="U14.html">U14</a><a class="nav-link" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a></div></nav><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer>
+  <div id="sfy-chat-widget" style="position:fixed; bottom:20px; right:20px; z-index:9999; font-family:sans-serif;">
+    <button id="chat-btn" onclick="toggleChat()" style="background:#FFD700; color:#000; border:none; border-radius:50%; width:56px; height:56px; font-size:24px; box-shadow:0 4px 10px rgba(0,0,0,0.3); cursor:pointer; transition:transform 0.2s;">💬</button>
+    <div id="chat-window" style="display:none; position:absolute; bottom:70px; right:0; width:340px; height:450px; background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.25); flex-direction:column; overflow:hidden; border:1px solid #ccc;">
+      <div style="background:#222; color:#FFD700; padding:12px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;">
+        <span>The U14 Chatbot V3.1</span>
+        <button onclick="toggleChat()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
+      <div id="chat-msgs" style="flex:1; padding:15px; overflow-y:auto; background:#f5f5f5; display:flex; flex-direction:column; gap:10px;">
+        <div style="align-self:flex-start; background:#e0e0e0; color:#000; padding:8px 12px; border-radius:12px; font-size:0.9rem; max-width:85%;">
+          Hi! Ask me about teams, standings, or fixtures for U14.
+        </div>
+      </div>
+      <div style="padding:10px; background:#fff; border-top:1px solid #ddd; display:flex; gap:6px;">
+        <input type="text" id="chat-input" placeholder="Ask a question..." style="flex:1; padding:10px; border:1px solid #ccc; border-radius:20px; outline:none; font-size:0.95rem;" onkeydown="if(event.key==='Enter') sendChat()">
+        <button onclick="sendChat()" style="background:#FFD700; border:none; border-radius:50%; width:38px; height:38px; cursor:pointer;">➤</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    let conversationHistory = [];
+    function toggleChat() {
+      const w = document.getElementById('chat-window');
+      const b = document.getElementById('chat-btn');
+      const isHidden = w.style.display === 'none';
+      w.style.display = isHidden ? 'flex' : 'none';
+      if(isHidden) setTimeout(() => document.getElementById('chat-input').focus(), 100);
+    }
+    function sendChat() {
+      const input = document.getElementById('chat-input');
+      const txt = input.value.trim();
+      if(!txt) return;
+      addMsg(txt, 'user');
+      input.value = '';
+      input.disabled = true;
+      const payload = { type: 'chat', question: txt, ageGroup: "U14", history: conversationHistory };
+      const ENDPOINT = "https://script.google.com/macros/s/AKfycbytk996A8C2OdalIjKAYWFLFyOB9Kp4WRJS8sCXIwvyoLKepHLZyOCf2mPp33h1p29JvA/exec"; 
+      fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
+      .then(res => res.json())
+      .then(data => {
+        input.disabled = false; input.focus();
+        if (data.answer) {
+          addMsg(data.answer, 'bot');
+          if (conversationHistory.length > 6) conversationHistory.shift(); 
+          conversationHistory.push({ role: 'user', content: txt }, { role: 'model', content: data.answer });
+        } else { addMsg("⚠️ " + (data.error || "No response"), 'bot'); }
+      }).catch(() => { input.disabled = false; addMsg("⛔ Connection Failed.", 'bot'); });
+    }
+    function addMsg(txt, sender) {
+      const div = document.createElement('div');
+      div.style.padding = '8px 12px'; div.style.borderRadius = '12px'; div.style.fontSize = '0.9rem'; div.style.maxWidth = '85%';  div.style.color = '#000000'; 
+      if(sender === 'user') { div.style.alignSelf = 'flex-end'; div.style.background = '#FFD700'; div.textContent = txt; }
+      else { div.style.alignSelf = 'flex-start'; div.style.background = '#e0e0e0'; div.innerHTML = txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'); }
+      const box = document.getElementById('chat-msgs'); box.appendChild(div); box.scrollTop = box.scrollHeight;
+    }
+  </script><h1>U14 League Tables</h1>
+  <label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Division 1">Division 1</option><option value="Division 2A">Division 2A</option><option value="Division 2B">Division 2B</option><option value="Division 3A">Division 3A</option><option value="Division 3B">Division 3B</option><option value="Division 4A">Division 4A</option><option value="Division 4B">Division 4B</option>
+  </select><div class="division-block" data-division="Division 1">
+      <h2>Division 1 - Last Updated 07/06/2026 21:34</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U14-Division_1-HUTCHISON_VALE_FC.html">HUTCHISON VALE FC</a></td>
+        <td>24</td>
+        <td>21</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">63</td>
+        <td class="gf">114</td>
+        <td class="ga">24</td>
+        <td class="gd">90</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U14-Division_1-LOCHEND_FA.html">LOCHEND FA</a></td>
+        <td>22</td>
+        <td>20</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">60</td>
+        <td class="gf">87</td>
+        <td class="ga">12</td>
+        <td class="gd">75</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U14-Division_1-MUSSELBURGH_WINDSOR_FC.html">MUSSELBURGH WINDSOR FC</a></td>
+        <td>23</td>
+        <td>17</td>
+        <td>1</td>
+        <td>5</td>
+        <td class="pts-cell">52</td>
+        <td class="gf">73</td>
+        <td class="ga">27</td>
+        <td class="gd">46</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U14-Division_1-EASTSIDE_RAPIDS_UNITED.html">EASTSIDE RAPIDS UNITED</a></td>
+        <td>23</td>
+        <td>16</td>
+        <td>2</td>
+        <td>5</td>
+        <td class="pts-cell">50</td>
+        <td class="gf">73</td>
+        <td class="ga">52</td>
+        <td class="gd">21</td>
+        <td class="form-cell" data-form="LWWDL"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="D">D</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U14-Division_1-SPARTANS_FC_YOUTH.html">SPARTANS FC YOUTH</a></td>
+        <td>23</td>
+        <td>15</td>
+        <td>3</td>
+        <td>5</td>
+        <td class="pts-cell">48</td>
+        <td class="gf">75</td>
+        <td class="ga">45</td>
+        <td class="gd">30</td>
+        <td class="form-cell" data-form="WDWDL"><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="D">D</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U14-Division_1-EDINBURGH_CITY_FC.html">EDINBURGH CITY FC</a></td>
+        <td>23</td>
+        <td>7</td>
+        <td>5</td>
+        <td>11</td>
+        <td class="pts-cell">26</td>
+        <td class="gf">57</td>
+        <td class="ga">79</td>
+        <td class="gd">-22</td>
+        <td class="form-cell" data-form="WLLDL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U14-Division_1-SPARTANS_FC_WHITES.html">SPARTANS FC WHITES</a></td>
+        <td>24</td>
+        <td>8</td>
+        <td>2</td>
+        <td>14</td>
+        <td class="pts-cell">26</td>
+        <td class="gf">54</td>
+        <td class="ga">80</td>
+        <td class="gd">-26</td>
+        <td class="form-cell" data-form="LWLLL"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U14-Division_1-HUTCHISON_VALE_BLACKS.html">HUTCHISON VALE BLACKS</a></td>
+        <td>23</td>
+        <td>8</td>
+        <td>2</td>
+        <td>13</td>
+        <td class="pts-cell">26</td>
+        <td class="gf">43</td>
+        <td class="ga">70</td>
+        <td class="gd">-27</td>
+        <td class="form-cell" data-form="LLDWL"><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U14-Division_1-BLACKBURN_UNITED_BLACKS.html">BLACKBURN UNITED BLACKS</a></td>
+        <td>23</td>
+        <td>7</td>
+        <td>4</td>
+        <td>12</td>
+        <td class="pts-cell">25</td>
+        <td class="gf">59</td>
+        <td class="ga">70</td>
+        <td class="gd">-11</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U14-Division_1-EDINBURGH_SOUTH_CFC.html">EDINBURGH SOUTH CFC</a></td>
+        <td>24</td>
+        <td>6</td>
+        <td>5</td>
+        <td>13</td>
+        <td class="pts-cell">23</td>
+        <td class="gf">31</td>
+        <td class="ga">71</td>
+        <td class="gd">-40</td>
+        <td class="form-cell" data-form="WLLLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>11</td>
+        <td><a class="team-link" href="Team-U14-Division_1-KSQ_GALAXY.html">KSQ GALAXY</a></td>
+        <td>24</td>
+        <td>5</td>
+        <td>2</td>
+        <td>17</td>
+        <td class="pts-cell">17</td>
+        <td class="gf">43</td>
+        <td class="ga">86</td>
+        <td class="gd">-43</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>12</td>
+        <td><a class="team-link" href="Team-U14-Division_1-CURRIE_STAR_FC.html">CURRIE STAR FC</a></td>
+        <td>24</td>
+        <td>5</td>
+        <td>1</td>
+        <td>18</td>
+        <td class="pts-cell">16</td>
+        <td class="gf">38</td>
+        <td class="ga">87</td>
+        <td class="gd">-49</td>
+        <td class="form-cell" data-form="LLLDW"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>13</td>
+        <td><a class="team-link" href="Team-U14-Division_1-DALKEITH_THISTLE_CFC.html">DALKEITH THISTLE CFC</a></td>
+        <td>24</td>
+        <td>3</td>
+        <td>1</td>
+        <td>20</td>
+        <td class="pts-cell">10</td>
+        <td class="gf">29</td>
+        <td class="ga">73</td>
+        <td class="gd">-44</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 2A">
+      <h2>Division 2A - Last Updated 19/05/2026 11:30</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-EDINBURGH_CITY_CFC.html">EDINBURGH CITY CFC</a></td>
+        <td>17</td>
+        <td>16</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">48</td>
+        <td class="gf">85</td>
+        <td class="ga">14</td>
+        <td class="gd">71</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-DUNBAR_UNITED_BLACKS.html">DUNBAR UNITED BLACKS</a></td>
+        <td>16</td>
+        <td>13</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">40</td>
+        <td class="gf">62</td>
+        <td class="ga">16</td>
+        <td class="gd">46</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-CORSTORPHINE_DYNAMO_WHITES.html">CORSTORPHINE DYNAMO WHITES</a></td>
+        <td>19</td>
+        <td>11</td>
+        <td>3</td>
+        <td>5</td>
+        <td class="pts-cell">36</td>
+        <td class="gf">68</td>
+        <td class="ga">44</td>
+        <td class="gd">24</td>
+        <td class="form-cell" data-form="WLWLW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-LOCHEND_FA.html">LOCHEND FA</a></td>
+        <td>19</td>
+        <td>11</td>
+        <td>2</td>
+        <td>6</td>
+        <td class="pts-cell">35</td>
+        <td class="gf">60</td>
+        <td class="ga">38</td>
+        <td class="gd">22</td>
+        <td class="form-cell" data-form="WWWLW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-CURRIE_FC_PUMAS.html">CURRIE FC PUMAS</a></td>
+        <td>19</td>
+        <td>7</td>
+        <td>4</td>
+        <td>8</td>
+        <td class="pts-cell">25</td>
+        <td class="gf">48</td>
+        <td class="ga">49</td>
+        <td class="gd">-1</td>
+        <td class="form-cell" data-form="LLWDL"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="D">D</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-EDINBURGH_UNITED_BLACKS.html">EDINBURGH UNITED BLACKS</a></td>
+        <td>18</td>
+        <td>7</td>
+        <td>2</td>
+        <td>9</td>
+        <td class="pts-cell">23</td>
+        <td class="gf">36</td>
+        <td class="ga">52</td>
+        <td class="gd">-16</td>
+        <td class="form-cell" data-form="LWLWL"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-MURIESTON_UNITED_REDS.html">MURIESTON UNITED REDS</a></td>
+        <td>19</td>
+        <td>7</td>
+        <td>2</td>
+        <td>10</td>
+        <td class="pts-cell">23</td>
+        <td class="gf">40</td>
+        <td class="ga">60</td>
+        <td class="gd">-20</td>
+        <td class="form-cell" data-form="LLLLW"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-INVERKEITHING_HILLFIELD_SWIFTS.html">INVERKEITHING HILLFIELD SWIFTS</a></td>
+        <td>18</td>
+        <td>6</td>
+        <td>3</td>
+        <td>9</td>
+        <td class="pts-cell">21</td>
+        <td class="gf">29</td>
+        <td class="ga">47</td>
+        <td class="gd">-18</td>
+        <td class="form-cell" data-form="WWLWL"><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-EDINA_HIBS_GREENS.html">EDINA HIBS GREENS</a></td>
+        <td>18</td>
+        <td>6</td>
+        <td>1</td>
+        <td>11</td>
+        <td class="pts-cell">19</td>
+        <td class="gf">37</td>
+        <td class="ga">47</td>
+        <td class="gd">-10</td>
+        <td class="form-cell" data-form="LLDLL"><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-NORTH_BERWICK_FC.html">NORTH BERWICK FC</a></td>
+        <td>20</td>
+        <td>5</td>
+        <td>3</td>
+        <td>12</td>
+        <td class="pts-cell">18</td>
+        <td class="gf">46</td>
+        <td class="ga">66</td>
+        <td class="gd">-20</td>
+        <td class="form-cell" data-form="LLDDL"><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="D">D</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>11</td>
+        <td><a class="team-link" href="Team-U14-Division_2A-EDINBURGH_CITY_FC_COLTS.html">EDINBURGH CITY FC COLTS</a></td>
+        <td>19</td>
+        <td>1</td>
+        <td>1</td>
+        <td>17</td>
+        <td class="pts-cell">4</td>
+        <td class="gf">14</td>
+        <td class="ga">92</td>
+        <td class="gd">-78</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 2B">
+      <h2>Division 2B - Last Updated 02/06/2026 21:37</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-MELROSE_FC.html">MELROSE FC</a></td>
+        <td>18</td>
+        <td>14</td>
+        <td>2</td>
+        <td>2</td>
+        <td class="pts-cell">44</td>
+        <td class="gf">77</td>
+        <td class="ga">31</td>
+        <td class="gd">46</td>
+        <td class="form-cell" data-form="LLWWD"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-EDINBURGH_SOUTH_ROMA.html">EDINBURGH SOUTH ROMA</a></td>
+        <td>19</td>
+        <td>12</td>
+        <td>3</td>
+        <td>4</td>
+        <td class="pts-cell">39</td>
+        <td class="gf">62</td>
+        <td class="ga">35</td>
+        <td class="gd">27</td>
+        <td class="form-cell" data-form="WLWWD"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-CRAMOND_CFC.html">CRAMOND CFC</a></td>
+        <td>27</td>
+        <td>12</td>
+        <td>3</td>
+        <td>12</td>
+        <td class="pts-cell">39</td>
+        <td class="gf">64</td>
+        <td class="ga">65</td>
+        <td class="gd">-1</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-GALA_FAIRYDEAN_ROVERS.html">GALA FAIRYDEAN ROVERS</a></td>
+        <td>18</td>
+        <td>12</td>
+        <td>1</td>
+        <td>5</td>
+        <td class="pts-cell">37</td>
+        <td class="gf">67</td>
+        <td class="ga">29</td>
+        <td class="gd">38</td>
+        <td class="form-cell" data-form="WWWLL"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-PENICUIK_ATHLETIC_WHITES.html">PENICUIK ATHLETIC WHITES</a></td>
+        <td>19</td>
+        <td>11</td>
+        <td>1</td>
+        <td>7</td>
+        <td class="pts-cell">34</td>
+        <td class="gf">59</td>
+        <td class="ga">38</td>
+        <td class="gd">21</td>
+        <td class="form-cell" data-form="WWWWL"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-PRESTON_ATHLETIC_BLACKS.html">PRESTON ATHLETIC BLACKS</a></td>
+        <td>19</td>
+        <td>11</td>
+        <td>1</td>
+        <td>7</td>
+        <td class="pts-cell">34</td>
+        <td class="gf">56</td>
+        <td class="ga">46</td>
+        <td class="gd">10</td>
+        <td class="form-cell" data-form="LLWLL"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-LONGNIDDRY_VILLA.html">LONGNIDDRY VILLA</a></td>
+        <td>21</td>
+        <td>9</td>
+        <td>3</td>
+        <td>9</td>
+        <td class="pts-cell">30</td>
+        <td class="gf">69</td>
+        <td class="ga">58</td>
+        <td class="gd">11</td>
+        <td class="form-cell" data-form="LLDLL"><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-MUSSELBURGH_WINDSOR_BLUES.html">MUSSELBURGH WINDSOR BLUES</a></td>
+        <td>20</td>
+        <td>4</td>
+        <td>1</td>
+        <td>15</td>
+        <td class="pts-cell">13</td>
+        <td class="gf">34</td>
+        <td class="ga">78</td>
+        <td class="gd">-44</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-CHIRNSIDE_UNITED_FC.html">CHIRNSIDE UNITED FC</a></td>
+        <td>18</td>
+        <td>3</td>
+        <td>0</td>
+        <td>15</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">34</td>
+        <td class="ga">89</td>
+        <td class="gd">-55</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U14-Division_2B-LOANHEAD_MYFC.html">LOANHEAD MYFC</a></td>
+        <td>17</td>
+        <td>2</td>
+        <td>1</td>
+        <td>14</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">34</td>
+        <td class="ga">87</td>
+        <td class="gd">-53</td>
+        <td class="form-cell" data-form="WLWLL"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 3A">
+      <h2>Division 3A - Last Updated 05/06/2026 12:30</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-BONNYRIGG_ROSE_PANTHERS.html">BONNYRIGG ROSE PANTHERS</a></td>
+        <td>21</td>
+        <td>21</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">63</td>
+        <td class="gf">110</td>
+        <td class="ga">21</td>
+        <td class="gd">89</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-LOCHEND_FA_REDS.html">LOCHEND FA REDS</a></td>
+        <td>24</td>
+        <td>16</td>
+        <td>2</td>
+        <td>6</td>
+        <td class="pts-cell">50</td>
+        <td class="gf">75</td>
+        <td class="ga">47</td>
+        <td class="gd">28</td>
+        <td class="form-cell" data-form="WWDLW"><span class="W">W</span><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-SPARTANS_FC_REDS.html">SPARTANS FC REDS</a></td>
+        <td>20</td>
+        <td>13</td>
+        <td>2</td>
+        <td>5</td>
+        <td class="pts-cell">41</td>
+        <td class="gf">76</td>
+        <td class="ga">41</td>
+        <td class="gd">35</td>
+        <td class="form-cell" data-form="WWWLW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-MUSSELBURGH_YOUNG_STARS.html">MUSSELBURGH YOUNG STARS</a></td>
+        <td>20</td>
+        <td>9</td>
+        <td>3</td>
+        <td>8</td>
+        <td class="pts-cell">30</td>
+        <td class="gf">66</td>
+        <td class="ga">59</td>
+        <td class="gd">7</td>
+        <td class="form-cell" data-form="LWWLW"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-EDINBURGH_SOUTH_REDS.html">EDINBURGH SOUTH REDS</a></td>
+        <td>20</td>
+        <td>8</td>
+        <td>5</td>
+        <td>7</td>
+        <td class="pts-cell">29</td>
+        <td class="gf">41</td>
+        <td class="ga">36</td>
+        <td class="gd">5</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-NORTH_BERWICK_TOWN.html">NORTH BERWICK TOWN</a></td>
+        <td>19</td>
+        <td>8</td>
+        <td>4</td>
+        <td>7</td>
+        <td class="pts-cell">28</td>
+        <td class="gf">39</td>
+        <td class="ga">31</td>
+        <td class="gd">8</td>
+        <td class="form-cell" data-form="WWLWL"><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-SALVESEN_CFC.html">SALVESEN CFC</a></td>
+        <td>22</td>
+        <td>8</td>
+        <td>4</td>
+        <td>10</td>
+        <td class="pts-cell">28</td>
+        <td class="gf">53</td>
+        <td class="ga">67</td>
+        <td class="gd">-14</td>
+        <td class="form-cell" data-form="DWDLL"><span class="D">D</span><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-DALKEITH_THISTLE_DEPORTIVO.html">DALKEITH THISTLE DEPORTIVO</a></td>
+        <td>19</td>
+        <td>8</td>
+        <td>1</td>
+        <td>10</td>
+        <td class="pts-cell">25</td>
+        <td class="gf">48</td>
+        <td class="ga">46</td>
+        <td class="gd">2</td>
+        <td class="form-cell" data-form="WLLLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-CURRIE_STAR_FC_WHITES.html">CURRIE STAR FC WHITES</a></td>
+        <td>18</td>
+        <td>7</td>
+        <td>3</td>
+        <td>8</td>
+        <td class="pts-cell">24</td>
+        <td class="gf">42</td>
+        <td class="ga">53</td>
+        <td class="gd">-11</td>
+        <td class="form-cell" data-form="WLLLW"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-PENICUIK_ATHLETIC_BLUES.html">PENICUIK ATHLETIC BLUES</a></td>
+        <td>22</td>
+        <td>7</td>
+        <td>3</td>
+        <td>12</td>
+        <td class="pts-cell">24</td>
+        <td class="gf">43</td>
+        <td class="ga">79</td>
+        <td class="gd">-36</td>
+        <td class="form-cell" data-form="WDLLL"><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>11</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-GALA_FAIRYDEAN_ROVERS.html">GALA FAIRYDEAN ROVERS</a></td>
+        <td>23</td>
+        <td>5</td>
+        <td>4</td>
+        <td>14</td>
+        <td class="pts-cell">19</td>
+        <td class="gf">39</td>
+        <td class="ga">67</td>
+        <td class="gd">-28</td>
+        <td class="form-cell" data-form="DLLWW"><span class="D">D</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>12</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-EYEMOUTH_UNITED_FC.html">EYEMOUTH UNITED FC</a></td>
+        <td>22</td>
+        <td>5</td>
+        <td>4</td>
+        <td>13</td>
+        <td class="pts-cell">19</td>
+        <td class="gf">40</td>
+        <td class="ga">82</td>
+        <td class="gd">-42</td>
+        <td class="form-cell" data-form="WLLLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>13</td>
+        <td><a class="team-link" href="Team-U14-Division_3A-PENTLAND_ATHLETIC_ORANGES.html">PENTLAND ATHLETIC ORANGES</a></td>
+        <td>20</td>
+        <td>2</td>
+        <td>1</td>
+        <td>17</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">23</td>
+        <td class="ga">66</td>
+        <td class="gd">-43</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 3B">
+      <h2>Division 3B - Last Updated 31/05/2026 21:49</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-LEITH_ATHLETIC_FC.html">LEITH ATHLETIC FC</a></td>
+        <td>22</td>
+        <td>17</td>
+        <td>4</td>
+        <td>1</td>
+        <td class="pts-cell">55</td>
+        <td class="gf">123</td>
+        <td class="ga">32</td>
+        <td class="gd">91</td>
+        <td class="form-cell" data-form="WWWDW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="D">D</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-CRAIGROYSTON_CYFC.html">CRAIGROYSTON CYFC</a></td>
+        <td>22</td>
+        <td>17</td>
+        <td>2</td>
+        <td>3</td>
+        <td class="pts-cell">53</td>
+        <td class="gf">75</td>
+        <td class="ga">26</td>
+        <td class="gd">49</td>
+        <td class="form-cell" data-form="WDLWW"><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-NORTH_MERCHISTON_BLACKS.html">NORTH MERCHISTON BLACKS</a></td>
+        <td>22</td>
+        <td>15</td>
+        <td>3</td>
+        <td>4</td>
+        <td class="pts-cell">48</td>
+        <td class="gf">77</td>
+        <td class="ga">43</td>
+        <td class="gd">34</td>
+        <td class="form-cell" data-form="DWLWW"><span class="D">D</span><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-INVERKEITHING_HILLFIELD_SWIFTS.html">INVERKEITHING HILLFIELD SWIFTS</a></td>
+        <td>20</td>
+        <td>10</td>
+        <td>7</td>
+        <td>3</td>
+        <td class="pts-cell">37</td>
+        <td class="gf">50</td>
+        <td class="ga">34</td>
+        <td class="gd">16</td>
+        <td class="form-cell" data-form="WDWWW"><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-ANCRUM_JFC.html">ANCRUM JFC</a></td>
+        <td>18</td>
+        <td>9</td>
+        <td>3</td>
+        <td>6</td>
+        <td class="pts-cell">30</td>
+        <td class="gf">58</td>
+        <td class="ga">35</td>
+        <td class="gd">23</td>
+        <td class="form-cell" data-form="DWLLL"><span class="D">D</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-EDINBURGH_CITY_REDS.html">EDINBURGH CITY REDS</a></td>
+        <td>19</td>
+        <td>8</td>
+        <td>4</td>
+        <td>7</td>
+        <td class="pts-cell">28</td>
+        <td class="gf">35</td>
+        <td class="ga">36</td>
+        <td class="gd">-1</td>
+        <td class="form-cell" data-form="LDWLD"><span class="L">L</span><span class="D">D</span><span class="W">W</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-KSQ_RAPIDS.html">KSQ RAPIDS</a></td>
+        <td>21</td>
+        <td>6</td>
+        <td>4</td>
+        <td>11</td>
+        <td class="pts-cell">22</td>
+        <td class="gf">42</td>
+        <td class="ga">67</td>
+        <td class="gd">-25</td>
+        <td class="form-cell" data-form="DLWDW"><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="D">D</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-EDINBURGH_SOUTH_CFC_RAMS.html">EDINBURGH SOUTH CFC RAMS</a></td>
+        <td>22</td>
+        <td>5</td>
+        <td>2</td>
+        <td>15</td>
+        <td class="pts-cell">17</td>
+        <td class="gf">26</td>
+        <td class="ga">61</td>
+        <td class="gd">-35</td>
+        <td class="form-cell" data-form="WDLWL"><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-HADDINGTON_ATHLETIC_CFC.html">HADDINGTON ATHLETIC CFC</a></td>
+        <td>19</td>
+        <td>5</td>
+        <td>1</td>
+        <td>13</td>
+        <td class="pts-cell">16</td>
+        <td class="gf">33</td>
+        <td class="ga">66</td>
+        <td class="gd">-33</td>
+        <td class="form-cell" data-form="LLLLW"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-CRAMOND_FC_LIONS.html">CRAMOND FC LIONS</a></td>
+        <td>21</td>
+        <td>4</td>
+        <td>2</td>
+        <td>15</td>
+        <td class="pts-cell">14</td>
+        <td class="gf">24</td>
+        <td class="ga">80</td>
+        <td class="gd">-56</td>
+        <td class="form-cell" data-form="WLLLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>11</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-BONNYRIGG_ROSE_UNITED.html">BONNYRIGG ROSE UNITED</a></td>
+        <td>19</td>
+        <td>2</td>
+        <td>4</td>
+        <td>13</td>
+        <td class="pts-cell">10</td>
+        <td class="gf">19</td>
+        <td class="ga">62</td>
+        <td class="gd">-43</td>
+        <td class="form-cell" data-form="LDLLL"><span class="L">L</span><span class="D">D</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>12</td>
+        <td><a class="team-link" href="Team-U14-Division_3B-EDINBURGH_SOUTH_CFC_VILLA.html">EDINBURGH SOUTH CFC VILLA</a></td>
+        <td>13</td>
+        <td>3</td>
+        <td>0</td>
+        <td>10</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">24</td>
+        <td class="ga">44</td>
+        <td class="gd">-20</td>
+        <td class="form-cell" data-form="LLLLW"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 4A">
+      <h2>Division 4A - Last Updated 24/05/2026 12:59</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-EDINA_HIBS_WHITES.html">EDINA HIBS WHITES</a></td>
+        <td>18</td>
+        <td>15</td>
+        <td>2</td>
+        <td>1</td>
+        <td class="pts-cell">47</td>
+        <td class="gf">98</td>
+        <td class="ga">8</td>
+        <td class="gd">90</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-MUSSELBURGH_WINDSOR_WHITES.html">MUSSELBURGH WINDSOR WHITES</a></td>
+        <td>17</td>
+        <td>15</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">45</td>
+        <td class="gf">70</td>
+        <td class="ga">20</td>
+        <td class="gd">50</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-BONNYRIGG_ROSE_ATHLETIC.html">BONNYRIGG ROSE ATHLETIC</a></td>
+        <td>17</td>
+        <td>13</td>
+        <td>3</td>
+        <td>1</td>
+        <td class="pts-cell">42</td>
+        <td class="gf">68</td>
+        <td class="ga">16</td>
+        <td class="gd">52</td>
+        <td class="form-cell" data-form="WWDWW"><span class="W">W</span><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-EDINBURGH_CITY_BLACKS.html">EDINBURGH CITY BLACKS</a></td>
+        <td>17</td>
+        <td>8</td>
+        <td>3</td>
+        <td>6</td>
+        <td class="pts-cell">27</td>
+        <td class="gf">48</td>
+        <td class="ga">36</td>
+        <td class="gd">12</td>
+        <td class="form-cell" data-form="WWLLW"><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-AC_OXGANGS_CFC.html">AC OXGANGS CFC</a></td>
+        <td>18</td>
+        <td>8</td>
+        <td>1</td>
+        <td>9</td>
+        <td class="pts-cell">25</td>
+        <td class="gf">48</td>
+        <td class="ga">53</td>
+        <td class="gd">-5</td>
+        <td class="form-cell" data-form="WLWWW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-LEITH_ATHLETIC_COLTS.html">LEITH ATHLETIC COLTS</a></td>
+        <td>17</td>
+        <td>6</td>
+        <td>6</td>
+        <td>5</td>
+        <td class="pts-cell">24</td>
+        <td class="gf">33</td>
+        <td class="ga">36</td>
+        <td class="gd">-3</td>
+        <td class="form-cell" data-form="WDLDD"><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="D">D</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-DALKEITH_THISTLE_CFC_BALOMPIE.html">DALKEITH THISTLE CFC BALOMPIE</a></td>
+        <td>17</td>
+        <td>5</td>
+        <td>1</td>
+        <td>11</td>
+        <td class="pts-cell">16</td>
+        <td class="gf">40</td>
+        <td class="ga">66</td>
+        <td class="gd">-26</td>
+        <td class="form-cell" data-form="LLLLD"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-EDINBURGH_UNITED_REDS.html">EDINBURGH UNITED REDS</a></td>
+        <td>14</td>
+        <td>4</td>
+        <td>0</td>
+        <td>10</td>
+        <td class="pts-cell">12</td>
+        <td class="gf">20</td>
+        <td class="ga">61</td>
+        <td class="gd">-41</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-KSQ_COMETS.html">KSQ COMETS</a></td>
+        <td>18</td>
+        <td>2</td>
+        <td>1</td>
+        <td>15</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">21</td>
+        <td class="ga">88</td>
+        <td class="gd">-67</td>
+        <td class="form-cell" data-form="LLLLD"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-DALKEITH_THISTLE_BALOMPIE.html">DALKEITH THISTLE BALOMPIE</a></td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td class="pts-cell">1</td>
+        <td class="gf">1</td>
+        <td class="ga">1</td>
+        <td class="gd">0</td>
+        <td class="form-cell" data-form="D"><span class="D">D</span></td>
+      </tr><tr>
+        <td>11</td>
+        <td><a class="team-link" href="Team-U14-Division_4A-LOANHEAD_MYFC_BLUES.html">LOANHEAD MYFC BLUES</a></td>
+        <td>16</td>
+        <td>0</td>
+        <td>0</td>
+        <td>16</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">16</td>
+        <td class="ga">78</td>
+        <td class="gd">-62</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Division 4B">
+      <h2>Division 4B - Last Updated 16/03/2026 07:30</h2>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U14-Division_4B-LOTHIAN_COLTS_FC.html">LOTHIAN COLTS FC</a></td>
+        <td>16</td>
+        <td>13</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">40</td>
+        <td class="gf">70</td>
+        <td class="ga">12</td>
+        <td class="gd">58</td>
+        <td class="form-cell" data-form="WLWWW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U14-Division_4B-EDINBURGH_UNITED_YOUTH.html">EDINBURGH UNITED YOUTH</a></td>
+        <td>17</td>
+        <td>11</td>
+        <td>2</td>
+        <td>4</td>
+        <td class="pts-cell">35</td>
+        <td class="gf">61</td>
+        <td class="ga">37</td>
+        <td class="gd">24</td>
+        <td class="form-cell" data-form="WLWLW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U14-Division_4B-DUNBAR_UNITED_COLTS.html">DUNBAR UNITED COLTS</a></td>
+        <td>18</td>
+        <td>10</td>
+        <td>4</td>
+        <td>4</td>
+        <td class="pts-cell">34</td>
+        <td class="gf">66</td>
+        <td class="ga">29</td>
+        <td class="gd">37</td>
+        <td class="form-cell" data-form="WWWWD"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U14-Division_4B-LINTON_HOTSPUR_FC.html">LINTON HOTSPUR FC</a></td>
+        <td>17</td>
+        <td>8</td>
+        <td>3</td>
+        <td>6</td>
+        <td class="pts-cell">27</td>
+        <td class="gf">52</td>
+        <td class="ga">40</td>
+        <td class="gd">12</td>
+        <td class="form-cell" data-form="DDWWD"><span class="D">D</span><span class="D">D</span><span class="W">W</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U14-Division_4B-NORTH_MERCHISTON_WHITES.html">NORTH MERCHISTON WHITES</a></td>
+        <td>17</td>
+        <td>8</td>
+        <td>2</td>
+        <td>7</td>
+        <td class="pts-cell">26</td>
+        <td class="gf">50</td>
+        <td class="ga">26</td>
+        <td class="gd">24</td>
+        <td class="form-cell" data-form="LWWLL"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U14-Division_4B-PENICUIK_ATHLETIC_WHITES.html">PENICUIK ATHLETIC WHITES</a></td>
+        <td>13</td>
+        <td>4</td>
+        <td>2</td>
+        <td>7</td>
+        <td class="pts-cell">14</td>
+        <td class="gf">28</td>
+        <td class="ga">27</td>
+        <td class="gd">1</td>
+        <td class="form-cell" data-form="LDLLW"><span class="L">L</span><span class="D">D</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U14-Division_4B-EASTHOUSES_LILY.html">EASTHOUSES LILY</a></td>
+        <td>17</td>
+        <td>4</td>
+        <td>1</td>
+        <td>12</td>
+        <td class="pts-cell">13</td>
+        <td class="gf">29</td>
+        <td class="ga">78</td>
+        <td class="gd">-49</td>
+        <td class="form-cell" data-form="LLWLL"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U14-Division_4B-PRESTON_ATHLETIC_DYNAMITE.html">PRESTON ATHLETIC DYNAMITE</a></td>
+        <td>17</td>
+        <td>0</td>
+        <td>1</td>
+        <td>16</td>
+        <td class="pts-cell">1</td>
+        <td class="gf">7</td>
+        <td class="ga">114</td>
+        <td class="gd">-107</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><div class="division-block" data-division="Division 1"><h3>Division 1</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-06-03">3/6/2026</td>
+        <td>Division 1</td><td>Eastside Rapids</td><td>1-4</td><td>Currie Star FC</td></tr><tr><td class="date-cell" data-iso="2026-06-04">4/6/2026</td>
+        <td>Division 1</td><td>Lochend FA</td><td>4-1</td><td>Spartans FC Youth</td></tr><tr><td class="date-cell" data-iso="2026-06-04">4/6/2026</td>
+        <td>Division 1</td><td>Edinburgh South CFC</td><td>1-4</td><td>Hutchison Vale FC</td></tr><tr><td class="date-cell" data-iso="2026-06-07">7/6/2026</td>
+        <td>Division 1</td><td>Musselburgh Windsor FC</td><td>7-2</td><td>Edinburgh City FC</td></tr></tbody></table></div><h2>Upcoming Matches</h2><script>
+  (function(){
+    const STORAGE_KEY = 'seryfa-theme'; const overrideEl = document.getElementById('theme-override');
+    function apply(mode){
+      if(mode === 'dark'){ overrideEl.textContent = 'body{background:#101010;color:#e0e0e0}select{background:#222;color:#fff;border-color:#555}table,th,td{border-color:#333}th{background:#222;color:#fff}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#444;color:#FFD700}td.gf{background:#1a2a40}td.ga{background:#402a1a}td.gd{background:#1a402a}tr:nth-child(even){background:#181818}tr:nth-child(odd){background:#141414}.W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}th:first-child,td:first-child{background:#202020;font-weight:bold}.date-cell{background:#000;color:#FFD700}'; }
+      else if(mode === 'light'){ overrideEl.textContent = 'body{background:#f8f8f8;color:#000}select{background:#fff;color:#000;border-color:#bbb}table,th,td{border-color:#ccc}th{background:#FFD700;color:#000}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#fffde7;color:#000}td.gf{background:#d0eaff}td.ga{background:#ffe0d0}td.gd{background:#d0ffe0}tr:nth-child(even){background:#f9f9f9}tr:nth-child(odd){background:#fff}.W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}.date-cell{background:#000;color:#FFD700}'; }
+      else { overrideEl.textContent = ''; }
+    }
+    const saved = localStorage.getItem(STORAGE_KEY); apply(saved || '');
+    const toggle = document.getElementById('theme-toggle');
+    if(toggle){ toggle.checked = saved ? (saved === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      toggle.addEventListener('change', function(){ const mode = this.checked ? 'dark' : 'light'; localStorage.setItem(STORAGE_KEY, mode); apply(mode); });
+    }
+  })();
+  </script>
+  <script>
+  (function(){
+    function parseDMY(s){ const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec((s||'').trim()); if(!m) return NaN; return new Date(m[3], m[2]-1, m[1]).getTime(); }
+    function getIsoOrParseDate(td){ const iso = td && td.dataset ? td.dataset.iso : ''; return iso ? Date.parse(iso) : parseDMY(td ? td.textContent : ''); }
+    function scoreValue(s){ const m = /^\s*(\d+)\s*[-–]\s*(\d+)\s*$/.exec(s || ''); return m ? [Number(m[1]), Number(m[2])] : [NaN, NaN]; }
+    function formValue(row){ const el = row.querySelector('.form-cell'); if(!el) return -Infinity; const seq = (el.dataset.form || '').trim(); let sum = 0; for(const ch of seq){ if(ch === 'W') sum += 3; else if(ch === 'D') sum += 1; } return sum; }
+    function getComparator(type, i, asc){
+      if(type === 'num') return (a,b)=>{ const ax = parseFloat(a.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0, bx = parseFloat(b.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0; return asc ? (ax - bx) : (bx - ax); };
+      if(type === 'date') return (a,b)=>{ const ax = getIsoOrParseDate(a.children[i]), bx = getIsoOrParseDate(b.children[i]); return asc ? (ax - bx) : (bx - ax); };
+      if(type === 'score') return (a,b)=>{ const [ah, aa] = scoreValue(a.children[i].textContent), [bh, ba] = scoreValue(b.children[i].textContent); if(ah !== bh) return asc ? (ah - bh) : (bh - ah); return asc ? (aa - ba) : (ba - aa); };
+      if(type === 'form') return (a,b)=>{ const av = formValue(a), bv = formValue(b); return asc ? (av - bv) : (bv - av); };
+      return (a,b)=>{ const ax = a.children[i].textContent.trim(), bx = b.children[i].textContent.trim(); const cmp = ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'}); return asc ? cmp : -cmp; };
+    }
+    function sortTable(table, colIdx, type, clickedTh){
+      const tbody = table.querySelector('tbody'); if(!tbody) return;
+      const asc = clickedTh.classList.contains('desc') || (type === 'text' && !clickedTh.classList.contains('asc'));
+      const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r, idx]);
+      const cmp = getComparator(type, colIdx, asc);
+      rows.sort((A,B)=>{ const res = cmp(A[0], B[0]); return res !== 0 ? res : A[1] - B[1]; });
+      table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+      clickedTh.classList.add(asc ? 'asc' : 'desc');
+      rows.forEach(pair=>tbody.appendChild(pair[0]));
+    }
+    document.querySelectorAll('table').forEach(table=>{ table.querySelectorAll('thead th.sortable').forEach((th)=>{ th.addEventListener('click', ()=>{ sortTable(table, th.cellIndex, th.dataset.type || 'text', th); }); }); });
+  })();
+  </script>
+  <script>(function(){
+    const divFilter = document.getElementById('division-filter');
+    function applyFilter(val){ document.querySelectorAll('.division-block, .future-division-block').forEach(d=>{ d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none'; }); }
+    if (divFilter){ divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      const url = new URL(window.location.href); const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) divFilter.value = pre;
+      applyFilter(divFilter.value || 'ALL');
+    }
+  })();</script></body></html>
