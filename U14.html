@@ -1,0 +1,202 @@
+<!DOCTYPE html><html><head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QLTFGFY0MQ');
+</script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+   
+  body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+  h1{margin-top:0;color:#FFD700}
+  select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+  table{border-collapse:collapse;width:100%;margin-bottom:30px}
+  th,td{border:1px solid #ccc;padding:8px;text-align:center}
+  th{background:#FFD700;color:#000}
+  th.sortable{cursor:pointer}
+  th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
+  th.pts-head{background:#FFD700;color:#000}
+  td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
+  td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
+  tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+  .form-cell span{padding:2px 6px;border-radius:4px;color:#fff;font-weight:bold;margin-right:2px}
+  .W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}
+  th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+  .date-cell{background:#000;color:#FFD700}
+  footer{margin-top:24px;font-size:.9em;opacity:.85}
+
+   
+  @media (max-width: 600px) {
+     
+    th:nth-child(3), td:nth-child(3),  
+    th:nth-child(4), td:nth-child(4),  
+    th:nth-child(5), td:nth-child(5),  
+    th:nth-child(6), td:nth-child(6),  
+    th:nth-child(8), td:nth-child(8),  
+    th:nth-child(9), td:nth-child(9),  
+    th:nth-child(10), td:nth-child(10)   {
+      display: none;
+    }
+    table { font-size: 0.85rem; }
+    .form-cell span { padding: 1px 4px; font-size: 10px; }
+  }
+
+   
+  td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
+  td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
+
+   
+  @media (prefers-color-scheme: dark){
+    body{background:#101010;color:#e0e0e0}
+    select{background:#222;color:#fff;border-color:#555}
+    table,th,td{border-color:#333}
+    th{background:#222;color:#fff}
+    th.pts-head{background:#FFD700;color:#000}
+    td.pts-cell{background:#444;color:#FFD700}
+    td.gf{background:#1a2a40} td.ga{background:#402a1a} td.gd{background:#1a402a}
+    tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+    .W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}
+    th:first-child,td:first-child{background:#202020;font-weight:bold}
+  }
+
+   
+  .theme-toggle{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:6px 0 14px 0}
+  .switch{position:relative;display:inline-block;width:52px;height:28px}
+  .switch input{opacity:0;width:0;height:0}
+  .slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#bbb;transition:.2s;border-radius:28px}
+  .slider:before{position:absolute;content:"";height:22px;width:22px;left:3px;bottom:3px;background:#fff;transition:.2s;border-radius:50%}
+  .switch input:checked + .slider{background:#4CAF50}
+  .switch input:checked + .slider:before{transform:translateX(24px)}
+  </style>
+  <style id="theme-override"></style></head><body>
+  <div class="theme-toggle" title="Toggle dark mode" role="group" aria-label="Theme toggle">
+  <span aria-hidden="true">☀️</span>
+  <label class="switch">
+    <input type="checkbox" id="theme-toggle" aria-label="Dark mode">
+    <span class="slider"></span>
+  </label>
+  <span aria-hidden="true">🌙</span>
+</div><style>.sfy-nav{background:#222;color:#fff;padding-bottom:5px}.sfy-nav .bar{padding:12px; font-weight:bold; color:#FFD700; border-bottom:1px solid #333}.sfy-tabs,.sfy-subtabs{display:flex;gap:6px;overflow-x:auto;padding:8px 10px}.nav-link{padding:6px 12px;border-radius:20px;border:1px solid #444;color:#fff;text-decoration:none;white-space:nowrap;font-size:0.9rem}.nav-link.active{background:#FFD700;color:#000;border-color:#FFD700}</style><nav class="sfy-nav"><div class="bar">SERYFA Unofficial Leagues</div><div class="sfy-subtabs"><a class="nav-link active" href="U14.html">U14 Table</a><a class="nav-link" href="U14-stats.html">Stats</a><a class="nav-link" href="Scores.html">Scores</a></div><div class="sfy-tabs"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="U13.html">U13</a><a class="nav-link active" href="U14.html">U14</a><a class="nav-link" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a></div></nav><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer>
+  <div id="sfy-chat-widget" style="position:fixed; bottom:20px; right:20px; z-index:9999; font-family:sans-serif;">
+    <button id="chat-btn" onclick="toggleChat()" style="background:#FFD700; color:#000; border:none; border-radius:50%; width:56px; height:56px; font-size:24px; box-shadow:0 4px 10px rgba(0,0,0,0.3); cursor:pointer; transition:transform 0.2s;">💬</button>
+    <div id="chat-window" style="display:none; position:absolute; bottom:70px; right:0; width:340px; height:450px; background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.25); flex-direction:column; overflow:hidden; border:1px solid #ccc;">
+      <div style="background:#222; color:#FFD700; padding:12px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;">
+        <span>The U14 Chatbot V3.1</span>
+        <button onclick="toggleChat()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
+      <div id="chat-msgs" style="flex:1; padding:15px; overflow-y:auto; background:#f5f5f5; display:flex; flex-direction:column; gap:10px;">
+        <div style="align-self:flex-start; background:#e0e0e0; color:#000; padding:8px 12px; border-radius:12px; font-size:0.9rem; max-width:85%;">
+          Hi! Ask me about teams, standings, or fixtures for U14.
+        </div>
+      </div>
+      <div style="padding:10px; background:#fff; border-top:1px solid #ddd; display:flex; gap:6px;">
+        <input type="text" id="chat-input" placeholder="Ask a question..." style="flex:1; padding:10px; border:1px solid #ccc; border-radius:20px; outline:none; font-size:0.95rem;" onkeydown="if(event.key==='Enter') sendChat()">
+        <button onclick="sendChat()" style="background:#FFD700; border:none; border-radius:50%; width:38px; height:38px; cursor:pointer;">➤</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    let conversationHistory = [];
+    function toggleChat() {
+      const w = document.getElementById('chat-window');
+      const b = document.getElementById('chat-btn');
+      const isHidden = w.style.display === 'none';
+      w.style.display = isHidden ? 'flex' : 'none';
+      if(isHidden) setTimeout(() => document.getElementById('chat-input').focus(), 100);
+    }
+    function sendChat() {
+      const input = document.getElementById('chat-input');
+      const txt = input.value.trim();
+      if(!txt) return;
+      addMsg(txt, 'user');
+      input.value = '';
+      input.disabled = true;
+      const payload = { type: 'chat', question: txt, ageGroup: "U14", history: conversationHistory };
+      const ENDPOINT = "https://script.google.com/macros/s/AKfycbytk996A8C2OdalIjKAYWFLFyOB9Kp4WRJS8sCXIwvyoLKepHLZyOCf2mPp33h1p29JvA/exec"; 
+      fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
+      .then(res => res.json())
+      .then(data => {
+        input.disabled = false; input.focus();
+        if (data.answer) {
+          addMsg(data.answer, 'bot');
+          if (conversationHistory.length > 6) conversationHistory.shift(); 
+          conversationHistory.push({ role: 'user', content: txt }, { role: 'model', content: data.answer });
+        } else { addMsg("⚠️ " + (data.error || "No response"), 'bot'); }
+      }).catch(() => { input.disabled = false; addMsg("⛔ Connection Failed.", 'bot'); });
+    }
+    function addMsg(txt, sender) {
+      const div = document.createElement('div');
+      div.style.padding = '8px 12px'; div.style.borderRadius = '12px'; div.style.fontSize = '0.9rem'; div.style.maxWidth = '85%';  div.style.color = '#000000'; 
+      if(sender === 'user') { div.style.alignSelf = 'flex-end'; div.style.background = '#FFD700'; div.textContent = txt; }
+      else { div.style.alignSelf = 'flex-start'; div.style.background = '#e0e0e0'; div.innerHTML = txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'); }
+      const box = document.getElementById('chat-msgs'); box.appendChild(div); box.scrollTop = box.scrollHeight;
+    }
+  </script><h1>U14 League Tables</h1>
+  <label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Division 1">Division 1</option><option value="Division 2">Division 2</option><option value="Division 3A">Division 3A</option><option value="Division 3B">Division 3B</option><option value="Division 4A">Division 4A</option><option value="Division 4B">Division 4B</option>
+  </select><h2>Recent Matches (Last 7 Days)</h2><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Division 1"><h3>Division 1</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Broxburn Athletic Colts</td><td>Spartans FC Youth</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Currie Star FC</td><td>Blackburn United FC Blacks</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Dalkeith Thistle CFC Cardo</td><td>North Merchiston FC Blacks</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Eastside Rapids</td><td>North Berwick FC</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Edinburgh City FC</td><td>Musselburgh Windsor F C</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Edinburgh City</td><td>Murieston United Reds</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Gala Fairydean Rovers Academy</td><td>Leith Athletic F C</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Haddington Athletic CFC</td><td>Hutchison Vale FC</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Dalkeith Thistle CFC Cardo</td><td>Gala Fairydean Rovers Academy</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>North Merchiston FC Blacks</td><td>Spartans FC Youth</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Eastside Rapids</td><td>Currie Star F C</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Edinburgh City FC</td><td>Broxburn Athletic Colts</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Edinburgh City</td><td>Blackburn United FC Blacks</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Haddington Athletic CFC</td><td>North Berwick FC</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Hutchison Vale FC</td><td>Musselburgh Windsor F C</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Leith Athletic F C</td><td>Murieston United Reds</td><td></td><td></td></tr></tbody></table></div><div class="future-division-block" data-division="Division 2"><h3>Division 2</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Currie Star Blues</td><td>Arniston Rangers Ajax</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Dalkeith Thistle CFC Estrellas</td><td>Tranent FC</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Eastside Rapids Oranges</td><td>The Reivers</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Edinburgh South Community FC Fires</td><td>Spartans FC Youth Reds</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Edinburgh South CFC The Titans</td><td>Penicuik Athletic YFC Whites</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Edinburgh United Blacks</td><td>Corstorphine Dynamo FC Whites</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Hutchison Vale Hornets</td><td>Musselburgh Windsor FC Blues</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>KSQ Galaxy</td><td>Leith Athletic Colts</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Corstorphine Dynamo FC Whites</td><td>Tranent FC</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Currie Star Blues</td><td>Spartans FC Youth Reds</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Dalkeith Thistle CFC Estrellas</td><td>The Reivers</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Edinburgh South CFC Fires</td><td>Peebles FC</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Edinburgh South CFC The Titans</td><td>Musselburgh Windsor FC Blues</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Edinburgh United Blacks</td><td>Leith Athletic Colts</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Hutchison Vale Hornets</td><td>KSQ Galaxy</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Penicuik Athletic YFC Whites</td><td>Eastside Rapids Oranges</td><td></td><td></td></tr></tbody></table></div><div class="future-division-block" data-division="Division 3A"><h3>Division 3A</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Hibernian Community Purples</td><td>Eyemouth United FC Juniors</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>KSQ Rapids</td><td>Edinburgh United Whites</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Melrose FC</td><td>Edinburgh South Community FC Storm</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>North Merchiston FC Whites</td><td>Dalkeith Thistle CFC</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Musselburgh Youngstars</td><td>Craigroyston CYFC Yellows</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Chirnside Utd</td><td>Corstorphine Dynamo FC Blacks</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Eyemouth United FC Juniors</td><td>Hawick YFC</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Edinburgh South CFC Storm</td><td>Dalkeith Thistle CFC</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Hibernian CFC Purples</td><td>Craigroyston CYFC Yellows</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>KSQ Rapids</td><td>Corstorphine Dynamo FC Blacks</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Melrose FC</td><td>Chirnside Utd</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>North Merchiston FC Whites</td><td>Musselburgh Youngstars</td><td></td><td></td></tr></tbody></table></div><div class="future-division-block" data-division="Division 3B"><h3>Division 3B</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Arniston Rangers Dortmund</td><td>Tynecastle F C</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Bonnyrigg Rose Titans</td><td>Spartans FC Youth Blues</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Currie F C</td><td>Musselburgh Windsor FC Whites</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Dunbar United Colts Blacks</td><td>Longniddry Villa</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Gala Fairydean Rovers Reds</td><td>Leith Athletic Reds</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Penicuik Athletic YFC Blacks</td><td>Craigroyston CYFC Luca</td><td>TBC</td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Musselburgh Windsor FC Whites</td><td>Tynecastle F C</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Longniddry Villa</td><td>Penicuik Athletic YFC Blacks</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Leith Athletic Reds</td><td>Spartans FC Youth Blues</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Gala Fairydean Rovers Reds</td><td>Arniston Rangers Dortmund</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Dunbar United Colts Blacks</td><td>Bonnyrigg Rose Titans</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Currie F C</td><td>Craigroyston CYFC Luca</td><td></td><td></td></tr></tbody></table></div><div class="future-division-block" data-division="Division 4A"><h3>Division 4A</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Bonnyrigg Rose Raptors</td><td>Leith Athletic Blacks</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Corstorphine Dynamo FC Blues</td><td>Haddington Athletic Colts</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Cramond FC Blue</td><td>Edinburgh United Reds</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Edinburgh United Golds</td><td>Craigroyston CYFC Blues</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Leith Athletic Blacks</td><td>Edinburgh United Golds</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Haddington Athletic Colts</td><td>Dalkeith Thistle CFC Deportivo</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Bonnyrigg Rose Raptors</td><td>Craigroyston CYFC Blues</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Corstorphine Dynamo FC Blues</td><td>Cramond FC Blue</td><td></td><td></td></tr></tbody></table></div><div class="future-division-block" data-division="Division 4B"><h3>Division 4B</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Musselburgh Young Stars Inter</td><td>Edinburgh United Greys</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>North Berwick FC Red</td><td>Edinburgh United 2013s Greens</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Rosewell Football Academy</td><td>Dunbar United Colts Whites</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Tranent FC Maroon</td><td>Cramond FC Yellow</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-16</td><td>Arniston Rangers Barcelona</td><td>Corstorphine Dynamo FC Greens</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Corstorphine Dynamo FC Greens</td><td>Edinburgh United Greens</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Cramond FC Yellow</td><td>Rosewell Football Academy</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Dunbar United Colts Whites</td><td>North Berwick FC Red</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-18</td><td>Edinburgh United Greys</td><td>Arniston Rangers Barcelona</td><td></td><td></td></tr><tr><td class="date-cell" data-iso="">2026-08-19</td><td>Musselburgh Young Stars Inter</td><td>Tranent FC Maroon</td><td></td><td></td></tr></tbody></table></div><script>
+  (function(){
+    const STORAGE_KEY = 'seryfa-theme'; const overrideEl = document.getElementById('theme-override');
+    function apply(mode){
+      if(mode === 'dark'){ overrideEl.textContent = 'body{background:#101010;color:#e0e0e0}select{background:#222;color:#fff;border-color:#555}table,th,td{border-color:#333}th{background:#222;color:#fff}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#444;color:#FFD700}td.gf{background:#1a2a40}td.ga{background:#402a1a}td.gd{background:#1a402a}tr:nth-child(even){background:#181818}tr:nth-child(odd){background:#141414}.W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}th:first-child,td:first-child{background:#202020;font-weight:bold}.date-cell{background:#000;color:#FFD700}'; }
+      else if(mode === 'light'){ overrideEl.textContent = 'body{background:#f8f8f8;color:#000}select{background:#fff;color:#000;border-color:#bbb}table,th,td{border-color:#ccc}th{background:#FFD700;color:#000}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#fffde7;color:#000}td.gf{background:#d0eaff}td.ga{background:#ffe0d0}td.gd{background:#d0ffe0}tr:nth-child(even){background:#f9f9f9}tr:nth-child(odd){background:#fff}.W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}.date-cell{background:#000;color:#FFD700}'; }
+      else { overrideEl.textContent = ''; }
+    }
+    const saved = localStorage.getItem(STORAGE_KEY); apply(saved || '');
+    const toggle = document.getElementById('theme-toggle');
+    if(toggle){ toggle.checked = saved ? (saved === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      toggle.addEventListener('change', function(){ const mode = this.checked ? 'dark' : 'light'; localStorage.setItem(STORAGE_KEY, mode); apply(mode); });
+    }
+  })();
+  </script>
+  <script>
+  (function(){
+    function parseDMY(s){ const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec((s||'').trim()); if(!m) return NaN; return new Date(m[3], m[2]-1, m[1]).getTime(); }
+    function getIsoOrParseDate(td){ const iso = td && td.dataset ? td.dataset.iso : ''; return iso ? Date.parse(iso) : parseDMY(td ? td.textContent : ''); }
+    function scoreValue(s){ const m = /^\s*(\d+)\s*[-–]\s*(\d+)\s*$/.exec(s || ''); return m ? [Number(m[1]), Number(m[2])] : [NaN, NaN]; }
+    function formValue(row){ const el = row.querySelector('.form-cell'); if(!el) return -Infinity; const seq = (el.dataset.form || '').trim(); let sum = 0; for(const ch of seq){ if(ch === 'W') sum += 3; else if(ch === 'D') sum += 1; } return sum; }
+    function getComparator(type, i, asc){
+      if(type === 'num') return (a,b)=>{ const ax = parseFloat(a.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0, bx = parseFloat(b.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0; return asc ? (ax - bx) : (bx - ax); };
+      if(type === 'date') return (a,b)=>{ const ax = getIsoOrParseDate(a.children[i]), bx = getIsoOrParseDate(b.children[i]); return asc ? (ax - bx) : (bx - ax); };
+      if(type === 'score') return (a,b)=>{ const [ah, aa] = scoreValue(a.children[i].textContent), [bh, ba] = scoreValue(b.children[i].textContent); if(ah !== bh) return asc ? (ah - bh) : (bh - ah); return asc ? (aa - ba) : (ba - aa); };
+      if(type === 'form') return (a,b)=>{ const av = formValue(a), bv = formValue(b); return asc ? (av - bv) : (bv - av); };
+      return (a,b)=>{ const ax = a.children[i].textContent.trim(), bx = b.children[i].textContent.trim(); const cmp = ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'}); return asc ? cmp : -cmp; };
+    }
+    function sortTable(table, colIdx, type, clickedTh){
+      const tbody = table.querySelector('tbody'); if(!tbody) return;
+      const asc = clickedTh.classList.contains('desc') || (type === 'text' && !clickedTh.classList.contains('asc'));
+      const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r, idx]);
+      const cmp = getComparator(type, colIdx, asc);
+      rows.sort((A,B)=>{ const res = cmp(A[0], B[0]); return res !== 0 ? res : A[1] - B[1]; });
+      table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+      clickedTh.classList.add(asc ? 'asc' : 'desc');
+      rows.forEach(pair=>tbody.appendChild(pair[0]));
+    }
+    document.querySelectorAll('table').forEach(table=>{ table.querySelectorAll('thead th.sortable').forEach((th)=>{ th.addEventListener('click', ()=>{ sortTable(table, th.cellIndex, th.dataset.type || 'text', th); }); }); });
+  })();
+  </script>
+  <script>(function(){
+    const divFilter = document.getElementById('division-filter');
+    function applyFilter(val){ document.querySelectorAll('.division-block, .future-division-block').forEach(d=>{ d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none'; }); }
+    if (divFilter){ divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      const url = new URL(window.location.href); const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) divFilter.value = pre;
+      applyFilter(divFilter.value || 'ALL');
+    }
+  })();</script></body></html>
