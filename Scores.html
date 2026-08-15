@@ -142,7 +142,7 @@
 
 <script>
 
-const data = {"U17":{"Division 3":[{"date":"2026-08-15","home":"Longniddry Villa","away":"Bonnyrigg Rose Blacks","hs":1,"as":0}]}};
+const data = {"U17":{"Division 3":[{"date":"2026-08-15","home":"Longniddry Villa","away":"Bonnyrigg Rose Blacks","hs":1,"as":0},{"date":"2026-08-15","home":"KSQ Rapids","away":"Dunbar United Colts","hs":1,"as":0},{"date":"2026-08-15","home":"Musselburgh Windsor FC Reds","away":"Broxburn Athletic Colts Badgers","hs":1,"as":4}],"Division 1":[{"date":"2026-08-15","home":"Musselburgh Windsor F C","away":"Edinburgh South CFC","hs":4,"as":2},{"date":"2026-08-15","home":"North Merchiston FC","away":"Edinburgh City Whites","hs":2,"as":0},{"date":"2026-08-15","home":"Portobello CFA","away":"Edinburgh City FC","hs":1,"as":2},{"date":"2026-08-15","home":"Spartans FC Youth Whites","away":"East Calder CFC","hs":5,"as":2},{"date":"2026-08-15","home":"Spartans FC Youth","away":"Blackburn United","hs":5,"as":1}],"Division 2":[{"date":"2026-08-15","home":"Cramond FC","away":"Tranent FC","hs":3,"as":1},{"date":"2026-08-15","home":"Currie Star","away":"Spartans FC Youth Reds","hs":2,"as":1},{"date":"2026-08-15","home":"Currie F C Lions","away":"Penicuik Athletic YFC White","hs":3,"as":2}]},"U18":{"Division 1":[{"date":"2026-08-15","home":"Penicuik Athletic F.C.","away":"North Berwick FC","hs":0,"as":1},{"date":"2026-08-15","home":"Spartans FC Youth Blues","away":"KSQ Rapids","hs":5,"as":0},{"date":"2026-08-15","home":"Spartans FC Youth","away":"KSQ Galaxy","hs":1,"as":1},{"date":"2026-08-15","home":"Tranent FC","away":"Inverkeithing Hillfield Swifts","hs":3,"as":2},{"date":"2026-08-15","home":"Bonnyrigg Rose","away":"Edinburgh South CFC Reds","hs":9,"as":1},{"date":"2026-08-15","home":"Broxburn Athletic Colts","away":"Edinburgh South Community CFC","hs":2,"as":4},{"date":"2026-08-15","home":"Currie Star F C Whites","away":"Dalkeith Thistle C F C","hs":3,"as":0}]}};
 const ageSel = document.getElementById('ageFilter');
 Object.keys(data).forEach(function(age){
   ageSel.innerHTML += '<option value="'+age+'">'+age+'</option>';
@@ -476,4 +476,73 @@ document.getElementById("matchForm").addEventListener("submit", async function(e
   btn.textContent = "Submit Match";
 });
 </script>
-</body></html>
+
+<section class="form-card" id="top-referees">
+  <header>Top 10 Referees this Season</header>
+  <div class="content">
+    <table>
+      <thead>
+        <tr>
+          <th class="sortable" data-type="number">#</th>
+          <th class="sortable" data-type="alpha">Referee</th>
+          <th class="sortable" data-type="number">Appearances</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>S Nisbet</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>D Donnelly-Kay</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>P Burns</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>R White</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>P Peace</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>M Scott</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Z Islam</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>C Tomany</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>N Brown</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>C Whittingham</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="muted" style="font-size:0.85rem;margin-top:4px;">
+      Based on league matches recorded on site with a referee name across all age groups.
+    </div>
+  </div>
+</section></body></html>
