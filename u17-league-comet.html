@@ -174,7 +174,7 @@
       if(isHidden) setTimeout(() => document.getElementById('chat-input').focus(), 100);
     }
 
-    function sendChat() {
+   function sendChat() {
       const input = document.getElementById('chat-input');
       const txt = input.value.trim();
       if(!txt) return;
@@ -194,7 +194,15 @@
         headers: { "Content-Type": "text/plain;charset=utf-8" }, 
         body: JSON.stringify(payload) 
       })
-      .then(res => res.json())
+      .then(async (res) => {
+        const text = await res.text();
+        try {
+          return JSON.parse(text);
+        } catch (e) {
+          
+          throw new Error("Server returned non-JSON: " + text.substring(0, 150));
+        }
+      })
       .then(data => {
         input.disabled = false; 
         input.focus();
@@ -206,9 +214,9 @@
           addMsg("⚠️ " + (data.error || "No response"), 'bot'); 
         }
       })
-      .catch(() => { 
+      .catch((err) => { 
         input.disabled = false; 
-        addMsg("⛔ Connection Failed.", 'bot'); 
+        addMsg("⛔ " + err.message, 'bot'); 
       });
     }
 
@@ -238,7 +246,7 @@
     <option value="ALL">All Divisions</option>
     <option value="Alpha Trophies 2010s Division 1 26/27">Alpha Trophies 2010s Division 1 26/27</option><option value="Alpha Trophies 2010s Division 2 26/27">Alpha Trophies 2010s Division 2 26/27</option><option value="Alpha Trophies 2010s Division 3 26/27">Alpha Trophies 2010s Division 3 26/27</option><option value="SERYFA 2010 South East Region Cup 2026/2027">SERYFA 2010 South East Region Cup 2026/2027</option><option value="SYFA Scottish Cup South East 2010s 26/27">SYFA Scottish Cup South East 2010s 26/27</option>
   </select><div class="division-block" data-division="Alpha Trophies 2010s Division 1 26/27">
-      <h2>Alpha Trophies 2010s Division 1 26/27 - Last Updated 07/10/2026 22:48</h2>
+      <h2>Alpha Trophies 2010s Division 1 26/27 - Last Updated 07/10/2026 22:59</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -396,7 +404,7 @@
         <td class="gd">-12</td>
         <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 2 26/27">
-      <h2>Alpha Trophies 2010s Division 2 26/27 - Last Updated 07/10/2026 22:48</h2>
+      <h2>Alpha Trophies 2010s Division 2 26/27 - Last Updated 07/10/2026 22:59</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -566,7 +574,7 @@
         <td class="gd">-7</td>
         <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 3 26/27">
-      <h2>Alpha Trophies 2010s Division 3 26/27 - Last Updated 07/10/2026 22:48</h2>
+      <h2>Alpha Trophies 2010s Division 3 26/27 - Last Updated 07/10/2026 22:59</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
