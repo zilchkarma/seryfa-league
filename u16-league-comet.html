@@ -78,7 +78,73 @@
     <span class="slider"></span>
   </label>
   <span aria-hidden="true">🌙</span>
-</div><nav style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap;"><a href="u13-league-comet.html" >U13</a><a href="u14-league-comet.html" >U14</a><a href="u15-league-comet.html" >U15</a><a href="u16-league-comet.html" style="font-weight:bold; text-decoration:underline;">U16</a><a href="u17-league-comet.html" >U17</a><a href="u18-league-comet.html" >U18</a></nav><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer>
+</div>
+  <style>
+    .sfy-nav {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .sfy-nav .bar {
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #FFD700;
+      border-bottom: 1px solid #333;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .sfy-tabs,
+    .sfy-subtabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .sfy-subtabs {
+      background: #181818;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      color: #e0e0e0;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-link:hover {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+    .nav-link.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: bold;
+    }
+  </style>
+
+  <nav class="sfy-nav">
+    <div class="bar">SERYFA COMET Leagues</div>
+    <div class="sfy-tabs">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="u13-league-comet.html">U13</a><a class="nav-link" href="u14-league-comet.html">U14</a><a class="nav-link" href="u15-league-comet.html">U15</a><a class="nav-link active" href="u16-league-comet.html">U16</a><a class="nav-link" href="u17-league-comet.html">U17</a><a class="nav-link" href="u18-league-comet.html">U18</a>
+    </div>
+    
+    <div class="sfy-subtabs">
+      <a class="nav-link active" href="u16-league-comet.html">U16 Table</a>
+      <a class="nav-link" href="u16-stats.html">Stats</a>
+      <a class="nav-link" href="Archive-2025-26-U16.html">2025/26 Archive</a>
+      <a class="nav-link" href="Scores.html">Scores</a>
+    </div>
+  </nav><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer>
   <div id="sfy-chat-widget" style="position:fixed; bottom:20px; right:20px; z-index:9999; font-family:sans-serif;">
     <button id="chat-btn" onclick="toggleChat()" style="background:#FFD700; color:#000; border:none; border-radius:50%; width:56px; height:56px; font-size:24px; box-shadow:0 4px 10px rgba(0,0,0,0.3); cursor:pointer; transition:transform 0.2s;">💬</button>
     <div id="chat-window" style="display:none; position:absolute; bottom:70px; right:0; width:340px; height:450px; background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.25); flex-direction:column; overflow:hidden; border:1px solid #ccc;">
@@ -172,7 +238,7 @@
     <option value="ALL">All Divisions</option>
     <option value="Alpha Trophies 2011s Division 1 26/27">Alpha Trophies 2011s Division 1 26/27</option><option value="Alpha Trophies 2011s Division 2 26/27">Alpha Trophies 2011s Division 2 26/27</option><option value="Alpha Trophies 2011s Division 3A 26/27">Alpha Trophies 2011s Division 3A 26/27</option><option value="Alpha Trophies 2011s Division 3B 26/27">Alpha Trophies 2011s Division 3B 26/27</option><option value="Alpha Trophies 2011s Division 4 26/27">Alpha Trophies 2011s Division 4 26/27</option><option value="SERYFA 2011 South East Region Cup 2026/2027">SERYFA 2011 South East Region Cup 2026/2027</option><option value="SYFA Scottish Cup South East 2011s 26/27">SYFA Scottish Cup South East 2011s 26/27</option>
   </select><div class="division-block" data-division="Alpha Trophies 2011s Division 1 26/27">
-      <h2>Alpha Trophies 2011s Division 1 26/27 - Last Updated 07/10/2026 22:37</h2>
+      <h2>Alpha Trophies 2011s Division 1 26/27 - Last Updated 07/10/2026 22:48</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -342,7 +408,7 @@
         <td class="gd">-19</td>
         <td class="form-cell" data-form="LLLLD"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2011s Division 2 26/27">
-      <h2>Alpha Trophies 2011s Division 2 26/27 - Last Updated 07/10/2026 22:37</h2>
+      <h2>Alpha Trophies 2011s Division 2 26/27 - Last Updated 07/10/2026 22:48</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -584,7 +650,7 @@
         <td class="gd">-8</td>
         <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2011s Division 3A 26/27">
-      <h2>Alpha Trophies 2011s Division 3A 26/27 - Last Updated 07/10/2026 22:37</h2>
+      <h2>Alpha Trophies 2011s Division 3A 26/27 - Last Updated 07/10/2026 22:48</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -718,7 +784,7 @@
         <td class="gd">-11</td>
         <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2011s Division 3B 26/27">
-      <h2>Alpha Trophies 2011s Division 3B 26/27 - Last Updated 07/10/2026 22:37</h2>
+      <h2>Alpha Trophies 2011s Division 3B 26/27 - Last Updated 07/10/2026 22:48</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -864,7 +930,7 @@
         <td class="gd">-27</td>
         <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2011s Division 4 26/27">
-      <h2>Alpha Trophies 2011s Division 4 26/27 - Last Updated 07/10/2026 22:37</h2>
+      <h2>Alpha Trophies 2011s Division 4 26/27 - Last Updated 07/10/2026 22:48</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
