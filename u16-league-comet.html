@@ -83,7 +83,7 @@
     <button id="chat-btn" onclick="toggleChat()" style="background:#FFD700; color:#000; border:none; border-radius:50%; width:56px; height:56px; font-size:24px; box-shadow:0 4px 10px rgba(0,0,0,0.3); cursor:pointer; transition:transform 0.2s;">💬</button>
     <div id="chat-window" style="display:none; position:absolute; bottom:70px; right:0; width:340px; height:450px; background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.25); flex-direction:column; overflow:hidden; border:1px solid #ccc;">
       <div style="background:#222; color:#FFD700; padding:12px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;">
-        <span>The U16 Chatbot V3.1</span>
+        <span>The U16 Chatbot</span>
         <button onclick="toggleChat()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
       </div>
       <div id="chat-msgs" style="flex:1; padding:15px; overflow-y:auto; background:#f5f5f5; display:flex; flex-direction:column; gap:10px;">
@@ -99,13 +99,15 @@
   </div>
   <script>
     let conversationHistory = [];
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbwrg4h41GlQpwbi9hLXRC_OGX4XyW2xaxFxmH0KoL5Xa2fm_TXMEwpxPjsFlUV3LCEv1w/exec";
+
     function toggleChat() {
       const w = document.getElementById('chat-window');
-      const b = document.getElementById('chat-btn');
       const isHidden = w.style.display === 'none';
       w.style.display = isHidden ? 'flex' : 'none';
       if(isHidden) setTimeout(() => document.getElementById('chat-input').focus(), 100);
     }
+
     function sendChat() {
       const input = document.getElementById('chat-input');
       const txt = input.value.trim();
@@ -113,33 +115,64 @@
       addMsg(txt, 'user');
       input.value = '';
       input.disabled = true;
-      const payload = { type: 'chat', question: txt, ageGroup: "U16", history: conversationHistory };
-      const ENDPOINT = "https://script.google.com/macros/s/AKfycbytk996A8C2OdalIjKAYWFLFyOB9Kp4WRJS8sCXIwvyoLKepHLZyOCf2mPp33h1p29JvA/exec"; 
-      fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
+
+      const payload = { 
+        type: 'chat', 
+        question: txt, 
+        ageGroup: "U16", 
+        history: conversationHistory 
+      };
+
+      fetch(ENDPOINT, { 
+        method: "POST", 
+        headers: { "Content-Type": "text/plain;charset=utf-8" }, 
+        body: JSON.stringify(payload) 
+      })
       .then(res => res.json())
       .then(data => {
-        input.disabled = false; input.focus();
+        input.disabled = false; 
+        input.focus();
         if (data.answer) {
           addMsg(data.answer, 'bot');
           if (conversationHistory.length > 6) conversationHistory.shift(); 
           conversationHistory.push({ role: 'user', content: txt }, { role: 'model', content: data.answer });
-        } else { addMsg("⚠️ " + (data.error || "No response"), 'bot'); }
-      }).catch(() => { input.disabled = false; addMsg("⛔ Connection Failed.", 'bot'); });
+        } else { 
+          addMsg("⚠️ " + (data.error || "No response"), 'bot'); 
+        }
+      })
+      .catch(() => { 
+        input.disabled = false; 
+        addMsg("⛔ Connection Failed.", 'bot'); 
+      });
     }
+
     function addMsg(txt, sender) {
       const div = document.createElement('div');
-      div.style.padding = '8px 12px'; div.style.borderRadius = '12px'; div.style.fontSize = '0.9rem'; div.style.maxWidth = '85%';  div.style.color = '#000000'; 
-      if(sender === 'user') { div.style.alignSelf = 'flex-end'; div.style.background = '#FFD700'; div.textContent = txt; }
-      else { div.style.alignSelf = 'flex-start'; div.style.background = '#e0e0e0'; div.innerHTML = txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'); }
-      const box = document.getElementById('chat-msgs'); box.appendChild(div); box.scrollTop = box.scrollHeight;
+      div.style.padding = '8px 12px'; 
+      div.style.borderRadius = '12px'; 
+      div.style.fontSize = '0.9rem'; 
+      div.style.maxWidth = '85%';  
+      div.style.color = '#000000'; 
+      if(sender === 'user') { 
+        div.style.alignSelf = 'flex-end'; 
+        div.style.background = '#FFD700'; 
+        div.textContent = txt; 
+      } else { 
+        div.style.alignSelf = 'flex-start'; 
+        div.style.background = '#e0e0e0'; 
+        div.innerHTML = txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'); 
+      }
+      const box = document.getElementById('chat-msgs'); 
+      box.appendChild(div); 
+      box.scrollTop = box.scrollHeight;
     }
   </script><h1>U16 COMET League Tables</h1>
   <label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
-    <option value="Alpha Trophies 2011s Division 1 26/27">Alpha Trophies 2011s Division 1 26/27</option><option value="Alpha Trophies 2011s Division 2 26/27">Alpha Trophies 2011s Division 2 26/27</option><option value="Alpha Trophies 2011s Division 3A 26/27">Alpha Trophies 2011s Division 3A 26/27</option><option value="Alpha Trophies 2011s Division 3B 26/27">Alpha Trophies 2011s Division 3B 26/27</option><option value="Alpha Trophies 2011s Division 4 26/27">Alpha Trophies 2011s Division 4 26/27</option>
+    <option value="Alpha Trophies 2011s Division 1 26/27">Alpha Trophies 2011s Division 1 26/27</option><option value="Alpha Trophies 2011s Division 2 26/27">Alpha Trophies 2011s Division 2 26/27</option><option value="Alpha Trophies 2011s Division 3A 26/27">Alpha Trophies 2011s Division 3A 26/27</option><option value="Alpha Trophies 2011s Division 3B 26/27">Alpha Trophies 2011s Division 3B 26/27</option><option value="Alpha Trophies 2011s Division 4 26/27">Alpha Trophies 2011s Division 4 26/27</option><option value="SERYFA 2011 South East Region Cup 2026/2027">SERYFA 2011 South East Region Cup 2026/2027</option><option value="SYFA Scottish Cup South East 2011s 26/27">SYFA Scottish Cup South East 2011s 26/27</option>
   </select><div class="division-block" data-division="Alpha Trophies 2011s Division 1 26/27">
-      <h2>Alpha Trophies 2011s Division 1 26/27 - Last Updated 07/10/2026 16:10</h2>
+      <h2>Alpha Trophies 2011s Division 1 26/27 - Last Updated 07/10/2026 22:37</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -309,7 +342,7 @@
         <td class="gd">-19</td>
         <td class="form-cell" data-form="LLLLD"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2011s Division 2 26/27">
-      <h2>Alpha Trophies 2011s Division 2 26/27 - Last Updated 07/10/2026 16:10</h2>
+      <h2>Alpha Trophies 2011s Division 2 26/27 - Last Updated 07/10/2026 22:37</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -551,7 +584,7 @@
         <td class="gd">-8</td>
         <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2011s Division 3A 26/27">
-      <h2>Alpha Trophies 2011s Division 3A 26/27 - Last Updated 07/10/2026 16:10</h2>
+      <h2>Alpha Trophies 2011s Division 3A 26/27 - Last Updated 07/10/2026 22:37</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -685,7 +718,7 @@
         <td class="gd">-11</td>
         <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2011s Division 3B 26/27">
-      <h2>Alpha Trophies 2011s Division 3B 26/27 - Last Updated 07/10/2026 16:10</h2>
+      <h2>Alpha Trophies 2011s Division 3B 26/27 - Last Updated 07/10/2026 22:37</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -831,7 +864,7 @@
         <td class="gd">-27</td>
         <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2011s Division 4 26/27">
-      <h2>Alpha Trophies 2011s Division 4 26/27 - Last Updated 07/10/2026 16:10</h2>
+      <h2>Alpha Trophies 2011s Division 4 26/27 - Last Updated 07/10/2026 22:37</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -1000,7 +1033,21 @@
         <td class="ga">4</td>
         <td class="gd">-4</td>
         <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
-      </tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><h2>Upcoming Matches</h2><script>
+      </tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Alpha Trophies 2011s Division 1 26/27"><h3>Alpha Trophies 2011s Division 1 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Leith Athletic</td><td>Musselburgh Windsor F C</td><td></td><td>Leith Links</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2011s Division 2 26/27"><h3>Alpha Trophies 2011s Division 2 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Bathgate Thistle CFC White</td><td>Blackburn United Community F.C.</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Hutchison Vale Fc</td><td>Armadale CFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Broxburn Athletic Colts - Badgers</td><td>Edinburgh South Community CFC Warriors</td><td></td><td>,  , </td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2011s Division 3A 26/27"><h3>Alpha Trophies 2011s Division 3A 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-09-19">20/09/2026</td><td>Craigroyston Community Youth Football Club</td><td>Dunbar United Colts</td><td></td><td>Craigroyston Park</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Edinburgh South CFC Eagles</td><td>Blackburn United White</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Craigroyston Community Youth Football Club</td><td>Corstorphine Dynamo FC Whites</td><td></td><td>Craigroyston Park</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2011s Division 3B 26/27"><h3>Alpha Trophies 2011s Division 3B 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Murieston United Reds</td><td>Spartans FC Youth Reds</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Chirnside Utd U16s</td><td>Craigroyston Community Youth Football Club 2011 Blues</td><td></td><td>Comrades Park</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Edinburgh United Youth FC Whites</td><td>Bathgate Thistle CFC - Blues</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Penicuik Athletic YFC Whites</td><td>Tynecastle F C  Maroons</td><td></td><td>,  , </td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2011s Division 4 26/27"><h3>Alpha Trophies 2011s Division 4 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Longniddry Villa</td><td>Penicuik Athletic YFC Blues</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Dalkeith Thistle CFC Deportivo</td><td>Tynecastle F C Reds</td><td></td><td>The Stevie Dixon Memorial Complex</td></tr></tbody></table></div><div class="future-division-block" data-division="SERYFA 2011 South East Region Cup 2026/2027"><h3>SERYFA 2011 South East Region Cup 2026/2027</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Polbeth United Reds</td><td>Tynecastle FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Dalkeith Thistle CFC</td><td>Arniston Rangers YFC</td><td></td><td>The Stevie Dixon Memorial Complex</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Vennie United</td><td>Broxburn Athletic Colts (2011 Colts)</td><td></td><td>,  , </td></tr></tbody></table></div><div class="future-division-block" data-division="SYFA Scottish Cup South East 2011s 26/27"><h3>SYFA Scottish Cup South East 2011s 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Castlevale Youth Development Club</td><td>Loanhead Miners Youth FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Musselburgh Windsor F C</td><td>Hutchison Vale Fc</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Edinburgh United Youth FC Blacks</td><td>Bathgate Thistle CFC - Blues</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Spartans FC Youth</td><td>Edinburgh City FC Academy</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>North Merchiston FC Whites</td><td>North Merchiston FC Blacks</td><td></td><td>Harrison Park</td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Broxburn Athletic Colts (2011 Colts)</td><td>Hibernian Community</td><td></td><td>Albyn Park</td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>EASTSIDE RAPIDS UNITED</td><td>Spartans FC Youth Reds</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Haddington Athletic cfc</td><td>Broxburn Athletic Colts - Badgers</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Bonnyrigg Rose YFC</td><td>North Berwick FC</td><td></td><td>Poltonhall Recreational Ground</td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Musselburgh Windsor F C Blues</td><td>Preston Athletic Y F C</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Leith Athletic</td><td>Armadale CFC</td><td></td><td>Leith Links</td></tr></tbody></table></div><script>
   (function(){
     const STORAGE_KEY = 'seryfa-theme'; const overrideEl = document.getElementById('theme-override');
     function apply(mode){
