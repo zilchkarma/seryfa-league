@@ -1,25 +1,237 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Edinburgh City Whites - Match History</title></head><body><h1>Edinburgh City Whites (U17)</h1><h2>Match History & Results</h2><table><thead><tr><th>Date</th><th>Opponent</th><th>Venue</th><th>Result</th><th>Score</th></tr></thead><tbody><tr>
-      <td>09/12/2026</td>
-      <td>Portobello Community Football Academy</td>
-      <td>Home</td>
-      <td><span class="D">D</span></td>
-      <td>1 - 1</td>
-    </tr><tr>
-      <td>22/08/2026</td>
-      <td>Musselburgh Windsor F C</td>
-      <td>Home</td>
-      <td><span class="D">D</span></td>
-      <td>2 - 2</td>
-    </tr><tr>
-      <td>15/08/2026</td>
-      <td>North Merchiston FC</td>
-      <td>Away</td>
-      <td><span class="L">L</span></td>
-      <td>0 - 2</td>
-    </tr><tr>
-      <td>09/05/2026</td>
-      <td>North Merchiston FC</td>
-      <td>Home</td>
-      <td><span class="W">W</span></td>
-      <td>1 - 0</td>
-    </tr></tbody></table></body></html>
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edinburgh City Whites - U17</title>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QLTFGFY0MQ');
+  </script>
+
+  
+  <script>
+  (function(){
+    try{
+      var pref = localStorage.getItem('theme') || 'auto';
+      var root = document.documentElement;
+      if(pref === 'light' || pref === 'dark'){
+        root.setAttribute('data-theme', pref);
+      }else{
+        root.removeAttribute('data-theme');
+      }
+    }catch(e){}
+  })();
+  </script>
+
+  <style>
+   
+  :root{
+    --bg:#f8f8f8; --fg:#000; --card:#ffffff; --border:#ccc;
+    --th-bg:#FFD700; --th-fg:#000; --muted:#666; --shadow:0 1px 6px rgba(0,0,0,0.08);
+    --input-bg:#fff; --input-fg:#000; --input-border:#bbb; --link:#0b5cab;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#101010; --fg:#e0e0e0; --card:#161616; --border:#333;
+      --th-bg:#222; --th-fg:#fff; --muted:#9aa0a6; --shadow:0 0 0 rgba(0,0,0,0);
+      --input-bg:#1b1b1b; --input-fg:#eaeaea; --input-border:#444; --link:#6aa7ff;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#f8f8f8; --fg:#000; --card:#ffffff; --border:#ccc;
+    --th-bg:#FFD700; --th-fg:#000; --muted:#666; --shadow:0 1px 6px rgba(0,0,0,0.08);
+    --input-bg:#fff; --input-fg:#000; --input-border:#bbb; --link:#0b5cab;
+  }
+  :root[data-theme="dark"]{
+    --bg:#101010; --fg:#e0e0e0; --card:#161616; --border:#333;
+    --th-bg:#222; --th-fg:#fff; --muted:#9aa0a6; --shadow:0 0 0 rgba(0,0,0,0);
+    --input-bg:#1b1b1b; --input-fg:#eaeaea; --input-border:#444; --link:#6aa7ff;
+  }
+
+   
+  html,body{margin:0;padding:0}
+  body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1{color:#FFD700;margin:10px 0 4px 0}
+  h2{margin:28px 0 10px 0;font-size:1.25rem}
+  .sub-title{color:var(--muted);font-size:1rem;margin-bottom:16px}
+  .back-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:20px;font-size:0.88rem;color:var(--fg);margin-bottom:12px}
+  .back-btn:hover{border-color:#FFD700;color:#FFD700;text-decoration:none}
+
+   
+  .topbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .theme-sel{padding:6px 10px;background:var(--input-bg);color:var(--input-fg);border:1px solid var(--input-border);border-radius:6px;font-size:0.9rem}
+
+   
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(90px, 1fr));gap:10px;margin:18px 0 24px}
+  .stat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 8px;text-align:center;box-shadow:var(--shadow)}
+  .stat-val{font-size:1.4rem;font-weight:bold;color:#FFD700}
+  .stat-lbl{font-size:0.75rem;color:var(--muted);text-transform:uppercase;margin-top:2px}
+
+   
+  table{border-collapse:collapse;width:100%;margin-bottom:30px;background:var(--card);box-shadow:var(--shadow);border:1px solid var(--border)}
+  th,td{border:1px solid var(--border);padding:10px;text-align:center}
+  th{background:var(--th-bg);color:var(--th-fg)}
+  .date-cell{background:#000;color:#FFD700;white-space:nowrap}
+  .score-cell{font-weight:bold;white-space:nowrap}
+
+   
+  .badge{display:inline-block;padding:3px 8px;border-radius:4px;font-weight:bold;color:#fff;font-size:0.85rem}
+  .W{background:#00B050}
+  .D{background:#007BFF}
+  .L{background:#C00000}
+
+  footer{margin-top:36px;font-size:0.85rem;color:var(--muted);text-align:center}
+
+  @media(max-width: 600px){
+    body{padding:12px}
+    th,td{padding:8px 6px;font-size:0.85rem}
+  }
+  </style>
+  </head>
+  <body>
+  <div class="topbar">
+    <a href="u17-league-comet.html" class="back-btn">← Back to Alpha Trophies 2010s Division 1 26/27</a>
+    <div>
+      <label for="themeSel" style="font-size:0.9rem; color:var(--muted); margin-right:4px;">Theme:</label>
+      <select id="themeSel" class="theme-sel">
+        <option value="auto">System</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </div>
+  </div>
+  <style>
+    .sfy-nav {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .sfy-nav .bar {
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #FFD700;
+      border-bottom: 1px solid #333;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .sfy-tabs,
+    .sfy-subtabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .sfy-subtabs {
+      background: #181818;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      color: #e0e0e0;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-link:hover {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+    .nav-link.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: bold;
+    }
+  </style>
+
+  <nav class="sfy-nav">
+    <div class="bar">SERYFA COMET Leagues</div>
+    <div class="sfy-tabs">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="u13-league-comet.html">U13</a><a class="nav-link" href="u14-league-comet.html">U14</a><a class="nav-link" href="u15-league-comet.html">U15</a><a class="nav-link" href="u16-league-comet.html">U16</a><a class="nav-link active" href="u17-league-comet.html">U17</a><a class="nav-link" href="u18-league-comet.html">U18</a>
+    </div>
+    
+    <div class="sfy-subtabs">
+      <a class="nav-link active" href="u17-league-comet.html">U17 Table</a>
+      <a class="nav-link" href="u17-stats.html">Stats</a>
+      <a class="nav-link" href="Archive-2025-26-U17.html">2025/26 Archive</a>
+      <a class="nav-link" href="Scores.html">Scores</a>
+    </div>
+  </nav>
+  <h1>Edinburgh City Whites</h1>
+  <div class="sub-title">U17 • Alpha Trophies 2010s Division 1 26/27</div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-val">5</div><div class="stat-lbl">Points</div></div>
+      <div class="stat-card"><div class="stat-val">4</div><div class="stat-lbl">Played</div></div>
+      <div class="stat-card"><div class="stat-val">1</div><div class="stat-lbl">Won</div></div>
+      <div class="stat-card"><div class="stat-val">2</div><div class="stat-lbl">Drawn</div></div>
+      <div class="stat-card"><div class="stat-val">1</div><div class="stat-lbl">Lost</div></div>
+      <div class="stat-card"><div class="stat-val">4</div><div class="stat-lbl">GF</div></div>
+      <div class="stat-card"><div class="stat-val">5</div><div class="stat-lbl">GA</div></div>
+      <div class="stat-card"><div class="stat-val">-1</div><div class="stat-lbl">GD</div></div>
+    </div><h2>Match History & Results</h2><table>
+      <thead>
+        <tr>
+          <th class="date-cell">Date</th>
+          <th>Opponent</th>
+          <th>Venue</th>
+          <th>Result</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+        <td class="date-cell">09/12/2026</td>
+        <td><strong>Portobello Community Football Academy</strong></td>
+        <td>Home</td>
+        <td><span class="badge D">D</span></td>
+        <td class="score-cell">1 - 1</td>
+      </tr><tr>
+        <td class="date-cell">22/08/2026</td>
+        <td><strong>Musselburgh Windsor F C</strong></td>
+        <td>Home</td>
+        <td><span class="badge D">D</span></td>
+        <td class="score-cell">2 - 2</td>
+      </tr><tr>
+        <td class="date-cell">15/08/2026</td>
+        <td><strong>North Merchiston FC</strong></td>
+        <td>Away</td>
+        <td><span class="badge L">L</span></td>
+        <td class="score-cell">0 - 2</td>
+      </tr><tr>
+        <td class="date-cell">09/05/2026</td>
+        <td><strong>North Merchiston FC</strong></td>
+        <td>Home</td>
+        <td><span class="badge W">W</span></td>
+        <td class="score-cell">1 - 0</td>
+      </tr></tbody></table><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer>
+  <script>
+  (function(){
+    var sel = document.getElementById('themeSel');
+    function apply(pref){
+      if(pref === 'light' || pref === 'dark'){
+        document.documentElement.setAttribute('data-theme', pref);
+      }else{
+        document.documentElement.removeAttribute('data-theme');
+        pref = 'auto';
+      }
+      try{ localStorage.setItem('theme', pref); }catch(e){}
+    }
+    try{ sel.value = localStorage.getItem('theme') || 'auto'; }catch(e){ sel.value = 'auto'; }
+    sel.addEventListener('change', function(){ apply(this.value); });
+  })();
+  </script>
+  </body></html>
