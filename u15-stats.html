@@ -1,0 +1,785 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>U15 Team Stats</title>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QLTFGFY0MQ');
+  </script>
+
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+    h1{margin-top:0;color:#FFD700}
+    h2{margin-top:24px}
+    select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+    table{border-collapse:collapse;width:100%;margin-bottom:30px}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    th{background:#FFD700;color:#000}
+    th.sortable{cursor:pointer}
+    th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
+    td.gf{background:#d0eaff} td.ga{background:#ffe0d0}
+    tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+    th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+    .max-cell { background-color:#d4edda; font-weight:bold }    
+    .min-cell { background-color:#ffe0b2; font-weight:bold }    
+    td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
+    td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
+    footer{margin-top:24px;font-size:.9em;opacity:.85;text-align:center}
+    @media (prefers-color-scheme: dark){
+      body{background:#101010;color:#e0e0e0}
+      select{background:#222;color:#fff;border-color:#555}
+      table,th,td{border-color:#333}
+      th{background:#222;color:#fff}
+      td.gf{background:#1a2a40} td.ga{background:#402a1a}
+      tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+      th:first-child,td:first-child{background:#202020;font-weight:bold}
+      .max-cell { background:#004d00; color:#fff }
+      .min-cell { background:#804000; color:#fff }
+    }
+  </style>
+  </head><body>
+  <style>
+    .sfy-nav {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .sfy-nav .bar {
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #FFD700;
+      border-bottom: 1px solid #333;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .sfy-tabs,
+    .sfy-subtabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .sfy-subtabs {
+      background: #181818;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      color: #e0e0e0;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-link:hover {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+    .nav-link.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: bold;
+    }
+  </style>
+
+  <nav class="sfy-nav">
+    <div class="bar">SERYFA COMET Leagues</div>
+    <div class="sfy-tabs">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="u13-league-comet.html">U13</a><a class="nav-link" href="u14-league-comet.html">U14</a><a class="nav-link" href="u15-league-comet.html">U15</a><a class="nav-link" href="u16-league-comet.html">U16</a><a class="nav-link" href="u17-league-comet.html">U17</a><a class="nav-link" href="u18-league-comet.html">U18</a>
+    </div>
+    
+    <div class="sfy-subtabs">
+      <a class="nav-link" href="u15-league-comet.html">U15 Table</a>
+      <a class="nav-link active" href="u15-stats.html">Stats</a>
+      <a class="nav-link" href="Archive-2025-26-U15.html">2025/26 Archive</a>
+      <a class="nav-link" href="Scores.html">Scores</a>
+    </div>
+  </nav><h1>U15 Team Stats</h1><label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Alpha Trophies 2012s Division 1 26/27">Alpha Trophies 2012s Division 1 26/27</option><option value="Alpha Trophies 2012s Division 2A 26/27">Alpha Trophies 2012s Division 2A 26/27</option><option value="Alpha Trophies 2012s Division 2B 26/27">Alpha Trophies 2012s Division 2B 26/27</option><option value="Alpha Trophies 2012s Division 3A 26/27">Alpha Trophies 2012s Division 3A 26/27</option><option value="Alpha Trophies 2012s Division 3B 26/27">Alpha Trophies 2012s Division 3B 26/27</option><option value="Alpha Trophies 2012s Division 4 26/27">Alpha Trophies 2012s Division 4 26/27</option>
+  </select><div class="division-block" data-division="Alpha Trophies 2012s Division 1 26/27">
+      <h2>Alpha Trophies 2012s Division 1 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Hutchison_Vale_FC_Whites.html">Hutchison Vale FC Whites</a></td>
+        <td class="max-cell" data-num="5.666666666666667">5.67</td>
+        <td class="min-cell" data-num="1.1666666666666667">1.17</td>
+        <td class="">11–1 vs Melrose FC</td>
+        <td>-</td>
+        <td class="" data-num="11">11</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        <td class="" data-num="2.5714285714285716">2.57</td>
+        <td class="" data-num="2.142857142857143">2.14</td>
+        <td class="">4–0 vs Dunbar United Colts</td>
+        <td>2–4 vs Edinburgh City</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="">5–1 vs Edinburgh South CFC</td>
+        <td>1–6 vs Bonnyrigg Rose FC</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        <td class="" data-num="2.4">2.40</td>
+        <td class="" data-num="4.2">4.20</td>
+        <td class="">-</td>
+        <td>3–10 vs Hutchison Vale FC Whites</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="10">10</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Melrose_FC.html">Melrose FC</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="7.6">7.60</td>
+        <td class="">-</td>
+        <td>1–11 vs Hutchison Vale FC Whites</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="11">11</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Musselburgh_Windsor_F_C.html">Musselburgh Windsor F C</a></td>
+        <td class="" data-num="3.7142857142857144">3.71</td>
+        <td class="" data-num="2.4285714285714284">2.43</td>
+        <td class="">5–1 vs Currie Star F C</td>
+        <td>1–2 vs Bonnyrigg Rose FC</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        <td class="" data-num="3.5">3.50</td>
+        <td class="" data-num="4.333333333333333">4.33</td>
+        <td class="">11–2 vs Melrose FC</td>
+        <td>0–4 vs Edinburgh City FC Academy</td>
+        <td class="" data-num="11">11</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Edinburgh_City.html">Edinburgh City</a></td>
+        <td class="" data-num="2.1666666666666665">2.17</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">4–1 vs Melrose FC</td>
+        <td>1–3 vs Hutchison Vale FC Whites</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Bonnyrigg_Rose_FC.html">Bonnyrigg Rose FC</a></td>
+        <td class="" data-num="5">5.00</td>
+        <td class="" data-num="1.2">1.20</td>
+        <td class="max-cell">12–1 vs Currie Star F C</td>
+        <td>-</td>
+        <td class="max-cell" data-num="12">12</td>
+        <td class="min-cell" data-num="2">2</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Edinburgh_City_FC_Academy.html">Edinburgh City FC Academy</a></td>
+        <td class="" data-num="3.6">3.60</td>
+        <td class="" data-num="1.4">1.40</td>
+        <td class="">7–0 vs Melrose FC</td>
+        <td>2–3 vs Spartans FC Youth</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Currie_Star_F_C.html">Currie Star F C</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="3.8333333333333335">3.83</td>
+        <td class="">5–1 vs Melrose FC</td>
+        <td>1–12 vs Bonnyrigg Rose FC</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="12">12</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        <td class="" data-num="0.2">0.20</td>
+        <td class="" data-num="2.6">2.60</td>
+        <td class="">-</td>
+        <td>0–4 vs Spartans FC Youth</td>
+        <td class="" data-num="1">1</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_1_26_27-Lochend_Football_Academy.html">Lochend Football Academy</a></td>
+        <td class="" data-num="2.2">2.20</td>
+        <td class="" data-num="2.2">2.20</td>
+        <td class="">5–1 vs Edinburgh South CFC</td>
+        <td>1–6 vs Hutchison Vale FC Whites</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="6">6</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2012s Division 2A 26/27">
+      <h2>Alpha Trophies 2012s Division 2A 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2A_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="3.8333333333333335">3.83</td>
+        <td class="">-</td>
+        <td>1–6 vs BLACKBURN UNITED BLACKS</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2A_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="4">4.00</td>
+        <td class="">6–1 vs Edinburgh United 2012 YFC Black</td>
+        <td>1–8 vs BLACKBURN UNITED BLACKS</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2A_26_27-BLACKBURN_UNITED_BLACKS.html">BLACKBURN UNITED BLACKS</a></td>
+        <td class="max-cell" data-num="6.166666666666667">6.17</td>
+        <td class="" data-num="1.6666666666666667">1.67</td>
+        <td class="max-cell">10–2 vs Edinburgh United 2012 YFC Black</td>
+        <td>2–4 vs Dalkeith Thistle CFC</td>
+        <td class="max-cell" data-num="10">10</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2A_26_27-Edinburgh_United_2012_YFC_Black.html">Edinburgh United 2012 YFC Black</a></td>
+        <td class="" data-num="1.5">1.50</td>
+        <td class="" data-num="6.75">6.75</td>
+        <td class="">-</td>
+        <td>2–10 vs BLACKBURN UNITED BLACKS</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="10">10</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2A_26_27-Corstorphine_Dynamo_FC.html">Corstorphine Dynamo FC</a></td>
+        <td class="" data-num="3.25">3.25</td>
+        <td class="" data-num="4">4.00</td>
+        <td class="">8–2 vs Cramond Football Club</td>
+        <td>1–7 vs TRANENT FC BLACKS</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2A_26_27-Edinburgh_South_Community_CFC_Roma.html">Edinburgh South Community CFC Roma</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="2.6">2.60</td>
+        <td class="">5–1 vs Corstorphine Dynamo FC</td>
+        <td>1–4 vs Dalkeith Thistle CFC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2A_26_27-TRANENT_FC_BLACKS.html">TRANENT FC BLACKS</a></td>
+        <td class="" data-num="4.666666666666667">4.67</td>
+        <td class="" data-num="1.6666666666666667">1.67</td>
+        <td class="">7–1 vs Corstorphine Dynamo FC</td>
+        <td>-</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2A_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        <td class="" data-num="3.75">3.75</td>
+        <td class="min-cell" data-num="1.25">1.25</td>
+        <td class="">4–1 vs Edinburgh South Community CFC Roma</td>
+        <td>-</td>
+        <td class="" data-num="5">5</td>
+        <td class="min-cell" data-num="2">2</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2A_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="3.6666666666666665">3.67</td>
+        <td class="">-</td>
+        <td>2–8 vs Corstorphine Dynamo FC</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="8">8</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2012s Division 2B 26/27">
+      <h2>Alpha Trophies 2012s Division 2B 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2B_26_27-Leith_Athletic.html">Leith Athletic</a></td>
+        <td class="" data-num="1.3333333333333333">1.33</td>
+        <td class="" data-num="5">5.00</td>
+        <td class="">-</td>
+        <td>0–6 vs Murieston United Reds</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2B_26_27-Currie_FC_Pumas.html">Currie FC Pumas</a></td>
+        <td class="" data-num="4.166666666666667">4.17</td>
+        <td class="" data-num="2.6666666666666665">2.67</td>
+        <td class="">7–2 vs Leith Athletic</td>
+        <td>2–3 vs Musselburgh Windsor FC Blues</td>
+        <td class="max-cell" data-num="7">7</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2B_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        <td class="" data-num="1.2">1.20</td>
+        <td class="" data-num="3.4">3.40</td>
+        <td class="">3–2 vs Currie FC Pumas</td>
+        <td>0–5 vs East Calder 2012 CFC</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2B_26_27-Lochend_Football_Academy_Colts.html">Lochend Football Academy Colts</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="2.6">2.60</td>
+        <td class="">4–1 vs Musselburgh Windsor FC Blues</td>
+        <td>5–6 vs Currie FC Pumas</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2B_26_27-East_Calder_2012_CFC.html">East Calder 2012 CFC</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="min-cell" data-num="1.8">1.80</td>
+        <td class="">5–0 vs Musselburgh Windsor FC Blues</td>
+        <td>1–2 vs Lochend Football Academy Colts</td>
+        <td class="" data-num="5">5</td>
+        <td class="min-cell" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2B_26_27-Murieston_United_Reds.html">Murieston United Reds</a></td>
+        <td class="" data-num="2.8">2.80</td>
+        <td class="" data-num="3.6">3.60</td>
+        <td class="max-cell">6–0 vs Leith Athletic</td>
+        <td>1–7 vs Penicuik Athletic YFC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2B_26_27-Penicuik_Athletic_YFC.html">Penicuik Athletic YFC</a></td>
+        <td class="max-cell" data-num="4.333333333333333">4.33</td>
+        <td class="" data-num="2.3333333333333335">2.33</td>
+        <td class="">7–1 vs Murieston United Reds</td>
+        <td>3–4 vs Bonnyrigg Rose Panthers</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_2B_26_27-Bonnyrigg_Rose_Panthers.html">Bonnyrigg Rose Panthers</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="2.25">2.25</td>
+        <td class="">4–0 vs Musselburgh Windsor FC Blues</td>
+        <td>2–4 vs Currie FC Pumas</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="4">4</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2012s Division 3A 26/27">
+      <h2>Alpha Trophies 2012s Division 3A 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-North_Merchiston_FC_Blacks.html">North Merchiston FC Blacks</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="4.666666666666667">4.67</td>
+        <td class="">5–2 vs Currie Star Whites</td>
+        <td>0–7 vs Dalkeith Thistle CFC Deportivo</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Edinburgh_South_Community_CFC_Reds.html">Edinburgh South Community CFC Reds</a></td>
+        <td class="" data-num="3.2">3.20</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">4–1 vs Spartans FC Youth Reds</td>
+        <td>3–4 vs Dalkeith Thistle CFC Deportivo</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Salvesen_CFC.html">Salvesen CFC</a></td>
+        <td class="max-cell" data-num="4.857142857142857">4.86</td>
+        <td class="" data-num="2.5714285714285716">2.57</td>
+        <td class="max-cell">10–0 vs Musselburgh Youngstars</td>
+        <td>3–6 vs Bonnyrigg Rose Athletic</td>
+        <td class="" data-num="10">10</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Dunbar_United_Colts_Whites.html">Dunbar United Colts Whites</a></td>
+        <td class="" data-num="1.2">1.20</td>
+        <td class="" data-num="4.6">4.60</td>
+        <td class="">2–1 vs Spartans FC Youth Reds</td>
+        <td>1–11 vs Currie Star Whites</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="11">11</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Dalkeith_Thistle_CFC_Deportivo.html">Dalkeith Thistle CFC Deportivo</a></td>
+        <td class="" data-num="4.857142857142857">4.86</td>
+        <td class="min-cell" data-num="1.1428571428571428">1.14</td>
+        <td class="">7–0 vs North Merchiston FC Blacks</td>
+        <td>-</td>
+        <td class="" data-num="7">7</td>
+        <td class="min-cell" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Musselburgh_Youngstars.html">Musselburgh Youngstars</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="4.166666666666667">4.17</td>
+        <td class="">7–0 vs Eyemouth United FC Juniors</td>
+        <td>0–10 vs Salvesen CFC</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="10">10</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Eyemouth_United_FC_Juniors.html">Eyemouth United FC Juniors</a></td>
+        <td class="" data-num="0.6">0.60</td>
+        <td class="" data-num="3.8">3.80</td>
+        <td class="">-</td>
+        <td>0–7 vs Musselburgh Youngstars</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Bonnyrigg_Rose_Athletic.html">Bonnyrigg Rose Athletic</a></td>
+        <td class="" data-num="1.8">1.80</td>
+        <td class="" data-num="3.6">3.60</td>
+        <td class="">6–3 vs Salvesen CFC</td>
+        <td>1–7 vs Currie Star Whites</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Currie_Star_Whites.html">Currie Star Whites</a></td>
+        <td class="" data-num="4.833333333333333">4.83</td>
+        <td class="" data-num="1.6666666666666667">1.67</td>
+        <td class="">11–1 vs Dunbar United Colts Whites</td>
+        <td>2–5 vs North Merchiston FC Blacks</td>
+        <td class="max-cell" data-num="11">11</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Edinburgh_City_FC_Academy_Colts.html">Edinburgh City FC Academy Colts</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="1.5">1.50</td>
+        <td class="">6–1 vs North Merchiston FC Blacks</td>
+        <td>1–3 vs Currie Star Whites</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3A_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="2.8333333333333335">2.83</td>
+        <td class="">8–1 vs Eyemouth United FC Juniors</td>
+        <td>1–4 vs Dalkeith Thistle CFC Deportivo</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="5">5</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2012s Division 3B 26/27">
+      <h2>Alpha Trophies 2012s Division 3B 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Penicuik_Athletic_YFC_Blues.html">Penicuik Athletic YFC Blues</a></td>
+        <td class="" data-num="1.8333333333333333">1.83</td>
+        <td class="" data-num="4.333333333333333">4.33</td>
+        <td class="">5–3 vs Edinburgh South CFC Rams</td>
+        <td>0–6 vs Murieston United Blues</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Cramond_Lions_Football_Club.html">Cramond Lions Football Club</a></td>
+        <td class="" data-num="1.8333333333333333">1.83</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">4–2 vs Edinburgh City Reds</td>
+        <td>2–7 vs Murieston United Blues</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Edina_Hibs.html">Edina Hibs</a></td>
+        <td class="" data-num="2.2">2.20</td>
+        <td class="" data-num="1">1.00</td>
+        <td class="">3–0 vs Preston Athletic Y F C - Colts</td>
+        <td>1–4 vs Lochend Football Academy Reds</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-North_Berwick_FC_Town.html">North Berwick FC Town</a></td>
+        <td class="" data-num="3.2">3.20</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">7–0 vs Edinburgh United Youth F C 2012 Whites</td>
+        <td>0–2 vs Edina Hibs</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Edinburgh_City_Reds.html">Edinburgh City Reds</a></td>
+        <td class="" data-num="1.5">1.50</td>
+        <td class="" data-num="2.1666666666666665">2.17</td>
+        <td class="">3–2 vs Edinburgh United Youth F C 2012 Whites</td>
+        <td>1–4 vs Inverkeithing Hillfield Swifts Lightning</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Edinburgh_South_CFC_Rams.html">Edinburgh South CFC Rams</a></td>
+        <td class="" data-num="3.857142857142857">3.86</td>
+        <td class="" data-num="2.142857142857143">2.14</td>
+        <td class="max-cell">11–0 vs Edinburgh United Youth F C 2012 Whites</td>
+        <td>0–4 vs Murieston United Blues</td>
+        <td class="max-cell" data-num="11">11</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Edinburgh_United_Youth_F_C_2012_Whites.html">Edinburgh United Youth F C 2012 Whites</a></td>
+        <td class="" data-num="1.2">1.20</td>
+        <td class="" data-num="7.6">7.60</td>
+        <td class="">-</td>
+        <td>0–11 vs Edinburgh South CFC Rams</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="11">11</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Haddington_Athletic_cfc.html">Haddington Athletic cfc</a></td>
+        <td class="" data-num="4.4">4.40</td>
+        <td class="" data-num="4.4">4.40</td>
+        <td class="">9–4 vs Preston Athletic Y F C - Colts</td>
+        <td>2–7 vs Lochend Football Academy Reds</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Murieston_United_Blues.html">Murieston United Blues</a></td>
+        <td class="max-cell" data-num="5.5">5.50</td>
+        <td class="min-cell" data-num="0.5">0.50</td>
+        <td class="">9–1 vs KSQ Rapids</td>
+        <td>-</td>
+        <td class="" data-num="9">9</td>
+        <td class="min-cell" data-num="2">2</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Inverkeithing_Hillfield_Swifts_Lightning.html">Inverkeithing Hillfield Swifts Lightning</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="0.8333333333333334">0.83</td>
+        <td class="">4–0 vs Longniddry Villa</td>
+        <td>0–1 vs Edinburgh South CFC Rams</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        <td class="" data-num="3.8">3.80</td>
+        <td class="" data-num="3.8">3.80</td>
+        <td class="">9–3 vs Penicuik Athletic YFC Blues</td>
+        <td>0–5 vs Murieston United Blues</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        <td class="" data-num="1.8333333333333333">1.83</td>
+        <td class="" data-num="3.5">3.50</td>
+        <td class="">4–1 vs Penicuik Athletic YFC Blues</td>
+        <td>1–9 vs Murieston United Blues</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Lochend_Football_Academy_Reds.html">Lochend Football Academy Reds</a></td>
+        <td class="" data-num="4.2">4.20</td>
+        <td class="" data-num="2.2">2.20</td>
+        <td class="">7–2 vs Haddington Athletic cfc</td>
+        <td>3–4 vs Inverkeithing Hillfield Swifts Lightning</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_3B_26_27-Preston_Athletic_Y_F_C___Colts.html">Preston Athletic Y F C - Colts</a></td>
+        <td class="" data-num="2.6">2.60</td>
+        <td class="" data-num="4.4">4.40</td>
+        <td class="">9–1 vs Edinburgh United Youth F C 2012 Whites</td>
+        <td>0–7 vs Edinburgh South CFC Rams</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="9">9</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2012s Division 4 26/27">
+      <h2>Alpha Trophies 2012s Division 4 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Bonnyrigg_Rose_United.html">Bonnyrigg Rose United</a></td>
+        <td class="" data-num="3.5">3.50</td>
+        <td class="" data-num="4.666666666666667">4.67</td>
+        <td class="">10–1 vs Loanhead Miners Youth FC Blues</td>
+        <td>0–11 vs Pentland Athletic Youth FC</td>
+        <td class="" data-num="10">10</td>
+        <td class="" data-num="11">11</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Edinburgh_United_2012_YFC_Red.html">Edinburgh United 2012 YFC Red</a></td>
+        <td class="" data-num="1.1666666666666667">1.17</td>
+        <td class="" data-num="4.166666666666667">4.17</td>
+        <td class="">4–3 vs Bonnyrigg Rose United</td>
+        <td>0–7 vs Musselburgh Windsor FC Whites</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+        <td class="" data-num="0.8">0.80</td>
+        <td class="" data-num="6.6">6.60</td>
+        <td class="">-</td>
+        <td>0–10 vs Edinburgh City Blacks</td>
+        <td class="" data-num="1">1</td>
+        <td class="" data-num="10">10</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Penicuik_Athletic_YFC_Whites.html">Penicuik Athletic YFC Whites</a></td>
+        <td class="" data-num="5.571428571428571">5.57</td>
+        <td class="" data-num="2.7142857142857144">2.71</td>
+        <td class="">11–1 vs Easthouses Lily</td>
+        <td>2–8 vs Pentland Athletic Youth FC</td>
+        <td class="" data-num="11">11</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Pentland_Athletic_Youth_FC.html">Pentland Athletic Youth FC</a></td>
+        <td class="max-cell" data-num="8.5">8.50</td>
+        <td class="min-cell" data-num="1">1.00</td>
+        <td class="">11–0 vs Bonnyrigg Rose United</td>
+        <td>-</td>
+        <td class="" data-num="11">11</td>
+        <td class="min-cell" data-num="2">2</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">-</td>
+        <td>2–6 vs North Merchiston FC Whites</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-North_Merchiston_FC_Whites.html">North Merchiston FC Whites</a></td>
+        <td class="" data-num="6">6.00</td>
+        <td class="" data-num="2.6666666666666665">2.67</td>
+        <td class="">8–1 vs AC Oxgangs CFC</td>
+        <td>4–5 vs Penicuik Athletic YFC Whites</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Easthouses_Lily.html">Easthouses Lily</a></td>
+        <td class="" data-num="1.5714285714285714">1.57</td>
+        <td class="" data-num="5.285714285714286">5.29</td>
+        <td class="">2–0 vs Edinburgh United 2012 YFC Red</td>
+        <td>0–10 vs Pentland Athletic Youth FC</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="11">11</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Musselburgh_Windsor_FC_Whites.html">Musselburgh Windsor FC Whites</a></td>
+        <td class="" data-num="6.666666666666667">6.67</td>
+        <td class="" data-num="1.8333333333333333">1.83</td>
+        <td class="max-cell">13–0 vs Loanhead Miners Youth FC Blues</td>
+        <td>0–9 vs Pentland Athletic Youth FC</td>
+        <td class="max-cell" data-num="13">13</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Edinburgh_City_Blacks.html">Edinburgh City Blacks</a></td>
+        <td class="" data-num="5.666666666666667">5.67</td>
+        <td class="" data-num="2.6666666666666665">2.67</td>
+        <td class="">10–0 vs AC Oxgangs CFC</td>
+        <td>2–8 vs Pentland Athletic Youth FC</td>
+        <td class="" data-num="10">10</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Loanhead_Miners_Youth_FC_Blues.html">Loanhead Miners Youth FC Blues</a></td>
+        <td class="" data-num="0.6666666666666666">0.67</td>
+        <td class="" data-num="10.666666666666666">10.67</td>
+        <td class="">-</td>
+        <td>0–13 vs Musselburgh Windsor FC Whites</td>
+        <td class="" data-num="1">1</td>
+        <td class="" data-num="13">13</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Leith_Athletic_2012_Colts.html">Leith Athletic 2012 Colts</a></td>
+        <td class="" data-num="3.4">3.40</td>
+        <td class="" data-num="3.2">3.20</td>
+        <td class="">5–0 vs Edinburgh United 2012 YFC Red</td>
+        <td>1–6 vs Penicuik Athletic YFC Whites</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U15-Alpha_Trophies_2012s_Division_4_26_27-Preston_Athletic_YFC.html">Preston Athletic YFC</a></td>
+        <td class="" data-num="0.6666666666666666">0.67</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">1–0 vs Dalkeith Thistle CFC Balompie</td>
+        <td>1–8 vs Musselburgh Windsor FC Whites</td>
+        <td class="" data-num="1">1</td>
+        <td class="" data-num="8">8</td>
+      </tr></tbody></table></div>
+  <script>
+  (function(){
+    function numVal(td){
+      const ds = td.getAttribute('data-num');
+      if(ds !== null) return parseFloat(ds);
+      const t = td.textContent.trim().replace(/[^\d.\-]/g,'');
+      const n = parseFloat(t);
+      return isNaN(n) ? 0 : n;
+    }
+    function getComparator(type, i, asc){
+      if(type === 'num'){
+        return (a,b)=>{ const ax=numVal(a.children[i]), bx=numVal(b.children[i]); return asc ? (ax-bx) : (bx-ax); };
+      }
+      return (a,b)=>{
+        const ax=a.children[i].textContent.trim();
+        const bx=b.children[i].textContent.trim();
+        const cmp=ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'});
+        return asc ? cmp : -cmp;
+      };
+    }
+    function sortTable(table, colIdx, type, th){
+      const tbody = table.querySelector('tbody'); if(!tbody) return;
+      const hasState = th.classList.contains('asc') || th.classList.contains('desc');
+      const firstAsc = (type === 'text');
+      const asc = hasState ? th.classList.contains('desc') : firstAsc;
+
+      const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r,idx]);
+      const cmp = getComparator(type, colIdx, asc);
+      rows.sort((A,B)=>{ const r=cmp(A[0],B[0]); return r!==0 ? r : (A[1]-B[1]); });
+
+      table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.forEach(pair=>tbody.appendChild(pair[0]));
+    }
+    document.querySelectorAll('table').forEach(t=>{
+      t.querySelectorAll('thead th.sortable').forEach(th=>{
+        th.addEventListener('click', ()=> sortTable(t, th.cellIndex, th.dataset.type||'text', th));
+      });
+    });
+
+    const divFilter = document.getElementById('division-filter');
+    function applyFilter(val){
+      document.querySelectorAll('.division-block').forEach(d=>{
+        d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none';
+      });
+    }
+    if(divFilter){
+      divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      const url = new URL(window.location.href);
+      const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) divFilter.value = pre;
+      applyFilter(divFilter.value || 'ALL');
+    }
+  })();
+  </script><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer></body></html>

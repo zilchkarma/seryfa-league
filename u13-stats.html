@@ -1,0 +1,977 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>U13 Team Stats</title>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QLTFGFY0MQ');
+  </script>
+
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+    h1{margin-top:0;color:#FFD700}
+    h2{margin-top:24px}
+    select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+    table{border-collapse:collapse;width:100%;margin-bottom:30px}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    th{background:#FFD700;color:#000}
+    th.sortable{cursor:pointer}
+    th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
+    td.gf{background:#d0eaff} td.ga{background:#ffe0d0}
+    tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+    th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+    .max-cell { background-color:#d4edda; font-weight:bold }    
+    .min-cell { background-color:#ffe0b2; font-weight:bold }    
+    td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
+    td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
+    footer{margin-top:24px;font-size:.9em;opacity:.85;text-align:center}
+    @media (prefers-color-scheme: dark){
+      body{background:#101010;color:#e0e0e0}
+      select{background:#222;color:#fff;border-color:#555}
+      table,th,td{border-color:#333}
+      th{background:#222;color:#fff}
+      td.gf{background:#1a2a40} td.ga{background:#402a1a}
+      tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+      th:first-child,td:first-child{background:#202020;font-weight:bold}
+      .max-cell { background:#004d00; color:#fff }
+      .min-cell { background:#804000; color:#fff }
+    }
+  </style>
+  </head><body>
+  <style>
+    .sfy-nav {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .sfy-nav .bar {
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #FFD700;
+      border-bottom: 1px solid #333;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .sfy-tabs,
+    .sfy-subtabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .sfy-subtabs {
+      background: #181818;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      color: #e0e0e0;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-link:hover {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+    .nav-link.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: bold;
+    }
+  </style>
+
+  <nav class="sfy-nav">
+    <div class="bar">SERYFA COMET Leagues</div>
+    <div class="sfy-tabs">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="u13-league-comet.html">U13</a><a class="nav-link" href="u14-league-comet.html">U14</a><a class="nav-link" href="u15-league-comet.html">U15</a><a class="nav-link" href="u16-league-comet.html">U16</a><a class="nav-link" href="u17-league-comet.html">U17</a><a class="nav-link" href="u18-league-comet.html">U18</a>
+    </div>
+    
+    <div class="sfy-subtabs">
+      <a class="nav-link" href="u13-league-comet.html">U13 Table</a>
+      <a class="nav-link active" href="u13-stats.html">Stats</a>
+      <a class="nav-link" href="Archive-2025-26-U13.html">2025/26 Archive</a>
+      <a class="nav-link" href="Scores.html">Scores</a>
+    </div>
+  </nav><h1>U13 Team Stats</h1><label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Alpha Trophies 2014s Division 1A 26/27">Alpha Trophies 2014s Division 1A 26/27</option><option value="Alpha Trophies 2014s Division 1B 26/27">Alpha Trophies 2014s Division 1B 26/27</option><option value="Alpha Trophies 2014s Division 2A 26/27">Alpha Trophies 2014s Division 2A 26/27</option><option value="Alpha Trophies 2014s Division 2B 26/27">Alpha Trophies 2014s Division 2B 26/27</option><option value="Alpha Trophies 2014s Division 3A 26/27">Alpha Trophies 2014s Division 3A 26/27</option><option value="Alpha Trophies 2014s Division 3B 26/27">Alpha Trophies 2014s Division 3B 26/27</option><option value="Alpha Trophies 2014s Division 4A 26/27">Alpha Trophies 2014s Division 4A 26/27</option><option value="Alpha Trophies 2014s Division 4B 26/27">Alpha Trophies 2014s Division 4B 26/27</option>
+  </select><div class="division-block" data-division="Alpha Trophies 2014s Division 1A 26/27">
+      <h2>Alpha Trophies 2014s Division 1A 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Newcraighall_Leith_Vics.html">Newcraighall Leith Vics</a></td>
+        <td class="" data-num="2.8333333333333335">2.83</td>
+        <td class="" data-num="2.1666666666666665">2.17</td>
+        <td class="">6–0 vs Musselburgh Windsor F C</td>
+        <td>0–9 vs Football Star Elite Blacks</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Craigroyston_CYFC_Yellow.html">Craigroyston CYFC Yellow</a></td>
+        <td class="" data-num="3.4">3.40</td>
+        <td class="min-cell" data-num="1.2">1.20</td>
+        <td class="">7–1 vs Corstorphine Dynamo FC Whites</td>
+        <td>0–1 vs Newcraighall Leith Vics</td>
+        <td class="" data-num="7">7</td>
+        <td class="min-cell" data-num="2">2</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        <td class="" data-num="3.6">3.60</td>
+        <td class="" data-num="3.2">3.20</td>
+        <td class="">7–2 vs Inverkeithing Hillfield Swifts</td>
+        <td>2–6 vs Football Star Elite Blacks</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Musselburgh_Windsor_F_C.html">Musselburgh Windsor F C</a></td>
+        <td class="" data-num="2.6">2.60</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">4–1 vs EASTSIDE RAPIDS UNITED</td>
+        <td>0–6 vs Newcraighall Leith Vics</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Bonnyrigg_Rose_2014_Rosey.html">Bonnyrigg Rose 2014 Rosey</a></td>
+        <td class="" data-num="1.25">1.25</td>
+        <td class="" data-num="1.75">1.75</td>
+        <td class="">3–0 vs Inverkeithing Hillfield Swifts</td>
+        <td>0–3 vs Edinburgh South CFC</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="3.3333333333333335">3.33</td>
+        <td class="">-</td>
+        <td>2–7 vs Edinburgh South CFC</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Bathgate_Thistle_CFC_Blues.html">Bathgate Thistle CFC Blues</a></td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="" data-num="3.1666666666666665">3.17</td>
+        <td class="">3–2 vs Inverkeithing Hillfield Swifts</td>
+        <td>4–6 vs Corstorphine Dynamo FC Whites</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-EASTSIDE_RAPIDS_UNITED.html">EASTSIDE RAPIDS UNITED</a></td>
+        <td class="" data-num="1.75">1.75</td>
+        <td class="" data-num="4">4.00</td>
+        <td class="">2–0 vs Inverkeithing Hillfield Swifts</td>
+        <td>2–7 vs Football Star Elite Blacks</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Football_Star_Elite_Blacks.html">Football Star Elite Blacks</a></td>
+        <td class="max-cell" data-num="6.5">6.50</td>
+        <td class="" data-num="1.75">1.75</td>
+        <td class="max-cell">9–0 vs Newcraighall Leith Vics</td>
+        <td>-</td>
+        <td class="max-cell" data-num="9">9</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Corstorphine_Dynamo_FC_Whites.html">Corstorphine Dynamo FC Whites</a></td>
+        <td class="" data-num="2.6666666666666665">2.67</td>
+        <td class="" data-num="4.333333333333333">4.33</td>
+        <td class="">6–4 vs Bathgate Thistle CFC Blues</td>
+        <td>1–7 vs Craigroyston CYFC Yellow</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="7">7</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 1B 26/27">
+      <h2>Alpha Trophies 2014s Division 1B 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Football_Star_Elite_Whites.html">Football Star Elite Whites</a></td>
+        <td class="" data-num="3.25">3.25</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">4–1 vs East Calder CFC</td>
+        <td>2–4 vs Spartans FC Youth</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Livingston_FC_Community_2014_Yellows.html">Livingston FC Community 2014 Yellows</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="1.75">1.75</td>
+        <td class="">4–0 vs Preston Athletic Y F C</td>
+        <td>2–3 vs Hutchison Vale Fc</td>
+        <td class="" data-num="4">4</td>
+        <td class="min-cell" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Haddington_Athletic_CFC.html">Haddington Athletic CFC</a></td>
+        <td class="max-cell" data-num="3.6666666666666665">3.67</td>
+        <td class="min-cell" data-num="1.3333333333333333">1.33</td>
+        <td class="max-cell">7–1 vs Tynecastle FC</td>
+        <td>-</td>
+        <td class="max-cell" data-num="7">7</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Hutchison_Vale_Fc.html">Hutchison Vale Fc</a></td>
+        <td class="" data-num="3.2">3.20</td>
+        <td class="" data-num="1.4">1.40</td>
+        <td class="">6–0 vs East Calder CFC</td>
+        <td>0–2 vs Spartans FC Youth</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="4">4.00</td>
+        <td class="">-</td>
+        <td>0–6 vs Hutchison Vale Fc</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Tynecastle_FC.html">Tynecastle FC</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="3.1666666666666665">3.17</td>
+        <td class="">6–1 vs Edinburgh United Youth F C 2014 Whites</td>
+        <td>1–7 vs Haddington Athletic CFC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        <td class="" data-num="2.8">2.80</td>
+        <td class="" data-num="2.4">2.40</td>
+        <td class="">2–0 vs Hutchison Vale Fc</td>
+        <td>0–4 vs Hutchison Vale Fc</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Preston_Athletic_Y_F_C.html">Preston Athletic Y F C</a></td>
+        <td class="" data-num="2.3333333333333335">2.33</td>
+        <td class="" data-num="4">4.00</td>
+        <td class="">4–3 vs East Calder CFC</td>
+        <td>0–4 vs Livingston FC Community 2014 Yellows</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Edinburgh_United_Youth_F_C_2014_Whites.html">Edinburgh United Youth F C 2014 Whites</a></td>
+        <td class="" data-num="0.5">0.50</td>
+        <td class="" data-num="3.5">3.50</td>
+        <td class="">-</td>
+        <td>1–6 vs Tynecastle FC</td>
+        <td class="" data-num="1">1</td>
+        <td class="" data-num="6">6</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 2A 26/27">
+      <h2>Alpha Trophies 2014s Division 2A 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Salvesen_CFC.html">Salvesen CFC</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="10.166666666666666">10.17</td>
+        <td class="">2–0 vs Hutchison Vale Colts</td>
+        <td>0–19 vs Dalkeith Thistle CFC</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="19">19</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+        <td class="" data-num="2.8333333333333335">2.83</td>
+        <td class="" data-num="4.666666666666667">4.67</td>
+        <td class="">8–1 vs Currie F C</td>
+        <td>1–12 vs Kelso FC</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="12">12</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Cramond_FC.html">Cramond FC</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="3.5714285714285716">3.57</td>
+        <td class="">1–0 vs Edinburgh City FC Academy</td>
+        <td>2–6 vs Edinburgh South Community FC Scorpions</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Edinburgh_City_FC_Academy.html">Edinburgh City FC Academy</a></td>
+        <td class="" data-num="0.5">0.50</td>
+        <td class="" data-num="2.6666666666666665">2.67</td>
+        <td class="">-</td>
+        <td>1–8 vs Tynecastle F C Maroons</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Currie_F_C.html">Currie F C</a></td>
+        <td class="" data-num="2.6">2.60</td>
+        <td class="" data-num="6.4">6.40</td>
+        <td class="">4–2 vs Edinburgh City FC Academy</td>
+        <td>2–9 vs Kelso FC</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Kelso_FC.html">Kelso FC</a></td>
+        <td class="" data-num="6.333333333333333">6.33</td>
+        <td class="" data-num="1">1.00</td>
+        <td class="">12–1 vs Spartans FC Youth Whites</td>
+        <td>-</td>
+        <td class="" data-num="12">12</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Tynecastle_F_C_Maroons.html">Tynecastle F C Maroons</a></td>
+        <td class="" data-num="6.166666666666667">6.17</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">8–0 vs Hutchison Vale Colts</td>
+        <td>2–4 vs Bonnyrigg Rose 2014 Thistle</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Peebles_FC.html">Peebles FC</a></td>
+        <td class="" data-num="2.8">2.80</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">9–2 vs Hutchison Vale Colts</td>
+        <td>1–5 vs Edinburgh South Community FC Scorpions</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        <td class="" data-num="4.25">4.25</td>
+        <td class="" data-num="2.75">2.75</td>
+        <td class="">14–1 vs Salvesen CFC</td>
+        <td>0–7 vs Kelso FC</td>
+        <td class="" data-num="14">14</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Bonnyrigg_Rose_2014_Thistle.html">Bonnyrigg Rose 2014 Thistle</a></td>
+        <td class="" data-num="5.166666666666667">5.17</td>
+        <td class="" data-num="1.5">1.50</td>
+        <td class="">14–0 vs Salvesen CFC</td>
+        <td>0–2 vs Dunbar United Colts - Blacks</td>
+        <td class="" data-num="14">14</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Hutchison_Vale_Colts.html">Hutchison Vale Colts</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="5.6">5.60</td>
+        <td class="">-</td>
+        <td>0–8 vs Tynecastle F C Maroons</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Edinburgh_South_Community_FC_Scorpions.html">Edinburgh South Community FC Scorpions</a></td>
+        <td class="" data-num="6.8">6.80</td>
+        <td class="" data-num="1.8">1.80</td>
+        <td class="">10–0 vs Salvesen CFC</td>
+        <td>3–5 vs Kelso FC</td>
+        <td class="" data-num="10">10</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        <td class="max-cell" data-num="9">9.00</td>
+        <td class="min-cell" data-num="0.6666666666666666">0.67</td>
+        <td class="max-cell">19–0 vs Salvesen CFC</td>
+        <td>-</td>
+        <td class="max-cell" data-num="19">19</td>
+        <td class="min-cell" data-num="1">1</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Dunbar_United_Colts___Blacks.html">Dunbar United Colts - Blacks</a></td>
+        <td class="" data-num="1.5">1.50</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">2–0 vs Bonnyrigg Rose 2014 Thistle</td>
+        <td>1–5 vs Dalkeith Thistle CFC</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="5">5</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 2B 26/27">
+      <h2>Alpha Trophies 2014s Division 2B 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Hawick_Youth.html">Hawick Youth</a></td>
+        <td class="" data-num="2.75">2.75</td>
+        <td class="" data-num="1.25">1.25</td>
+        <td class="">7–2 vs Loanhead Miners Youth FC</td>
+        <td>0–1 vs KSQ Galaxy</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="2">2</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Edinburgh_United_Youth_F_C_2014_Reds.html">Edinburgh United Youth F C 2014 Reds</a></td>
+        <td class="" data-num="3.3333333333333335">3.33</td>
+        <td class="" data-num="4">4.00</td>
+        <td class="">8–1 vs Haddington Athletic Colts</td>
+        <td>1–6 vs KSQ Galaxy</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        <td class="" data-num="5.428571428571429">5.43</td>
+        <td class="" data-num="1.4285714285714286">1.43</td>
+        <td class="">8–1 vs Inverkeithing Hillfield Swifts Colts</td>
+        <td>-</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Penicuik_Athletic_YFC_Blue.html">Penicuik Athletic YFC Blue</a></td>
+        <td class="" data-num="3.857142857142857">3.86</td>
+        <td class="" data-num="3.142857142857143">3.14</td>
+        <td class="">5–1 vs Leith Athletic FC</td>
+        <td>1–5 vs KSQ Galaxy</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Haddington_Athletic_Colts.html">Haddington Athletic Colts</a></td>
+        <td class="" data-num="1.2">1.20</td>
+        <td class="" data-num="7.8">7.80</td>
+        <td class="">-</td>
+        <td>2–14 vs North Merchiston FC Blacks</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="14">14</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Edinburgh_South_Community_FC_Falcons.html">Edinburgh South Community FC Falcons</a></td>
+        <td class="" data-num="4">4.00</td>
+        <td class="" data-num="5">5.00</td>
+        <td class="">5–2 vs Haddington Athletic Colts</td>
+        <td>2–6 vs Leith Athletic FC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Inverkeithing_Hillfield_Swifts_Colts.html">Inverkeithing Hillfield Swifts Colts</a></td>
+        <td class="" data-num="2.8">2.80</td>
+        <td class="" data-num="4.2">4.20</td>
+        <td class="">2–1 vs Livingston FC Community 2014 Whites</td>
+        <td>1–8 vs KSQ Galaxy</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Leith_Athletic_FC.html">Leith Athletic FC</a></td>
+        <td class="" data-num="2.8333333333333335">2.83</td>
+        <td class="" data-num="3.5">3.50</td>
+        <td class="">6–2 vs Edinburgh South Community FC Falcons</td>
+        <td>2–8 vs KSQ Galaxy</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Livingston_FC_Community_2014_Whites.html">Livingston FC Community 2014 Whites</a></td>
+        <td class="" data-num="1.8">1.80</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">5–1 vs Edinburgh City</td>
+        <td>1–5 vs KSQ Galaxy</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Loanhead_Miners_Youth_FC.html">Loanhead Miners Youth FC</a></td>
+        <td class="" data-num="4.25">4.25</td>
+        <td class="" data-num="3.75">3.75</td>
+        <td class="">7–4 vs Edinburgh South Community FC Falcons</td>
+        <td>2–7 vs Hawick Youth</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-North_Merchiston_FC_Blacks.html">North Merchiston FC Blacks</a></td>
+        <td class="" data-num="5">5.00</td>
+        <td class="" data-num="3.1666666666666665">3.17</td>
+        <td class="max-cell">14–2 vs Haddington Athletic Colts</td>
+        <td>3–7 vs Penicuik Athletic YFC Blue</td>
+        <td class="max-cell" data-num="14">14</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Edinburgh_City.html">Edinburgh City</a></td>
+        <td class="" data-num="1.3333333333333333">1.33</td>
+        <td class="" data-num="5.666666666666667">5.67</td>
+        <td class="">-</td>
+        <td>1–8 vs Gala Fairydean Rovers Academy</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Gala_Fairydean_Rovers_Academy.html">Gala Fairydean Rovers Academy</a></td>
+        <td class="max-cell" data-num="5.666666666666667">5.67</td>
+        <td class="min-cell" data-num="0.6666666666666666">0.67</td>
+        <td class="">9–0 vs Haddington Athletic Colts</td>
+        <td>0–1 vs Livingston FC Community 2014 Whites</td>
+        <td class="" data-num="9">9</td>
+        <td class="min-cell" data-num="1">1</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 3A 26/27">
+      <h2>Alpha Trophies 2014s Division 3A 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Craigroyston_CYFC_Blue.html">Craigroyston CYFC Blue</a></td>
+        <td class="" data-num="3.3333333333333335">3.33</td>
+        <td class="" data-num="2.3333333333333335">2.33</td>
+        <td class="">4–0 vs Broxburn Athletic Colts - Badgers</td>
+        <td>3–4 vs Musselburgh Youngstars</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        <td class="" data-num="3.1666666666666665">3.17</td>
+        <td class="" data-num="3.3333333333333335">3.33</td>
+        <td class="">3–2 vs Edinburgh City Blacks</td>
+        <td>2–5 vs Livingston FC Community 2014 Blues</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Broxburn_Athletic_Colts___Badgers.html">Broxburn Athletic Colts - Badgers</a></td>
+        <td class="" data-num="4.833333333333333">4.83</td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="max-cell">15–0 vs Preston Athletic Y F C - Colts</td>
+        <td>1–5 vs Livingston FC Community 2014 Blues</td>
+        <td class="max-cell" data-num="15">15</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-North_Merchiston_FC_Whites.html">North Merchiston FC Whites</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="4.666666666666667">4.67</td>
+        <td class="">7–5 vs TRANENT FC BLACKS</td>
+        <td>1–7 vs Broxburn Athletic Colts - Badgers</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Edinburgh_City_Blacks.html">Edinburgh City Blacks</a></td>
+        <td class="" data-num="1.6666666666666667">1.67</td>
+        <td class="" data-num="3.3333333333333335">3.33</td>
+        <td class="">2–1 vs TRANENT FC BLACKS</td>
+        <td>1–6 vs Musselburgh Youngstars</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-TRANENT_FC_BLACKS.html">TRANENT FC BLACKS</a></td>
+        <td class="" data-num="2.8">2.80</td>
+        <td class="" data-num="4.8">4.80</td>
+        <td class="">-</td>
+        <td>2–7 vs Bonnyrigg Rose 2014 Whites</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Bonnyrigg_Rose_2014_Whites.html">Bonnyrigg Rose 2014 Whites</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="2.75">2.75</td>
+        <td class="">7–2 vs TRANENT FC BLACKS</td>
+        <td>2–4 vs Livingston FC Community 2014 Blues</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Preston_Athletic_Y_F_C___Colts.html">Preston Athletic Y F C - Colts</a></td>
+        <td class="" data-num="2.25">2.25</td>
+        <td class="" data-num="8.75">8.75</td>
+        <td class="">-</td>
+        <td>0–15 vs Broxburn Athletic Colts - Badgers</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="15">15</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Inverkeithing_Hillfield_Swifts_Gunners.html">Inverkeithing Hillfield Swifts Gunners</a></td>
+        <td class="" data-num="3.4">3.40</td>
+        <td class="" data-num="2.2">2.20</td>
+        <td class="">6–0 vs Preston Athletic Y F C - Colts</td>
+        <td>1–4 vs Livingston FC Community 2014 Blues</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Livingston_FC_Community_2014_Blues.html">Livingston FC Community 2014 Blues</a></td>
+        <td class="" data-num="4.4">4.40</td>
+        <td class="min-cell" data-num="1.4">1.40</td>
+        <td class="">5–1 vs Broxburn Athletic Colts - Badgers</td>
+        <td>-</td>
+        <td class="" data-num="5">5</td>
+        <td class="min-cell" data-num="2">2</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Musselburgh_Youngstars.html">Musselburgh Youngstars</a></td>
+        <td class="max-cell" data-num="6">6.00</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">6–1 vs Edinburgh City Blacks</td>
+        <td>-</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="5">5</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 3B 26/27">
+      <h2>Alpha Trophies 2014s Division 3B 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Edina_Hibs.html">Edina Hibs</a></td>
+        <td class="" data-num="5.428571428571429">5.43</td>
+        <td class="" data-num="3.7142857142857144">3.71</td>
+        <td class="">10–4 vs Edinburgh South Community FC Sharks</td>
+        <td>3–6 vs Lochend Football Academy</td>
+        <td class="" data-num="10">10</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Cramond_FC_Lions.html">Cramond FC Lions</a></td>
+        <td class="" data-num="1.1428571428571428">1.14</td>
+        <td class="" data-num="2.857142857142857">2.86</td>
+        <td class="">-</td>
+        <td>2–5 vs Edina Hibs</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        <td class="max-cell" data-num="7.25">7.25</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="max-cell">10–0 vs Inter Currie FC</td>
+        <td>1–5 vs Tynecastle F C Whites</td>
+        <td class="" data-num="10">10</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Inter_Currie_FC.html">Inter Currie FC</a></td>
+        <td class="" data-num="0.6">0.60</td>
+        <td class="" data-num="8.2">8.20</td>
+        <td class="">-</td>
+        <td>0–10 vs Corstorphine Dynamo FC Blacks</td>
+        <td class="" data-num="1">1</td>
+        <td class="" data-num="10">10</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Lochend_Football_Academy.html">Lochend Football Academy</a></td>
+        <td class="" data-num="6.142857142857143">6.14</td>
+        <td class="min-cell" data-num="1.7142857142857142">1.71</td>
+        <td class="">10–0 vs Edinburgh South Community FC Sharks</td>
+        <td>-</td>
+        <td class="" data-num="10">10</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Tynecastle_F_C_Whites.html">Tynecastle F C Whites</a></td>
+        <td class="" data-num="5.2">5.20</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">11–1 vs Dalkeith Thistle CFC Cardo</td>
+        <td>1–5 vs Lochend Football Academy</td>
+        <td class="max-cell" data-num="11">11</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-North_Berwick_Town_FC.html">North Berwick Town FC</a></td>
+        <td class="" data-num="2.8333333333333335">2.83</td>
+        <td class="" data-num="6.666666666666667">6.67</td>
+        <td class="">-</td>
+        <td>2–10 vs Corstorphine Dynamo FC Blacks</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="10">10</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+        <td class="" data-num="4.25">4.25</td>
+        <td class="" data-num="1.75">1.75</td>
+        <td class="">9–3 vs North Berwick Town FC</td>
+        <td>0–4 vs Edina Hibs</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Castlevale_Youth_Development_Club.html">Castlevale Youth Development Club</a></td>
+        <td class="" data-num="1.6">1.60</td>
+        <td class="" data-num="3.4">3.40</td>
+        <td class="">3–2 vs Musselburgh Windsor FC Blues</td>
+        <td>0–6 vs Spartans FC Youth Reds</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        <td class="" data-num="5.25">5.25</td>
+        <td class="" data-num="2.25">2.25</td>
+        <td class="">10–1 vs Inter Currie FC</td>
+        <td>2–3 vs Castlevale Youth Development Club</td>
+        <td class="" data-num="10">10</td>
+        <td class="min-cell" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Leith_Athletic_F_C_Colts.html">Leith Athletic F C Colts</a></td>
+        <td class="" data-num="4.8">4.80</td>
+        <td class="" data-num="3.6">3.60</td>
+        <td class="">7–0 vs Inter Currie FC</td>
+        <td>4–7 vs Edina Hibs</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+        <td class="" data-num="4.6">4.60</td>
+        <td class="" data-num="5.8">5.80</td>
+        <td class="">9–1 vs Inter Currie FC</td>
+        <td>1–11 vs Tynecastle F C Whites</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="11">11</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Edinburgh_South_Community_FC_Sharks.html">Edinburgh South Community FC Sharks</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="5.5">5.50</td>
+        <td class="">5–1 vs Inter Currie FC</td>
+        <td>0–10 vs Lochend Football Academy</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="10">10</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 4A 26/27">
+      <h2>Alpha Trophies 2014s Division 4A 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Livingston_FC_Community_2014_Blacks.html">Livingston FC Community 2014 Blacks</a></td>
+        <td class="" data-num="3.5">3.50</td>
+        <td class="" data-num="4.5">4.50</td>
+        <td class="">5–2 vs Edinburgh South Community FC Wolves</td>
+        <td>2–5 vs Easthouses Lily</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Edinburgh_South_Community_FC_Wolves.html">Edinburgh South Community FC Wolves</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="min-cell" data-num="2">2.00</td>
+        <td class="">1–0 vs Dunbar United Colts - Whites</td>
+        <td>2–5 vs Livingston FC Community 2014 Blacks</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Easthouses_Lily.html">Easthouses Lily</a></td>
+        <td class="" data-num="3.6">3.60</td>
+        <td class="" data-num="4.6">4.60</td>
+        <td class="">5–2 vs Livingston FC Community 2014 Blacks</td>
+        <td>0–4 vs Dunbar United Colts - Whites</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Dunbar_United_Colts___Whites.html">Dunbar United Colts - Whites</a></td>
+        <td class="" data-num="2.6666666666666665">2.67</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">4–0 vs Easthouses Lily</td>
+        <td>1–9 vs AC Oxgangs CFC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Penicuik_Athletic_YFC_Red.html">Penicuik Athletic YFC Red</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="7.333333333333333">7.33</td>
+        <td class="">6–2 vs Edinburgh United Youth F C 2014 Blacks</td>
+        <td>2–16 vs Melrose FC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="16">16</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Melrose_FC.html">Melrose FC</a></td>
+        <td class="max-cell" data-num="7.5">7.50</td>
+        <td class="" data-num="2.25">2.25</td>
+        <td class="max-cell">16–2 vs Penicuik Athletic YFC Red</td>
+        <td>-</td>
+        <td class="max-cell" data-num="16">16</td>
+        <td class="min-cell" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+        <td class="" data-num="5.666666666666667">5.67</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">8–0 vs Edinburgh United Youth F C 2014 Blacks</td>
+        <td>3–6 vs Melrose FC</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Lochend_Football_Academy_Colts.html">Lochend Football Academy Colts</a></td>
+        <td class="" data-num="4.25">4.25</td>
+        <td class="" data-num="5.5">5.50</td>
+        <td class="">5–3 vs Livingston FC Community 2014 Blacks</td>
+        <td>2–7 vs AC Oxgangs CFC</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Edinburgh_United_Youth_F_C_2014_Blacks.html">Edinburgh United Youth F C 2014 Blacks</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="4.666666666666667">4.67</td>
+        <td class="">1–0 vs Edinburgh South Community FC Wolves</td>
+        <td>0–8 vs AC Oxgangs CFC</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="8">8</td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 4B 26/27">
+      <h2>Alpha Trophies 2014s Division 4B 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Penicuik_Athletic_YFC_Gold.html">Penicuik Athletic YFC Gold</a></td>
+        <td class="" data-num="6.25">6.25</td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="">10–3 vs Edinburgh South Community FC Cobras</td>
+        <td>-</td>
+        <td class="" data-num="10">10</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Bonnyrigg_Rose_Juniors.html">Bonnyrigg Rose Juniors</a></td>
+        <td class="" data-num="2.8333333333333335">2.83</td>
+        <td class="" data-num="3.6666666666666665">3.67</td>
+        <td class="">6–1 vs Edinburgh South Community FC Cobras</td>
+        <td>3–8 vs Penicuik Athletic YFC Gold</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Musselburgh_Windsor_FC_Whites.html">Musselburgh Windsor FC Whites</a></td>
+        <td class="max-cell" data-num="6.333333333333333">6.33</td>
+        <td class="min-cell" data-num="1.1666666666666667">1.17</td>
+        <td class="max-cell">14–0 vs Tranent FC Maroon</td>
+        <td>-</td>
+        <td class="max-cell" data-num="14">14</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        <td class="" data-num="4">4.00</td>
+        <td class="" data-num="2.4">2.40</td>
+        <td class="">8–2 vs Loanhead Miners Youth FC Star</td>
+        <td>-</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Tranent_FC_Maroon.html">Tranent FC Maroon</a></td>
+        <td class="" data-num="2.8">2.80</td>
+        <td class="" data-num="6.6">6.60</td>
+        <td class="">7–4 vs Loanhead Miners Youth FC Star</td>
+        <td>0–14 vs Musselburgh Windsor FC Whites</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="14">14</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Edinburgh_South_Community_FC_Cobras.html">Edinburgh South Community FC Cobras</a></td>
+        <td class="" data-num="4.166666666666667">4.17</td>
+        <td class="" data-num="5.5">5.50</td>
+        <td class="">9–1 vs Tranent FC Maroon</td>
+        <td>1–9 vs Musselburgh Windsor FC Whites</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="10">10</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Loanhead_Miners_Youth_FC_Star.html">Loanhead Miners Youth FC Star</a></td>
+        <td class="" data-num="3.3333333333333335">3.33</td>
+        <td class="" data-num="7">7.00</td>
+        <td class="">-</td>
+        <td>2–8 vs KSQ Rapids</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Dalkeith_Thistle_CFC_Deportivo.html">Dalkeith Thistle CFC Deportivo</a></td>
+        <td class="" data-num="0.8">0.80</td>
+        <td class="" data-num="2.4">2.40</td>
+        <td class="">-</td>
+        <td>4–9 vs Edinburgh South Community FC Cobras</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Leith_Athletic_Reds.html">Leith Athletic Reds</a></td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="" data-num="4">4.00</td>
+        <td class="">3–2 vs Edinburgh South Community FC Cobras</td>
+        <td>1–8 vs Musselburgh Windsor FC Whites</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Gala_Fairydean_Rovers_Reds.html">Gala Fairydean Rovers Reds</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="1.5">1.50</td>
+        <td class="">6–2 vs Bonnyrigg Rose Juniors</td>
+        <td>0–1 vs Musselburgh Windsor FC Whites</td>
+        <td class="" data-num="6">6</td>
+        <td class="min-cell" data-num="2">2</td>
+      </tr></tbody></table></div>
+  <script>
+  (function(){
+    function numVal(td){
+      const ds = td.getAttribute('data-num');
+      if(ds !== null) return parseFloat(ds);
+      const t = td.textContent.trim().replace(/[^\d.\-]/g,'');
+      const n = parseFloat(t);
+      return isNaN(n) ? 0 : n;
+    }
+    function getComparator(type, i, asc){
+      if(type === 'num'){
+        return (a,b)=>{ const ax=numVal(a.children[i]), bx=numVal(b.children[i]); return asc ? (ax-bx) : (bx-ax); };
+      }
+      return (a,b)=>{
+        const ax=a.children[i].textContent.trim();
+        const bx=b.children[i].textContent.trim();
+        const cmp=ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'});
+        return asc ? cmp : -cmp;
+      };
+    }
+    function sortTable(table, colIdx, type, th){
+      const tbody = table.querySelector('tbody'); if(!tbody) return;
+      const hasState = th.classList.contains('asc') || th.classList.contains('desc');
+      const firstAsc = (type === 'text');
+      const asc = hasState ? th.classList.contains('desc') : firstAsc;
+
+      const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r,idx]);
+      const cmp = getComparator(type, colIdx, asc);
+      rows.sort((A,B)=>{ const r=cmp(A[0],B[0]); return r!==0 ? r : (A[1]-B[1]); });
+
+      table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.forEach(pair=>tbody.appendChild(pair[0]));
+    }
+    document.querySelectorAll('table').forEach(t=>{
+      t.querySelectorAll('thead th.sortable').forEach(th=>{
+        th.addEventListener('click', ()=> sortTable(t, th.cellIndex, th.dataset.type||'text', th));
+      });
+    });
+
+    const divFilter = document.getElementById('division-filter');
+    function applyFilter(val){
+      document.querySelectorAll('.division-block').forEach(d=>{
+        d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none';
+      });
+    }
+    if(divFilter){
+      divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      const url = new URL(window.location.href);
+      const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) divFilter.value = pre;
+      applyFilter(divFilter.value || 'ALL');
+    }
+  })();
+  </script><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer></body></html>

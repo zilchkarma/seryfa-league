@@ -1,0 +1,309 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>U18 Team Stats</title>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QLTFGFY0MQ');
+  </script>
+
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+    h1{margin-top:0;color:#FFD700}
+    h2{margin-top:24px}
+    select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+    table{border-collapse:collapse;width:100%;margin-bottom:30px}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    th{background:#FFD700;color:#000}
+    th.sortable{cursor:pointer}
+    th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
+    td.gf{background:#d0eaff} td.ga{background:#ffe0d0}
+    tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+    th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+    .max-cell { background-color:#d4edda; font-weight:bold }    
+    .min-cell { background-color:#ffe0b2; font-weight:bold }    
+    td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
+    td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
+    footer{margin-top:24px;font-size:.9em;opacity:.85;text-align:center}
+    @media (prefers-color-scheme: dark){
+      body{background:#101010;color:#e0e0e0}
+      select{background:#222;color:#fff;border-color:#555}
+      table,th,td{border-color:#333}
+      th{background:#222;color:#fff}
+      td.gf{background:#1a2a40} td.ga{background:#402a1a}
+      tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+      th:first-child,td:first-child{background:#202020;font-weight:bold}
+      .max-cell { background:#004d00; color:#fff }
+      .min-cell { background:#804000; color:#fff }
+    }
+  </style>
+  </head><body>
+  <style>
+    .sfy-nav {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .sfy-nav .bar {
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #FFD700;
+      border-bottom: 1px solid #333;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .sfy-tabs,
+    .sfy-subtabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .sfy-subtabs {
+      background: #181818;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      color: #e0e0e0;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-link:hover {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+    .nav-link.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: bold;
+    }
+  </style>
+
+  <nav class="sfy-nav">
+    <div class="bar">SERYFA COMET Leagues</div>
+    <div class="sfy-tabs">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="u13-league-comet.html">U13</a><a class="nav-link" href="u14-league-comet.html">U14</a><a class="nav-link" href="u15-league-comet.html">U15</a><a class="nav-link" href="u16-league-comet.html">U16</a><a class="nav-link" href="u17-league-comet.html">U17</a><a class="nav-link" href="u18-league-comet.html">U18</a>
+    </div>
+    
+    <div class="sfy-subtabs">
+      <a class="nav-link" href="u18-league-comet.html">U18 Table</a>
+      <a class="nav-link active" href="u18-stats.html">Stats</a>
+      <a class="nav-link" href="Archive-2025-26-U18.html">2025/26 Archive</a>
+      <a class="nav-link" href="Scores.html">Scores</a>
+    </div>
+  </nav><h1>U18 Team Stats</h1><label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Alpha Trophies 2009s Division 1 26/27">Alpha Trophies 2009s Division 1 26/27</option>
+  </select><div class="division-block" data-division="Alpha Trophies 2009s Division 1 26/27">
+      <h2>Alpha Trophies 2009s Division 1 26/27</h2>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        <td class="max-cell" data-num="5.777777777777778">5.78</td>
+        <td class="min-cell" data-num="0.6666666666666666">0.67</td>
+        <td class="max-cell">13–1 vs KSQ Rapids</td>
+        <td>-</td>
+        <td class="max-cell" data-num="13">13</td>
+        <td class="min-cell" data-num="1">1</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Easthouses_Lily.html">Easthouses Lily</a></td>
+        <td class="" data-num="3.142857142857143">3.14</td>
+        <td class="" data-num="3.2857142857142856">3.29</td>
+        <td class="">7–2 vs KSQ Rapids</td>
+        <td>0–9 vs Spartans FC Youth</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        <td class="" data-num="4.25">4.25</td>
+        <td class="" data-num="2.125">2.13</td>
+        <td class="">6–0 vs CURRIE STAR FC WHITES</td>
+        <td>1–2 vs PENICUIK ATHLETIC YFC WHITES</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="4.777777777777778">4.78</td>
+        <td class="">1–0 vs North Berwick FC</td>
+        <td>0–8 vs KSQ Galaxy</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-TRANENT_FC_BLACKS.html">TRANENT FC BLACKS</a></td>
+        <td class="" data-num="2.4285714285714284">2.43</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">3–0 vs Broxburn Athletic Colts</td>
+        <td>1–7 vs KSQ Galaxy</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="5.666666666666667">5.67</td>
+        <td class="">4–2 vs TRANENT FC BLACKS</td>
+        <td>0–8 vs Spartans FC Youth</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+        <td class="" data-num="3.1666666666666665">3.17</td>
+        <td class="" data-num="3.1666666666666665">3.17</td>
+        <td class="">8–1 vs Inverkeithing Hillfield Swifts</td>
+        <td>0–7 vs Edinburgh South Community CFC</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-PENICUIK_ATHLETIC_YFC_WHITES.html">PENICUIK ATHLETIC YFC WHITES</a></td>
+        <td class="" data-num="2.4444444444444446">2.44</td>
+        <td class="" data-num="1.6666666666666667">1.67</td>
+        <td class="">5–0 vs Inverkeithing Hillfield Swifts</td>
+        <td>1–4 vs Edinburgh South Community CFC</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        <td class="" data-num="1.8571428571428572">1.86</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">4–0 vs North Berwick FC</td>
+        <td>0–4 vs DALKEITH THISTLE CFC BALOMPIE</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        <td class="" data-num="1.4285714285714286">1.43</td>
+        <td class="" data-num="3.2857142857142856">3.29</td>
+        <td class="">6–3 vs North Merchiston FC</td>
+        <td>0–8 vs Edinburgh South Community CFC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-DALKEITH_THISTLE_CFC_BALOMPIE.html">DALKEITH THISTLE CFC BALOMPIE</a></td>
+        <td class="" data-num="4.25">4.25</td>
+        <td class="" data-num="3.375">3.38</td>
+        <td class="">4–0 vs Corstorphine Dynamo FC Blacks</td>
+        <td>1–4 vs Spartans FC Youth</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+        <td class="" data-num="1.8571428571428572">1.86</td>
+        <td class="" data-num="4.714285714285714">4.71</td>
+        <td class="">-</td>
+        <td>1–9 vs KSQ Galaxy</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        <td class="" data-num="4.25">4.25</td>
+        <td class="" data-num="1.625">1.63</td>
+        <td class="">8–0 vs North Berwick FC</td>
+        <td>0–3 vs Spartans FC Youth</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        <td class="" data-num="5.142857142857143">5.14</td>
+        <td class="" data-num="1.1428571428571428">1.14</td>
+        <td class="">9–1 vs Broxburn Athletic Colts</td>
+        <td>2–3 vs Spartans FC Youth Blues</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        <td class="" data-num="1.5714285714285714">1.57</td>
+        <td class="" data-num="4.428571428571429">4.43</td>
+        <td class="">2–0 vs Inverkeithing Hillfield Swifts</td>
+        <td>1–13 vs Spartans FC Youth</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="13">13</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-CURRIE_STAR_FC_WHITES.html">CURRIE STAR FC WHITES</a></td>
+        <td class="" data-num="1.8333333333333333">1.83</td>
+        <td class="" data-num="3.6666666666666665">3.67</td>
+        <td class="">3–2 vs TRANENT FC BLACKS</td>
+        <td>0–6 vs Spartans FC Youth Blues</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="6">6</td>
+      </tr></tbody></table></div>
+  <script>
+  (function(){
+    function numVal(td){
+      const ds = td.getAttribute('data-num');
+      if(ds !== null) return parseFloat(ds);
+      const t = td.textContent.trim().replace(/[^\d.\-]/g,'');
+      const n = parseFloat(t);
+      return isNaN(n) ? 0 : n;
+    }
+    function getComparator(type, i, asc){
+      if(type === 'num'){
+        return (a,b)=>{ const ax=numVal(a.children[i]), bx=numVal(b.children[i]); return asc ? (ax-bx) : (bx-ax); };
+      }
+      return (a,b)=>{
+        const ax=a.children[i].textContent.trim();
+        const bx=b.children[i].textContent.trim();
+        const cmp=ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'});
+        return asc ? cmp : -cmp;
+      };
+    }
+    function sortTable(table, colIdx, type, th){
+      const tbody = table.querySelector('tbody'); if(!tbody) return;
+      const hasState = th.classList.contains('asc') || th.classList.contains('desc');
+      const firstAsc = (type === 'text');
+      const asc = hasState ? th.classList.contains('desc') : firstAsc;
+
+      const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r,idx]);
+      const cmp = getComparator(type, colIdx, asc);
+      rows.sort((A,B)=>{ const r=cmp(A[0],B[0]); return r!==0 ? r : (A[1]-B[1]); });
+
+      table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.forEach(pair=>tbody.appendChild(pair[0]));
+    }
+    document.querySelectorAll('table').forEach(t=>{
+      t.querySelectorAll('thead th.sortable').forEach(th=>{
+        th.addEventListener('click', ()=> sortTable(t, th.cellIndex, th.dataset.type||'text', th));
+      });
+    });
+
+    const divFilter = document.getElementById('division-filter');
+    function applyFilter(val){
+      document.querySelectorAll('.division-block').forEach(d=>{
+        d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none';
+      });
+    }
+    if(divFilter){
+      divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      const url = new URL(window.location.href);
+      const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) divFilter.value = pre;
+      applyFilter(divFilter.value || 'ALL');
+    }
+  })();
+  </script><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer></body></html>
