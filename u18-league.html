@@ -78,12 +78,78 @@
     <span class="slider"></span>
   </label>
   <span aria-hidden="true">🌙</span>
-</div><nav style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap;"><a href="u13-league.html" >U13</a><a href="u14-league.html" >U14</a><a href="u15-league.html" >U15</a><a href="u16-league.html" >U16</a><a href="u17-league.html" >U17</a><a href="u18-league.html" style="font-weight:bold; text-decoration:underline;">U18</a></nav><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer>
+</div>
+  <style>
+    .sfy-nav {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .sfy-nav .bar {
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #FFD700;
+      border-bottom: 1px solid #333;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .sfy-tabs,
+    .sfy-subtabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .sfy-subtabs {
+      background: #181818;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      color: #e0e0e0;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-link:hover {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+    .nav-link.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: bold;
+    }
+  </style>
+
+  <nav class="sfy-nav">
+    <div class="bar">SERYFA Leagues</div>
+    <div class="sfy-tabs">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="u13-league.html">U13</a><a class="nav-link" href="u14-league.html">U14</a><a class="nav-link" href="u15-league.html">U15</a><a class="nav-link" href="u16-league.html">U16</a><a class="nav-link" href="u17-league.html">U17</a><a class="nav-link active" href="u18-league.html">U18</a>
+    </div>
+    
+    <div class="sfy-subtabs">
+      <a class="nav-link active" href="u18-league.html">U18 Table</a>
+      <a class="nav-link" href="u18-stats.html">Stats</a>
+      <a class="nav-link" href="Archive-2025-26-U18.html">2025/26 Archive</a>
+      <a class="nav-link" href="Scores.html">Scores</a>
+    </div>
+  </nav><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer>
   <div id="sfy-chat-widget" style="position:fixed; bottom:20px; right:20px; z-index:9999; font-family:sans-serif;">
     <button id="chat-btn" onclick="toggleChat()" style="background:#FFD700; color:#000; border:none; border-radius:50%; width:56px; height:56px; font-size:24px; box-shadow:0 4px 10px rgba(0,0,0,0.3); cursor:pointer; transition:transform 0.2s;">💬</button>
     <div id="chat-window" style="display:none; position:absolute; bottom:70px; right:0; width:340px; height:450px; background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.25); flex-direction:column; overflow:hidden; border:1px solid #ccc;">
       <div style="background:#222; color:#FFD700; padding:12px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;">
-        <span>The U18 Chatbot V3.1</span>
+        <span>The U18 Chatbot</span>
         <button onclick="toggleChat()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
       </div>
       <div id="chat-msgs" style="flex:1; padding:15px; overflow-y:auto; background:#f5f5f5; display:flex; flex-direction:column; gap:10px;">
@@ -99,47 +165,88 @@
   </div>
   <script>
     let conversationHistory = [];
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbwrg4h41GlQpwbi9hLXRC_OGX4XyW2xaxFxmH0KoL5Xa2fm_TXMEwpxPjsFlUV3LCEv1w/exec";
+
     function toggleChat() {
       const w = document.getElementById('chat-window');
-      const b = document.getElementById('chat-btn');
       const isHidden = w.style.display === 'none';
       w.style.display = isHidden ? 'flex' : 'none';
       if(isHidden) setTimeout(() => document.getElementById('chat-input').focus(), 100);
     }
-    function sendChat() {
+
+   function sendChat() {
       const input = document.getElementById('chat-input');
       const txt = input.value.trim();
       if(!txt) return;
       addMsg(txt, 'user');
       input.value = '';
       input.disabled = true;
-      const payload = { type: 'chat', question: txt, ageGroup: "U18", history: conversationHistory };
-      const ENDPOINT = "https://script.google.com/macros/s/AKfycbytk996A8C2OdalIjKAYWFLFyOB9Kp4WRJS8sCXIwvyoLKepHLZyOCf2mPp33h1p29JvA/exec"; 
-      fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
-      .then(res => res.json())
+
+      const payload = { 
+        type: 'chat', 
+        question: txt, 
+        ageGroup: "U18", 
+        history: conversationHistory 
+      };
+
+      fetch(ENDPOINT, { 
+        method: "POST", 
+        headers: { "Content-Type": "text/plain;charset=utf-8" }, 
+        body: JSON.stringify(payload) 
+      })
+      .then(async (res) => {
+        const text = await res.text();
+        try {
+          return JSON.parse(text);
+        } catch (e) {
+          
+          throw new Error("Server returned non-JSON: " + text.substring(0, 150));
+        }
+      })
       .then(data => {
-        input.disabled = false; input.focus();
+        input.disabled = false; 
+        input.focus();
         if (data.answer) {
           addMsg(data.answer, 'bot');
           if (conversationHistory.length > 6) conversationHistory.shift(); 
           conversationHistory.push({ role: 'user', content: txt }, { role: 'model', content: data.answer });
-        } else { addMsg("⚠️ " + (data.error || "No response"), 'bot'); }
-      }).catch(() => { input.disabled = false; addMsg("⛔ Connection Failed.", 'bot'); });
+        } else { 
+          addMsg("⚠️ " + (data.error || "No response"), 'bot'); 
+        }
+      })
+      .catch((err) => { 
+        input.disabled = false; 
+        addMsg("⛔ " + err.message, 'bot'); 
+      });
     }
+
     function addMsg(txt, sender) {
       const div = document.createElement('div');
-      div.style.padding = '8px 12px'; div.style.borderRadius = '12px'; div.style.fontSize = '0.9rem'; div.style.maxWidth = '85%';  div.style.color = '#000000'; 
-      if(sender === 'user') { div.style.alignSelf = 'flex-end'; div.style.background = '#FFD700'; div.textContent = txt; }
-      else { div.style.alignSelf = 'flex-start'; div.style.background = '#e0e0e0'; div.innerHTML = txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'); }
-      const box = document.getElementById('chat-msgs'); box.appendChild(div); box.scrollTop = box.scrollHeight;
+      div.style.padding = '8px 12px'; 
+      div.style.borderRadius = '12px'; 
+      div.style.fontSize = '0.9rem'; 
+      div.style.maxWidth = '85%';  
+      div.style.color = '#000000'; 
+      if(sender === 'user') { 
+        div.style.alignSelf = 'flex-end'; 
+        div.style.background = '#FFD700'; 
+        div.textContent = txt; 
+      } else { 
+        div.style.alignSelf = 'flex-start'; 
+        div.style.background = '#e0e0e0'; 
+        div.innerHTML = txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'); 
+      }
+      const box = document.getElementById('chat-msgs'); 
+      box.appendChild(div); 
+      box.scrollTop = box.scrollHeight;
     }
   </script><h1>U18 League Tables</h1>
   <label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
-    <option value="Alpha Trophies 2009s Division 1 26/27">Alpha Trophies 2009s Division 1 26/27</option>
+    <option value="Alpha Trophies 2009s Division 1 26/27">Alpha Trophies 2009s Division 1 26/27</option><option value="SYFA Scottish Cup South East 2009s 26/27">SYFA Scottish Cup South East 2009s 26/27</option>
   </select><div class="division-block" data-division="Alpha Trophies 2009s Division 1 26/27">
-      <h2>Alpha Trophies 2009s Division 1 26/27 - Last Updated 05/10/2026 22:42</h2>
+      <h2>Alpha Trophies 2009s Division 1 26/27 - Last Updated 08/10/2026 12:03</h2>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -344,7 +451,11 @@
         <td class="ga">33</td>
         <td class="gd">-20</td>
         <td class="form-cell" data-form="DLLLL"><span class="D">D</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
-      </tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><h2>Upcoming Matches</h2><script>
+      </tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Alpha Trophies 2009s Division 1 26/27"><h3>Alpha Trophies 2009s Division 1 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>TRANENT FC BLACKS</td><td>DALKEITH THISTLE CFC BALOMPIE</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Bonnyrigg Rose</td><td>North Berwick FC</td><td></td><td>Poltonhall Recreational Ground</td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Broxburn Athletic Colts</td><td>KSQ Rapids</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Easthouses Lily</td><td>Inverkeithing Hillfield Swifts</td><td></td><td>Easthouses Park</td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Edinburgh South Community CFC</td><td>KSQ Galaxy</td><td></td><td>,  , </td></tr></tbody></table></div><div class="future-division-block" data-division="SYFA Scottish Cup South East 2009s 26/27"><h3>SYFA Scottish Cup South East 2009s 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-04-09">10/04/2026</td><td>Corstorphine Dynamo FC Blacks</td><td>Edinburgh South CFC Reds</td><td></td><td>Gyle Park</td></tr><tr><td class="date-cell" data-iso="2026-04-09">10/04/2026</td><td>Inverkeithing Hillfield Swifts</td><td>Linlithgow Rose CFC Maroon</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-04-09">10/04/2026</td><td>North Berwick FC</td><td>Kelso F C</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Corstorphine Dynamo FC Blacks</td><td>Edinburgh South Community CFC</td><td></td><td>Gyle Park</td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>North Berwick FC</td><td>Inverkeithing Hillfield Swifts</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>KSQ Galaxy</td><td>Easthouses Lily</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>PENICUIK ATHLETIC YFC WHITES</td><td>Spartans FC Youth</td><td></td><td>Montgomery Park</td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Bonnyrigg Rose</td><td>DALKEITH THISTLE CFC BALOMPIE</td><td></td><td>Poltonhall Recreational Ground</td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Spartans FC Youth Blues</td><td>Linlithgow Rose CFC Maroon</td><td></td><td>Ainslie Park Stadium</td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>TRANENT FC BLACKS</td><td>North Merchiston FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>CURRIE STAR FC WHITES</td><td>Broxburn Athletic Colts</td><td></td><td>,  , </td></tr></tbody></table></div><script>
   (function(){
     const STORAGE_KEY = 'seryfa-theme'; const overrideEl = document.getElementById('theme-override');
     function apply(mode){
