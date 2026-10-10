@@ -28,15 +28,41 @@
   footer{margin-top:24px;font-size:.9em;opacity:.85}
 
    
+  .division-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .division-header h2 { margin: 0; }
+  .btn-share {
+    background: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-share:hover {
+    background: #FFD700;
+    border-color: #FFD700;
+    color: #000;
+  }
+
+   
   @media (max-width: 600px) {
-     
-    th:nth-child(3), td:nth-child(3),  
-    th:nth-child(4), td:nth-child(4),  
-    th:nth-child(5), td:nth-child(5),  
-    th:nth-child(6), td:nth-child(6),  
-    th:nth-child(8), td:nth-child(8),  
-    th:nth-child(9), td:nth-child(9),  
-    th:nth-child(10), td:nth-child(10)   {
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5),
+    th:nth-child(6), td:nth-child(6),
+    th:nth-child(8), td:nth-child(8),
+    th:nth-child(9), td:nth-child(9),
+    th:nth-child(10), td:nth-child(10) {
       display: none;
     }
     table { font-size: 0.85rem; }
@@ -59,6 +85,16 @@
     tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
     .W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}
     th:first-child,td:first-child{background:#202020;font-weight:bold}
+    .btn-share {
+      background: #222;
+      color: #e0e0e0;
+      border-color: #444;
+    }
+    .btn-share:hover {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+    }
   }
 
    
@@ -71,14 +107,15 @@
   .switch input:checked + .slider:before{transform:translateX(24px)}
   </style>
   <style id="theme-override"></style></head><body>
+
   <div class="theme-toggle" title="Toggle dark mode" role="group" aria-label="Theme toggle">
-  <span aria-hidden="true">☀️</span>
-  <label class="switch">
-    <input type="checkbox" id="theme-toggle" aria-label="Dark mode">
-    <span class="slider"></span>
-  </label>
-  <span aria-hidden="true">🌙</span>
-</div>
+    <span aria-hidden="true">☀️</span>
+    <label class="switch">
+      <input type="checkbox" id="theme-toggle" aria-label="Dark mode">
+      <span class="slider"></span>
+    </label>
+    <span aria-hidden="true">🌙</span>
+  </div>
   <style>
     .sfy-nav {
       background: #222;
@@ -162,91 +199,18 @@
         <button onclick="sendChat()" style="background:#FFD700; border:none; border-radius:50%; width:38px; height:38px; cursor:pointer;">➤</button>
       </div>
     </div>
-  </div>
-  <script>
-    let conversationHistory = [];
-    const ENDPOINT = "https://script.google.com/macros/s/AKfycbwrg4h41GlQpwbi9hLXRC_OGX4XyW2xaxFxmH0KoL5Xa2fm_TXMEwpxPjsFlUV3LCEv1w/exec";
-
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      const isHidden = w.style.display === 'none';
-      w.style.display = isHidden ? 'flex' : 'none';
-      if(isHidden) setTimeout(() => document.getElementById('chat-input').focus(), 100);
-    }
-
-   function sendChat() {
-      const input = document.getElementById('chat-input');
-      const txt = input.value.trim();
-      if(!txt) return;
-      addMsg(txt, 'user');
-      input.value = '';
-      input.disabled = true;
-
-      const payload = { 
-        type: 'chat', 
-        question: txt, 
-        ageGroup: "U17", 
-        history: conversationHistory 
-      };
-
-      fetch(ENDPOINT, { 
-        method: "POST", 
-        headers: { "Content-Type": "text/plain;charset=utf-8" }, 
-        body: JSON.stringify(payload) 
-      })
-      .then(async (res) => {
-        const text = await res.text();
-        try {
-          return JSON.parse(text);
-        } catch (e) {
-          
-          throw new Error("Server returned non-JSON: " + text.substring(0, 150));
-        }
-      })
-      .then(data => {
-        input.disabled = false; 
-        input.focus();
-        if (data.answer) {
-          addMsg(data.answer, 'bot');
-          if (conversationHistory.length > 6) conversationHistory.shift(); 
-          conversationHistory.push({ role: 'user', content: txt }, { role: 'model', content: data.answer });
-        } else { 
-          addMsg("⚠️ " + (data.error || "No response"), 'bot'); 
-        }
-      })
-      .catch((err) => { 
-        input.disabled = false; 
-        addMsg("⛔ " + err.message, 'bot'); 
-      });
-    }
-
-    function addMsg(txt, sender) {
-      const div = document.createElement('div');
-      div.style.padding = '8px 12px'; 
-      div.style.borderRadius = '12px'; 
-      div.style.fontSize = '0.9rem'; 
-      div.style.maxWidth = '85%';  
-      div.style.color = '#000000'; 
-      if(sender === 'user') { 
-        div.style.alignSelf = 'flex-end'; 
-        div.style.background = '#FFD700'; 
-        div.textContent = txt; 
-      } else { 
-        div.style.alignSelf = 'flex-start'; 
-        div.style.background = '#e0e0e0'; 
-        div.innerHTML = txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'); 
-      }
-      const box = document.getElementById('chat-msgs'); 
-      box.appendChild(div); 
-      box.scrollTop = box.scrollHeight;
-    }
-  </script><h1>U17 League Tables</h1>
+  </div><h1>U17 League Tables</h1>
   <label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
     <option value="Alpha Trophies 2010s Division 1 26/27">Alpha Trophies 2010s Division 1 26/27</option><option value="Alpha Trophies 2010s Division 2 26/27">Alpha Trophies 2010s Division 2 26/27</option><option value="Alpha Trophies 2010s Division 3 26/27">Alpha Trophies 2010s Division 3 26/27</option><option value="SERYFA 2010 South East Region Cup 2026/2027">SERYFA 2010 South East Region Cup 2026/2027</option><option value="SYFA Scottish Cup South East 2010s 26/27">SYFA Scottish Cup South East 2010s 26/27</option>
   </select><div class="division-block" data-division="Alpha Trophies 2010s Division 1 26/27">
-      <h2>Alpha Trophies 2010s Division 1 26/27 - Last Updated 10/10/2026 11:23</h2>
+      <div class="division-header">
+        <h2>Alpha Trophies 2010s Division 1 26/27 - Last Updated 10/10/2026 20:33</h2>
+        <button class="btn-share" data-age="U17" data-division="Alpha Trophies 2010s Division 1 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -262,27 +226,27 @@
       </tr></thead><tbody><tr>
         <td>1</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        <td>6</td>
         <td>5</td>
-        <td>4</td>
         <td>0</td>
         <td>1</td>
-        <td class="pts-cell">12</td>
-        <td class="gf">20</td>
+        <td class="pts-cell">15</td>
+        <td class="gf">23</td>
         <td class="ga">7</td>
-        <td class="gd">13</td>
-        <td class="form-cell" data-form="LWWWW"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+        <td class="gd">16</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
       </tr><tr>
         <td>2</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
-        <td>5</td>
-        <td>3</td>
+        <td>6</td>
+        <td>4</td>
         <td>2</td>
         <td>0</td>
-        <td class="pts-cell">11</td>
-        <td class="gf">14</td>
-        <td class="ga">10</td>
-        <td class="gd">4</td>
-        <td class="form-cell" data-form="WDDWW"><span class="W">W</span><span class="D">D</span><span class="D">D</span><span class="W">W</span><span class="W">W</span></td>
+        <td class="pts-cell">14</td>
+        <td class="gf">17</td>
+        <td class="ga">11</td>
+        <td class="gd">6</td>
+        <td class="form-cell" data-form="DDWWW"><span class="D">D</span><span class="D">D</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
       </tr><tr>
         <td>3</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
@@ -298,15 +262,15 @@
       </tr><tr>
         <td>4</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
-        <td>5</td>
+        <td>6</td>
         <td>3</td>
         <td>1</td>
-        <td>1</td>
+        <td>2</td>
         <td class="pts-cell">10</td>
         <td class="gf">14</td>
-        <td class="ga">5</td>
-        <td class="gd">9</td>
-        <td class="form-cell" data-form="LWDWW"><span class="L">L</span><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="W">W</span></td>
+        <td class="ga">8</td>
+        <td class="gd">6</td>
+        <td class="form-cell" data-form="WDWLW"><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
       </tr><tr>
         <td>5</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
@@ -333,6 +297,18 @@
         <td class="form-cell" data-form="WWL"><span class="W">W</span><span class="W">W</span><span class="L">L</span></td>
       </tr><tr>
         <td>7</td>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_United.html">Blackburn United</a></td>
+        <td>4</td>
+        <td>2</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">6</td>
+        <td class="ga">13</td>
+        <td class="gd">-7</td>
+        <td class="form-cell" data-form="LLWW"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>8</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_Whites.html">Edinburgh City Whites</a></td>
         <td>4</td>
         <td>1</td>
@@ -344,7 +320,7 @@
         <td class="gd">-1</td>
         <td class="form-cell" data-form="WLDD"><span class="W">W</span><span class="L">L</span><span class="D">D</span><span class="D">D</span></td>
       </tr><tr>
-        <td>8</td>
+        <td>9</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Bayside_F_C_Athletic.html">Bayside F C Athletic</a></td>
         <td>4</td>
         <td>1</td>
@@ -356,41 +332,29 @@
         <td class="gd">0</td>
         <td class="form-cell" data-form="DWLL"><span class="D">D</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
       </tr><tr>
-        <td>9</td>
-        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_United.html">Blackburn United</a></td>
-        <td>3</td>
-        <td>1</td>
-        <td>0</td>
-        <td>2</td>
-        <td class="pts-cell">3</td>
-        <td class="gf">3</td>
-        <td class="ga">11</td>
-        <td class="gd">-8</td>
-        <td class="form-cell" data-form="LLW"><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
-      </tr><tr>
         <td>10</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-East_Calder_2010_CFC.html">East Calder 2010 CFC</a></td>
-        <td>5</td>
+        <td>6</td>
         <td>1</td>
         <td>0</td>
-        <td>4</td>
+        <td>5</td>
         <td class="pts-cell">3</td>
-        <td class="gf">12</td>
-        <td class="ga">31</td>
-        <td class="gd">-19</td>
-        <td class="form-cell" data-form="LWLLL"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+        <td class="gf">14</td>
+        <td class="ga">34</td>
+        <td class="gd">-20</td>
+        <td class="form-cell" data-form="WLLLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr><tr>
         <td>11</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Portobello_Community_Football_Academy.html">Portobello Community Football Academy</a></td>
-        <td>3</td>
+        <td>4</td>
         <td>0</td>
         <td>1</td>
-        <td>2</td>
+        <td>3</td>
         <td class="pts-cell">1</td>
-        <td class="gf">7</td>
-        <td class="ga">9</td>
-        <td class="gd">-2</td>
-        <td class="form-cell" data-form="LLD"><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
+        <td class="gf">8</td>
+        <td class="ga">12</td>
+        <td class="gd">-4</td>
+        <td class="form-cell" data-form="LLLD"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
       </tr><tr>
         <td>12</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
@@ -404,7 +368,12 @@
         <td class="gd">-12</td>
         <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 2 26/27">
-      <h2>Alpha Trophies 2010s Division 2 26/27 - Last Updated 10/10/2026 11:23</h2>
+      <div class="division-header">
+        <h2>Alpha Trophies 2010s Division 2 26/27 - Last Updated 10/10/2026 20:33</h2>
+        <button class="btn-share" data-age="U17" data-division="Alpha Trophies 2010s Division 2 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -419,6 +388,18 @@
         <th class="sortable" data-type="form">Form</th>
       </tr></thead><tbody><tr>
         <td>1</td>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+        <td>6</td>
+        <td>4</td>
+        <td>1</td>
+        <td>1</td>
+        <td class="pts-cell">13</td>
+        <td class="gf">20</td>
+        <td class="ga">12</td>
+        <td class="gd">8</td>
+        <td class="form-cell" data-form="WDLWW"><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
         <td>5</td>
         <td>4</td>
@@ -430,7 +411,7 @@
         <td class="gd">6</td>
         <td class="form-cell" data-form="LWWWW"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
       </tr><tr>
-        <td>2</td>
+        <td>3</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
         <td>7</td>
         <td>3</td>
@@ -442,19 +423,19 @@
         <td class="gd">3</td>
         <td class="form-cell" data-form="LDLWW"><span class="L">L</span><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
       </tr><tr>
-        <td>3</td>
-        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
-        <td>5</td>
-        <td>3</td>
-        <td>1</td>
-        <td>1</td>
-        <td class="pts-cell">10</td>
-        <td class="gf">18</td>
-        <td class="ga">12</td>
-        <td class="gd">6</td>
-        <td class="form-cell" data-form="WWDLW"><span class="W">W</span><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="W">W</span></td>
-      </tr><tr>
         <td>4</td>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Edinburgh_South_Community_CFC_Rovers.html">Edinburgh South Community CFC Rovers</a></td>
+        <td>6</td>
+        <td>3</td>
+        <td>2</td>
+        <td>1</td>
+        <td class="pts-cell">11</td>
+        <td class="gf">14</td>
+        <td class="ga">12</td>
+        <td class="gd">2</td>
+        <td class="form-cell" data-form="DLWDW"><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="D">D</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Blues.html">Musselburgh Windsor F C Blues</a></td>
         <td>4</td>
         <td>3</td>
@@ -466,29 +447,17 @@
         <td class="gd">5</td>
         <td class="form-cell" data-form="WDWW"><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="W">W</span></td>
       </tr><tr>
-        <td>5</td>
-        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Edinburgh_South_Community_CFC_Rovers.html">Edinburgh South Community CFC Rovers</a></td>
-        <td>5</td>
-        <td>3</td>
-        <td>1</td>
-        <td>1</td>
-        <td class="pts-cell">10</td>
-        <td class="gf">11</td>
-        <td class="ga">9</td>
-        <td class="gd">2</td>
-        <td class="form-cell" data-form="WDLWW"><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
-      </tr><tr>
         <td>6</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
-        <td>5</td>
+        <td>6</td>
         <td>3</td>
         <td>0</td>
-        <td>2</td>
+        <td>3</td>
         <td class="pts-cell">9</td>
         <td class="gf">20</td>
-        <td class="ga">9</td>
-        <td class="gd">11</td>
-        <td class="form-cell" data-form="LWWWL"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span></td>
+        <td class="ga">11</td>
+        <td class="gd">9</td>
+        <td class="form-cell" data-form="WWWLL"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
       </tr><tr>
         <td>7</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_F_C_Lions.html">Currie F C Lions</a></td>
@@ -527,6 +496,18 @@
         <td class="form-cell" data-form="LLLWL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
       </tr><tr>
         <td>10</td>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
+        <td>5</td>
+        <td>1</td>
+        <td>1</td>
+        <td>3</td>
+        <td class="pts-cell">4</td>
+        <td class="gf">10</td>
+        <td class="ga">15</td>
+        <td class="gd">-5</td>
+        <td class="form-cell" data-form="LWLLD"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>11</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
         <td>5</td>
         <td>1</td>
@@ -537,18 +518,6 @@
         <td class="ga">19</td>
         <td class="gd">-9</td>
         <td class="form-cell" data-form="DLWLL"><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
-      </tr><tr>
-        <td>11</td>
-        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
-        <td>4</td>
-        <td>1</td>
-        <td>0</td>
-        <td>3</td>
-        <td class="pts-cell">3</td>
-        <td class="gf">7</td>
-        <td class="ga">12</td>
-        <td class="gd">-5</td>
-        <td class="form-cell" data-form="LWLL"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
       </tr><tr>
         <td>12</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
@@ -574,7 +543,12 @@
         <td class="gd">-7</td>
         <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td>
       </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 3 26/27">
-      <h2>Alpha Trophies 2010s Division 3 26/27 - Last Updated 10/10/2026 11:23</h2>
+      <div class="division-header">
+        <h2>Alpha Trophies 2010s Division 3 26/27 - Last Updated 10/10/2026 20:33</h2>
+        <button class="btn-share" data-age="U17" data-division="Alpha Trophies 2010s Division 3 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
       <table class="sortable"><thead><tr>
         <th>#</th>
         <th class="sortable" data-type="text">Team</th>
@@ -613,6 +587,30 @@
         <td class="form-cell" data-form="WLLWW"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
       </tr><tr>
         <td>3</td>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        <td>7</td>
+        <td>4</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">12</td>
+        <td class="gf">32</td>
+        <td class="ga">13</td>
+        <td class="gd">19</td>
+        <td class="form-cell" data-form="WWLWW"><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers_Jfc.html">Gala Fairydean Rovers Jfc</a></td>
+        <td>4</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">12</td>
+        <td class="gf">20</td>
+        <td class="ga">10</td>
+        <td class="gd">10</td>
+        <td class="form-cell" data-form="WWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
         <td>6</td>
         <td>4</td>
@@ -624,65 +622,41 @@
         <td class="gd">4</td>
         <td class="form-cell" data-form="LWWLW"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
       </tr><tr>
-        <td>4</td>
-        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
         <td>6</td>
-        <td>3</td>
-        <td>0</td>
-        <td>3</td>
-        <td class="pts-cell">9</td>
-        <td class="gf">23</td>
-        <td class="ga">12</td>
-        <td class="gd">11</td>
-        <td class="form-cell" data-form="LWWLW"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
-      </tr><tr>
-        <td>5</td>
-        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers_Jfc.html">Gala Fairydean Rovers Jfc</a></td>
-        <td>3</td>
-        <td>3</td>
-        <td>0</td>
-        <td>0</td>
-        <td class="pts-cell">9</td>
-        <td class="gf">18</td>
-        <td class="ga">9</td>
-        <td class="gd">9</td>
-        <td class="form-cell" data-form="WWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
-      </tr><tr>
-        <td>6</td>
-        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
-        <td>7</td>
-        <td>3</td>
-        <td>0</td>
-        <td>4</td>
-        <td class="pts-cell">9</td>
-        <td class="gf">27</td>
-        <td class="ga">27</td>
-        <td class="gd">0</td>
-        <td class="form-cell" data-form="WLWLL"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
-      </tr><tr>
-        <td>7</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
-        <td>6</td>
+        <td>7</td>
+        <td>3</td>
         <td>2</td>
         <td>2</td>
-        <td>2</td>
-        <td class="pts-cell">8</td>
-        <td class="gf">19</td>
-        <td class="ga">25</td>
-        <td class="gd">-6</td>
-        <td class="form-cell" data-form="DLDWL"><span class="D">D</span><span class="L">L</span><span class="D">D</span><span class="W">W</span><span class="L">L</span></td>
+        <td class="pts-cell">11</td>
+        <td class="gf">21</td>
+        <td class="ga">26</td>
+        <td class="gd">-5</td>
+        <td class="form-cell" data-form="LDWWL"><span class="L">L</span><span class="D">D</span><span class="W">W</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        <td>8</td>
+        <td>3</td>
+        <td>0</td>
+        <td>5</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">28</td>
+        <td class="ga">36</td>
+        <td class="gd">-8</td>
+        <td class="form-cell" data-form="LWLLL"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr><tr>
         <td>8</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
-        <td>6</td>
+        <td>7</td>
         <td>2</td>
         <td>1</td>
-        <td>3</td>
+        <td>4</td>
         <td class="pts-cell">7</td>
-        <td class="gf">22</td>
-        <td class="ga">19</td>
-        <td class="gd">3</td>
-        <td class="form-cell" data-form="LWDWL"><span class="L">L</span><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="L">L</span></td>
+        <td class="gf">23</td>
+        <td class="ga">21</td>
+        <td class="gd">2</td>
+        <td class="form-cell" data-form="WDWLL"><span class="W">W</span><span class="D">D</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
       </tr><tr>
         <td>9</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Musselburgh_Windsor_FC_Reds.html">Musselburgh Windsor FC Reds</a></td>
@@ -698,15 +672,15 @@
       </tr><tr>
         <td>10</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Polbeth_United.html">Polbeth United</a></td>
-        <td>5</td>
+        <td>6</td>
         <td>1</td>
         <td>0</td>
-        <td>4</td>
+        <td>5</td>
         <td class="pts-cell">3</td>
-        <td class="gf">7</td>
-        <td class="ga">29</td>
-        <td class="gd">-22</td>
-        <td class="form-cell" data-form="LWLLL"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+        <td class="gf">8</td>
+        <td class="ga">31</td>
+        <td class="gd">-23</td>
+        <td class="form-cell" data-form="WLLLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
       </tr><tr>
         <td>11</td>
         <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Bonnyrigg_Rose_Blacks.html">Bonnyrigg Rose Blacks</a></td>
@@ -731,22 +705,92 @@
         <td class="ga">33</td>
         <td class="gd">-25</td>
         <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
-      </tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Alpha Trophies 2010s Division 1 26/27"><h3>Alpha Trophies 2010s Division 1 26/27</h3><table><thead><tr>
+      </tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><div class="division-block" data-division="Alpha Trophies 2010s Division 1 26/27"><h3>Alpha Trophies 2010s Division 1 26/27</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>Alpha Trophies 2010s Division 1 26/27</td><td>North Merchiston FC</td><td>0-3</td><td>Edinburgh South CFC</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>Alpha Trophies 2010s Division 1 26/27</td><td>Musselburgh Windsor FC</td><td>3-1</td><td>Portobello Community Football Academy</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>Alpha Trophies 2010s Division 1 26/27</td><td>East Calder 2010 CFC</td><td>2-3</td><td>Blackburn United</td></tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 2 26/27"><h3>Alpha Trophies 2010s Division 2 26/27</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>Alpha Trophies 2010s Division 2 26/27</td><td>Cramond Football Club</td><td>2-0</td><td>Penicuik Athletic YFC White</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>Alpha Trophies 2010s Division 2 26/27</td><td>Edinburgh South Community CFC Rovers</td><td>3-3</td><td>Tranent FC</td></tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 3 26/27"><h3>Alpha Trophies 2010s Division 3 26/27</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>Alpha Trophies 2010s Division 3 26/27</td><td>Gala Fairydean Rovers Jfc</td><td>2-1</td><td>Livingston Community FC</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>Alpha Trophies 2010s Division 3 26/27</td><td>Dunbar United Colts</td><td>9-1</td><td>Currie F C Tigers</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>Alpha Trophies 2010s Division 3 26/27</td><td>Polbeth United</td><td>1-2</td><td>Penicuik Athletic YFC Reds</td></tr></tbody></table></div><div class="division-block" data-division="SERYFA 2010 South East Region Cup 2026/2027"><h3>SERYFA 2010 South East Region Cup 2026/2027</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>SERYFA 2010 South East Region Cup 2026/2027</td><td>Civil Service Strollers Fc</td><td>4-6</td><td>Edinburgh City FC Academy</td></tr></tbody></table></div><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Alpha Trophies 2010s Division 1 26/27"><h3>Alpha Trophies 2010s Division 1 26/27</h3><table><thead><tr>
       <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
-    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>North Merchiston FC</td><td>Edinburgh South CFC</td><td></td><td>Harrison Park</td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Musselburgh Windsor FC</td><td>Portobello Community Football Academy</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>East Calder 2010 CFC</td><td>Blackburn United</td><td></td><td>East Calder Park</td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Portobello Community Football Academy</td><td>Edinburgh South CFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Edinburgh City Whites</td><td>Spartans FC Youth</td><td></td><td>Forrester High School</td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>East Calder 2010 CFC</td><td>AC Oxgangs CFC</td><td></td><td>East Calder Park</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2010s Division 2 26/27"><h3>Alpha Trophies 2010s Division 2 26/27</h3><table><thead><tr>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Portobello Community Football Academy</td><td>Edinburgh South CFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Edinburgh City Whites</td><td>Spartans FC Youth</td><td></td><td>Forrester High School</td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>East Calder 2010 CFC</td><td>AC Oxgangs CFC</td><td></td><td>East Calder Park</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2010s Division 2 26/27"><h3>Alpha Trophies 2010s Division 2 26/27</h3><table><thead><tr>
       <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
-    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Cramond Football Club</td><td>Penicuik Athletic YFC White</td><td></td><td>Davidsons Mains Park</td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Edinburgh South Community CFC Rovers</td><td>Tranent FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Murieston United Blues</td><td>Dalkeith Thistle CFC Balompie</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Currie F C Lions</td><td>Musselburgh Windsor F C Whites</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Dalkeith Thistle CFC Balompie</td><td>Spartans FC Youth Reds</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Murieston United Blues</td><td>Penicuik Athletic YFC White</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Edinburgh South Community CFC Rovers</td><td>Currie Star</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Musselburgh Windsor F C Whites</td><td>Cramond Football Club</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Civil Service Strollers Fc</td><td>Tranent FC</td><td></td><td>,  , </td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2010s Division 3 26/27"><h3>Alpha Trophies 2010s Division 3 26/27</h3><table><thead><tr>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Murieston United Blues</td><td>Dalkeith Thistle CFC Balompie</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Currie F C Lions</td><td>Musselburgh Windsor F C Whites</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Dalkeith Thistle CFC Balompie</td><td>Spartans FC Youth Reds</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Murieston United Blues</td><td>Penicuik Athletic YFC White</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Edinburgh South Community CFC Rovers</td><td>Currie Star</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Musselburgh Windsor F C Whites</td><td>Cramond Football Club</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Civil Service Strollers Fc</td><td>Tranent FC</td><td></td><td>,  , </td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2010s Division 3 26/27"><h3>Alpha Trophies 2010s Division 3 26/27</h3><table><thead><tr>
       <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
-    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Bonnyrigg Rose Blacks</td><td>Musselburgh Windsor FC Reds</td><td></td><td>Poltonhall Recreational Ground</td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Gala Fairydean Rovers Jfc</td><td>Livingston Community FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Dunbar United Colts</td><td>Currie F C Tigers</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Polbeth United</td><td>Penicuik Athletic YFC Reds</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>AC Oxgangs CFC Calcio</td><td>Currie F C Tigers</td><td></td><td>Colinton Mains Park</td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Longniddry Villa</td><td>Broxburn Athletic Colts - Badgers (2010</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Musselburgh Windsor FC Reds</td><td>Penicuik Athletic YFC Reds</td><td></td><td>Pinkie Playing Fields</td></tr></tbody></table></div><div class="future-division-block" data-division="SERYFA 2010 South East Region Cup 2026/2027"><h3>SERYFA 2010 South East Region Cup 2026/2027</h3><table><thead><tr>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Bonnyrigg Rose Blacks</td><td>Musselburgh Windsor FC Reds</td><td></td><td>Poltonhall Recreational Ground</td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>AC Oxgangs CFC Calcio</td><td>Currie F C Tigers</td><td></td><td>Colinton Mains Park</td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Longniddry Villa</td><td>Broxburn Athletic Colts - Badgers (2010</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-16">17/10/2026</td><td>Musselburgh Windsor FC Reds</td><td>Penicuik Athletic YFC Reds</td><td></td><td>Pinkie Playing Fields</td></tr></tbody></table></div><div class="future-division-block" data-division="SYFA Scottish Cup South East 2010s 26/27"><h3>SYFA Scottish Cup South East 2010s 26/27</h3><table><thead><tr>
       <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
-    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-09">10/10/2026</td><td>Civil Service Strollers Fc</td><td>Edinburgh City FC Academy</td><td></td><td>,  , </td></tr></tbody></table></div><div class="future-division-block" data-division="SYFA Scottish Cup South East 2010s 26/27"><h3>SYFA Scottish Cup South East 2010s 26/27</h3><table><thead><tr>
-      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
-    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Dalkeith Thistle CFC Cardo</td><td>Currie F C Lions</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Spartans FC Youth</td><td>East Calder 2010 CFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Murieston United Blues</td><td>Spartans FC Youth Whites</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>North Merchiston FC</td><td>Edinburgh City Whites</td><td></td><td>Harrison Park</td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Musselburgh Windsor FC</td><td>Bayside F C Athletic</td><td></td><td>,  , </td></tr></tbody></table></div><script>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Dalkeith Thistle CFC Cardo</td><td>Currie F C Lions</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Spartans FC Youth</td><td>East Calder 2010 CFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Murieston United Blues</td><td>Spartans FC Youth Whites</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>North Merchiston FC</td><td>Edinburgh City Whites</td><td></td><td>Harrison Park</td></tr><tr><td class="date-cell" data-iso="2026-10-31">31/10/2026</td><td>Musselburgh Windsor FC</td><td>Bayside F C Athletic</td><td></td><td>,  , </td></tr></tbody></table></div>
+  <div id="share-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:99999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fff; color:#000; border-radius:12px; max-width:550px; width:100%; padding:24px; box-shadow:0 8px 30px rgba(0,0,0,0.3); position:relative;">
+      <button onclick="closeShareModal()" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:24px; cursor:pointer; color:inherit;">&times;</button>
+      
+      <h3 id="modal-title" style="margin-top:0; color:#FFD700;">Share League Table</h3>
+      <p style="font-size:0.9rem; opacity:0.85; margin-bottom:18px;">
+        Share this live table on Facebook or embed it into your club's website so it stays updated in real time.
+      </p>
+
+      <div style="margin-bottom:20px;">
+        <label style="font-weight:bold; display:block; margin-bottom:6px;">1. Share Live Table on Facebook</label>
+        <button id="fb-share-btn" onclick="shareToFacebook()" style="background:#1877F2; color:#fff; border:none; padding:10px 18px; border-radius:6px; font-weight:bold; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Post Live Link on Facebook
+        </button>
+        <div style="font-size:0.8rem; opacity:0.75; margin-top:4px;">Creates a Facebook post with a card linking directly to this live table.</div>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <label style="font-weight:bold; display:block; margin-bottom:6px;">2. Real-Time Embed Code (WordPress / Wix / Website)</label>
+        <textarea id="embed-code-box" readonly style="width:100%; box-sizing:border-box; height:80px; padding:10px; font-family:monospace; font-size:0.82rem; background:#f5f5f5; color:#000; border:1px solid #ccc; border-radius:6px; resize:none;"></textarea>
+        <div style="margin-top:6px; display:flex; gap:8px;">
+          <button onclick="copyEmbedCode()" style="background:#FFD700; color:#000; border:none; padding:8px 14px; border-radius:6px; font-weight:bold; cursor:pointer;">
+            📋 Copy Embed Code
+          </button>
+          <button onclick="downloadEmbedFile()" style="background:#eee; color:#000; border:1px solid #ccc; padding:8px 14px; border-radius:6px; cursor:pointer;">
+            💾 Download .HTML File
+          </button>
+        </div>
+        <span id="copy-feedback" style="font-size:0.85rem; color:#00B050; display:block; margin-top:6px;"></span>
+      </div>
+    </div>
+  </div>
+  <script>
+  
   (function(){
     const STORAGE_KEY = 'seryfa-theme'; const overrideEl = document.getElementById('theme-override');
     function apply(mode){
-      if(mode === 'dark'){ overrideEl.textContent = 'body{background:#101010;color:#e0e0e0}select{background:#222;color:#fff;border-color:#555}table,th,td{border-color:#333}th{background:#222;color:#fff}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#444;color:#FFD700}td.gf{background:#1a2a40}td.ga{background:#402a1a}td.gd{background:#1a402a}tr:nth-child(even){background:#181818}tr:nth-child(odd){background:#141414}.W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}th:first-child,td:first-child{background:#202020;font-weight:bold}.date-cell{background:#000;color:#FFD700}'; }
-      else if(mode === 'light'){ overrideEl.textContent = 'body{background:#f8f8f8;color:#000}select{background:#fff;color:#000;border-color:#bbb}table,th,td{border-color:#ccc}th{background:#FFD700;color:#000}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#fffde7;color:#000}td.gf{background:#d0eaff}td.ga{background:#ffe0d0}td.gd{background:#d0ffe0}tr:nth-child(even){background:#f9f9f9}tr:nth-child(odd){background:#fff}.W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}.date-cell{background:#000;color:#FFD700}'; }
+      if(mode === 'dark'){ overrideEl.textContent = 'body{background:#101010;color:#e0e0e0}select{background:#222;color:#fff;border-color:#555}table,th,td{border-color:#333}th{background:#222;color:#fff}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#444;color:#FFD700}td.gf{background:#1a2a40}td.ga{background:#402a1a}td.gd{background:#1a402a}tr:nth-child(even){background:#181818}tr:nth-child(odd){background:#141414}.W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}th:first-child,td:first-child{background:#202020;font-weight:bold}.date-cell{background:#000;color:#FFD700}.btn-share{background:#222;color:#e0e0e0;border-color:#444}'; }
+      else if(mode === 'light'){ overrideEl.textContent = 'body{background:#f8f8f8;color:#000}select{background:#fff;color:#000;border-color:#bbb}table,th,td{border-color:#ccc}th{background:#FFD700;color:#000}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#fffde7;color:#000}td.gf{background:#d0eaff}td.ga{background:#ffe0d0}td.gd{background:#d0ffe0}tr:nth-child(even){background:#f9f9f9}tr:nth-child(odd){background:#fff}.W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}.date-cell{background:#000;color:#FFD700}.btn-share{background:#fff;color:#000;border-color:#ccc}'; }
       else { overrideEl.textContent = ''; }
     }
     const saved = localStorage.getItem(STORAGE_KEY); apply(saved || '');
@@ -756,7 +800,90 @@
     }
   })();
   </script>
+
   <script>
+  
+  let conversationHistory = [];
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbwrg4h41GlQpwbi9hLXRC_OGX4XyW2xaxFxmH0KoL5Xa2fm_TXMEwpxPjsFlUV3LCEv1w/exec";
+
+  function toggleChat() {
+    const w = document.getElementById('chat-window');
+    const isHidden = w.style.display === 'none';
+    w.style.display = isHidden ? 'flex' : 'none';
+    if(isHidden) setTimeout(() => document.getElementById('chat-input').focus(), 100);
+  }
+
+  function sendChat() {
+    const input = document.getElementById('chat-input');
+    const txt = input.value.trim();
+    if(!txt) return;
+    addMsg(txt, 'user');
+    input.value = '';
+    input.disabled = true;
+
+    const payload = { 
+      type: 'chat', 
+      question: txt, 
+      ageGroup: "U17", 
+      history: conversationHistory 
+    };
+
+    fetch(ENDPOINT, { 
+      method: "POST", 
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, 
+      body: JSON.stringify(payload) 
+    })
+    .then(async (res) => {
+      const text = await res.text();
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        throw new Error("Server returned non-JSON: " + text.substring(0, 150));
+      }
+    })
+    .then(data => {
+      input.disabled = false; 
+      input.focus();
+      if (data.answer) {
+        addMsg(data.answer, 'bot');
+        if (conversationHistory.length > 6) conversationHistory.shift(); 
+        conversationHistory.push({ role: 'user', content: txt }, { role: 'model', content: data.answer });
+      } else { 
+        addMsg("⚠️ " + (data.error || "No response"), 'bot'); 
+      }
+    })
+    .catch((err) => { 
+      input.disabled = false; 
+      addMsg("⛔ " + err.message, 'bot'); 
+    });
+  }
+
+  function addMsg(txt, sender) {
+    const div = document.createElement('div');
+    div.style.padding = '8px 12px'; 
+    div.style.borderRadius = '12px'; 
+    div.style.fontSize = '0.9rem'; 
+    div.style.maxWidth = '85%';  
+    div.style.color = '#000000'; 
+    if(sender === 'user') { 
+      div.style.alignSelf = 'flex-end'; 
+      div.style.background = '#FFD700'; 
+      div.textContent = txt; 
+    } else { 
+      div.style.alignSelf = 'flex-start'; 
+      div.style.background = '#e0e0e0'; 
+      
+      const safe = (txt || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      div.innerHTML = safe.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>').replace(/\n/g, '<br>'); 
+    }
+    const box = document.getElementById('chat-msgs'); 
+    box.appendChild(div); 
+    box.scrollTop = box.scrollHeight;
+  }
+  </script>
+
+  <script>
+  
   (function(){
     function parseDMY(s){ const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec((s||'').trim()); if(!m) return NaN; return new Date(m[3], m[2]-1, m[1]).getTime(); }
     function getIsoOrParseDate(td){ const iso = td && td.dataset ? td.dataset.iso : ''; return iso ? Date.parse(iso) : parseDMY(td ? td.textContent : ''); }
@@ -782,12 +909,104 @@
     document.querySelectorAll('table').forEach(table=>{ table.querySelectorAll('thead th.sortable').forEach((th)=>{ th.addEventListener('click', ()=>{ sortTable(table, th.cellIndex, th.dataset.type || 'text', th); }); }); });
   })();
   </script>
-  <script>(function(){
+
+  <script>
+  
+  let currentShareUrl = '';
+  let currentShareDiv = '';
+
+  function handleShareClick(btn) {
+    const age = btn.getAttribute('data-age') || '';
+    const divName = btn.getAttribute('data-division') || '';
+    openShareModal(age, divName);
+  }
+
+  function openShareModal(ageGroup, divName) {
+    const modal = document.getElementById('share-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const embedBox = document.getElementById('embed-code-box');
+    const feedback = document.getElementById('copy-feedback');
+
+    feedback.textContent = '';
+    currentShareDiv = divName;
+
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('division', divName);
+    currentShareUrl = currentUrl.toString();
+
+    modalTitle.textContent = ageGroup + ' - ' + divName;
+
+    const safeTitle = divName.replace(/"/g, '&quot;');
+    const iframeSnippet = '<iframe src="' + currentShareUrl + '" width="100%" height="600" frameborder="0" style="border:1px solid #ccc; border-radius:8px; overflow:hidden;" title="' + safeTitle + ' Live Standings"></iframe>';
+    embedBox.value = iframeSnippet;
+
+    modal.style.display = 'flex';
+  }
+
+  function closeShareModal() {
+    document.getElementById('share-modal').style.display = 'none';
+  }
+
+  function shareToFacebook() {
+    const fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(currentShareUrl);
+    window.open(fbUrl, '_blank', 'width=600,height=500,menubar=no,toolbar=no,resizable=yes');
+  }
+
+  function copyEmbedCode() {
+    const embedBox = document.getElementById('embed-code-box');
+    embedBox.select();
+    const feedback = document.getElementById('copy-feedback');
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(embedBox.value).then(() => {
+        feedback.textContent = '✅ Embed code copied to clipboard!';
+        setTimeout(() => { feedback.textContent = ''; }, 3000);
+      }).catch(() => {
+        document.execCommand('copy');
+        feedback.textContent = '✅ Embed code copied!';
+        setTimeout(() => { feedback.textContent = ''; }, 3000);
+      });
+    } else {
+      document.execCommand('copy');
+      feedback.textContent = '✅ Embed code copied!';
+      setTimeout(() => { feedback.textContent = ''; }, 3000);
+    }
+  }
+
+  function downloadEmbedFile() {
+    const content = '<!DOCTYPE html>\n<html>\n<head>\n  <meta charset="UTF-8">\n  <title>' + currentShareDiv + ' - Live Table</title>\n</head>\n<body style="margin:0; padding:0; background:#f8f8f8;">\n  <iframe src="' + currentShareUrl + '" width="100%" height="800" frameborder="0" style="border:none;"></iframe>\n</body>\n</html>';
+    const blob = new Blob([content], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = currentShareDiv.replace(/[^a-z0-9]/gi, '_') + '_Live_Table.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  window.addEventListener('click', (e) => {
+    const modal = document.getElementById('share-modal');
+    if (e.target === modal) closeShareModal();
+  });
+  </script>
+
+  <script>
+  
+  (function(){
     const divFilter = document.getElementById('division-filter');
-    function applyFilter(val){ document.querySelectorAll('.division-block, .future-division-block').forEach(d=>{ d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none'; }); }
-    if (divFilter){ divFilter.addEventListener('change', function(){ applyFilter(this.value); });
-      const url = new URL(window.location.href); const pre = url.searchParams.get('division');
+    function applyFilter(val){ 
+      document.querySelectorAll('.division-block, .future-division-block').forEach(d=>{ 
+        d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none'; 
+      }); 
+    }
+    if (divFilter){ 
+      divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      const url = new URL(window.location.href); 
+      const pre = url.searchParams.get('division');
       if (pre && [...divFilter.options].some(o=>o.value===pre)) divFilter.value = pre;
       applyFilter(divFilter.value || 'ALL');
     }
-  })();</script></body></html>
+  })();
+  </script>
+
+</body></html>
