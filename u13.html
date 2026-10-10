@@ -1,0 +1,1759 @@
+<!DOCTYPE html><html><head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QLTFGFY0MQ');
+</script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+   
+  body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
+  h1{margin-top:0;color:#FFD700}
+  select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
+  table{border-collapse:collapse;width:100%;margin-bottom:30px}
+  th,td{border:1px solid #ccc;padding:8px;text-align:center}
+  th{background:#FFD700;color:#000}
+  th.sortable{cursor:pointer}
+  th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
+  th.pts-head{background:#FFD700;color:#000}
+  td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
+  td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
+  tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
+  .form-cell span{padding:2px 6px;border-radius:4px;color:#fff;font-weight:bold;margin-right:2px}
+  .W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}
+  th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
+  .date-cell{background:#000;color:#FFD700}
+  footer{margin-top:24px;font-size:.9em;opacity:.85}
+
+   
+  .division-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .division-header h2 { margin: 0; }
+  .btn-share {
+    background: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-share:hover {
+    background: #FFD700;
+    border-color: #FFD700;
+    color: #000;
+  }
+
+   
+  @media (max-width: 600px) {
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5),
+    th:nth-child(6), td:nth-child(6),
+    th:nth-child(8), td:nth-child(8),
+    th:nth-child(9), td:nth-child(9),
+    th:nth-child(10), td:nth-child(10) {
+      display: none;
+    }
+    table { font-size: 0.85rem; }
+    .form-cell span { padding: 1px 4px; font-size: 10px; }
+  }
+
+   
+  td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
+  td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
+
+   
+  @media (prefers-color-scheme: dark){
+    body{background:#101010;color:#e0e0e0}
+    select{background:#222;color:#fff;border-color:#555}
+    table,th,td{border-color:#333}
+    th{background:#222;color:#fff}
+    th.pts-head{background:#FFD700;color:#000}
+    td.pts-cell{background:#444;color:#FFD700}
+    td.gf{background:#1a2a40} td.ga{background:#402a1a} td.gd{background:#1a402a}
+    tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
+    .W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}
+    th:first-child,td:first-child{background:#202020;font-weight:bold}
+    .btn-share {
+      background: #222;
+      color: #e0e0e0;
+      border-color: #444;
+    }
+    .btn-share:hover {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+    }
+  }
+
+   
+  .theme-toggle{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:6px 0 14px 0}
+  .switch{position:relative;display:inline-block;width:52px;height:28px}
+  .switch input{opacity:0;width:0;height:0}
+  .slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#bbb;transition:.2s;border-radius:28px}
+  .slider:before{position:absolute;content:"";height:22px;width:22px;left:3px;bottom:3px;background:#fff;transition:.2s;border-radius:50%}
+  .switch input:checked + .slider{background:#4CAF50}
+  .switch input:checked + .slider:before{transform:translateX(24px)}
+  </style>
+  <style id="theme-override"></style></head><body>
+
+  <div class="theme-toggle" title="Toggle dark mode" role="group" aria-label="Theme toggle">
+    <span aria-hidden="true">☀️</span>
+    <label class="switch">
+      <input type="checkbox" id="theme-toggle" aria-label="Dark mode">
+      <span class="slider"></span>
+    </label>
+    <span aria-hidden="true">🌙</span>
+  </div>
+  <style>
+    .sfy-nav {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .sfy-nav .bar {
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #FFD700;
+      border-bottom: 1px solid #333;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .sfy-tabs,
+    .sfy-subtabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .sfy-subtabs {
+      background: #181818;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      color: #e0e0e0;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-link:hover {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+    .nav-link.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: bold;
+    }
+  </style>
+
+  <nav class="sfy-nav">
+    <div class="bar">SERYFA Leagues</div>
+    <div class="sfy-tabs">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link active" href="u13.html">U13</a><a class="nav-link" href="u14.html">U14</a><a class="nav-link" href="u15.html">U15</a><a class="nav-link" href="u16.html">U16</a><a class="nav-link" href="u17.html">U17</a><a class="nav-link" href="u18.html">U18</a>
+    </div>
+    
+    <div class="sfy-subtabs">
+      <a class="nav-link active" href="u13.html">U13 Table</a>
+      <a class="nav-link" href="u13-stats.html">Stats</a>
+      <a class="nav-link" href="Archive-2025-26-U13.html">2025/26 Archive</a>
+      <a class="nav-link" href="Scores.html">Scores</a>
+    </div>
+  </nav><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer>
+  <div id="sfy-chat-widget" style="position:fixed; bottom:20px; right:20px; z-index:9999; font-family:sans-serif;">
+    <button id="chat-btn" onclick="toggleChat()" style="background:#FFD700; color:#000; border:none; border-radius:50%; width:56px; height:56px; font-size:24px; box-shadow:0 4px 10px rgba(0,0,0,0.3); cursor:pointer; transition:transform 0.2s;">💬</button>
+    <div id="chat-window" style="display:none; position:absolute; bottom:70px; right:0; width:340px; height:450px; background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.25); flex-direction:column; overflow:hidden; border:1px solid #ccc;">
+      <div style="background:#222; color:#FFD700; padding:12px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;">
+        <span>The U13 Chatbot</span>
+        <button onclick="toggleChat()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
+      <div id="chat-msgs" style="flex:1; padding:15px; overflow-y:auto; background:#f5f5f5; display:flex; flex-direction:column; gap:10px;">
+        <div style="align-self:flex-start; background:#e0e0e0; color:#000; padding:8px 12px; border-radius:12px; font-size:0.9rem; max-width:85%;">
+          Hi! Ask me about teams, standings, or fixtures for U13.
+        </div>
+      </div>
+      <div style="padding:10px; background:#fff; border-top:1px solid #ddd; display:flex; gap:6px;">
+        <input type="text" id="chat-input" placeholder="Ask a question..." style="flex:1; padding:10px; border:1px solid #ccc; border-radius:20px; outline:none; font-size:0.95rem;" onkeydown="if(event.key==='Enter') sendChat()">
+        <button onclick="sendChat()" style="background:#FFD700; border:none; border-radius:50%; width:38px; height:38px; cursor:pointer;">➤</button>
+      </div>
+    </div>
+  </div><h1>U13 League Tables</h1>
+  <label for="division-filter">Division:</label>
+  <select id="division-filter">
+    <option value="ALL">All Divisions</option>
+    <option value="Alpha Trophies 2014s Division 1A 26/27">Alpha Trophies 2014s Division 1A 26/27</option><option value="Alpha Trophies 2014s Division 1B 26/27">Alpha Trophies 2014s Division 1B 26/27</option><option value="Alpha Trophies 2014s Division 2A 26/27">Alpha Trophies 2014s Division 2A 26/27</option><option value="Alpha Trophies 2014s Division 2B 26/27">Alpha Trophies 2014s Division 2B 26/27</option><option value="Alpha Trophies 2014s Division 3A 26/27">Alpha Trophies 2014s Division 3A 26/27</option><option value="Alpha Trophies 2014s Division 3B 26/27">Alpha Trophies 2014s Division 3B 26/27</option><option value="Alpha Trophies 2014s Division 4A 26/27">Alpha Trophies 2014s Division 4A 26/27</option><option value="Alpha Trophies 2014s Division 4B 26/27">Alpha Trophies 2014s Division 4B 26/27</option><option value="SYFA Scottish Cup South East 2014s 26/27">SYFA Scottish Cup South East 2014s 26/27</option><option value="WLAYFC 2014s Top 6 26/27">WLAYFC 2014s Top 6 26/27</option><option value="WLAYFC Bottom 6 2014s 26/27">WLAYFC Bottom 6 2014s 26/27</option><option value="WLAYFC Middle 7 2014s 26/27">WLAYFC Middle 7 2014s 26/27</option>
+  </select><div class="division-block" data-division="Alpha Trophies 2014s Division 1A 26/27">
+      <div class="division-header">
+        <h2>Alpha Trophies 2014s Division 1A 26/27 - Last Updated 10/10/2026 21:44</h2>
+        <button class="btn-share" data-age="U13" data-division="Alpha Trophies 2014s Division 1A 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Leith_Victoria_AFC.html">Leith Victoria AFC</a></td>
+        <td>6</td>
+        <td>5</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">15</td>
+        <td class="gf">17</td>
+        <td class="ga">13</td>
+        <td class="gd">4</td>
+        <td class="form-cell" data-form="WWWLW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Football_Star_Elite_Blacks.html">Football Star Elite Blacks</a></td>
+        <td>4</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">12</td>
+        <td class="gf">26</td>
+        <td class="ga">7</td>
+        <td class="gd">19</td>
+        <td class="form-cell" data-form="WWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Craigroyston_CYFC_Yellows.html">Craigroyston CYFC Yellows</a></td>
+        <td>5</td>
+        <td>3</td>
+        <td>1</td>
+        <td>1</td>
+        <td class="pts-cell">10</td>
+        <td class="gf">17</td>
+        <td class="ga">6</td>
+        <td class="gd">11</td>
+        <td class="form-cell" data-form="LWWWD"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        <td>5</td>
+        <td>3</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">18</td>
+        <td class="ga">16</td>
+        <td class="gd">2</td>
+        <td class="form-cell" data-form="LLWWW"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        <td>5</td>
+        <td>2</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">13</td>
+        <td class="ga">15</td>
+        <td class="gd">-2</td>
+        <td class="form-cell" data-form="WDLWL"><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Bathgate_Thistle_CFC_Blues.html">Bathgate Thistle CFC Blues</a></td>
+        <td>6</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td class="pts-cell">5</td>
+        <td class="gf">15</td>
+        <td class="ga">19</td>
+        <td class="gd">-4</td>
+        <td class="form-cell" data-form="LLDDW"><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="D">D</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Bonnyrigg_Rose_Rosey.html">Bonnyrigg Rose Rosey</a></td>
+        <td>4</td>
+        <td>1</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">4</td>
+        <td class="gf">5</td>
+        <td class="ga">7</td>
+        <td class="gd">-2</td>
+        <td class="form-cell" data-form="WDLL"><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Corstorphine_Dynamo_FC_Whites.html">Corstorphine Dynamo FC Whites</a></td>
+        <td>3</td>
+        <td>1</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">8</td>
+        <td class="ga">13</td>
+        <td class="gd">-5</td>
+        <td class="form-cell" data-form="LWL"><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Eastside_Rapids.html">Eastside Rapids</a></td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">7</td>
+        <td class="ga">16</td>
+        <td class="gd">-9</td>
+        <td class="form-cell" data-form="LLWL"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+        <td>6</td>
+        <td>0</td>
+        <td>1</td>
+        <td>5</td>
+        <td class="pts-cell">1</td>
+        <td class="gf">6</td>
+        <td class="ga">20</td>
+        <td class="gd">-14</td>
+        <td class="form-cell" data-form="LLDLL"><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 1B 26/27">
+      <div class="division-header">
+        <h2>Alpha Trophies 2014s Division 1B 26/27 - Last Updated 10/10/2026 21:44</h2>
+        <button class="btn-share" data-age="U13" data-division="Alpha Trophies 2014s Division 1B 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Hutchison_Vale_FC.html">Hutchison Vale FC</a></td>
+        <td>5</td>
+        <td>3</td>
+        <td>1</td>
+        <td>1</td>
+        <td class="pts-cell">10</td>
+        <td class="gf">16</td>
+        <td class="ga">7</td>
+        <td class="gd">9</td>
+        <td class="form-cell" data-form="WWWLD"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        <td>5</td>
+        <td>3</td>
+        <td>1</td>
+        <td>1</td>
+        <td class="pts-cell">10</td>
+        <td class="gf">14</td>
+        <td class="ga">12</td>
+        <td class="gd">2</td>
+        <td class="form-cell" data-form="LWWDW"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="D">D</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Livingston_CFC_Yellows.html">Livingston CFC Yellows</a></td>
+        <td>4</td>
+        <td>3</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">12</td>
+        <td class="ga">7</td>
+        <td class="gd">5</td>
+        <td class="form-cell" data-form="WLWW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Haddington_Athletic_CFC.html">Haddington Athletic CFC</a></td>
+        <td>3</td>
+        <td>2</td>
+        <td>1</td>
+        <td>0</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">11</td>
+        <td class="ga">4</td>
+        <td class="gd">7</td>
+        <td class="form-cell" data-form="WWD"><span class="W">W</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Tynecastle_FC.html">Tynecastle FC</a></td>
+        <td>6</td>
+        <td>2</td>
+        <td>1</td>
+        <td>3</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">18</td>
+        <td class="ga">19</td>
+        <td class="gd">-1</td>
+        <td class="form-cell" data-form="WLDLW"><span class="W">W</span><span class="L">L</span><span class="D">D</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Football_Star_Elite_Whites.html">Football Star Elite Whites</a></td>
+        <td>4</td>
+        <td>2</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">13</td>
+        <td class="ga">12</td>
+        <td class="gd">1</td>
+        <td class="form-cell" data-form="WLWL"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Preston_Athletic_YFC.html">Preston Athletic YFC</a></td>
+        <td>3</td>
+        <td>1</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">7</td>
+        <td class="ga">12</td>
+        <td class="gd">-5</td>
+        <td class="form-cell" data-form="LLW"><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Edinburgh_United_Youth_FC_Whites.html">Edinburgh United Youth FC Whites</a></td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">1</td>
+        <td class="ga">7</td>
+        <td class="gd">-6</td>
+        <td class="form-cell" data-form="LL"><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>4</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">4</td>
+        <td class="ga">16</td>
+        <td class="gd">-12</td>
+        <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 2A 26/27">
+      <div class="division-header">
+        <h2>Alpha Trophies 2014s Division 2A 26/27 - Last Updated 10/10/2026 21:44</h2>
+        <button class="btn-share" data-age="U13" data-division="Alpha Trophies 2014s Division 2A 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Kelso_FC.html">Kelso FC</a></td>
+        <td>6</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">18</td>
+        <td class="gf">38</td>
+        <td class="ga">6</td>
+        <td class="gd">32</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Tynecastle_FC_Maroons.html">Tynecastle FC Maroons</a></td>
+        <td>6</td>
+        <td>5</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">15</td>
+        <td class="gf">37</td>
+        <td class="ga">12</td>
+        <td class="gd">25</td>
+        <td class="form-cell" data-form="WWLWW"><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Bonnyrigg_Rose_Thistle.html">Bonnyrigg Rose Thistle</a></td>
+        <td>6</td>
+        <td>5</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">15</td>
+        <td class="gf">31</td>
+        <td class="ga">9</td>
+        <td class="gd">22</td>
+        <td class="form-cell" data-form="WLWWW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Edinburgh_South_CFC_Scorpions.html">Edinburgh South CFC Scorpions</a></td>
+        <td>5</td>
+        <td>4</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">12</td>
+        <td class="gf">34</td>
+        <td class="ga">9</td>
+        <td class="gd">25</td>
+        <td class="form-cell" data-form="LWWWW"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+        <td>6</td>
+        <td>3</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">10</td>
+        <td class="gf">17</td>
+        <td class="ga">28</td>
+        <td class="gd">-11</td>
+        <td class="form-cell" data-form="WLWDL"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="D">D</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">27</td>
+        <td class="ga">2</td>
+        <td class="gd">25</td>
+        <td class="form-cell" data-form="WWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        <td>4</td>
+        <td>2</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">17</td>
+        <td class="ga">11</td>
+        <td class="gd">6</td>
+        <td class="form-cell" data-form="WLLW"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Peebles_FC.html">Peebles FC</a></td>
+        <td>5</td>
+        <td>2</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">14</td>
+        <td class="ga">15</td>
+        <td class="gd">-1</td>
+        <td class="form-cell" data-form="WLWLL"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Dunbar_United_Colts_Blacks.html">Dunbar United Colts Blacks</a></td>
+        <td>4</td>
+        <td>2</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">6</td>
+        <td class="ga">8</td>
+        <td class="gd">-2</td>
+        <td class="form-cell" data-form="LWWL"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Cramond_FC.html">Cramond FC</a></td>
+        <td>7</td>
+        <td>1</td>
+        <td>2</td>
+        <td>4</td>
+        <td class="pts-cell">5</td>
+        <td class="gf">14</td>
+        <td class="ga">25</td>
+        <td class="gd">-11</td>
+        <td class="form-cell" data-form="LDDLW"><span class="L">L</span><span class="D">D</span><span class="D">D</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>11</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Currie_FC.html">Currie FC</a></td>
+        <td>5</td>
+        <td>1</td>
+        <td>1</td>
+        <td>3</td>
+        <td class="pts-cell">4</td>
+        <td class="gf">13</td>
+        <td class="ga">32</td>
+        <td class="gd">-19</td>
+        <td class="form-cell" data-form="LLDWL"><span class="L">L</span><span class="L">L</span><span class="D">D</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>12</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Salvesen_CFC.html">Salvesen CFC</a></td>
+        <td>6</td>
+        <td>1</td>
+        <td>0</td>
+        <td>5</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">6</td>
+        <td class="ga">61</td>
+        <td class="gd">-55</td>
+        <td class="form-cell" data-form="LWLLL"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>13</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Edinburgh_City_FC_Academy.html">Edinburgh City FC Academy</a></td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td>6</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">3</td>
+        <td class="ga">16</td>
+        <td class="gd">-13</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>14</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Hutchison_Vale_Colts.html">Hutchison Vale Colts</a></td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>5</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">5</td>
+        <td class="ga">28</td>
+        <td class="gd">-23</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 2B 26/27">
+      <div class="division-header">
+        <h2>Alpha Trophies 2014s Division 2B 26/27 - Last Updated 10/10/2026 21:44</h2>
+        <button class="btn-share" data-age="U13" data-division="Alpha Trophies 2014s Division 2B 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        <td>7</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">21</td>
+        <td class="gf">38</td>
+        <td class="ga">10</td>
+        <td class="gd">28</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Penicuik_Athletic_YFC_Blue.html">Penicuik Athletic YFC Blue</a></td>
+        <td>7</td>
+        <td>4</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">12</td>
+        <td class="gf">27</td>
+        <td class="ga">22</td>
+        <td class="gd">5</td>
+        <td class="form-cell" data-form="WWWWL"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-North_Merchiston_FC_Blacks.html">North Merchiston FC Blacks</a></td>
+        <td>6</td>
+        <td>3</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">10</td>
+        <td class="gf">30</td>
+        <td class="ga">19</td>
+        <td class="gd">11</td>
+        <td class="form-cell" data-form="WWLLD"><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Loanhead_Miners_Youth_FC.html">Loanhead Miners Youth FC</a></td>
+        <td>4</td>
+        <td>3</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">17</td>
+        <td class="ga">15</td>
+        <td class="gd">2</td>
+        <td class="form-cell" data-form="WWLW"><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Leith_Athletic_FC.html">Leith Athletic FC</a></td>
+        <td>6</td>
+        <td>3</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">17</td>
+        <td class="ga">21</td>
+        <td class="gd">-4</td>
+        <td class="form-cell" data-form="WLLWL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Hawick_Youth.html">Hawick Youth</a></td>
+        <td>4</td>
+        <td>2</td>
+        <td>1</td>
+        <td>1</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">11</td>
+        <td class="ga">5</td>
+        <td class="gd">6</td>
+        <td class="form-cell" data-form="WWDL"><span class="W">W</span><span class="W">W</span><span class="D">D</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Inverkeithing_Hillfield_Swifts_Colts.html">Inverkeithing Hillfield Swifts Colts</a></td>
+        <td>5</td>
+        <td>2</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">14</td>
+        <td class="ga">21</td>
+        <td class="gd">-7</td>
+        <td class="form-cell" data-form="WLWLD"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Gala_Fairydean_Rovers_Academy.html">Gala Fairydean Rovers Academy</a></td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">17</td>
+        <td class="ga">2</td>
+        <td class="gd">15</td>
+        <td class="form-cell" data-form="LWW"><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Livingston_CFC_Whites.html">Livingston CFC Whites</a></td>
+        <td>5</td>
+        <td>2</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">9</td>
+        <td class="ga">10</td>
+        <td class="gd">-1</td>
+        <td class="form-cell" data-form="WLLWL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Edinburgh_United_Youth_FC_Reds.html">Edinburgh United Youth FC Reds</a></td>
+        <td>6</td>
+        <td>2</td>
+        <td>0</td>
+        <td>4</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">20</td>
+        <td class="ga">24</td>
+        <td class="gd">-4</td>
+        <td class="form-cell" data-form="LLLWW"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>11</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Edinburgh_South_CFC_Falcons.html">Edinburgh South CFC Falcons</a></td>
+        <td>5</td>
+        <td>1</td>
+        <td>1</td>
+        <td>3</td>
+        <td class="pts-cell">4</td>
+        <td class="gf">20</td>
+        <td class="ga">25</td>
+        <td class="gd">-5</td>
+        <td class="form-cell" data-form="LWLLD"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>12</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Edinburgh_City.html">Edinburgh City</a></td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">4</td>
+        <td class="ga">17</td>
+        <td class="gd">-13</td>
+        <td class="form-cell" data-form="LLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>13</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Haddington_Athletic_Colts.html">Haddington Athletic Colts</a></td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>5</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">6</td>
+        <td class="ga">39</td>
+        <td class="gd">-33</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 3A 26/27">
+      <div class="division-header">
+        <h2>Alpha Trophies 2014s Division 3A 26/27 - Last Updated 10/10/2026 21:44</h2>
+        <button class="btn-share" data-age="U13" data-division="Alpha Trophies 2014s Division 3A 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Livingston_CFC_Blues.html">Livingston CFC Blues</a></td>
+        <td>5</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">15</td>
+        <td class="gf">22</td>
+        <td class="ga">7</td>
+        <td class="gd">15</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Musselburgh_Youngstars.html">Musselburgh Youngstars</a></td>
+        <td>5</td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td class="pts-cell">13</td>
+        <td class="gf">30</td>
+        <td class="ga">15</td>
+        <td class="gd">15</td>
+        <td class="form-cell" data-form="DWWWW"><span class="D">D</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Craigroyston_CYFC_Blues.html">Craigroyston CYFC Blues</a></td>
+        <td>6</td>
+        <td>3</td>
+        <td>2</td>
+        <td>1</td>
+        <td class="pts-cell">11</td>
+        <td class="gf">20</td>
+        <td class="ga">14</td>
+        <td class="gd">6</td>
+        <td class="form-cell" data-form="WWWLD"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Inverkeithing_Hillfield_Swifts_Gunners.html">Inverkeithing Hillfield Swifts Gunners</a></td>
+        <td>5</td>
+        <td>3</td>
+        <td>1</td>
+        <td>1</td>
+        <td class="pts-cell">10</td>
+        <td class="gf">17</td>
+        <td class="ga">11</td>
+        <td class="gd">6</td>
+        <td class="form-cell" data-form="DWWWL"><span class="D">D</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Broxburn_Athletic_Colts_Badgers.html">Broxburn Athletic Colts Badgers</a></td>
+        <td>6</td>
+        <td>3</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">29</td>
+        <td class="ga">15</td>
+        <td class="gd">14</td>
+        <td class="form-cell" data-form="WLLLW"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        <td>6</td>
+        <td>2</td>
+        <td>3</td>
+        <td>1</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">19</td>
+        <td class="ga">20</td>
+        <td class="gd">-1</td>
+        <td class="form-cell" data-form="LDWWD"><span class="L">L</span><span class="D">D</span><span class="W">W</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-North_Merchiston_FC_Whites.html">North Merchiston FC Whites</a></td>
+        <td>6</td>
+        <td>2</td>
+        <td>1</td>
+        <td>3</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">18</td>
+        <td class="ga">28</td>
+        <td class="gd">-10</td>
+        <td class="form-cell" data-form="WLLWD"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Bonnyrigg_Rose_Whites.html">Bonnyrigg Rose Whites</a></td>
+        <td>4</td>
+        <td>1</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">4</td>
+        <td class="gf">12</td>
+        <td class="ga">11</td>
+        <td class="gd">1</td>
+        <td class="form-cell" data-form="LLWD"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Edinburgh_City_Blacks.html">Edinburgh City Blacks</a></td>
+        <td>6</td>
+        <td>1</td>
+        <td>0</td>
+        <td>5</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">10</td>
+        <td class="ga">20</td>
+        <td class="gd">-10</td>
+        <td class="form-cell" data-form="LLLLW"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Tranent_FC.html">Tranent FC</a></td>
+        <td>5</td>
+        <td>0</td>
+        <td>1</td>
+        <td>4</td>
+        <td class="pts-cell">1</td>
+        <td class="gf">14</td>
+        <td class="ga">24</td>
+        <td class="gd">-10</td>
+        <td class="form-cell" data-form="LDLLL"><span class="L">L</span><span class="D">D</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>11</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Preston_Athletic_YFC_Colts.html">Preston Athletic YFC Colts</a></td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>4</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">9</td>
+        <td class="ga">35</td>
+        <td class="gd">-26</td>
+        <td class="form-cell" data-form="LLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 3B 26/27">
+      <div class="division-header">
+        <h2>Alpha Trophies 2014s Division 3B 26/27 - Last Updated 10/10/2026 21:44</h2>
+        <button class="btn-share" data-age="U13" data-division="Alpha Trophies 2014s Division 3B 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Lochend_Football_Academy.html">Lochend Football Academy</a></td>
+        <td>7</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">21</td>
+        <td class="gf">43</td>
+        <td class="ga">12</td>
+        <td class="gd">31</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Edina_Hibs.html">Edina Hibs</a></td>
+        <td>7</td>
+        <td>4</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">13</td>
+        <td class="gf">38</td>
+        <td class="ga">26</td>
+        <td class="gd">12</td>
+        <td class="form-cell" data-form="LWLWD"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Tynecastle_FC_Whites.html">Tynecastle FC Whites</a></td>
+        <td>5</td>
+        <td>3</td>
+        <td>1</td>
+        <td>1</td>
+        <td class="pts-cell">10</td>
+        <td class="gf">26</td>
+        <td class="ga">15</td>
+        <td class="gd">11</td>
+        <td class="form-cell" data-form="LWWWD"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        <td>4</td>
+        <td>3</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">29</td>
+        <td class="ga">8</td>
+        <td class="gd">21</td>
+        <td class="form-cell" data-form="WWLW"><span class="W">W</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        <td>4</td>
+        <td>3</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">21</td>
+        <td class="ga">9</td>
+        <td class="gd">12</td>
+        <td class="form-cell" data-form="WWWL"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+        <td>4</td>
+        <td>3</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">17</td>
+        <td class="ga">7</td>
+        <td class="gd">10</td>
+        <td class="form-cell" data-form="LWWW"><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Leith_Athletic_FC_Colts.html">Leith Athletic FC Colts</a></td>
+        <td>5</td>
+        <td>3</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">24</td>
+        <td class="ga">18</td>
+        <td class="gd">6</td>
+        <td class="form-cell" data-form="LWLWW"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+        <td>5</td>
+        <td>3</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">23</td>
+        <td class="ga">29</td>
+        <td class="gd">-6</td>
+        <td class="form-cell" data-form="LWLWW"><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Edinburgh_South_CFC_Sharks.html">Edinburgh South CFC Sharks</a></td>
+        <td>6</td>
+        <td>3</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">18</td>
+        <td class="ga">33</td>
+        <td class="gd">-15</td>
+        <td class="form-cell" data-form="WLLWL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Castlevale_YDC.html">Castlevale YDC</a></td>
+        <td>5</td>
+        <td>2</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">8</td>
+        <td class="ga">17</td>
+        <td class="gd">-9</td>
+        <td class="form-cell" data-form="WLLLW"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>11</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Cramond_FC_Lions.html">Cramond FC Lions</a></td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td>7</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">8</td>
+        <td class="ga">20</td>
+        <td class="gd">-12</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>12</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-North_Berwick_Town_FC.html">North Berwick Town FC</a></td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td>6</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">17</td>
+        <td class="ga">40</td>
+        <td class="gd">-23</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>13</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Inter_Currie_FC.html">Inter Currie FC</a></td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>5</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">3</td>
+        <td class="ga">41</td>
+        <td class="gd">-38</td>
+        <td class="form-cell" data-form="LLLLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 4A 26/27">
+      <div class="division-header">
+        <h2>Alpha Trophies 2014s Division 4A 26/27 - Last Updated 10/10/2026 21:44</h2>
+        <button class="btn-share" data-age="U13" data-division="Alpha Trophies 2014s Division 4A 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+        <td>6</td>
+        <td>5</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">15</td>
+        <td class="gf">34</td>
+        <td class="ga">12</td>
+        <td class="gd">22</td>
+        <td class="form-cell" data-form="WLWWW"><span class="W">W</span><span class="L">L</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Melrose_FC.html">Melrose FC</a></td>
+        <td>4</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">12</td>
+        <td class="gf">30</td>
+        <td class="ga">9</td>
+        <td class="gd">21</td>
+        <td class="form-cell" data-form="WWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Dunbar_United_Colts___Whites.html">Dunbar United Colts - Whites</a></td>
+        <td>6</td>
+        <td>3</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">16</td>
+        <td class="ga">18</td>
+        <td class="gd">-2</td>
+        <td class="form-cell" data-form="LLWLW"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Easthouses_Lily_MWFC.html">Easthouses Lily MWFC</a></td>
+        <td>5</td>
+        <td>1</td>
+        <td>1</td>
+        <td>3</td>
+        <td class="pts-cell">4</td>
+        <td class="gf">18</td>
+        <td class="ga">23</td>
+        <td class="gd">-5</td>
+        <td class="form-cell" data-form="LDWLL"><span class="L">L</span><span class="D">D</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Lochend_Football_Academy_Colts.html">Lochend Football Academy Colts</a></td>
+        <td>4</td>
+        <td>1</td>
+        <td>1</td>
+        <td>2</td>
+        <td class="pts-cell">4</td>
+        <td class="gf">17</td>
+        <td class="ga">22</td>
+        <td class="gd">-5</td>
+        <td class="form-cell" data-form="DLWL"><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Edinburgh_South_CFC_Wolves.html">Edinburgh South CFC Wolves</a></td>
+        <td>3</td>
+        <td>1</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">3</td>
+        <td class="ga">6</td>
+        <td class="gd">-3</td>
+        <td class="form-cell" data-form="LLW"><span class="L">L</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Livingston_CFC_Blacks.html">Livingston CFC Blacks</a></td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">14</td>
+        <td class="ga">18</td>
+        <td class="gd">-4</td>
+        <td class="form-cell" data-form="WLLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Edinburgh_United_Youth_FC_Blacks.html">Edinburgh United Youth FC Blacks</a></td>
+        <td>3</td>
+        <td>1</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">3</td>
+        <td class="ga">14</td>
+        <td class="gd">-11</td>
+        <td class="form-cell" data-form="WLL"><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+        <td>3</td>
+        <td>1</td>
+        <td>0</td>
+        <td>2</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">9</td>
+        <td class="ga">22</td>
+        <td class="gd">-13</td>
+        <td class="form-cell" data-form="LWL"><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 4B 26/27">
+      <div class="division-header">
+        <h2>Alpha Trophies 2014s Division 4B 26/27 - Last Updated 10/10/2026 21:44</h2>
+        <button class="btn-share" data-age="U13" data-division="Alpha Trophies 2014s Division 4B 26/27" onclick="handleShareClick(this)">
+          🔗 Share / Embed
+        </button>
+      </div>
+      <table class="sortable"><thead><tr>
+        <th>#</th>
+        <th class="sortable" data-type="text">Team</th>
+        <th class="sortable" data-type="num">P</th>
+        <th class="sortable" data-type="num">W</th>
+        <th class="sortable" data-type="num">D</th>
+        <th class="sortable" data-type="num">L</th>
+        <th class="sortable pts-head" data-type="num">Pts</th>
+        <th class="sortable gf" data-type="num">GF</th>
+        <th class="sortable ga" data-type="num">GA</th>
+        <th class="sortable gd" data-type="num">GD</th>
+        <th class="sortable" data-type="form">Form</th>
+      </tr></thead><tbody><tr>
+        <td>1</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Musselburgh_Windsor_FC_Whites.html">Musselburgh Windsor FC Whites</a></td>
+        <td>6</td>
+        <td>5</td>
+        <td>1</td>
+        <td>0</td>
+        <td class="pts-cell">16</td>
+        <td class="gf">38</td>
+        <td class="ga">7</td>
+        <td class="gd">31</td>
+        <td class="form-cell" data-form="WWWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>2</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Penicuik_Athletic_YFC_Golds.html">Penicuik Athletic YFC Golds</a></td>
+        <td>4</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td class="pts-cell">12</td>
+        <td class="gf">25</td>
+        <td class="ga">10</td>
+        <td class="gd">15</td>
+        <td class="form-cell" data-form="WWWW"><span class="W">W</span><span class="W">W</span><span class="W">W</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>3</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        <td>5</td>
+        <td>2</td>
+        <td>3</td>
+        <td>0</td>
+        <td class="pts-cell">9</td>
+        <td class="gf">20</td>
+        <td class="ga">12</td>
+        <td class="gd">8</td>
+        <td class="form-cell" data-form="DWDDW"><span class="D">D</span><span class="W">W</span><span class="D">D</span><span class="D">D</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>4</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Bonnyrigg_Rose_Juniors.html">Bonnyrigg Rose Juniors</a></td>
+        <td>6</td>
+        <td>2</td>
+        <td>1</td>
+        <td>3</td>
+        <td class="pts-cell">7</td>
+        <td class="gf">17</td>
+        <td class="ga">22</td>
+        <td class="gd">-5</td>
+        <td class="form-cell" data-form="WDLWL"><span class="W">W</span><span class="D">D</span><span class="L">L</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>5</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Edinburgh_South_CFC_Cobras.html">Edinburgh South CFC Cobras</a></td>
+        <td>6</td>
+        <td>2</td>
+        <td>0</td>
+        <td>4</td>
+        <td class="pts-cell">6</td>
+        <td class="gf">25</td>
+        <td class="ga">33</td>
+        <td class="gd">-8</td>
+        <td class="form-cell" data-form="LLWLL"><span class="L">L</span><span class="L">L</span><span class="W">W</span><span class="L">L</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>6</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Leith_Athletic_Reds.html">Leith Athletic Reds</a></td>
+        <td>4</td>
+        <td>1</td>
+        <td>2</td>
+        <td>1</td>
+        <td class="pts-cell">5</td>
+        <td class="gf">10</td>
+        <td class="ga">16</td>
+        <td class="gd">-6</td>
+        <td class="form-cell" data-form="DDLW"><span class="D">D</span><span class="D">D</span><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>7</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Tranent_FC_Maroons.html">Tranent FC Maroons</a></td>
+        <td>5</td>
+        <td>1</td>
+        <td>2</td>
+        <td>2</td>
+        <td class="pts-cell">5</td>
+        <td class="gf">14</td>
+        <td class="ga">33</td>
+        <td class="gd">-19</td>
+        <td class="form-cell" data-form="LDDWL"><span class="L">L</span><span class="D">D</span><span class="D">D</span><span class="W">W</span><span class="L">L</span></td>
+      </tr><tr>
+        <td>8</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Gala_Fairydean_Rovers_Reds.html">Gala Fairydean Rovers Reds</a></td>
+        <td>2</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td class="pts-cell">3</td>
+        <td class="gf">6</td>
+        <td class="ga">3</td>
+        <td class="gd">3</td>
+        <td class="form-cell" data-form="LW"><span class="L">L</span><span class="W">W</span></td>
+      </tr><tr>
+        <td>9</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Dalkeith_Thistle_CFC_Deportivo.html">Dalkeith Thistle CFC Deportivo</a></td>
+        <td>5</td>
+        <td>0</td>
+        <td>1</td>
+        <td>4</td>
+        <td class="pts-cell">1</td>
+        <td class="gf">4</td>
+        <td class="ga">12</td>
+        <td class="gd">-8</td>
+        <td class="form-cell" data-form="LLLLD"><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="L">L</span><span class="D">D</span></td>
+      </tr><tr>
+        <td>10</td>
+        <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Loanhead_Miners_YFC_Stars.html">Loanhead Miners YFC Stars</a></td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td>3</td>
+        <td class="pts-cell">0</td>
+        <td class="gf">10</td>
+        <td class="ga">21</td>
+        <td class="gd">-11</td>
+        <td class="form-cell" data-form="LLL"><span class="L">L</span><span class="L">L</span><span class="L">L</span></td>
+      </tr></tbody></table></div><h2>Recent Matches (Last 7 Days)</h2><div class="division-block" data-division="Alpha Trophies 2014s Division 2B 26/27"><h3>Alpha Trophies 2014s Division 2B 26/27</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-08">08/10/2026</td>
+        <td>Alpha Trophies 2014s Division 2B 26/27</td><td>KSQ Galaxy</td><td>1-0</td><td>Hawick Youth</td></tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 3A 26/27"><h3>Alpha Trophies 2014s Division 3A 26/27</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-09">09/10/2026</td>
+        <td>Alpha Trophies 2014s Division 3A 26/27</td><td>Bonnyrigg Rose Whites</td><td>2-2</td><td>Longniddry Villa</td></tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 4A 26/27"><h3>Alpha Trophies 2014s Division 4A 26/27</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-09">09/10/2026</td>
+        <td>Alpha Trophies 2014s Division 4A 26/27</td><td>Easthouses Lily MWFC</td><td>2-3</td><td>AC Oxgangs CFC</td></tr></tbody></table></div><div class="division-block" data-division="WLAYFC 2014s Top 6 26/27"><h3>WLAYFC 2014s Top 6 26/27</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>WLAYFC 2014s Top 6 26/27</td><td>East Calder United CFC</td><td>0-4</td><td>Bathgate Thistle CFC Blacks</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>WLAYFC 2014s Top 6 26/27</td><td>Shotts Bon Accord FC</td><td>6-1</td><td>Armadale CFC Blacks</td></tr></tbody></table></div><div class="division-block" data-division="WLAYFC Bottom 6 2014s 26/27"><h3>WLAYFC Bottom 6 2014s 26/27</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>WLAYFC Bottom 6 2014s 26/27</td><td>Murieston United Whites</td><td>0-7</td><td>Bathgate Thistle CFC Reds</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>WLAYFC Bottom 6 2014s 26/27</td><td>Mid-Calder Colts</td><td>8-3</td><td>Polbeth United</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>WLAYFC Bottom 6 2014s 26/27</td><td>East Calder Thistle CFC</td><td>1-4</td><td>Linlithgow Rose CFC</td></tr></tbody></table></div><div class="division-block" data-division="WLAYFC Middle 7 2014s 26/27"><h3>WLAYFC Middle 7 2014s 26/27</h3><table>
+      <thead><tr>
+        <th class="sortable date-cell" data-type="date">Date</th>
+        <th class="sortable" data-type="text">Competition</th>
+        <th class="sortable" data-type="text">Home</th>
+        <th class="sortable" data-type="score">Score</th>
+        <th class="sortable" data-type="text">Away</th>
+      </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>WLAYFC Middle 7 2014s 26/27</td><td>Bathgate Thistle CFC Golds</td><td>1-6</td><td>Murieston United Blues</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>WLAYFC Middle 7 2014s 26/27</td><td>Blackburn United CFC</td><td>2-9</td><td>Blackburn United Whites</td></tr><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td>
+        <td>WLAYFC Middle 7 2014s 26/27</td><td>Murieston United Reds</td><td>1-4</td><td>Winchburgh Albion</td></tr></tbody></table></div><h2>Upcoming Matches</h2><div class="future-division-block" data-division="Alpha Trophies 2014s Division 1A 26/27"><h3>Alpha Trophies 2014s Division 1A 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Craigroyston CYFC Yellows</td><td>Bonnyrigg Rose Rosey</td><td></td><td>Craigroyston Park</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Eastside Rapids</td><td>Leith Victoria AFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Musselburgh Windsor FC</td><td>Corstorphine Dynamo FC Whites</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Bathgate Thistle CFC Blues</td><td>Edinburgh South CFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Musselburgh Windsor FC</td><td>Craigroyston CYFC Yellows</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Bonnyrigg Rose Rosey</td><td>Football Star Elite Blacks</td><td></td><td>Poltonhall Recreational Ground</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2014s Division 1B 26/27"><h3>Alpha Trophies 2014s Division 1B 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>East Calder CFC</td><td>Haddington Athletic CFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Tynecastle FC</td><td>Preston Athletic YFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Football Star Elite Whites</td><td>Edinburgh United Youth FC Whites</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>East Calder CFC</td><td>Edinburgh United Youth FC Whites</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Livingston CFC Yellows</td><td>Haddington Athletic CFC</td><td></td><td>Eliburn Park</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Spartans FC Youth</td><td>Football Star Elite Whites</td><td></td><td>,  , </td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2014s Division 2A 26/27"><h3>Alpha Trophies 2014s Division 2A 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Salvesen CFC</td><td>Currie FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Spartans FC Youth Whites</td><td>Hutchison Vale Colts</td><td></td><td>Ainslie Park Stadium</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Kelso FC</td><td>Cramond FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Salvesen CFC</td><td>Cramond FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Spartans FC Youth Whites</td><td>Bonnyrigg Rose Thistle</td><td></td><td>Ainslie Park Stadium</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2014s Division 2B 26/27"><h3>Alpha Trophies 2014s Division 2B 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Gala Fairydean Rovers Academy</td><td>Leith Athletic FC</td><td></td><td>3G Arena, Netherdale</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Inverkeithing Hillfield Swifts Colts</td><td>Edinburgh City</td><td></td><td>Ballast Bank Community Centre</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Livingston CFC Whites</td><td>Edinburgh South CFC Falcons</td><td></td><td>Eliburn Park</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Edinburgh United Youth FC Reds</td><td>North Merchiston FC Blacks</td><td></td><td>Paties Road Stadium</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Penicuik Athletic YFC Blue</td><td>Haddington Athletic Colts</td><td></td><td>Bog Road Pavillion</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Livingston CFC Whites</td><td>Penicuik Athletic YFC Blue</td><td></td><td>Eliburn Park</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2014s Division 3A 26/27"><h3>Alpha Trophies 2014s Division 3A 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Livingston CFC Blues</td><td>Craigroyston CYFC Blues</td><td></td><td>Eliburn Park</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Tranent FC</td><td>Preston Athletic YFC Colts</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Edinburgh City Blacks</td><td>Inverkeithing Hillfield Swifts Gunners</td><td></td><td>Forrester High School</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Musselburgh Youngstars</td><td>Longniddry Villa</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Preston Athletic YFC Colts</td><td>Craigroyston CYFC Blues</td><td></td><td>Middleshot 3g</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Livingston CFC Blues</td><td>Inverkeithing Hillfield Swifts Gunners</td><td></td><td>Eliburn Park</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Broxburn Athletic Colts Badgers</td><td>Bonnyrigg Rose Whites</td><td></td><td>Albyn Park</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2014s Division 3B 26/27"><h3>Alpha Trophies 2014s Division 3B 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Castlevale YDC</td><td>Edinburgh South CFC Sharks</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Musselburgh Windsor FC Blues</td><td>Lochend Football Academy</td><td></td><td>Pinkie Playing Fields</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Edina Hibs</td><td>Corstorphine Dynamo FC Blacks</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Tynecastle FC Whites</td><td>Leith Athletic FC Colts</td><td></td><td>Saughton Sports Complex</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Corstorphine Dynamo FC Blacks</td><td>Dalkeith Thistle CFC Cardo</td><td></td><td>Gyle Park</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2014s Division 4A 26/27"><h3>Alpha Trophies 2014s Division 4A 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Penicuik Athletic YFC Reds</td><td>Easthouses Lily MWFC</td><td></td><td>Bog Road Pavillion</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>AC Oxgangs CFC</td><td>Edinburgh South CFC Wolves</td><td></td><td>Colinton Mains Park</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Lochend Football Academy Colts</td><td>Livingston CFC Blacks</td><td></td><td>Lochend Academy</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Penicuik Athletic YFC Reds</td><td>Lochend Football Academy Colts</td><td></td><td>Bog Road Pavillion</td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Edinburgh South CFC Wolves</td><td>Easthouses Lily MWFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>AC Oxgangs CFC</td><td>Livingston CFC Blacks</td><td></td><td>Colinton Mains Park</td></tr></tbody></table></div><div class="future-division-block" data-division="Alpha Trophies 2014s Division 4B 26/27"><h3>Alpha Trophies 2014s Division 4B 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Musselburgh Windsor FC Whites</td><td>Penicuik Athletic YFC Golds</td><td></td><td>Pinkie Playing Fields</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Leith Athletic Reds</td><td>Tranent FC Maroons</td><td></td><td>Leith Links</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Dalkeith Thistle CFC Deportivo</td><td>Bonnyrigg Rose Juniors</td><td></td><td>The Stevie Dixon Memorial Complex</td></tr><tr><td class="date-cell" data-iso="2026-10-17">18/10/2026</td><td>Gala Fairydean Rovers Reds</td><td>Edinburgh South CFC Cobras</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-11-10">10/11/2026</td><td>Penicuik Athletic YFC Golds</td><td>Leith Athletic Reds</td><td></td><td>Bog Road Pavillion</td></tr></tbody></table></div><div class="future-division-block" data-division="SYFA Scottish Cup South East 2014s 26/27"><h3>SYFA Scottish Cup South East 2014s 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Dunbar United Colts Blacks</td><td>North Berwick FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Hutchison Vale FC</td><td>Salvesen CFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Football Star Elite Whites</td><td>Inverkeithing Hillfield Swifts Gunners</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Eastside Rapids</td><td>Tynecastle FC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Murieston United Reds</td><td>Preston Athletic YFC</td><td></td><td>Murieston United Fc</td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Livingston CFC Whites</td><td>Livingston CFC Yellows</td><td></td><td>Eliburn Park</td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Football Star Elite Blacks</td><td>Gala Fairydean Rovers Academy</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Inverkeithing Hillfield Swifts</td><td>Hawick Youth</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Bathgate Thistle CFC Navy</td><td>East Calder CFC</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Spartans FC Youth</td><td>Livingston CFC Blues</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Craigroyston CYFC Yellows</td><td>Musselburgh Windsor FC</td><td></td><td>Craigroyston Park</td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Loanhead Miners Youth FC</td><td>Murieston United Blues</td><td></td><td>,  , </td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Corstorphine Dynamo FC Whites</td><td>Leith Victoria AFC</td><td></td><td>Gyle Park</td></tr><tr><td class="date-cell" data-iso="2026-01-11">11/01/2026</td><td>Musselburgh Windsor FC Blues</td><td>Haddington Athletic CFC</td><td></td><td>Pinkie Playing Fields</td></tr></tbody></table></div><div class="future-division-block" data-division="WLAYFC 2014s Top 6 26/27"><h3>WLAYFC 2014s Top 6 26/27</h3><table><thead><tr>
+      <th class="sortable date-cell" data-type="date">Date</th><th class="sortable" data-type="text">Home</th><th class="sortable" data-type="text">Away</th><th class="sortable" data-type="text">Referee</th><th class="sortable" data-type="text">Location</th>
+    </tr></thead><tbody><tr><td class="date-cell" data-iso="2026-10-10">10/10/2026</td><td>Armadale CFC Blues</td><td>Bathgate Thistle CFC Navy</td><td></td><td>Armadale Academy 4g</td></tr></tbody></table></div>
+  <div id="share-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:99999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fff; color:#000; border-radius:12px; max-width:550px; width:100%; padding:24px; box-shadow:0 8px 30px rgba(0,0,0,0.3); position:relative;">
+      <button onclick="closeShareModal()" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:24px; cursor:pointer; color:inherit;">&times;</button>
+      
+      <h3 id="modal-title" style="margin-top:0; color:#FFD700;">Share League Table</h3>
+      <p style="font-size:0.9rem; opacity:0.85; margin-bottom:18px;">
+        Share this live table on Facebook or embed it into your club's website so it stays updated in real time.
+      </p>
+
+      <div style="margin-bottom:20px;">
+        <label style="font-weight:bold; display:block; margin-bottom:6px;">1. Share Live Table on Facebook</label>
+        <button id="fb-share-btn" onclick="shareToFacebook()" style="background:#1877F2; color:#fff; border:none; padding:10px 18px; border-radius:6px; font-weight:bold; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Post Live Link on Facebook
+        </button>
+        <div style="font-size:0.8rem; opacity:0.75; margin-top:4px;">Creates a Facebook post with a card linking directly to this live table.</div>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <label style="font-weight:bold; display:block; margin-bottom:6px;">2. Real-Time Embed Code (WordPress / Wix / Website)</label>
+        <textarea id="embed-code-box" readonly style="width:100%; box-sizing:border-box; height:80px; padding:10px; font-family:monospace; font-size:0.82rem; background:#f5f5f5; color:#000; border:1px solid #ccc; border-radius:6px; resize:none;"></textarea>
+        <div style="margin-top:6px; display:flex; gap:8px;">
+          <button onclick="copyEmbedCode()" style="background:#FFD700; color:#000; border:none; padding:8px 14px; border-radius:6px; font-weight:bold; cursor:pointer;">
+            📋 Copy Embed Code
+          </button>
+          <button onclick="downloadEmbedFile()" style="background:#eee; color:#000; border:1px solid #ccc; padding:8px 14px; border-radius:6px; cursor:pointer;">
+            💾 Download .HTML File
+          </button>
+        </div>
+        <span id="copy-feedback" style="font-size:0.85rem; color:#00B050; display:block; margin-top:6px;"></span>
+      </div>
+    </div>
+  </div>
+  <script>
+  
+  (function(){
+    const STORAGE_KEY = 'seryfa-theme'; const overrideEl = document.getElementById('theme-override');
+    function apply(mode){
+      if(mode === 'dark'){ overrideEl.textContent = 'body{background:#101010;color:#e0e0e0}select{background:#222;color:#fff;border-color:#555}table,th,td{border-color:#333}th{background:#222;color:#fff}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#444;color:#FFD700}td.gf{background:#1a2a40}td.ga{background:#402a1a}td.gd{background:#1a402a}tr:nth-child(even){background:#181818}tr:nth-child(odd){background:#141414}.W{background:#00FF99}.D{background:#00BFFF}.L{background:#FF4444}th:first-child,td:first-child{background:#202020;font-weight:bold}.date-cell{background:#000;color:#FFD700}.btn-share{background:#222;color:#e0e0e0;border-color:#444}'; }
+      else if(mode === 'light'){ overrideEl.textContent = 'body{background:#f8f8f8;color:#000}select{background:#fff;color:#000;border-color:#bbb}table,th,td{border-color:#ccc}th{background:#FFD700;color:#000}th.pts-head{background:#FFD700;color:#000}td.pts-cell{background:#fffde7;color:#000}td.gf{background:#d0eaff}td.ga{background:#ffe0d0}td.gd{background:#d0ffe0}tr:nth-child(even){background:#f9f9f9}tr:nth-child(odd){background:#fff}.W{background:#00B050}.D{background:#007BFF}.L{background:#C00000}th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}.date-cell{background:#000;color:#FFD700}.btn-share{background:#fff;color:#000;border-color:#ccc}'; }
+      else { overrideEl.textContent = ''; }
+    }
+    const saved = localStorage.getItem(STORAGE_KEY); apply(saved || '');
+    const toggle = document.getElementById('theme-toggle');
+    if(toggle){ toggle.checked = saved ? (saved === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      toggle.addEventListener('change', function(){ const mode = this.checked ? 'dark' : 'light'; localStorage.setItem(STORAGE_KEY, mode); apply(mode); });
+    }
+  })();
+  </script>
+
+  <script>
+  
+  let conversationHistory = [];
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbwrg4h41GlQpwbi9hLXRC_OGX4XyW2xaxFxmH0KoL5Xa2fm_TXMEwpxPjsFlUV3LCEv1w/exec";
+
+  function toggleChat() {
+    const w = document.getElementById('chat-window');
+    const isHidden = w.style.display === 'none';
+    w.style.display = isHidden ? 'flex' : 'none';
+    if(isHidden) setTimeout(() => document.getElementById('chat-input').focus(), 100);
+  }
+
+  function sendChat() {
+    const input = document.getElementById('chat-input');
+    const txt = input.value.trim();
+    if(!txt) return;
+    addMsg(txt, 'user');
+    input.value = '';
+    input.disabled = true;
+
+    const payload = { 
+      type: 'chat', 
+      question: txt, 
+      ageGroup: "U13", 
+      history: conversationHistory 
+    };
+
+    fetch(ENDPOINT, { 
+      method: "POST", 
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, 
+      body: JSON.stringify(payload) 
+    })
+    .then(async (res) => {
+      const text = await res.text();
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        throw new Error("Server returned non-JSON: " + text.substring(0, 150));
+      }
+    })
+    .then(data => {
+      input.disabled = false; 
+      input.focus();
+      if (data.answer) {
+        addMsg(data.answer, 'bot');
+        if (conversationHistory.length > 6) conversationHistory.shift(); 
+        conversationHistory.push({ role: 'user', content: txt }, { role: 'model', content: data.answer });
+      } else { 
+        addMsg("⚠️ " + (data.error || "No response"), 'bot'); 
+      }
+    })
+    .catch((err) => { 
+      input.disabled = false; 
+      addMsg("⛔ " + err.message, 'bot'); 
+    });
+  }
+
+  function addMsg(txt, sender) {
+    const div = document.createElement('div');
+    div.style.padding = '8px 12px'; 
+    div.style.borderRadius = '12px'; 
+    div.style.fontSize = '0.9rem'; 
+    div.style.maxWidth = '85%';  
+    div.style.color = '#000000'; 
+    if(sender === 'user') { 
+      div.style.alignSelf = 'flex-end'; 
+      div.style.background = '#FFD700'; 
+      div.textContent = txt; 
+    } else { 
+      div.style.alignSelf = 'flex-start'; 
+      div.style.background = '#e0e0e0'; 
+      
+      const safe = (txt || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      div.innerHTML = safe.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>').replace(/\n/g, '<br>'); 
+    }
+    const box = document.getElementById('chat-msgs'); 
+    box.appendChild(div); 
+    box.scrollTop = box.scrollHeight;
+  }
+  </script>
+
+  <script>
+  
+  (function(){
+    function parseDMY(s){ const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec((s||'').trim()); if(!m) return NaN; return new Date(m[3], m[2]-1, m[1]).getTime(); }
+    function getIsoOrParseDate(td){ const iso = td && td.dataset ? td.dataset.iso : ''; return iso ? Date.parse(iso) : parseDMY(td ? td.textContent : ''); }
+    function scoreValue(s){ const m = /^\s*(\d+)\s*[-–]\s*(\d+)\s*$/.exec(s || ''); return m ? [Number(m[1]), Number(m[2])] : [NaN, NaN]; }
+    function formValue(row){ const el = row.querySelector('.form-cell'); if(!el) return -Infinity; const seq = (el.dataset.form || '').trim(); let sum = 0; for(const ch of seq){ if(ch === 'W') sum += 3; else if(ch === 'D') sum += 1; } return sum; }
+    function getComparator(type, i, asc){
+      if(type === 'num') return (a,b)=>{ const ax = parseFloat(a.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0, bx = parseFloat(b.children[i].textContent.replace(/[^\d.\-]/g,'')) || 0; return asc ? (ax - bx) : (bx - ax); };
+      if(type === 'date') return (a,b)=>{ const ax = getIsoOrParseDate(a.children[i]), bx = getIsoOrParseDate(b.children[i]); return asc ? (ax - bx) : (bx - ax); };
+      if(type === 'score') return (a,b)=>{ const [ah, aa] = scoreValue(a.children[i].textContent), [bh, ba] = scoreValue(b.children[i].textContent); if(ah !== bh) return asc ? (ah - bh) : (bh - ah); return asc ? (aa - ba) : (ba - aa); };
+      if(type === 'form') return (a,b)=>{ const av = formValue(a), bv = formValue(b); return asc ? (av - bv) : (bv - av); };
+      return (a,b)=>{ const ax = a.children[i].textContent.trim(), bx = b.children[i].textContent.trim(); const cmp = ax.localeCompare(bx, undefined, {numeric:true, sensitivity:'base'}); return asc ? cmp : -cmp; };
+    }
+    function sortTable(table, colIdx, type, clickedTh){
+      const tbody = table.querySelector('tbody'); if(!tbody) return;
+      const asc = clickedTh.classList.contains('desc') || (type === 'text' && !clickedTh.classList.contains('asc'));
+      const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r, idx]);
+      const cmp = getComparator(type, colIdx, asc);
+      rows.sort((A,B)=>{ const res = cmp(A[0], B[0]); return res !== 0 ? res : A[1] - B[1]; });
+      table.querySelectorAll('thead th').forEach(h=>h.classList.remove('asc','desc'));
+      clickedTh.classList.add(asc ? 'asc' : 'desc');
+      rows.forEach(pair=>tbody.appendChild(pair[0]));
+    }
+    document.querySelectorAll('table').forEach(table=>{ table.querySelectorAll('thead th.sortable').forEach((th)=>{ th.addEventListener('click', ()=>{ sortTable(table, th.cellIndex, th.dataset.type || 'text', th); }); }); });
+  })();
+  </script>
+
+  <script>
+  
+  let currentShareUrl = '';
+  let currentShareDiv = '';
+
+  function handleShareClick(btn) {
+    const age = btn.getAttribute('data-age') || '';
+    const divName = btn.getAttribute('data-division') || '';
+    openShareModal(age, divName);
+  }
+
+  function openShareModal(ageGroup, divName) {
+    const modal = document.getElementById('share-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const embedBox = document.getElementById('embed-code-box');
+    const feedback = document.getElementById('copy-feedback');
+
+    feedback.textContent = '';
+    currentShareDiv = divName;
+
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('division', divName);
+    currentShareUrl = currentUrl.toString();
+
+    modalTitle.textContent = ageGroup + ' - ' + divName;
+
+    const safeTitle = divName.replace(/"/g, '&quot;');
+    const iframeSnippet = '<iframe src="' + currentShareUrl + '" width="100%" height="600" frameborder="0" style="border:1px solid #ccc; border-radius:8px; overflow:hidden;" title="' + safeTitle + ' Live Standings"></iframe>';
+    embedBox.value = iframeSnippet;
+
+    modal.style.display = 'flex';
+  }
+
+  function closeShareModal() {
+    document.getElementById('share-modal').style.display = 'none';
+  }
+
+  function shareToFacebook() {
+    const fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(currentShareUrl);
+    window.open(fbUrl, '_blank', 'width=600,height=500,menubar=no,toolbar=no,resizable=yes');
+  }
+
+  function copyEmbedCode() {
+    const embedBox = document.getElementById('embed-code-box');
+    embedBox.select();
+    const feedback = document.getElementById('copy-feedback');
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(embedBox.value).then(() => {
+        feedback.textContent = '✅ Embed code copied to clipboard!';
+        setTimeout(() => { feedback.textContent = ''; }, 3000);
+      }).catch(() => {
+        document.execCommand('copy');
+        feedback.textContent = '✅ Embed code copied!';
+        setTimeout(() => { feedback.textContent = ''; }, 3000);
+      });
+    } else {
+      document.execCommand('copy');
+      feedback.textContent = '✅ Embed code copied!';
+      setTimeout(() => { feedback.textContent = ''; }, 3000);
+    }
+  }
+
+  function downloadEmbedFile() {
+    const content = '<!DOCTYPE html>\n<html>\n<head>\n  <meta charset="UTF-8">\n  <title>' + currentShareDiv + ' - Live Table</title>\n</head>\n<body style="margin:0; padding:0; background:#f8f8f8;">\n  <iframe src="' + currentShareUrl + '" width="100%" height="800" frameborder="0" style="border:none;"></iframe>\n</body>\n</html>';
+    const blob = new Blob([content], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = currentShareDiv.replace(/[^a-z0-9]/gi, '_') + '_Live_Table.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  window.addEventListener('click', (e) => {
+    const modal = document.getElementById('share-modal');
+    if (e.target === modal) closeShareModal();
+  });
+  </script>
+
+  <script>
+  
+  (function(){
+    const divFilter = document.getElementById('division-filter');
+    function applyFilter(val){ 
+      document.querySelectorAll('.division-block, .future-division-block').forEach(d=>{ 
+        d.style.display = (val==='ALL' || d.dataset.division===val) ? 'block' : 'none'; 
+      }); 
+    }
+    if (divFilter){ 
+      divFilter.addEventListener('change', function(){ applyFilter(this.value); });
+      const url = new URL(window.location.href); 
+      const pre = url.searchParams.get('division');
+      if (pre && [...divFilter.options].some(o=>o.value===pre)) divFilter.value = pre;
+      applyFilter(divFilter.value || 'ALL');
+    }
+  })();
+  </script>
+
+</body></html>
