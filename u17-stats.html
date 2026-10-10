@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>U17 Team & Goal Stats</title>
+  <title>U17 Team & Discipline Stats</title>
 
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
@@ -14,8 +14,8 @@
   <style>
     body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
     h1{margin-top:0;color:#FFD700}
-    h2{margin-top:32px;font-size:1.35rem;border-bottom:2px solid #FFD700;padding-bottom:6px}
-    h3{margin-top:20px;font-size:1.1rem;color:#333}
+    h2{margin-top:34px;font-size:1.35rem;border-bottom:2px solid #FFD700;padding-bottom:6px}
+    h3{margin-top:22px;font-size:1.1rem;color:#333}
     select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
     table{border-collapse:collapse;width:100%;margin-bottom:20px}
     th,td{border:1px solid #ccc;padding:8px 10px;text-align:center}
@@ -25,41 +25,48 @@
     td.gf{background:#d0eaff} td.ga{background:#ffe0d0}
     tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
     th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
-    .max-cell { background-color:#d4edda; font-weight:bold }    
-    .min-cell { background-color:#ffe0b2; font-weight:bold }    
+    .max-cell { background-color:#d4edda; font-weight:bold }
+    .min-cell { background-color:#ffe0b2; font-weight:bold }
     td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
     td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
     .scorer-badge{background:#FFD700; color:#000; padding:2px 8px; border-radius:12px; font-weight:bold}
 
      
-    .scorers-table.collapsed tbody tr:nth-child(n+11) {
-      display: none;
-    }
-    .more-btn-wrap {
-      text-align: center;
-      margin: -10px 0 25px 0;
-    }
-    .btn-more-scorers {
-      background: #fff;
-      color: #333;
-      border: 1px solid #ccc;
-      padding: 7px 18px;
-      border-radius: 20px;
+    .card-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
       font-weight: bold;
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      min-width: 22px;
+      text-align: center;
+      font-size: 0.9rem;
     }
-    .btn-more-scorers:hover {
-      border-color: #FFD700;
+    .yellow-card {
+      background: #FFEB3B;
       color: #000;
-      background: #FFD700;
+      border: 1px solid #FBC02D;
+    }
+    .red-card {
+      background: #F44336;
+      color: #fff;
+      border: 1px solid #D32F2F;
+    }
+    .total-cards {
+      font-weight: bold;
+      font-size: 0.95rem;
     }
 
-    footer{margin-top:32px;font-size:.9em;opacity:.85;text-align:center}
+     
+    .scorers-table.collapsed tbody tr:nth-child(n+11) { display: none; }
+    .more-btn-wrap { text-align: center; margin: -10px 0 25px 0; }
+    .btn-more-scorers {
+      background: #fff; color: #333; border: 1px solid #ccc;
+      padding: 7px 18px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn-more-scorers:hover { border-color: #FFD700; color: #000; background: #FFD700; }
+
+    footer{margin-top:36px;font-size:.9em;opacity:.85;text-align:center}
 
     @media (prefers-color-scheme: dark){
       body{background:#101010;color:#e0e0e0}
@@ -73,16 +80,10 @@
       .max-cell { background:#004d00; color:#fff }
       .min-cell { background:#804000; color:#fff }
       .scorer-badge{background:#444; color:#FFD700}
-      .btn-more-scorers {
-        background: #222;
-        color: #e0e0e0;
-        border-color: #444;
-      }
-      .btn-more-scorers:hover {
-        background: #FFD700;
-        color: #000;
-        border-color: #FFD700;
-      }
+      .yellow-card { background: #FFD700; color: #000; }
+      .red-card { background: #E53935; color: #fff; }
+      .btn-more-scorers { background: #222; color: #e0e0e0; border-color: #444; }
+      .btn-more-scorers:hover { background: #FFD700; color: #000; border-color: #FFD700; }
     }
   </style>
   </head><body>
@@ -151,7 +152,7 @@
       <a class="nav-link" href="Archive-2025-26-U17.html">2025/26 Archive</a>
       <a class="nav-link" href="Scores.html">Scores</a>
     </div>
-  </nav><h1>U17 Team & Goal Stats</h1><label for="division-filter">Division:</label>
+  </nav><h1>U17 Team & Discipline Stats</h1><label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
     <option value="Alpha Trophies 2010s Division 1 26/27">Alpha Trophies 2010s Division 1 26/27</option><option value="Alpha Trophies 2010s Division 2 26/27">Alpha Trophies 2010s Division 2 26/27</option><option value="Alpha Trophies 2010s Division 3 26/27">Alpha Trophies 2010s Division 3 26/27</option>
@@ -548,7 +549,87 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (44 more) ▼">
             Show More (44 more) ▼
           </button>
-        </div></div><div class="division-block" data-division="Alpha Trophies 2010s Division 2 26/27">
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_F_C.html">Musselburgh Windsor F C</a></td>
+          <td data-num="16"><span class="card-badge yellow-card">16</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="16">16</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+          <td data-num="11"><span class="card-badge yellow-card">11</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="12">12</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+          <td data-num="11"><span class="card-badge yellow-card">11</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="11">11</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Bayside_F_C_Athletic.html">Bayside F C Athletic</a></td>
+          <td data-num="6"><span class="card-badge yellow-card">6</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Portobello_Community_Football_Academy.html">Portobello Community Football Academy</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_FC_Academy.html">Edinburgh City FC Academy</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_Whites.html">Edinburgh City Whites</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-East_Calder_2010_CFC.html">East Calder 2010 CFC</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_united.html">Blackburn united</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 2 26/27">
       <h2>Alpha Trophies 2010s Division 2 26/27</h2>
 
       
@@ -1039,7 +1120,93 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (62 more) ▼">
             Show More (62 more) ▼
           </button>
-        </div></div><div class="division-block" data-division="Alpha Trophies 2010s Division 3 26/27">
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="8">8</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Blues.html">Musselburgh Windsor F C Blues</a></td>
+          <td data-num="8"><span class="card-badge yellow-card">8</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="8">8</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Edinburgh_South_Community_CFC_Rovers.html">Edinburgh South Community CFC Rovers</a></td>
+          <td data-num="6"><span class="card-badge yellow-card">6</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="6">6</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_F_C_Lions.html">Currie F C Lions</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Murieston_United_Blues.html">Murieston United Blues</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>13</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Civil_Service_Strollers_Fc.html">Civil Service Strollers Fc</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 3 26/27">
       <h2>Alpha Trophies 2010s Division 3 26/27</h2>
 
       
@@ -1502,9 +1669,88 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (58 more) ▼">
             Show More (58 more) ▼
           </button>
-        </div></div>
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+          <td data-num="14"><span class="card-badge yellow-card">14</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="14">14</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+          <td data-num="11"><span class="card-badge yellow-card">11</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="13">13</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+          <td data-num="8"><span class="card-badge yellow-card">8</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="9">9</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Polbeth_United.html">Polbeth United</a></td>
+          <td data-num="6"><span class="card-badge yellow-card">6</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="6">6</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers_Jfc.html">Gala Fairydean Rovers Jfc</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Bonnyrigg_Rose_Blacks.html">Bonnyrigg Rose Blacks</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-AC_Oxgangs_CFC_Calcio.html">AC Oxgangs CFC Calcio</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Musselburgh_Windsor_FC_Reds.html">Musselburgh Windsor FC Reds</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div>
   <script>
-  
   function toggleScorers(btn) {
     const block = btn.closest('.division-block');
     if (!block) return;

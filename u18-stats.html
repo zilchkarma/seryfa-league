@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>U18 Team & Goal Stats</title>
+  <title>U18 Team & Discipline Stats</title>
 
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
@@ -14,8 +14,8 @@
   <style>
     body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
     h1{margin-top:0;color:#FFD700}
-    h2{margin-top:32px;font-size:1.35rem;border-bottom:2px solid #FFD700;padding-bottom:6px}
-    h3{margin-top:20px;font-size:1.1rem;color:#333}
+    h2{margin-top:34px;font-size:1.35rem;border-bottom:2px solid #FFD700;padding-bottom:6px}
+    h3{margin-top:22px;font-size:1.1rem;color:#333}
     select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
     table{border-collapse:collapse;width:100%;margin-bottom:20px}
     th,td{border:1px solid #ccc;padding:8px 10px;text-align:center}
@@ -25,41 +25,48 @@
     td.gf{background:#d0eaff} td.ga{background:#ffe0d0}
     tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
     th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
-    .max-cell { background-color:#d4edda; font-weight:bold }    
-    .min-cell { background-color:#ffe0b2; font-weight:bold }    
+    .max-cell { background-color:#d4edda; font-weight:bold }
+    .min-cell { background-color:#ffe0b2; font-weight:bold }
     td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
     td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
     .scorer-badge{background:#FFD700; color:#000; padding:2px 8px; border-radius:12px; font-weight:bold}
 
      
-    .scorers-table.collapsed tbody tr:nth-child(n+11) {
-      display: none;
-    }
-    .more-btn-wrap {
-      text-align: center;
-      margin: -10px 0 25px 0;
-    }
-    .btn-more-scorers {
-      background: #fff;
-      color: #333;
-      border: 1px solid #ccc;
-      padding: 7px 18px;
-      border-radius: 20px;
+    .card-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
       font-weight: bold;
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      min-width: 22px;
+      text-align: center;
+      font-size: 0.9rem;
     }
-    .btn-more-scorers:hover {
-      border-color: #FFD700;
+    .yellow-card {
+      background: #FFEB3B;
       color: #000;
-      background: #FFD700;
+      border: 1px solid #FBC02D;
+    }
+    .red-card {
+      background: #F44336;
+      color: #fff;
+      border: 1px solid #D32F2F;
+    }
+    .total-cards {
+      font-weight: bold;
+      font-size: 0.95rem;
     }
 
-    footer{margin-top:32px;font-size:.9em;opacity:.85;text-align:center}
+     
+    .scorers-table.collapsed tbody tr:nth-child(n+11) { display: none; }
+    .more-btn-wrap { text-align: center; margin: -10px 0 25px 0; }
+    .btn-more-scorers {
+      background: #fff; color: #333; border: 1px solid #ccc;
+      padding: 7px 18px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn-more-scorers:hover { border-color: #FFD700; color: #000; background: #FFD700; }
+
+    footer{margin-top:36px;font-size:.9em;opacity:.85;text-align:center}
 
     @media (prefers-color-scheme: dark){
       body{background:#101010;color:#e0e0e0}
@@ -73,16 +80,10 @@
       .max-cell { background:#004d00; color:#fff }
       .min-cell { background:#804000; color:#fff }
       .scorer-badge{background:#444; color:#FFD700}
-      .btn-more-scorers {
-        background: #222;
-        color: #e0e0e0;
-        border-color: #444;
-      }
-      .btn-more-scorers:hover {
-        background: #FFD700;
-        color: #000;
-        border-color: #FFD700;
-      }
+      .yellow-card { background: #FFD700; color: #000; }
+      .red-card { background: #E53935; color: #fff; }
+      .btn-more-scorers { background: #222; color: #e0e0e0; border-color: #444; }
+      .btn-more-scorers:hover { background: #FFD700; color: #000; border-color: #FFD700; }
     }
   </style>
   </head><body>
@@ -151,7 +152,7 @@
       <a class="nav-link" href="Archive-2025-26-U18.html">2025/26 Archive</a>
       <a class="nav-link" href="Scores.html">Scores</a>
     </div>
-  </nav><h1>U18 Team & Goal Stats</h1><label for="division-filter">Division:</label>
+  </nav><h1>U18 Team & Discipline Stats</h1><label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
     <option value="Alpha Trophies 2009s Division 1 26/27">Alpha Trophies 2009s Division 1 26/27</option>
@@ -905,9 +906,112 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (109 more) ▼">
             Show More (109 more) ▼
           </button>
-        </div></div>
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+          <td data-num="17"><span class="card-badge yellow-card">17</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="19">19</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+          <td data-num="13"><span class="card-badge yellow-card">13</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="15">15</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+          <td data-num="11"><span class="card-badge yellow-card">11</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="13">13</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_C_F_C.html">Dalkeith Thistle C F C</a></td>
+          <td data-num="12"><span class="card-badge yellow-card">12</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="12">12</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+          <td data-num="12"><span class="card-badge yellow-card">12</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="12">12</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_U18s_F_C_.html">Penicuik Athletic U18s F.C.</a></td>
+          <td data-num="10"><span class="card-badge yellow-card">10</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="10">10</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+          <td data-num="8"><span class="card-badge yellow-card">8</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="9">9</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="8">8</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+          <td data-num="8"><span class="card-badge yellow-card">8</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="8">8</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="6">6</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+          <td data-num="6"><span class="card-badge yellow-card">6</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="6">6</td>
+        </tr><tr>
+          <td>13</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Currie_Star_F_C_Whites.html">Currie Star F C Whites</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>14</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>15</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>16</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Easthouses_Lily.html">Easthouses Lily</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr></tbody></table></div>
   <script>
-  
   function toggleScorers(btn) {
     const block = btn.closest('.division-block');
     if (!block) return;

@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>U13 Team & Goal Stats</title>
+  <title>U13 Team & Discipline Stats</title>
 
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
@@ -14,8 +14,8 @@
   <style>
     body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
     h1{margin-top:0;color:#FFD700}
-    h2{margin-top:32px;font-size:1.35rem;border-bottom:2px solid #FFD700;padding-bottom:6px}
-    h3{margin-top:20px;font-size:1.1rem;color:#333}
+    h2{margin-top:34px;font-size:1.35rem;border-bottom:2px solid #FFD700;padding-bottom:6px}
+    h3{margin-top:22px;font-size:1.1rem;color:#333}
     select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
     table{border-collapse:collapse;width:100%;margin-bottom:20px}
     th,td{border:1px solid #ccc;padding:8px 10px;text-align:center}
@@ -25,41 +25,48 @@
     td.gf{background:#d0eaff} td.ga{background:#ffe0d0}
     tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
     th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
-    .max-cell { background-color:#d4edda; font-weight:bold }    
-    .min-cell { background-color:#ffe0b2; font-weight:bold }    
+    .max-cell { background-color:#d4edda; font-weight:bold }
+    .min-cell { background-color:#ffe0b2; font-weight:bold }
     td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
     td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
     .scorer-badge{background:#FFD700; color:#000; padding:2px 8px; border-radius:12px; font-weight:bold}
 
      
-    .scorers-table.collapsed tbody tr:nth-child(n+11) {
-      display: none;
-    }
-    .more-btn-wrap {
-      text-align: center;
-      margin: -10px 0 25px 0;
-    }
-    .btn-more-scorers {
-      background: #fff;
-      color: #333;
-      border: 1px solid #ccc;
-      padding: 7px 18px;
-      border-radius: 20px;
+    .card-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
       font-weight: bold;
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      min-width: 22px;
+      text-align: center;
+      font-size: 0.9rem;
     }
-    .btn-more-scorers:hover {
-      border-color: #FFD700;
+    .yellow-card {
+      background: #FFEB3B;
       color: #000;
-      background: #FFD700;
+      border: 1px solid #FBC02D;
+    }
+    .red-card {
+      background: #F44336;
+      color: #fff;
+      border: 1px solid #D32F2F;
+    }
+    .total-cards {
+      font-weight: bold;
+      font-size: 0.95rem;
     }
 
-    footer{margin-top:32px;font-size:.9em;opacity:.85;text-align:center}
+     
+    .scorers-table.collapsed tbody tr:nth-child(n+11) { display: none; }
+    .more-btn-wrap { text-align: center; margin: -10px 0 25px 0; }
+    .btn-more-scorers {
+      background: #fff; color: #333; border: 1px solid #ccc;
+      padding: 7px 18px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn-more-scorers:hover { border-color: #FFD700; color: #000; background: #FFD700; }
+
+    footer{margin-top:36px;font-size:.9em;opacity:.85;text-align:center}
 
     @media (prefers-color-scheme: dark){
       body{background:#101010;color:#e0e0e0}
@@ -73,16 +80,10 @@
       .max-cell { background:#004d00; color:#fff }
       .min-cell { background:#804000; color:#fff }
       .scorer-badge{background:#444; color:#FFD700}
-      .btn-more-scorers {
-        background: #222;
-        color: #e0e0e0;
-        border-color: #444;
-      }
-      .btn-more-scorers:hover {
-        background: #FFD700;
-        color: #000;
-        border-color: #FFD700;
-      }
+      .yellow-card { background: #FFD700; color: #000; }
+      .red-card { background: #E53935; color: #fff; }
+      .btn-more-scorers { background: #222; color: #e0e0e0; border-color: #444; }
+      .btn-more-scorers:hover { background: #FFD700; color: #000; border-color: #FFD700; }
     }
   </style>
   </head><body>
@@ -151,7 +152,7 @@
       <a class="nav-link" href="Archive-2025-26-U13.html">2025/26 Archive</a>
       <a class="nav-link" href="Scores.html">Scores</a>
     </div>
-  </nav><h1>U13 Team & Goal Stats</h1><label for="division-filter">Division:</label>
+  </nav><h1>U13 Team & Discipline Stats</h1><label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
     <option value="Alpha Trophies 2014s Division 1A 26/27">Alpha Trophies 2014s Division 1A 26/27</option><option value="Alpha Trophies 2014s Division 1B 26/27">Alpha Trophies 2014s Division 1B 26/27</option><option value="Alpha Trophies 2014s Division 2A 26/27">Alpha Trophies 2014s Division 2A 26/27</option><option value="Alpha Trophies 2014s Division 2B 26/27">Alpha Trophies 2014s Division 2B 26/27</option><option value="Alpha Trophies 2014s Division 3A 26/27">Alpha Trophies 2014s Division 3A 26/27</option><option value="Alpha Trophies 2014s Division 3B 26/27">Alpha Trophies 2014s Division 3B 26/27</option><option value="Alpha Trophies 2014s Division 4A 26/27">Alpha Trophies 2014s Division 4A 26/27</option><option value="Alpha Trophies 2014s Division 4B 26/27">Alpha Trophies 2014s Division 4B 26/27</option>
@@ -472,7 +473,75 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (32 more) ▼">
             Show More (32 more) ▼
           </button>
-        </div></div><div class="division-block" data-division="Alpha Trophies 2014s Division 1B 26/27">
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+          <td data-num="8"><span class="card-badge yellow-card">8</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="8">8</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Eastside_Rapids.html">Eastside Rapids</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Bathgate_Thistle_CFC_Blues.html">Bathgate Thistle CFC Blues</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Football_Star_Elite_Blacks.html">Football Star Elite Blacks</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Bonnyrigg_Rose_2014_Rosey.html">Bonnyrigg Rose 2014 Rosey</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Craigroyston_CYFC_Yellow.html">Craigroyston CYFC Yellow</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Musselburgh_Windsor_F_C.html">Musselburgh Windsor F C</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Corstorphine_Dynamo_FC_Whites.html">Corstorphine Dynamo FC Whites</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1A_26_27-Newcraighall_Leith_Vics.html">Newcraighall Leith Vics</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 1B 26/27">
       <h2>Alpha Trophies 2014s Division 1B 26/27</h2>
 
       
@@ -846,7 +915,69 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (45 more) ▼">
             Show More (45 more) ▼
           </button>
-        </div></div><div class="division-block" data-division="Alpha Trophies 2014s Division 2A 26/27">
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Tynecastle_FC.html">Tynecastle FC</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Preston_Athletic_Y_F_C.html">Preston Athletic Y F C</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Football_Star_Elite_Whites.html">Football Star Elite Whites</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Hutchison_Vale_Fc.html">Hutchison Vale Fc</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Livingston_FC_Community_2014_Yellows.html">Livingston FC Community 2014 Yellows</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Edinburgh_United_Youth_F_C_2014_Whites.html">Edinburgh United Youth F C 2014 Whites</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_1B_26_27-Haddington_Athletic_CFC.html">Haddington Athletic CFC</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 2A 26/27">
       <h2>Alpha Trophies 2014s Division 2A 26/27</h2>
 
       
@@ -1425,7 +1556,99 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (78 more) ▼">
             Show More (78 more) ▼
           </button>
-        </div></div><div class="division-block" data-division="Alpha Trophies 2014s Division 2B 26/27">
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Currie_F_C.html">Currie F C</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Edinburgh_City_FC_Academy.html">Edinburgh City FC Academy</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Bonnyrigg_Rose_2014_Thistle.html">Bonnyrigg Rose 2014 Thistle</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Cramond_FC.html">Cramond FC</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Edinburgh_South_Community_FC_Scorpions.html">Edinburgh South Community FC Scorpions</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Salvesen_CFC.html">Salvesen CFC</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Tynecastle_F_C_Maroons.html">Tynecastle F C Maroons</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Dunbar_United_Colts___Blacks.html">Dunbar United Colts - Blacks</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Hutchison_Vale_Colts.html">Hutchison Vale Colts</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Kelso_FC.html">Kelso FC</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>13</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>14</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2A_26_27-Peebles_FC.html">Peebles FC</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 2B 26/27">
       <h2>Alpha Trophies 2014s Division 2B 26/27</h2>
 
       
@@ -1951,7 +2174,93 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (69 more) ▼">
             Show More (69 more) ▼
           </button>
-        </div></div><div class="division-block" data-division="Alpha Trophies 2014s Division 3A 26/27">
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Leith_Athletic_FC.html">Leith Athletic FC</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Edinburgh_South_Community_FC_Falcons.html">Edinburgh South Community FC Falcons</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Haddington_Athletic_Colts.html">Haddington Athletic Colts</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Inverkeithing_Hillfield_Swifts_Colts.html">Inverkeithing Hillfield Swifts Colts</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Edinburgh_City.html">Edinburgh City</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Livingston_FC_Community_2014_Whites.html">Livingston FC Community 2014 Whites</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-North_Merchiston_FC_Blacks.html">North Merchiston FC Blacks</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Penicuik_Athletic_YFC_Blue.html">Penicuik Athletic YFC Blue</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Edinburgh_United_Youth_F_C_2014_Reds.html">Edinburgh United Youth F C 2014 Reds</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Gala_Fairydean_Rovers_Academy.html">Gala Fairydean Rovers Academy</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Hawick_Youth.html">Hawick Youth</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>13</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_2B_26_27-Loanhead_Miners_Youth_FC.html">Loanhead Miners Youth FC</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 3A 26/27">
       <h2>Alpha Trophies 2014s Division 3A 26/27</h2>
 
       
@@ -2436,7 +2745,81 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (64 more) ▼">
             Show More (64 more) ▼
           </button>
-        </div></div><div class="division-block" data-division="Alpha Trophies 2014s Division 3B 26/27">
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Bonnyrigg_Rose_2014_Whites.html">Bonnyrigg Rose 2014 Whites</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Edinburgh_City_Blacks.html">Edinburgh City Blacks</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Tranent_FC.html">Tranent FC</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Broxburn_Athletic_Colts___Badgers.html">Broxburn Athletic Colts - Badgers</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Livingston_FC_Community_2014_Blues.html">Livingston FC Community 2014 Blues</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Preston_Athletic_Y_F_C___Colts.html">Preston Athletic Y F C - Colts</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Craigroyston_CYFC_Blue.html">Craigroyston CYFC Blue</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Inverkeithing_Hillfield_Swifts_Gunners.html">Inverkeithing Hillfield Swifts Gunners</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-Musselburgh_Youngstars.html">Musselburgh Youngstars</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3A_26_27-North_Merchiston_FC_Whites.html">North Merchiston FC Whites</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 3B 26/27">
       <h2>Alpha Trophies 2014s Division 3B 26/27</h2>
 
       
@@ -2902,7 +3285,93 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (57 more) ▼">
             Show More (57 more) ▼
           </button>
-        </div></div><div class="division-block" data-division="Alpha Trophies 2014s Division 4A 26/27">
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Castlevale_Youth_Development_Club.html">Castlevale Youth Development Club</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Edina_Hibs.html">Edina Hibs</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Cramond_FC_Lions.html">Cramond FC Lions</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Edinburgh_South_Community_FC_Sharks.html">Edinburgh South Community FC Sharks</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Leith_Athletic_F_C_Colts.html">Leith Athletic F C Colts</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Tynecastle_F_C_Whites.html">Tynecastle F C Whites</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Inter_Currie_FC.html">Inter Currie FC</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Lochend_Football_Academy.html">Lochend Football Academy</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-North_Berwick_Town_FC.html">North Berwick Town FC</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>13</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_3B_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 4A 26/27">
       <h2>Alpha Trophies 2014s Division 4A 26/27</h2>
 
       
@@ -3131,7 +3600,69 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (16 more) ▼">
             Show More (16 more) ▼
           </button>
-        </div></div><div class="division-block" data-division="Alpha Trophies 2014s Division 4B 26/27">
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Easthouses_Lily.html">Easthouses Lily</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Melrose_FC.html">Melrose FC</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Dunbar_United_Colts___Whites.html">Dunbar United Colts - Whites</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Edinburgh_South_Community_FC_Wolves.html">Edinburgh South Community FC Wolves</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Edinburgh_United_Youth_F_C_2014_Blacks.html">Edinburgh United Youth F C 2014 Blacks</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Livingston_FC_Community_2014_Blacks.html">Livingston FC Community 2014 Blacks</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Lochend_Football_Academy_Colts.html">Lochend Football Academy Colts</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4A_26_27-Penicuik_Athletic_YFC_Red.html">Penicuik Athletic YFC Red</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2014s Division 4B 26/27">
       <h2>Alpha Trophies 2014s Division 4B 26/27</h2>
 
       
@@ -3473,9 +4004,76 @@
           <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (37 more) ▼">
             Show More (37 more) ▼
           </button>
-        </div></div>
+        </div><h3>Disciplinary Record ("Dirty Team" Standings)</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Leith_Athletic_Reds.html">Leith Athletic Reds</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Bonnyrigg_Rose_Juniors.html">Bonnyrigg Rose Juniors</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Dalkeith_Thistle_CFC_Deportivo.html">Dalkeith Thistle CFC Deportivo</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Edinburgh_South_Community_FC_Cobras.html">Edinburgh South Community FC Cobras</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Gala_Fairydean_Rovers_Reds.html">Gala Fairydean Rovers Reds</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Loanhead_Miners_Youth_FC_Star.html">Loanhead Miners Youth FC Star</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Musselburgh_Windsor_FC_Whites.html">Musselburgh Windsor FC Whites</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Penicuik_Athletic_YFC_Gold.html">Penicuik Athletic YFC Gold</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U13-Alpha_Trophies_2014s_Division_4B_26_27-Tranent_FC_Maroon.html">Tranent FC Maroon</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div>
   <script>
-  
   function toggleScorers(btn) {
     const block = btn.closest('.division-block');
     if (!block) return;
