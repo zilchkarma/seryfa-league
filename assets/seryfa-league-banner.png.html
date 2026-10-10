@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SERYFA Leagues Logo Generator</title>
+  <style>
+    body {
+      background: #1a1a1a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    canvas {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    button {
+      background: #FFD700;
+      color: #000;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+      transition: transform 0.15s ease;
+    }
+    button:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body>
+
+  <h2>SERYFA Leagues Logo</h2>
+  <canvas id="logoCanvas" width="512" height="512"></canvas>
+  <button onclick="downloadPNG()">💾 Download seryfa-leagues-logo.png</button>
+
+  <script>
+    const canvas = document.getElementById('logoCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function drawCrest() {
+      ctx.clearRect(0, 0, 512, 512);
+
+      // --- 1. Outer Shield Path ---
+      function makeShield(inset) {
+        ctx.beginPath();
+        ctx.moveTo(70 + inset, 60 + inset);
+        ctx.lineTo(442 - inset, 60 + inset);
+        ctx.bezierCurveTo(442 - inset, 280, 360, 410, 256, 470 - inset);
+        ctx.bezierCurveTo(152, 410, 70 + inset, 280, 70 + inset, 60 + inset);
+        ctx.closePath();
+      }
+
+      // Outer Shield Border (Gold Glow)
+      makeShield(0);
+      ctx.fillStyle = '#FFD700';
+      ctx.fill();
+
+      // Inner Dark Shield Base
+      makeShield(8);
+      ctx.fillStyle = '#0a0a0a';
+      ctx.fill();
+
+      // Inner Shield Gold Outline
+      makeShield(14);
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#FFD700';
+      ctx.stroke();
+
+      // Subtle Scottish Saltire / Cross in upper background
+      ctx.save();
+      makeShield(14);
+      ctx.clip();
+      ctx.lineWidth = 26;
+      ctx.strokeStyle = 'rgba(255, 215, 0, 0.12)';
+      ctx.beginPath();
+      ctx.moveTo(50, 40); ctx.lineTo(460, 450);
+      ctx.moveTo(460, 40); ctx.lineTo(50, 450);
+      ctx.stroke();
+      ctx.restore();
+
+      // --- 2. Top Header Banner: SERYFA ---
+      ctx.fillStyle = '#FFD700';
+      ctx.font = '900 44px Arial, Helvetica, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('SERYFA', 256, 130);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      ctx.font = '700 13px Arial, sans-serif';
+      ctx.letterSpacing = '3px';
+      ctx.fillText('SOUTH EAST REGION YOUTH FOOTBALL ASSOCIATION', 256, 155);
+
+      // Divider line
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#FFD700';
+      ctx.beginPath();
+      ctx.moveTo(130, 172);
+      ctx.lineTo(382, 172);
+      ctx.stroke();
+
+      // --- 3. Center Graphic: Stylized Football ---
+      const cx = 256, cy = 265, r = 62;
+
+      // Ball Outer Circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#FFD700';
+      ctx.stroke();
+
+      // Center Pentagon
+      function drawPolygon(x, y, radius, sides, angle) {
+        ctx.beginPath();
+        for (let i = 0; i < sides; i++) {
+          const a = angle + (i * 2 * Math.PI / sides);
+          const px = x + radius * Math.cos(a);
+          const py = y + radius * Math.sin(a);
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+      }
+
+      drawPolygon(cx, cy, 23, 5, -Math.PI / 2);
+      ctx.fillStyle = '#111827';
+      ctx.fill();
+
+      // Outer seam patches
+      for (let i = 0; i < 5; i++) {
+        const a = -Math.PI / 2 + (i * 2 * Math.PI / 5);
+        const p1x = cx + 23 * Math.cos(a);
+        const p1y = cy + 23 * Math.sin(a);
+        const p2x = cx + 56 * Math.cos(a);
+        const p2y = cy + 56 * Math.sin(a);
+
+        ctx.beginPath();
+        ctx.moveTo(p1x, p1y);
+        ctx.lineTo(p2x, p2y);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#111827';
+        ctx.stroke();
+      }
+
+      // --- 4. Bottom Ribbon: LEAGUES ---
+      // Ribbon base
+      ctx.beginPath();
+      ctx.moveTo(110, 360);
+      ctx.lineTo(402, 360);
+      ctx.lineTo(380, 410);
+      ctx.lineTo(132, 410);
+      ctx.closePath();
+      ctx.fillStyle = '#FFD700';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#000';
+      ctx.stroke();
+
+      // Ribbon Text
+      ctx.fillStyle = '#000000';
+      ctx.font = '900 32px Arial, Helvetica, sans-serif';
+      ctx.fillText('LEAGUES', 256, 398);
+
+      // Est. stars / accent
+      ctx.fillStyle = '#FFD700';
+      ctx.font = '700 13px Arial, sans-serif';
+      ctx.fillText('', 256, 442);
+    }
+
+    function downloadPNG() {
+      const link = document.createElement('a');
+      link.download = 'seryfa-leagues-logo.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    drawCrest();
+  </script>
+</body>
+</html>
