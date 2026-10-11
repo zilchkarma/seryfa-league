@@ -1,512 +1,1851 @@
 <!DOCTYPE html><html><head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>U17 Team Stats</title>
+  <title>U17 Team & Discipline Stats</title>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QLTFGFY0MQ');
+  </script>
+
   <style>
     body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
     h1{margin-top:0;color:#FFD700}
-    h2{margin-top:24px}
+    h2{margin-top:34px;font-size:1.35rem;border-bottom:2px solid #FFD700;padding-bottom:6px}
+    h3{margin-top:22px;font-size:1.1rem;color:#333}
     select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
-    table{border-collapse:collapse;width:100%;margin-bottom:30px}
-    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    table{border-collapse:collapse;width:100%;margin-bottom:20px}
+    th,td{border:1px solid #ccc;padding:8px 10px;text-align:center}
     th{background:#FFD700;color:#000}
     th.sortable{cursor:pointer}
     th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
-    .highlight{background-color:#d4edda;font-weight:bold}
-    .highlight-low{background-color:#fff3cd;font-weight:bold}
-    th.pts-head{background:#FFD700;color:#000}
-    td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
-    td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
+    td.gf{background:#d0eaff} td.ga{background:#ffe0d0}
     tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
     th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
-    .date-cell{background:#000;color:#FFD700}
-    .max-cell { background-color:#d4edda; font-weight:bold }    
-.min-cell { background-color:#ffe0b2; font-weight:bold }    
-    footer{margin-top:24px;font-size:.9em;opacity:.85}
+    .max-cell { background-color:#d4edda; font-weight:bold }
+    .min-cell { background-color:#ffe0b2; font-weight:bold }
+    td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
+    td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
+    .scorer-badge{background:#FFD700; color:#000; padding:2px 8px; border-radius:12px; font-weight:bold}
+
+     
+    .card-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      min-width: 22px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .yellow-card {
+      background: #FFEB3B;
+      color: #000;
+      border: 1px solid #FBC02D;
+    }
+    .red-card {
+      background: #F44336;
+      color: #fff;
+      border: 1px solid #D32F2F;
+    }
+    .total-cards {
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+     
+    .scorers-table.collapsed tbody tr:nth-child(n+11) { display: none; }
+    .more-btn-wrap { text-align: center; margin: -10px 0 25px 0; }
+    .btn-more-scorers {
+      background: #fff; color: #333; border: 1px solid #ccc;
+      padding: 7px 18px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn-more-scorers:hover { border-color: #FFD700; color: #000; background: #FFD700; }
+
+    footer{margin-top:36px;font-size:.9em;opacity:.85;text-align:center}
+
     @media (prefers-color-scheme: dark){
       body{background:#101010;color:#e0e0e0}
+      h3{color:#FFD700}
       select{background:#222;color:#fff;border-color:#555}
       table,th,td{border-color:#333}
       th{background:#222;color:#fff}
-      th.pts-head{background:#FFD700;color:#000}
-      td.pts-cell{background:#444;color:#FFD700}
-      td.gf{background:#1a2a40} td.ga{background:#402a1a} td.gd{background:#1a402a}
+      td.gf{background:#1a2a40} td.ga{background:#402a1a}
       tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
       th:first-child,td:first-child{background:#202020;font-weight:bold}
-      .date-cell{background:#000;color:#FFD700}
-        .max-cell { background:#004d00; color:#fff }
-  .min-cell { background:#804000; color:#fff }
+      .max-cell { background:#004d00; color:#fff }
+      .min-cell { background:#804000; color:#fff }
+      .scorer-badge{background:#444; color:#FFD700}
+      .yellow-card { background: #FFD700; color: #000; }
+      .red-card { background: #E53935; color: #fff; }
+      .btn-more-scorers { background: #222; color: #e0e0e0; border-color: #444; }
+      .btn-more-scorers:hover { background: #FFD700; color: #000; border-color: #FFD700; }
     }
   </style>
- 
-<style>
+  <meta property="og:type" content="website">
+<meta property="og:title" content="SERYFA League Tables &amp; Standings">
+<meta property="og:description" content="View live standings, recent results, goalscorer leaderboards, and upcoming fixtures.">
+<meta property="og:image" content="https://seryfaleagues.com/assets/seryfa-league-banner.png">
+<meta property="og:url" content="https://seryfaleagues.com/index.html"></head><body>
+  <style>
+    .sfy-nav {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .sfy-nav .bar {
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #FFD700;
+      border-bottom: 1px solid #333;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .sfy-tabs,
+    .sfy-subtabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .sfy-subtabs {
+      background: #181818;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      color: #e0e0e0;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-link:hover {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+    .nav-link.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: bold;
+    }
+  </style>
 
-.sfy-nav{
- background:#222;
- color:#fff;
- padding-bottom:5px
-}
-
-.sfy-nav .bar{
- padding:12px;
- font-weight:bold;
- color:#FFD700;
- border-bottom:1px solid #333
-}
-
-.sfy-tabs,
-.sfy-subtabs{
- display:flex;
- gap:6px;
- overflow-x:auto;
- padding:8px 10px
-}
-
-.nav-link{
- padding:6px 12px;
- border-radius:20px;
- border:1px solid #444;
- color:#fff;
- text-decoration:none;
- white-space:nowrap;
- font-size:.9rem
-}
-
-.nav-link.active{
- background:#FFD700;
- color:#000;
- border-color:#FFD700
-}
-
-</style>
-
-<nav class="sfy-nav">
-
-<div class="bar">
-SERYFA Unofficial Leagues
-</div>
-
-
-<div class="sfy-subtabs">
-
-
-<a
- class="nav-link"
- href="U17.html">
- U17 Table
-</a>
-
-
-<a
- class="nav-link active"
- href="U17-stats.html">
- Stats
-</a>
-
-
-<a
- class="nav-link"
- href="Archive-2025-26-U17.html">
- 2025/26 Archive
-</a>
-
-<a class="nav-link"
-        href="Scores.html">Scores</a>
-
-</div>
-
-<div class="sfy-tabs">
-
-<a class="nav-link" href="index.html">
-Home
-</a>
-
-
-<a
- class="nav-link"
- href="U13.html">
- U13
-</a>
-<a
- class="nav-link"
- href="U14.html">
- U14
-</a>
-<a
- class="nav-link"
- href="U15.html">
- U15
-</a>
-<a
- class="nav-link"
- href="U16.html">
- U16
-</a>
-<a
- class="nav-link"
- href="U17.html">
- U17
-</a>
-<a
- class="nav-link"
- href="U18.html">
- U18
-</a>
-
-</div>
-
-</nav></head><body><h1>U17 Team Stats</h1><label for="division-filter">Division:</label>
+  <nav class="sfy-nav">
+    <div class="bar">SERYFA Leagues</div>
+    <div class="sfy-tabs">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="U13.html">U13</a><a class="nav-link" href="U14.html">U14</a><a class="nav-link" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a>
+    </div>
+    
+    <div class="sfy-subtabs">
+      <a class="nav-link" href="U17.html">U17 Table</a>
+      <a class="nav-link active" href="U17-stats.html">Stats</a>
+      <a class="nav-link" href="Archive-2025-26-U17.html">2025/26 Archive</a>
+      <a class="nav-link" href="Scores.html">Scores</a>
+    </div>
+  </nav><h1>U17 Team & Discipline Stats</h1><label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
-    <option value="Division 1">Division 1</option><option value="Division 2">Division 2</option><option value="Division 3">Division 3</option>
-  </select><div class="division-block" data-division="Division 1">
-    <h2>Division 1</h2>
-    <table class="sortable">
-      <thead><tr>
-        <th class="sortable" data-type="text">Team</th>
-        <th class="sortable gf" data-type="num">Avg GF</th>
-        <th class="sortable ga" data-type="num">Avg GA</th>
-        <th class="sortable" data-type="text">Biggest Win</th>
-        <th class="sortable" data-type="text">Biggest Loss</th>
-        <th class="sortable gf" data-type="num">Most Scored</th>
-        <th class="sortable ga" data-type="num">Most Conceded</th>
-      </tr></thead>
-      <tbody><tr>
-      <td>SPARTANS FC YOUTH</td>
-      <td class="max-cell" data-num="4.25">4.25</td>
-      <td class="" data-num="1">1.00</td>
-      <td class="max-cell">9–1 vs EAST CALDER CFC</td>
-      <td>-</td>
-      <td class="max-cell" data-num="9">9</td>
-      <td class="" data-num="2">2</td>
-    </tr><tr>
-      <td>BLACKBURN UNITED CFC</td>
-      <td class="" data-num="1">1.00</td>
-      <td class="" data-num="3.6666666666666665">3.67</td>
-      <td class="">1–0 vs AC OXGANGS CFC</td>
-      <td>1–6 vs SPARTANS FC WHITES</td>
-      <td class="" data-num="1">1</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>SPARTANS FC WHITES</td>
-      <td class="" data-num="2.8">2.80</td>
-      <td class="" data-num="2.2">2.20</td>
-      <td class="">6–1 vs BLACKBURN UNITED CFC</td>
-      <td>0–3 vs EDINBURGH SOUTH CFC</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>EAST CALDER CFC</td>
-      <td class="" data-num="2.4">2.40</td>
-      <td class="min-cell" data-num="6.2">6.20</td>
-      <td class="">6–5 vs PORTOBELLO CFA</td>
-      <td>1–9 vs SPARTANS FC YOUTH</td>
-      <td class="" data-num="6">6</td>
-      <td class="min-cell" data-num="9">9</td>
-    </tr><tr>
-      <td>PORTOBELLO CFA</td>
-      <td class="" data-num="2.3333333333333335">2.33</td>
-      <td class="" data-num="3">3.00</td>
-      <td class="">-</td>
-      <td>1–2 vs EDINBURGH CITY FC</td>
-      <td class="" data-num="5">5</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>EDINBURGH CITY FC</td>
-      <td class="" data-num="1.6666666666666667">1.67</td>
-      <td class="" data-num="1.6666666666666667">1.67</td>
-      <td class="">3–1 vs AC OXGANGS CFC</td>
-      <td>0–3 vs NORTH MERCHISTON BLACKS</td>
-      <td class="" data-num="3">3</td>
-      <td class="" data-num="3">3</td>
-    </tr><tr>
-      <td>NORTH MERCHISTON BLACKS</td>
-      <td class="" data-num="2.8">2.80</td>
-      <td class="" data-num="1">1.00</td>
-      <td class="">7–2 vs AC OXGANGS CFC</td>
-      <td>0–1 vs EDINBURGH CITY WHITES</td>
-      <td class="" data-num="7">7</td>
-      <td class="" data-num="2">2</td>
-    </tr><tr>
-      <td>EDINBURGH CITY WHITES</td>
-      <td class="" data-num="1">1.00</td>
-      <td class="" data-num="1.25">1.25</td>
-      <td class="">1–0 vs NORTH MERCHISTON BLACKS</td>
-      <td>0–2 vs NORTH MERCHISTON BLACKS</td>
-      <td class="" data-num="2">2</td>
-      <td class="" data-num="2">2</td>
-    </tr><tr>
-      <td>MUSSELBURGH WINDSOR FC</td>
-      <td class="" data-num="2.8">2.80</td>
-      <td class="" data-num="2">2.00</td>
-      <td class="">4–2 vs EDINBURGH SOUTH CFC</td>
-      <td>-</td>
-      <td class="" data-num="4">4</td>
-      <td class="" data-num="3">3</td>
-    </tr><tr>
-      <td>EDINBURGH SOUTH CFC</td>
-      <td class="" data-num="4">4.00</td>
-      <td class="" data-num="1.4">1.40</td>
-      <td class="">6–1 vs EAST CALDER CFC</td>
-      <td>2–4 vs MUSSELBURGH WINDSOR FC</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>AC OXGANGS CFC</td>
-      <td class="" data-num="1">1.00</td>
-      <td class="" data-num="4">4.00</td>
-      <td class="">-</td>
-      <td>2–7 vs NORTH MERCHISTON BLACKS</td>
-      <td class="" data-num="2">2</td>
-      <td class="" data-num="7">7</td>
-    </tr><tr>
-      <td>BAYSIDE FC ATHLETIC</td>
-      <td class="" data-num="2.5">2.50</td>
-      <td class="" data-num="2.5">2.50</td>
-      <td class="">6–2 vs EAST CALDER CFC</td>
-      <td>1–4 vs EDINBURGH SOUTH CFC</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="4">4</td>
-    </tr></tbody></table></div><div class="division-block" data-division="Division 2">
-    <h2>Division 2</h2>
-    <table class="sortable">
-      <thead><tr>
-        <th class="sortable" data-type="text">Team</th>
-        <th class="sortable gf" data-type="num">Avg GF</th>
-        <th class="sortable ga" data-type="num">Avg GA</th>
-        <th class="sortable" data-type="text">Biggest Win</th>
-        <th class="sortable" data-type="text">Biggest Loss</th>
-        <th class="sortable gf" data-type="num">Most Scored</th>
-        <th class="sortable ga" data-type="num">Most Conceded</th>
-      </tr></thead>
-      <tbody><tr>
-      <td>EDINBURGH SOUTH CFC ROVERS</td>
-      <td class="" data-num="2.2">2.20</td>
-      <td class="" data-num="1.8">1.80</td>
-      <td class="">6–3 vs MURIESTON UNITED BLUES</td>
-      <td>0–4 vs PENICUIK ATHLETIC YFC WHITES</td>
-      <td class="max-cell" data-num="6">6</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>MURIESTON UNITED BLUES</td>
-      <td class="" data-num="2.6">2.60</td>
-      <td class="" data-num="3.6">3.60</td>
-      <td class="">5–1 vs TRANENT FC</td>
-      <td>3–6 vs CRAMOND CFC</td>
-      <td class="" data-num="5">5</td>
-      <td class="min-cell" data-num="6">6</td>
-    </tr><tr>
-      <td>DALKEITH THISTLE CARDO</td>
-      <td class="" data-num="3.6">3.60</td>
-      <td class="" data-num="2.4">2.40</td>
-      <td class="">4–1 vs CURRIE STAR</td>
-      <td>4–5 vs MUSSELBURGH WINDSOR FC BLUES</td>
-      <td class="" data-num="4">4</td>
-      <td class="" data-num="5">5</td>
-    </tr><tr>
-      <td>MUSSELBURGH WINDSOR FC BLUES</td>
-      <td class="" data-num="3">3.00</td>
-      <td class="" data-num="1.75">1.75</td>
-      <td class="">2–0 vs CURRIE FC</td>
-      <td>-</td>
-      <td class="" data-num="5">5</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>DALKEITH THISTLE CFC BALOMPIE</td>
-      <td class="" data-num="2">2.00</td>
-      <td class="" data-num="3.8">3.80</td>
-      <td class="">4–3 vs TRANENT FC</td>
-      <td>2–6 vs PENICUIK ATHLETIC YFC WHITES</td>
-      <td class="" data-num="4">4</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>MUSSELBURGH WINDSOR FC WHITES</td>
-      <td class="" data-num="2.4">2.40</td>
-      <td class="" data-num="3.2">3.20</td>
-      <td class="">4–2 vs MURIESTON UNITED BLUES</td>
-      <td>1–6 vs PENICUIK ATHLETIC YFC WHITES</td>
-      <td class="" data-num="4">4</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>CURRIE FC LIONS</td>
-      <td class="" data-num="3.3333333333333335">3.33</td>
-      <td class="" data-num="1.6666666666666667">1.67</td>
-      <td class="">3–0 vs DALKEITH THISTLE CFC BALOMPIE</td>
-      <td>-</td>
-      <td class="" data-num="4">4</td>
-      <td class="" data-num="3">3</td>
-    </tr><tr>
-      <td>PENICUIK ATHLETIC YFC WHITES</td>
-      <td class="max-cell" data-num="4">4.00</td>
-      <td class="" data-num="1.8">1.80</td>
-      <td class="max-cell">6–1 vs MUSSELBURGH WINDSOR FC WHITES</td>
-      <td>2–3 vs CURRIE FC LIONS</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="3">3</td>
-    </tr><tr>
-      <td>CURRIE STAR</td>
-      <td class="" data-num="2">2.00</td>
-      <td class="" data-num="2.25">2.25</td>
-      <td class="">5–2 vs DALKEITH THISTLE CFC BALOMPIE</td>
-      <td>1–4 vs DALKEITH THISTLE CARDO</td>
-      <td class="" data-num="5">5</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>SPARTANS FC REDS</td>
-      <td class="" data-num="2">2.00</td>
-      <td class="" data-num="3">3.00</td>
-      <td class="">-</td>
-      <td>1–2 vs CURRIE STAR</td>
-      <td class="" data-num="3">3</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>CRAMOND CFC</td>
-      <td class="" data-num="3.6">3.60</td>
-      <td class="" data-num="2.4">2.40</td>
-      <td class="">6–3 vs MURIESTON UNITED BLUES</td>
-      <td>1–3 vs EDINBURGH SOUTH CFC ROVERS</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="3">3</td>
-    </tr><tr>
-      <td>TRANENT FC</td>
-      <td class="" data-num="1.75">1.75</td>
-      <td class="" data-num="3">3.00</td>
-      <td class="">2–0 vs CURRIE STAR</td>
-      <td>1–5 vs MURIESTON UNITED BLUES</td>
-      <td class="" data-num="3">3</td>
-      <td class="" data-num="5">5</td>
-    </tr><tr>
-      <td>CURRIE FC</td>
-      <td class="" data-num="1">1.00</td>
-      <td class="" data-num="2">2.00</td>
-      <td class="">-</td>
-      <td>0–2 vs MUSSELBURGH WINDSOR FC BLUES</td>
-      <td class="" data-num="2">2</td>
-      <td class="" data-num="2">2</td>
-    </tr><tr>
-      <td>CIVIL SERVICE STROLLERS FC</td>
-      <td class="" data-num="3">3.00</td>
-      <td class="min-cell" data-num="6">6.00</td>
-      <td class="">-</td>
-      <td>3–6 vs CRAMOND CFC</td>
-      <td class="" data-num="3">3</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>SPARTANS FC YOUTH</td>
-      <td class="" data-num="2">2.00</td>
-      <td class="" data-num="4">4.00</td>
-      <td class="">-</td>
-      <td>2–4 vs MUSSELBURGH WINDSOR FC BLUES</td>
-      <td class="" data-num="2">2</td>
-      <td class="" data-num="4">4</td>
-    </tr></tbody></table></div><div class="division-block" data-division="Division 3">
-    <h2>Division 3</h2>
-    <table class="sortable">
-      <thead><tr>
-        <th class="sortable" data-type="text">Team</th>
-        <th class="sortable gf" data-type="num">Avg GF</th>
-        <th class="sortable ga" data-type="num">Avg GA</th>
-        <th class="sortable" data-type="text">Biggest Win</th>
-        <th class="sortable" data-type="text">Biggest Loss</th>
-        <th class="sortable gf" data-type="num">Most Scored</th>
-        <th class="sortable ga" data-type="num">Most Conceded</th>
-      </tr></thead>
-      <tbody><tr>
-      <td>LONGNIDDRY VILLA</td>
-      <td class="" data-num="3.7142857142857144">3.71</td>
-      <td class="" data-num="2">2.00</td>
-      <td class="">5–0 vs MUSSELBURGH WINDSOR FC REDS</td>
-      <td>3–6 vs BROXBURN ATHLETIC COLTS BADGERS</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>BONNYRIGG ROSE BLACKS</td>
-      <td class="" data-num="1.3333333333333333">1.33</td>
-      <td class="" data-num="4">4.00</td>
-      <td class="">-</td>
-      <td>2–9 vs CURRIE FC TIGERS</td>
-      <td class="" data-num="2">2</td>
-      <td class="min-cell" data-num="9">9</td>
-    </tr><tr>
-      <td>MUSSELBURGH WINDSOR FC REDS</td>
-      <td class="" data-num="1.5">1.50</td>
-      <td class="" data-num="3.1666666666666665">3.17</td>
-      <td class="">3–1 vs POLBETH UNITED</td>
-      <td>0–5 vs LONGNIDDRY VILLA</td>
-      <td class="" data-num="4">4</td>
-      <td class="" data-num="5">5</td>
-    </tr><tr>
-      <td>BROXBURN ATHLETIC COLTS BADGERS</td>
-      <td class="max-cell" data-num="6.333333333333333">6.33</td>
-      <td class="" data-num="1">1.00</td>
-      <td class="max-cell">9–0 vs POLBETH UNITED</td>
-      <td>-</td>
-      <td class="max-cell" data-num="9">9</td>
-      <td class="" data-num="3">3</td>
-    </tr><tr>
-      <td>LIVINGSTON CFC</td>
-      <td class="" data-num="3.4">3.40</td>
-      <td class="" data-num="2.8">2.80</td>
-      <td class="">6–0 vs KSQ RAPIDS</td>
-      <td>1–4 vs DUNBAR UNITED COLTS</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="5">5</td>
-    </tr><tr>
-      <td>CURRIE FC TIGERS</td>
-      <td class="" data-num="3.8">3.80</td>
-      <td class="" data-num="4.2">4.20</td>
-      <td class="">9–2 vs BONNYRIGG ROSE BLACKS</td>
-      <td>0–6 vs BROXBURN ATHLETIC COLTS BADGERS</td>
-      <td class="" data-num="9">9</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>KSQ RAPIDS</td>
-      <td class="" data-num="3">3.00</td>
-      <td class="" data-num="2.3333333333333335">2.33</td>
-      <td class="">8–0 vs POLBETH UNITED</td>
-      <td>0–6 vs LIVINGSTON CFC</td>
-      <td class="" data-num="8">8</td>
-      <td class="" data-num="7">7</td>
-    </tr><tr>
-      <td>DUNBAR UNITED COLTS</td>
-      <td class="" data-num="3.1666666666666665">3.17</td>
-      <td class="" data-num="2">2.00</td>
-      <td class="">9–1 vs AC OXGANGS CFC CALCIO</td>
-      <td>2–5 vs BROXBURN ATHLETIC COLTS BADGERS</td>
-      <td class="" data-num="9">9</td>
-      <td class="" data-num="5">5</td>
-    </tr><tr>
-      <td>PENICUIK ATHLETIC YFC REDS</td>
-      <td class="" data-num="2.25">2.25</td>
-      <td class="" data-num="4.5">4.50</td>
-      <td class="">5–2 vs AC OXGANGS CFC CALCIO</td>
-      <td>0–8 vs BROXBURN ATHLETIC COLTS BADGERS</td>
-      <td class="" data-num="5">5</td>
-      <td class="" data-num="8">8</td>
-    </tr><tr>
-      <td>AC OXGANGS CFC CALCIO</td>
-      <td class="" data-num="1.6">1.60</td>
-      <td class="min-cell" data-num="5.8">5.80</td>
-      <td class="">-</td>
-      <td>1–9 vs DUNBAR UNITED COLTS</td>
-      <td class="" data-num="3">3</td>
-      <td class="" data-num="9">9</td>
-    </tr><tr>
-      <td>GALA FAIRYDEAN ROVERS</td>
-      <td class="" data-num="6">6.00</td>
-      <td class="" data-num="3">3.00</td>
-      <td class="">7–3 vs KSQ RAPIDS</td>
-      <td>-</td>
-      <td class="" data-num="7">7</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>POLBETH UNITED</td>
-      <td class="" data-num="1.5">1.50</td>
-      <td class="" data-num="5.75">5.75</td>
-      <td class="">5–3 vs AC OXGANGS CFC CALCIO</td>
-      <td>0–9 vs BROXBURN ATHLETIC COLTS BADGERS</td>
-      <td class="" data-num="5">5</td>
-      <td class="" data-num="9">9</td>
-    </tr></tbody></table></div><script>
+    <option value="Alpha Trophies 2010s Division 1 26/27">Alpha Trophies 2010s Division 1 26/27</option><option value="Alpha Trophies 2010s Division 2 26/27">Alpha Trophies 2010s Division 2 26/27</option><option value="Alpha Trophies 2010s Division 3 26/27">Alpha Trophies 2010s Division 3 26/27</option>
+  </select><div class="division-block" data-division="Alpha Trophies 2010s Division 1 26/27">
+      <h2>Alpha Trophies 2010s Division 1 26/27</h2>
+
+      
+      <h3>Team Performance</h3>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        <td class="" data-num="2.3333333333333335">2.33</td>
+        <td class="" data-num="1.3333333333333333">1.33</td>
+        <td class="">7–2 vs AC Oxgangs CFC</td>
+        <td>0–3 vs Edinburgh South CFC</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        <td class="" data-num="3.8333333333333335">3.83</td>
+        <td class="" data-num="1.1666666666666667">1.17</td>
+        <td class="">6–1 vs East Calder CFC</td>
+        <td>2–4 vs Musselburgh Windsor FC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        <td class="" data-num="2.8333333333333335">2.83</td>
+        <td class="" data-num="1.8333333333333333">1.83</td>
+        <td class="">3–1 vs Portobello Community Football Academy</td>
+        <td>-</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Portobello_Community_Football_Academy.html">Portobello Community Football Academy</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">-</td>
+        <td>1–3 vs Musselburgh Windsor FC</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+        <td class="" data-num="2.3333333333333335">2.33</td>
+        <td class="" data-num="5.666666666666667">5.67</td>
+        <td class="">6–5 vs Portobello Community Football Academy</td>
+        <td>1–9 vs Spartans FC Youth</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_United_CFC.html">Blackburn United CFC</a></td>
+        <td class="" data-num="1.5">1.50</td>
+        <td class="" data-num="3.25">3.25</td>
+        <td class="">3–2 vs East Calder CFC</td>
+        <td>1–6 vs Spartans FC Youth Whites</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="4">4.00</td>
+        <td class="">-</td>
+        <td>2–7 vs North Merchiston FC</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Bayside_FC_Athletic.html">Bayside FC Athletic</a></td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="">6–2 vs East Calder CFC</td>
+        <td>1–4 vs Edinburgh South CFC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+        <td class="" data-num="2.8">2.80</td>
+        <td class="" data-num="2.2">2.20</td>
+        <td class="">6–1 vs Blackburn United CFC</td>
+        <td>0–3 vs Edinburgh South CFC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        <td class="max-cell" data-num="4.25">4.25</td>
+        <td class="min-cell" data-num="1">1.00</td>
+        <td class="max-cell">9–1 vs East Calder CFC</td>
+        <td>-</td>
+        <td class="max-cell" data-num="9">9</td>
+        <td class="min-cell" data-num="2">2</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_FC_Academy.html">Edinburgh City FC Academy</a></td>
+        <td class="" data-num="1.6666666666666667">1.67</td>
+        <td class="" data-num="1.6666666666666667">1.67</td>
+        <td class="">3–1 vs AC Oxgangs CFC</td>
+        <td>0–3 vs North Merchiston FC</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_Whites.html">Edinburgh City Whites</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="1.25">1.25</td>
+        <td class="">1–0 vs North Merchiston FC</td>
+        <td>0–2 vs North Merchiston FC</td>
+        <td class="" data-num="2">2</td>
+        <td class="" data-num="2">2</td>
+      </tr></tbody></table><h3>Top Scorers</h3><table class="sortable scorers-table collapsed">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable gf" data-type="num" style="width:90px">Goals</th>
+          <th class="sortable" data-type="text">Player Code</th>
+          <th class="sortable" data-type="text">Team</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td data-num="5"><span class="scorer-badge">5</span></td>
+          <td>PL-6473F5566F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+        </tr><tr>
+          <td>2</td>
+          <td data-num="5"><span class="scorer-badge">5</span></td>
+          <td>PL-9363A7D93F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        </tr><tr>
+          <td>3</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-C3078C64B7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>4</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-DF17826EF2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>5</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-483D2E8546</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+        </tr><tr>
+          <td>6</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-A4E6A55678</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>7</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-A34498E360</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        </tr><tr>
+          <td>8</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-1485C2D222</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>9</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-E51F984574</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>10</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-520D585360</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        </tr><tr>
+          <td>11</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-48F7BA981F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+        </tr><tr>
+          <td>12</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-C6D8E90A89</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>13</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-116CA55A44</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Portobello_Community_Football_Academy.html">Portobello Community Football Academy</a></td>
+        </tr><tr>
+          <td>14</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-20C2F38522</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>15</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-8989626C2B</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>16</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-EFFE432179</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        </tr><tr>
+          <td>17</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-94047C6B41</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+        </tr><tr>
+          <td>18</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-A0D9A58A55</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>19</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-A246460319</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>20</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-B84F53303C</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Portobello_Community_Football_Academy.html">Portobello Community Football Academy</a></td>
+        </tr><tr>
+          <td>21</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-8BB3BFE07F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+        </tr><tr>
+          <td>22</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-3E5D8D6275</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>23</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-EED8DE561A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+        </tr><tr>
+          <td>24</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-3CBE88A95D</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>25</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-FD1F193263</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>26</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-7C9ECEA34B</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Portobello_Community_Football_Academy.html">Portobello Community Football Academy</a></td>
+        </tr><tr>
+          <td>27</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-5402008DF2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Bayside_FC_Athletic.html">Bayside FC Athletic</a></td>
+        </tr><tr>
+          <td>28</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-67A392EED2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+        </tr><tr>
+          <td>29</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-9F5DCFABF8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+        </tr><tr>
+          <td>30</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-45AFFB9B71</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_Whites.html">Edinburgh City Whites</a></td>
+        </tr><tr>
+          <td>31</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-4DCBB16348</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_United_CFC.html">Blackburn United CFC</a></td>
+        </tr><tr>
+          <td>32</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-CF779BA425</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>33</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-F4AD8397BB</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>34</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-979B4CF6E9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_United_CFC.html">Blackburn United CFC</a></td>
+        </tr><tr>
+          <td>35</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-2D83E46C33</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+        </tr><tr>
+          <td>36</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-DE56364CE8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>37</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-A87289F7A4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+        </tr><tr>
+          <td>38</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-FC6339D731</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_United_CFC.html">Blackburn United CFC</a></td>
+        </tr><tr>
+          <td>39</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-E47D958173</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Bayside_FC_Athletic.html">Bayside FC Athletic</a></td>
+        </tr><tr>
+          <td>40</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-65FE9C2250</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_Whites.html">Edinburgh City Whites</a></td>
+        </tr><tr>
+          <td>41</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-55C7486A86</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        </tr><tr>
+          <td>42</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-7F05AFC595</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>43</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-A2CC511CAA</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        </tr><tr>
+          <td>44</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-4F3CAE4C30</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>45</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-0261A48F09</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_Whites.html">Edinburgh City Whites</a></td>
+        </tr><tr>
+          <td>46</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-7A358A7F61</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+        </tr><tr>
+          <td>47</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-71F1F7BEE7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_United_CFC.html">Blackburn United CFC</a></td>
+        </tr><tr>
+          <td>48</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-FD301A5D58</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>49</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-FF797628A6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        </tr><tr>
+          <td>50</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-AA0A8B94AF</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Portobello_Community_Football_Academy.html">Portobello Community Football Academy</a></td>
+        </tr><tr>
+          <td>51</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-6E54BA1BB9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        </tr><tr>
+          <td>52</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-7F039A3D1E</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>53</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-A45EB9B6DE</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_Whites.html">Edinburgh City Whites</a></td>
+        </tr><tr>
+          <td>54</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-E613842208</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_United_CFC.html">Blackburn United CFC</a></td>
+        </tr><tr>
+          <td>55</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-4EF9B339DB</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+        </tr><tr>
+          <td>56</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-065208741C</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+        </tr><tr>
+          <td>57</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-823BCECE70</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+        </tr><tr>
+          <td>58</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-8E155BD1F7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Bayside_FC_Athletic.html">Bayside FC Athletic</a></td>
+        </tr><tr>
+          <td>59</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-5A13B232BD</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>60</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-C3B2A1C224</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+        </tr><tr>
+          <td>61</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-83D07BCAC6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Portobello_Community_Football_Academy.html">Portobello Community Football Academy</a></td>
+        </tr></tbody></table>
+        <div class="more-btn-wrap">
+          <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (51 more) ▼">
+            Show More (51 more) ▼
+          </button>
+        </div><h3>Disciplinary Record</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Musselburgh_Windsor_FC.html">Musselburgh Windsor FC</a></td>
+          <td data-num="18"><span class="card-badge yellow-card">18</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="18">18</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_South_CFC.html">Edinburgh South CFC</a></td>
+          <td data-num="13"><span class="card-badge yellow-card">13</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="14">14</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth_Whites.html">Spartans FC Youth Whites</a></td>
+          <td data-num="11"><span class="card-badge yellow-card">11</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="11">11</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Portobello_Community_Football_Academy.html">Portobello Community Football Academy</a></td>
+          <td data-num="8"><span class="card-badge yellow-card">8</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="8">8</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Bayside_FC_Athletic.html">Bayside FC Athletic</a></td>
+          <td data-num="6"><span class="card-badge yellow-card">6</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+          <td data-num="6"><span class="card-badge yellow-card">6</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="6">6</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-East_Calder_CFC.html">East Calder CFC</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_FC_Academy.html">Edinburgh City FC Academy</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Edinburgh_City_Whites.html">Edinburgh City Whites</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-AC_Oxgangs_CFC.html">AC Oxgangs CFC</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_1_26_27-Blackburn_United_CFC.html">Blackburn United CFC</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 2 26/27">
+      <h2>Alpha Trophies 2010s Division 2 26/27</h2>
+
+      
+      <h3>Team Performance</h3>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+        <td class="" data-num="3.3333333333333335">3.33</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">6–3 vs Civil Service Strollers</td>
+        <td>1–3 vs Edinburgh South Community CFC Rovers</td>
+        <td class="max-cell" data-num="6">6</td>
+        <td class="min-cell" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        <td class="" data-num="3.3333333333333335">3.33</td>
+        <td class="" data-num="1.8333333333333333">1.83</td>
+        <td class="max-cell">6–1 vs Musselburgh Windsor F C Whites</td>
+        <td>0–2 vs Cramond Football Club</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Edinburgh_South_Community_CFC_Rovers.html">Edinburgh South Community CFC Rovers</a></td>
+        <td class="" data-num="2.3333333333333335">2.33</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">6–3 vs Murieston United Blues</td>
+        <td>0–4 vs Penicuik Athletic YFC White</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">2–0 vs Currie Star</td>
+        <td>1–5 vs Murieston United Blues</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+        <td class="" data-num="2.7142857142857144">2.71</td>
+        <td class="" data-num="2.2857142857142856">2.29</td>
+        <td class="">6–2 vs Civil Service Strollers</td>
+        <td>1–4 vs Dalkeith Thistle CFC Cardo</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Murieston_United_Blues.html">Murieston United Blues</a></td>
+        <td class="" data-num="2.6666666666666665">2.67</td>
+        <td class="" data-num="3.5">3.50</td>
+        <td class="">5–1 vs Tranent FC</td>
+        <td>3–6 vs Edinburgh South Community CFC Rovers</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Civil_Service_Strollers.html">Civil Service Strollers</a></td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="" data-num="6">6.00</td>
+        <td class="">-</td>
+        <td>2–6 vs Currie Star</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="min-cell" data-num="1.75">1.75</td>
+        <td class="">4–2 vs Spartans FC Youth Reds</td>
+        <td>-</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="3.2">3.20</td>
+        <td class="">-</td>
+        <td>2–4 vs Musselburgh Windsor FC Blues</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+        <td class="" data-num="2.4">2.40</td>
+        <td class="" data-num="3.2">3.20</td>
+        <td class="">4–2 vs Murieston United Blues</td>
+        <td>1–6 vs Penicuik Athletic YFC White</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_FC_Lions.html">Currie FC Lions</a></td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="" data-num="1.75">1.75</td>
+        <td class="">3–0 vs Dalkeith Thistle CFC Balompie</td>
+        <td>0–2 vs Musselburgh Windsor FC Blues</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="3.8">3.80</td>
+        <td class="">4–3 vs Tranent FC</td>
+        <td>2–6 vs Penicuik Athletic YFC White</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+        <td class="max-cell" data-num="3.6">3.60</td>
+        <td class="" data-num="2.4">2.40</td>
+        <td class="">4–1 vs Currie Star</td>
+        <td>4–5 vs Musselburgh Windsor FC Blues</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="5">5</td>
+      </tr></tbody></table><h3>Top Scorers</h3><table class="sortable scorers-table collapsed">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable gf" data-type="num" style="width:90px">Goals</th>
+          <th class="sortable" data-type="text">Player Code</th>
+          <th class="sortable" data-type="text">Team</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td data-num="8"><span class="scorer-badge">8</span></td>
+          <td>PL-5DD1E4E23E</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Murieston_United_Blues.html">Murieston United Blues</a></td>
+        </tr><tr>
+          <td>2</td>
+          <td data-num="6"><span class="scorer-badge">6</span></td>
+          <td>PL-EDF97CD62C</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+        </tr><tr>
+          <td>3</td>
+          <td data-num="5"><span class="scorer-badge">5</span></td>
+          <td>PL-226F7DE707</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+        </tr><tr>
+          <td>4</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-A6B63023A7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        </tr><tr>
+          <td>5</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-F43AB90AEB</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+        </tr><tr>
+          <td>6</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-55E155B55E</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Edinburgh_South_Community_CFC_Rovers.html">Edinburgh South Community CFC Rovers</a></td>
+        </tr><tr>
+          <td>7</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-5D30E0AA8F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_FC_Lions.html">Currie FC Lions</a></td>
+        </tr><tr>
+          <td>8</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-C4B6377A11</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+        </tr><tr>
+          <td>9</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-A2E38CAA4A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+        </tr><tr>
+          <td>10</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-D525C3F04A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Edinburgh_South_Community_CFC_Rovers.html">Edinburgh South Community CFC Rovers</a></td>
+        </tr><tr>
+          <td>11</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-FC9FCC8230</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+        </tr><tr>
+          <td>12</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-00D315016D</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        </tr><tr>
+          <td>13</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-E75739E978</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>14</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-F33C3C24C3</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+        </tr><tr>
+          <td>15</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-916114194A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        </tr><tr>
+          <td>16</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-F2E2B50AE8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+        </tr><tr>
+          <td>17</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-6408A65E7F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Civil_Service_Strollers.html">Civil Service Strollers</a></td>
+        </tr><tr>
+          <td>18</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-864A09EE3E</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+        </tr><tr>
+          <td>19</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-FC082AB56A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        </tr><tr>
+          <td>20</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-CA080D765D</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+        </tr><tr>
+          <td>21</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-0CE73A2C09</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        </tr><tr>
+          <td>22</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-D4273221F4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+        </tr><tr>
+          <td>23</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-D8EE1281EA</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+        </tr><tr>
+          <td>24</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-D16731EEFE</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+        </tr><tr>
+          <td>25</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-B76BF92CA3</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+        </tr><tr>
+          <td>26</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-220782FDBC</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Murieston_United_Blues.html">Murieston United Blues</a></td>
+        </tr><tr>
+          <td>27</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-D690B17579</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+        </tr><tr>
+          <td>28</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-D460D21689</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        </tr><tr>
+          <td>29</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-7F8410EEC0</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+        </tr><tr>
+          <td>30</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-36F53EFFEF</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+        </tr><tr>
+          <td>31</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-52C5D650F6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+        </tr><tr>
+          <td>32</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-E034AEB426</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+        </tr><tr>
+          <td>33</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-380698A382</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+        </tr><tr>
+          <td>34</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-5B1AE7FF63</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+        </tr><tr>
+          <td>35</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-BEAE711D44</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        </tr><tr>
+          <td>36</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-92FD71A8C9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Murieston_United_Blues.html">Murieston United Blues</a></td>
+        </tr><tr>
+          <td>37</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-6319D7C51F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>38</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-833DDA9341</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+        </tr><tr>
+          <td>39</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-D4B49EDCEE</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Civil_Service_Strollers.html">Civil Service Strollers</a></td>
+        </tr><tr>
+          <td>40</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-47074E2C57</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+        </tr><tr>
+          <td>41</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-F22BC953F9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>42</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-76DD4B3507</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+        </tr><tr>
+          <td>43</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-28327A0E54</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        </tr><tr>
+          <td>44</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-CD1AA333C1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+        </tr><tr>
+          <td>45</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-A512A3819E</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        </tr><tr>
+          <td>46</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-CC9DF5CC44</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_FC_Lions.html">Currie FC Lions</a></td>
+        </tr><tr>
+          <td>47</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-0773F6927B</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_FC_Lions.html">Currie FC Lions</a></td>
+        </tr><tr>
+          <td>48</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-9618D44292</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+        </tr><tr>
+          <td>49</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-51CF7A0ED9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+        </tr><tr>
+          <td>50</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-805EA78AD0</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_FC_Lions.html">Currie FC Lions</a></td>
+        </tr><tr>
+          <td>51</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-A05B0A9E84</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        </tr><tr>
+          <td>52</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-4E66861CDD</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+        </tr><tr>
+          <td>53</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-BAF494A980</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        </tr><tr>
+          <td>54</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-B78F58326A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+        </tr><tr>
+          <td>55</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-A9D01E52C5</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>56</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-454715E3C9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+        </tr><tr>
+          <td>57</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-32AD20A9B1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+        </tr><tr>
+          <td>58</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-8290A275BB</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Edinburgh_South_Community_CFC_Rovers.html">Edinburgh South Community CFC Rovers</a></td>
+        </tr><tr>
+          <td>59</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-71533E3F43</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+        </tr><tr>
+          <td>60</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-ECBBF3BC0C</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+        </tr><tr>
+          <td>61</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-8FA7053710</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>62</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-F9CF5AB0D7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Murieston_United_Blues.html">Murieston United Blues</a></td>
+        </tr><tr>
+          <td>63</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-8D2D052102</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+        </tr><tr>
+          <td>64</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-4359FA2D26</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Murieston_United_Blues.html">Murieston United Blues</a></td>
+        </tr><tr>
+          <td>65</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-006C08CD5B</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+        </tr><tr>
+          <td>66</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-FF22B356C0</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+        </tr><tr>
+          <td>67</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-42951639A9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        </tr><tr>
+          <td>68</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-34F3BF6F01</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Civil_Service_Strollers.html">Civil Service Strollers</a></td>
+        </tr><tr>
+          <td>69</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-4EF9B339DB</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        </tr><tr>
+          <td>70</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-4D3C3EB6F2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+        </tr><tr>
+          <td>71</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-BD1C9AC312</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+        </tr><tr>
+          <td>72</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-96970A19A0</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+        </tr></tbody></table>
+        <div class="more-btn-wrap">
+          <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (62 more) ▼">
+            Show More (62 more) ▼
+          </button>
+        </div><h3>Disciplinary Record</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Tranent_FC.html">Tranent FC</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="8">8</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_FC_Blues.html">Musselburgh Windsor FC Blues</a></td>
+          <td data-num="8"><span class="card-badge yellow-card">8</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="8">8</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Penicuik_Athletic_YFC_White.html">Penicuik Athletic YFC White</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Cardo.html">Dalkeith Thistle CFC Cardo</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Cramond_Football_Club.html">Cramond Football Club</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="6">6</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Edinburgh_South_Community_CFC_Rovers.html">Edinburgh South Community CFC Rovers</a></td>
+          <td data-num="6"><span class="card-badge yellow-card">6</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="6">6</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_FC_Lions.html">Currie FC Lions</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Spartans_FC_Youth_Reds.html">Spartans FC Youth Reds</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Dalkeith_Thistle_CFC_Balompie.html">Dalkeith Thistle CFC Balompie</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Musselburgh_Windsor_F_C_Whites.html">Musselburgh Windsor F C Whites</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Currie_Star.html">Currie Star</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Murieston_United_Blues.html">Murieston United Blues</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>13</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_2_26_27-Civil_Service_Strollers.html">Civil Service Strollers</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="1">1</td>
+        </tr></tbody></table></div><div class="division-block" data-division="Alpha Trophies 2010s Division 3 26/27">
+      <h2>Alpha Trophies 2010s Division 3 26/27</h2>
+
+      
+      <h3>Team Performance</h3>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Bonnyrigg_Rose_Blacks.html">Bonnyrigg Rose Blacks</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="3.5">3.50</td>
+        <td class="">8–2 vs Musselburgh Windsor FC Reds</td>
+        <td>2–9 vs Currie F C Tigers</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Musselburgh_Windsor_FC_Reds.html">Musselburgh Windsor FC Reds</a></td>
+        <td class="" data-num="1.5714285714285714">1.57</td>
+        <td class="" data-num="3.857142857142857">3.86</td>
+        <td class="">3–1 vs Polbeth United</td>
+        <td>2–8 vs Bonnyrigg Rose Blacks</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers.html">Gala Fairydean Rovers</a></td>
+        <td class="" data-num="5">5.00</td>
+        <td class="" data-num="2.5">2.50</td>
+        <td class="">6–2 vs Penicuik Athletic YFC Reds</td>
+        <td>-</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
+        <td class="" data-num="3.2857142857142856">3.29</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">6–0 vs KSQ Rapids</td>
+        <td>1–4 vs Dunbar United Colts</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        <td class="" data-num="4.571428571428571">4.57</td>
+        <td class="" data-num="1.8571428571428572">1.86</td>
+        <td class="max-cell">13–1 vs AC Oxgangs CFC Calcio</td>
+        <td>1–4 vs Longniddry Villa</td>
+        <td class="max-cell" data-num="13">13</td>
+        <td class="" data-num="5">5</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        <td class="" data-num="3.5">3.50</td>
+        <td class="" data-num="4.5">4.50</td>
+        <td class="">9–2 vs Bonnyrigg Rose Blacks</td>
+        <td>1–9 vs Dunbar United Colts</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Polbeth_United.html">Polbeth United</a></td>
+        <td class="" data-num="1.3333333333333333">1.33</td>
+        <td class="" data-num="5.166666666666667">5.17</td>
+        <td class="">5–3 vs AC Oxgangs CFC Calcio</td>
+        <td>0–9 vs Broxburn Athletic Colts - Badgers (2010</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="3.7142857142857144">3.71</td>
+        <td class="">5–2 vs Currie F C Tigers</td>
+        <td>0–8 vs Broxburn Athletic Colts - Badgers (2010</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        <td class="" data-num="3.7142857142857144">3.71</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">5–0 vs Musselburgh Windsor FC Reds</td>
+        <td>3–6 vs Broxburn Athletic Colts - Badgers (2010</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        <td class="" data-num="3">3.00</td>
+        <td class="" data-num="2.3333333333333335">2.33</td>
+        <td class="">8–0 vs Polbeth United</td>
+        <td>0–6 vs Livingston Community FC</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        <td class="max-cell" data-num="6.333333333333333">6.33</td>
+        <td class="min-cell" data-num="1">1.00</td>
+        <td class="">9–0 vs Polbeth United</td>
+        <td>-</td>
+        <td class="" data-num="9">9</td>
+        <td class="min-cell" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-AC_Oxgangs_CFC_Calcio.html">AC Oxgangs CFC Calcio</a></td>
+        <td class="" data-num="1.6">1.60</td>
+        <td class="" data-num="6.6">6.60</td>
+        <td class="">-</td>
+        <td>1–13 vs Dunbar United Colts</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="13">13</td>
+      </tr></tbody></table><h3>Top Scorers</h3><table class="sortable scorers-table collapsed">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable gf" data-type="num" style="width:90px">Goals</th>
+          <th class="sortable" data-type="text">Player Code</th>
+          <th class="sortable" data-type="text">Team</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td data-num="7"><span class="scorer-badge">7</span></td>
+          <td>PL-CFD17F8E5A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>2</td>
+          <td data-num="7"><span class="scorer-badge">7</span></td>
+          <td>PL-AD21669F29</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        </tr><tr>
+          <td>3</td>
+          <td data-num="7"><span class="scorer-badge">7</span></td>
+          <td>PL-39BA607BD4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Musselburgh_Windsor_FC_Reds.html">Musselburgh Windsor FC Reds</a></td>
+        </tr><tr>
+          <td>4</td>
+          <td data-num="5"><span class="scorer-badge">5</span></td>
+          <td>PL-49D14C0690</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers.html">Gala Fairydean Rovers</a></td>
+        </tr><tr>
+          <td>5</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-D201E86BE0</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>6</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-D05934BB10</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>7</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-4BC516AAF2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>8</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-A87A81F244</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        </tr><tr>
+          <td>9</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-81E8A23BAF</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Bonnyrigg_Rose_Blacks.html">Bonnyrigg Rose Blacks</a></td>
+        </tr><tr>
+          <td>10</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-F224AAAEAC</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+        </tr><tr>
+          <td>11</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-C336EE27A8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        </tr><tr>
+          <td>12</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-33BA7FA5C9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        </tr><tr>
+          <td>13</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-2FC97E3585</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        </tr><tr>
+          <td>14</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-0A9DA52F99</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>15</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-887529D597</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>16</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-781AB5DEC1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        </tr><tr>
+          <td>17</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-A2D716688F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers.html">Gala Fairydean Rovers</a></td>
+        </tr><tr>
+          <td>18</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-D84FE2857E</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        </tr><tr>
+          <td>19</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-A7F4A09BEB</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        </tr><tr>
+          <td>20</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-54B6189F57</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        </tr><tr>
+          <td>21</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-1A29D5F70B</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
+        </tr><tr>
+          <td>22</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-ABD469D7EE</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
+        </tr><tr>
+          <td>23</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-B8F34B674E</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        </tr><tr>
+          <td>24</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-70558A3AFE</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+        </tr><tr>
+          <td>25</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-122850F892</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        </tr><tr>
+          <td>26</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-0C2447910D</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers.html">Gala Fairydean Rovers</a></td>
+        </tr><tr>
+          <td>27</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-ACF81D0A52</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        </tr><tr>
+          <td>28</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-47073E94FC</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
+        </tr><tr>
+          <td>29</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-A4D103E758</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        </tr><tr>
+          <td>30</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-BFA66C0F7C</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        </tr><tr>
+          <td>31</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-CED98D0932</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Polbeth_United.html">Polbeth United</a></td>
+        </tr><tr>
+          <td>32</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-8180F284BE</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>33</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-DD90AD547A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+        </tr><tr>
+          <td>34</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-70AA9B295A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Bonnyrigg_Rose_Blacks.html">Bonnyrigg Rose Blacks</a></td>
+        </tr><tr>
+          <td>35</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-C336C595AE</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        </tr><tr>
+          <td>36</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-9249D81B62</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+        </tr><tr>
+          <td>37</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-5270703E0A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        </tr><tr>
+          <td>38</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-D93AF95FCC</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        </tr><tr>
+          <td>39</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-1840129958</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
+        </tr><tr>
+          <td>40</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-ED4DC3D637</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
+        </tr><tr>
+          <td>41</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-10060B52A2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Musselburgh_Windsor_FC_Reds.html">Musselburgh Windsor FC Reds</a></td>
+        </tr><tr>
+          <td>42</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-64BE5FF562</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        </tr><tr>
+          <td>43</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-F1D786C9B8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        </tr><tr>
+          <td>44</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-F473C3311D</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>45</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-DF8D01D2BC</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+        </tr><tr>
+          <td>46</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-FAE81FB851</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Musselburgh_Windsor_FC_Reds.html">Musselburgh Windsor FC Reds</a></td>
+        </tr><tr>
+          <td>47</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-AF2C4C9956</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-AC_Oxgangs_CFC_Calcio.html">AC Oxgangs CFC Calcio</a></td>
+        </tr><tr>
+          <td>48</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-26C2C4232A</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers.html">Gala Fairydean Rovers</a></td>
+        </tr><tr>
+          <td>49</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-1F45B6F1EF</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Bonnyrigg_Rose_Blacks.html">Bonnyrigg Rose Blacks</a></td>
+        </tr><tr>
+          <td>50</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-E9A24AA8FC</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
+        </tr><tr>
+          <td>51</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-552B4990B6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Bonnyrigg_Rose_Blacks.html">Bonnyrigg Rose Blacks</a></td>
+        </tr><tr>
+          <td>52</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-6C4D894190</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        </tr><tr>
+          <td>53</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-3C0ABA90F1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers.html">Gala Fairydean Rovers</a></td>
+        </tr><tr>
+          <td>54</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-EA72EEACB0</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers.html">Gala Fairydean Rovers</a></td>
+        </tr><tr>
+          <td>55</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-9832E56505</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>56</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-C0532579C4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        </tr><tr>
+          <td>57</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-B130101C9F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>58</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-B24946BB79</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+        </tr><tr>
+          <td>59</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-C3563FEF87</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+        </tr><tr>
+          <td>60</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-CE8C094D80</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>61</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-2F060F1379</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>62</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-0383377F2B</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-AC_Oxgangs_CFC_Calcio.html">AC Oxgangs CFC Calcio</a></td>
+        </tr><tr>
+          <td>63</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-ADCF9E4124</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>64</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-A5B38AA654</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>65</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-07ED77C15F</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>66</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-18100FBC14</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Musselburgh_Windsor_FC_Reds.html">Musselburgh Windsor FC Reds</a></td>
+        </tr><tr>
+          <td>67</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-7D4A89638C</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>68</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-9191169C09</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+        </tr><tr>
+          <td>69</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-D880CDA97E</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>70</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-6E77F1ACA1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>71</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-7E15B9777C</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Musselburgh_Windsor_FC_Reds.html">Musselburgh Windsor FC Reds</a></td>
+        </tr><tr>
+          <td>72</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-D3063DB9D6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers.html">Gala Fairydean Rovers</a></td>
+        </tr><tr>
+          <td>73</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-EF176C73C9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+        </tr><tr>
+          <td>74</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-76F147840E</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+        </tr><tr>
+          <td>75</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-1413E0221D</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Polbeth_United.html">Polbeth United</a></td>
+        </tr><tr>
+          <td>76</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-475B5D8265</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Bonnyrigg_Rose_Blacks.html">Bonnyrigg Rose Blacks</a></td>
+        </tr></tbody></table>
+        <div class="more-btn-wrap">
+          <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (66 more) ▼">
+            Show More (66 more) ▼
+          </button>
+        </div><h3>Disciplinary Record</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Penicuik_Athletic_YFC_Reds.html">Penicuik Athletic YFC Reds</a></td>
+          <td data-num="16"><span class="card-badge yellow-card">16</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="17">17</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Broxburn_Athletic_Colts___Badgers__2010.html">Broxburn Athletic Colts - Badgers (2010</a></td>
+          <td data-num="11"><span class="card-badge yellow-card">11</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="13">13</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Currie_F_C_Tigers.html">Currie F C Tigers</a></td>
+          <td data-num="8"><span class="card-badge yellow-card">8</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="9">9</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Gala_Fairydean_Rovers.html">Gala Fairydean Rovers</a></td>
+          <td data-num="9"><span class="card-badge yellow-card">9</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="9">9</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Livingston_Community_FC.html">Livingston Community FC</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Polbeth_United.html">Polbeth United</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Bonnyrigg_Rose_Blacks.html">Bonnyrigg Rose Blacks</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Musselburgh_Windsor_FC_Reds.html">Musselburgh Windsor FC Reds</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-AC_Oxgangs_CFC_Calcio.html">AC Oxgangs CFC Calcio</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+          <td data-num="3"><span class="card-badge yellow-card">3</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="3">3</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Dunbar_United_Colts.html">Dunbar United Colts</a></td>
+          <td data-num="1"><span class="card-badge yellow-card">1</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U17-Alpha_Trophies_2010s_Division_3_26_27-Longniddry_Villa.html">Longniddry Villa</a></td>
+          <td data-num="0"><span class="card-badge yellow-card">0</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="0">0</td>
+        </tr></tbody></table></div>
+  <script>
+  function toggleScorers(btn) {
+    const block = btn.closest('.division-block');
+    if (!block) return;
+    const table = block.querySelector('.scorers-table');
+    if (!table) return;
+
+    const isCollapsed = table.classList.contains('collapsed');
+    if (isCollapsed) {
+      table.classList.remove('collapsed');
+      btn.textContent = 'Show Less ▲';
+    } else {
+      table.classList.add('collapsed');
+      btn.textContent = btn.getAttribute('data-more-text') || 'Show More ▼';
+    }
+  }
+
   (function(){
     function numVal(td){
       const ds = td.getAttribute('data-num');
@@ -519,7 +1858,6 @@ Home
       if(type === 'num'){
         return (a,b)=>{ const ax=numVal(a.children[i]), bx=numVal(b.children[i]); return asc ? (ax-bx) : (bx-ax); };
       }
-      
       return (a,b)=>{
         const ax=a.children[i].textContent.trim();
         const bx=b.children[i].textContent.trim();
@@ -530,7 +1868,7 @@ Home
     function sortTable(table, colIdx, type, th){
       const tbody = table.querySelector('tbody'); if(!tbody) return;
       const hasState = th.classList.contains('asc') || th.classList.contains('desc');
-      const firstAsc = (type === 'text'); 
+      const firstAsc = (type === 'text');
       const asc = hasState ? th.classList.contains('desc') : firstAsc;
 
       const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r,idx]);
@@ -546,7 +1884,7 @@ Home
         th.addEventListener('click', ()=> sortTable(t, th.cellIndex, th.dataset.type||'text', th));
       });
     });
-    
+
     const divFilter = document.getElementById('division-filter');
     function applyFilter(val){
       document.querySelectorAll('.division-block').forEach(d=>{
@@ -561,4 +1899,4 @@ Home
       applyFilter(divFilter.value || 'ALL');
     }
   })();
-  </script></body></html>
+  </script><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer></body></html>

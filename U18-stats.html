@@ -1,312 +1,1062 @@
 <!DOCTYPE html><html><head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>U18 Team Stats</title>
+  <title>U18 Team & Discipline Stats</title>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLTFGFY0MQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QLTFGFY0MQ');
+  </script>
+
   <style>
     body{font-family:Arial,Helvetica,sans-serif;background:#f8f8f8;color:#000;padding:20px}
     h1{margin-top:0;color:#FFD700}
-    h2{margin-top:24px}
+    h2{margin-top:34px;font-size:1.35rem;border-bottom:2px solid #FFD700;padding-bottom:6px}
+    h3{margin-top:22px;font-size:1.1rem;color:#333}
     select{font-size:1em;padding:6px 10px;margin:10px 0 20px 0;border:1px solid #bbb;border-radius:4px;width:100%;box-sizing:border-box}
-    table{border-collapse:collapse;width:100%;margin-bottom:30px}
-    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    table{border-collapse:collapse;width:100%;margin-bottom:20px}
+    th,td{border:1px solid #ccc;padding:8px 10px;text-align:center}
     th{background:#FFD700;color:#000}
     th.sortable{cursor:pointer}
     th.asc::after{content:' ▲'} th.desc::after{content:' ▼'}
-    .highlight{background-color:#d4edda;font-weight:bold}
-    .highlight-low{background-color:#fff3cd;font-weight:bold}
-    th.pts-head{background:#FFD700;color:#000}
-    td.pts-cell{background:#fffde7;font-weight:bold;color:#000}
-    td.gf{background:#d0eaff} td.ga{background:#ffe0d0} td.gd{background:#d0ffe0}
+    td.gf{background:#d0eaff} td.ga{background:#ffe0d0}
     tr:nth-child(even){background:#f9f9f9} tr:nth-child(odd){background:#fff}
     th:first-child,td:first-child{background:#f0f0f0;font-weight:bold}
-    .date-cell{background:#000;color:#FFD700}
-    .max-cell { background-color:#d4edda; font-weight:bold }    
-.min-cell { background-color:#ffe0b2; font-weight:bold }    
-    footer{margin-top:24px;font-size:.9em;opacity:.85}
+    .max-cell { background-color:#d4edda; font-weight:bold }
+    .min-cell { background-color:#ffe0b2; font-weight:bold }
+    td a.team-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #888; }
+    td a.team-link:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
+    .scorer-badge{background:#FFD700; color:#000; padding:2px 8px; border-radius:12px; font-weight:bold}
+
+     
+    .card-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      min-width: 22px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .yellow-card {
+      background: #FFEB3B;
+      color: #000;
+      border: 1px solid #FBC02D;
+    }
+    .red-card {
+      background: #F44336;
+      color: #fff;
+      border: 1px solid #D32F2F;
+    }
+    .total-cards {
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+     
+    .scorers-table.collapsed tbody tr:nth-child(n+11) { display: none; }
+    .more-btn-wrap { text-align: center; margin: -10px 0 25px 0; }
+    .btn-more-scorers {
+      background: #fff; color: #333; border: 1px solid #ccc;
+      padding: 7px 18px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn-more-scorers:hover { border-color: #FFD700; color: #000; background: #FFD700; }
+
+    footer{margin-top:36px;font-size:.9em;opacity:.85;text-align:center}
+
     @media (prefers-color-scheme: dark){
       body{background:#101010;color:#e0e0e0}
+      h3{color:#FFD700}
       select{background:#222;color:#fff;border-color:#555}
       table,th,td{border-color:#333}
       th{background:#222;color:#fff}
-      th.pts-head{background:#FFD700;color:#000}
-      td.pts-cell{background:#444;color:#FFD700}
-      td.gf{background:#1a2a40} td.ga{background:#402a1a} td.gd{background:#1a402a}
+      td.gf{background:#1a2a40} td.ga{background:#402a1a}
       tr:nth-child(even){background:#181818} tr:nth-child(odd){background:#141414}
       th:first-child,td:first-child{background:#202020;font-weight:bold}
-      .date-cell{background:#000;color:#FFD700}
-        .max-cell { background:#004d00; color:#fff }
-  .min-cell { background:#804000; color:#fff }
+      .max-cell { background:#004d00; color:#fff }
+      .min-cell { background:#804000; color:#fff }
+      .scorer-badge{background:#444; color:#FFD700}
+      .yellow-card { background: #FFD700; color: #000; }
+      .red-card { background: #E53935; color: #fff; }
+      .btn-more-scorers { background: #222; color: #e0e0e0; border-color: #444; }
+      .btn-more-scorers:hover { background: #FFD700; color: #000; border-color: #FFD700; }
     }
   </style>
- 
-<style>
+  <meta property="og:type" content="website">
+<meta property="og:title" content="SERYFA League Tables &amp; Standings">
+<meta property="og:description" content="View live standings, recent results, goalscorer leaderboards, and upcoming fixtures.">
+<meta property="og:image" content="https://seryfaleagues.com/assets/seryfa-league-banner.png">
+<meta property="og:url" content="https://seryfaleagues.com/index.html"></head><body>
+  <style>
+    .sfy-nav {
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .sfy-nav .bar {
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #FFD700;
+      border-bottom: 1px solid #333;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    .sfy-tabs,
+    .sfy-subtabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .sfy-subtabs {
+      background: #181818;
+      border-bottom: 1px solid #2e2e2e;
+    }
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      color: #e0e0e0;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-link:hover {
+      border-color: #FFD700;
+      color: #FFD700;
+    }
+    .nav-link.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: bold;
+    }
+  </style>
 
-.sfy-nav{
- background:#222;
- color:#fff;
- padding-bottom:5px
-}
-
-.sfy-nav .bar{
- padding:12px;
- font-weight:bold;
- color:#FFD700;
- border-bottom:1px solid #333
-}
-
-.sfy-tabs,
-.sfy-subtabs{
- display:flex;
- gap:6px;
- overflow-x:auto;
- padding:8px 10px
-}
-
-.nav-link{
- padding:6px 12px;
- border-radius:20px;
- border:1px solid #444;
- color:#fff;
- text-decoration:none;
- white-space:nowrap;
- font-size:.9rem
-}
-
-.nav-link.active{
- background:#FFD700;
- color:#000;
- border-color:#FFD700
-}
-
-</style>
-
-<nav class="sfy-nav">
-
-<div class="bar">
-SERYFA Unofficial Leagues
-</div>
-
-
-<div class="sfy-subtabs">
-
-
-<a
- class="nav-link"
- href="U18.html">
- U18 Table
-</a>
-
-
-<a
- class="nav-link active"
- href="U18-stats.html">
- Stats
-</a>
-
-
-<a
- class="nav-link"
- href="Archive-2025-26-U18.html">
- 2025/26 Archive
-</a>
-
-<a class="nav-link"
-        href="Scores.html">Scores</a>
-
-</div>
-
-<div class="sfy-tabs">
-
-<a class="nav-link" href="index.html">
-Home
-</a>
-
-
-<a
- class="nav-link"
- href="U13.html">
- U13
-</a>
-<a
- class="nav-link"
- href="U14.html">
- U14
-</a>
-<a
- class="nav-link"
- href="U15.html">
- U15
-</a>
-<a
- class="nav-link"
- href="U16.html">
- U16
-</a>
-<a
- class="nav-link"
- href="U17.html">
- U17
-</a>
-<a
- class="nav-link"
- href="U18.html">
- U18
-</a>
-
-</div>
-
-</nav></head><body><h1>U18 Team Stats</h1><label for="division-filter">Division:</label>
+  <nav class="sfy-nav">
+    <div class="bar">SERYFA Leagues</div>
+    <div class="sfy-tabs">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="U13.html">U13</a><a class="nav-link" href="U14.html">U14</a><a class="nav-link" href="U15.html">U15</a><a class="nav-link" href="U16.html">U16</a><a class="nav-link" href="U17.html">U17</a><a class="nav-link" href="U18.html">U18</a>
+    </div>
+    
+    <div class="sfy-subtabs">
+      <a class="nav-link" href="U18.html">U18 Table</a>
+      <a class="nav-link active" href="U18-stats.html">Stats</a>
+      <a class="nav-link" href="Archive-2025-26-U18.html">2025/26 Archive</a>
+      <a class="nav-link" href="Scores.html">Scores</a>
+    </div>
+  </nav><h1>U18 Team & Discipline Stats</h1><label for="division-filter">Division:</label>
   <select id="division-filter">
     <option value="ALL">All Divisions</option>
-    <option value="Division 1">Division 1</option>
-  </select><div class="division-block" data-division="Division 1">
-    <h2>Division 1</h2>
-    <table class="sortable">
-      <thead><tr>
-        <th class="sortable" data-type="text">Team</th>
-        <th class="sortable gf" data-type="num">Avg GF</th>
-        <th class="sortable ga" data-type="num">Avg GA</th>
-        <th class="sortable" data-type="text">Biggest Win</th>
-        <th class="sortable" data-type="text">Biggest Loss</th>
-        <th class="sortable gf" data-type="num">Most Scored</th>
-        <th class="sortable ga" data-type="num">Most Conceded</th>
-      </tr></thead>
-      <tbody><tr>
-      <td>KSQ RAPIDS</td>
-      <td class="" data-num="2.375">2.38</td>
-      <td class="" data-num="3.75">3.75</td>
-      <td class="">8–3 vs EDINBURGH SOUTH REDS</td>
-      <td>1–9 vs SPARTANS FC YOUTH</td>
-      <td class="" data-num="8">8</td>
-      <td class="min-cell" data-num="9">9</td>
-    </tr><tr>
-      <td>BONNYRIGG ROSE FC</td>
-      <td class="" data-num="4.571428571428571">4.57</td>
-      <td class="" data-num="3">3.00</td>
-      <td class="">9–1 vs EDINBURGH SOUTH REDS</td>
-      <td>4–8 vs EDINBURGH SOUTH CFC</td>
-      <td class="max-cell" data-num="9">9</td>
-      <td class="" data-num="8">8</td>
-    </tr><tr>
-      <td>EASTHOUSES LILY</td>
-      <td class="" data-num="3.142857142857143">3.14</td>
-      <td class="" data-num="3.2857142857142856">3.29</td>
-      <td class="">7–2 vs KSQ RAPIDS</td>
-      <td>0–9 vs SPARTANS FC YOUTH</td>
-      <td class="" data-num="7">7</td>
-      <td class="" data-num="9">9</td>
-    </tr><tr>
-      <td>EDINBURGH SOUTH CFC</td>
-      <td class="" data-num="4.375">4.38</td>
-      <td class="" data-num="2.125">2.13</td>
-      <td class="">8–0 vs NORTH BERWICK FC</td>
-      <td>0–3 vs SPARTANS FC YOUTH</td>
-      <td class="" data-num="8">8</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>INVERKEITHING HILLFIELD SWIFTS</td>
-      <td class="" data-num="1">1.00</td>
-      <td class="" data-num="5.375">5.38</td>
-      <td class="">-</td>
-      <td>0–8 vs KSQ GALAXY</td>
-      <td class="" data-num="3">3</td>
-      <td class="" data-num="8">8</td>
-    </tr><tr>
-      <td>BROXBURN ATHLETIC COLTS</td>
-      <td class="" data-num="1.8571428571428572">1.86</td>
-      <td class="" data-num="4.571428571428571">4.57</td>
-      <td class="">-</td>
-      <td>1–9 vs KSQ GALAXY</td>
-      <td class="" data-num="5">5</td>
-      <td class="" data-num="9">9</td>
-    </tr><tr>
-      <td>CURRIE STAR FC WHITES</td>
-      <td class="" data-num="1.8571428571428572">1.86</td>
-      <td class="" data-num="2.4285714285714284">2.43</td>
-      <td class="">3–0 vs DALKEITH THISTLE CFC</td>
-      <td>0–6 vs SPARTANS FC YOUTH BLUES</td>
-      <td class="" data-num="3">3</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>DALKEITH THISTLE CFC</td>
-      <td class="" data-num="3.375">3.38</td>
-      <td class="" data-num="3.375">3.38</td>
-      <td class="">4–0 vs CORSTORPHINE DYNAMO FC BLACKS</td>
-      <td>0–3 vs CURRIE STAR FC WHITES</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>KSQ GALAXY</td>
-      <td class="" data-num="5.142857142857143">5.14</td>
-      <td class="" data-num="1.1428571428571428">1.14</td>
-      <td class="">9–1 vs BROXBURN ATHLETIC COLTS</td>
-      <td>2–3 vs SPARTANS FC YOUTH BLUES</td>
-      <td class="" data-num="9">9</td>
-      <td class="" data-num="3">3</td>
-    </tr><tr>
-      <td>CORSTORPHINE DYNAMO FC BLACKS</td>
-      <td class="" data-num="1.8571428571428572">1.86</td>
-      <td class="" data-num="2">2.00</td>
-      <td class="">4–0 vs NORTH BERWICK FC</td>
-      <td>0–4 vs DALKEITH THISTLE CFC</td>
-      <td class="" data-num="4">4</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>TRANENT FC</td>
-      <td class="" data-num="2.4285714285714284">2.43</td>
-      <td class="" data-num="3">3.00</td>
-      <td class="">3–0 vs BROXBURN ATHLETIC COLTS</td>
-      <td>1–7 vs KSQ GALAXY</td>
-      <td class="" data-num="4">4</td>
-      <td class="" data-num="7">7</td>
-    </tr><tr>
-      <td>SPARTANS FC YOUTH</td>
-      <td class="max-cell" data-num="5.2727272727272725">5.27</td>
-      <td class="" data-num="0.9090909090909091">0.91</td>
-      <td class="max-cell">9–0 vs EASTHOUSES LILY</td>
-      <td>-</td>
-      <td class="" data-num="9">9</td>
-      <td class="" data-num="3">3</td>
-    </tr><tr>
-      <td>EDINBURGH SOUTH REDS</td>
-      <td class="" data-num="1.75">1.75</td>
-      <td class="min-cell" data-num="6">6.00</td>
-      <td class="">-</td>
-      <td>1–9 vs BONNYRIGG ROSE FC</td>
-      <td class="" data-num="3">3</td>
-      <td class="" data-num="9">9</td>
-    </tr><tr>
-      <td>PENICUIK ATHLETIC YFC WHITES</td>
-      <td class="" data-num="2.4444444444444446">2.44</td>
-      <td class="" data-num="1.6666666666666667">1.67</td>
-      <td class="">5–0 vs INVERKEITHING HILLFIELD SWIFTS</td>
-      <td>1–4 vs EDINBURGH SOUTH CFC</td>
-      <td class="" data-num="5">5</td>
-      <td class="" data-num="4">4</td>
-    </tr><tr>
-      <td>NORTH MERCHISTON BLACKS</td>
-      <td class="" data-num="2.4285714285714284">2.43</td>
-      <td class="" data-num="5.142857142857143">5.14</td>
-      <td class="">5–2 vs EDINBURGH SOUTH REDS</td>
-      <td>0–8 vs SPARTANS FC YOUTH</td>
-      <td class="" data-num="5">5</td>
-      <td class="" data-num="8">8</td>
-    </tr><tr>
-      <td>SPARTANS FC YOUTH BLUES</td>
-      <td class="" data-num="4">4.00</td>
-      <td class="" data-num="2.1666666666666665">2.17</td>
-      <td class="">6–0 vs CURRIE STAR FC WHITES</td>
-      <td>1–2 vs PENICUIK ATHLETIC YFC WHITES</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="6">6</td>
-    </tr><tr>
-      <td>NORTH BERWICK FC</td>
-      <td class="" data-num="1.6666666666666667">1.67</td>
-      <td class="" data-num="3.6666666666666665">3.67</td>
-      <td class="">6–3 vs NORTH MERCHISTON BLACKS</td>
-      <td>0–8 vs EDINBURGH SOUTH CFC</td>
-      <td class="" data-num="6">6</td>
-      <td class="" data-num="8">8</td>
-    </tr></tbody></table></div><script>
+    <option value="Alpha Trophies 2009s Division 1 26/27">Alpha Trophies 2009s Division 1 26/27</option>
+  </select><div class="division-block" data-division="Alpha Trophies 2009s Division 1 26/27">
+      <h2>Alpha Trophies 2009s Division 1 26/27</h2>
+
+      
+      <h3>Team Performance</h3>
+      <table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable gf" data-type="num">Avg GF</th>
+          <th class="sortable ga" data-type="num">Avg GA</th>
+          <th class="sortable" data-type="text">Biggest Win</th>
+          <th class="sortable" data-type="text">Biggest Loss</th>
+          <th class="sortable gf" data-type="num">Most Scored</th>
+          <th class="sortable ga" data-type="num">Most Conceded</th>
+        </tr></thead>
+        <tbody><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+        <td class="" data-num="1.875">1.88</td>
+        <td class="" data-num="4.625">4.63</td>
+        <td class="">-</td>
+        <td>1–9 vs KSQ Galaxy</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        <td class="" data-num="1.875">1.88</td>
+        <td class="" data-num="4.125">4.13</td>
+        <td class="">4–2 vs Broxburn Athletic Colts</td>
+        <td>1–13 vs Spartans FC Youth</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="13">13</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        <td class="" data-num="3.888888888888889">3.89</td>
+        <td class="" data-num="1.6666666666666667">1.67</td>
+        <td class="">8–0 vs North Berwick FC</td>
+        <td>0–3 vs Spartans FC Youth</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        <td class="" data-num="4.75">4.75</td>
+        <td class="" data-num="1.125">1.13</td>
+        <td class="">9–1 vs Broxburn Athletic Colts</td>
+        <td>2–3 vs Spartans FC Youth Blues</td>
+        <td class="" data-num="9">9</td>
+        <td class="" data-num="3">3</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        <td class="max-cell" data-num="5.777777777777778">5.78</td>
+        <td class="min-cell" data-num="0.6666666666666666">0.67</td>
+        <td class="max-cell">13–1 vs KSQ Rapids</td>
+        <td>-</td>
+        <td class="max-cell" data-num="13">13</td>
+        <td class="min-cell" data-num="1">1</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Easthouses_Lily_MWFC.html">Easthouses Lily MWFC</a></td>
+        <td class="" data-num="3.142857142857143">3.14</td>
+        <td class="" data-num="3.2857142857142856">3.29</td>
+        <td class="">7–2 vs KSQ Rapids</td>
+        <td>0–9 vs Spartans FC Youth</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="9">9</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        <td class="" data-num="4.25">4.25</td>
+        <td class="" data-num="2.125">2.13</td>
+        <td class="">6–0 vs Currie Star FC Whites</td>
+        <td>1–2 vs Penicuik Athletic FC</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+        <td class="" data-num="1">1.00</td>
+        <td class="" data-num="4.777777777777778">4.78</td>
+        <td class="">1–0 vs North Berwick FC</td>
+        <td>0–8 vs KSQ Galaxy</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+        <td class="" data-num="2.4285714285714284">2.43</td>
+        <td class="" data-num="3">3.00</td>
+        <td class="">3–0 vs Broxburn Athletic Colts</td>
+        <td>1–7 vs KSQ Galaxy</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        <td class="" data-num="2">2.00</td>
+        <td class="" data-num="5.666666666666667">5.67</td>
+        <td class="">4–2 vs Tranent FC</td>
+        <td>0–8 vs Spartans FC Youth</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+        <td class="" data-num="3.1666666666666665">3.17</td>
+        <td class="" data-num="3.1666666666666665">3.17</td>
+        <td class="">8–1 vs Inverkeithing Hillfield Swifts</td>
+        <td>0–7 vs Edinburgh South Community CFC</td>
+        <td class="" data-num="8">8</td>
+        <td class="" data-num="7">7</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        <td class="" data-num="2.4444444444444446">2.44</td>
+        <td class="" data-num="1.6666666666666667">1.67</td>
+        <td class="">5–0 vs Inverkeithing Hillfield Swifts</td>
+        <td>1–4 vs Edinburgh South Community CFC</td>
+        <td class="" data-num="5">5</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        <td class="" data-num="1.8571428571428572">1.86</td>
+        <td class="" data-num="2">2.00</td>
+        <td class="">4–0 vs North Berwick FC</td>
+        <td>0–4 vs Dalkeith Thistle CFC</td>
+        <td class="" data-num="4">4</td>
+        <td class="" data-num="4">4</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        <td class="" data-num="1.4285714285714286">1.43</td>
+        <td class="" data-num="3.2857142857142856">3.29</td>
+        <td class="">6–3 vs North Merchiston FC</td>
+        <td>0–8 vs Edinburgh South Community CFC</td>
+        <td class="" data-num="6">6</td>
+        <td class="" data-num="8">8</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        <td class="" data-num="4.25">4.25</td>
+        <td class="" data-num="3.375">3.38</td>
+        <td class="">4–0 vs Corstorphine Dynamo FC Blacks</td>
+        <td>1–4 vs Spartans FC Youth</td>
+        <td class="" data-num="7">7</td>
+        <td class="" data-num="6">6</td>
+      </tr><tr>
+        <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Currie_Star_FC_Whites.html">Currie Star FC Whites</a></td>
+        <td class="" data-num="1.8333333333333333">1.83</td>
+        <td class="" data-num="3.6666666666666665">3.67</td>
+        <td class="">3–2 vs Tranent FC</td>
+        <td>0–6 vs Spartans FC Youth Blues</td>
+        <td class="" data-num="3">3</td>
+        <td class="" data-num="6">6</td>
+      </tr></tbody></table><h3>Top Scorers</h3><table class="sortable scorers-table collapsed">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable gf" data-type="num" style="width:90px">Goals</th>
+          <th class="sortable" data-type="text">Player Code</th>
+          <th class="sortable" data-type="text">Team</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td data-num="10"><span class="scorer-badge">10</span></td>
+          <td>PL-600A9B6062</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>2</td>
+          <td data-num="9"><span class="scorer-badge">9</span></td>
+          <td>PL-7A2C52F69F</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>3</td>
+          <td data-num="8"><span class="scorer-badge">8</span></td>
+          <td>PL-023D28E198</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>4</td>
+          <td data-num="7"><span class="scorer-badge">7</span></td>
+          <td>PL-E7994DBC5C</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>5</td>
+          <td data-num="6"><span class="scorer-badge">6</span></td>
+          <td>PL-7C9C4902CD</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>6</td>
+          <td data-num="6"><span class="scorer-badge">6</span></td>
+          <td>PL-E32D157828</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>7</td>
+          <td data-num="6"><span class="scorer-badge">6</span></td>
+          <td>PL-11E886B402</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>8</td>
+          <td data-num="5"><span class="scorer-badge">5</span></td>
+          <td>PL-34C07110ED</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>9</td>
+          <td data-num="5"><span class="scorer-badge">5</span></td>
+          <td>PL-6F07BD2516</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>10</td>
+          <td data-num="5"><span class="scorer-badge">5</span></td>
+          <td>PL-F92B30FCED</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>11</td>
+          <td data-num="5"><span class="scorer-badge">5</span></td>
+          <td>PL-68EB590FAC</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>12</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-368CCCA8E9</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>13</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-3B356616B9</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>14</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-010DC142F8</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>15</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-63D3144745</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>16</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-DABEB47FA3</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>17</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-715A2B439D</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>18</td>
+          <td data-num="4"><span class="scorer-badge">4</span></td>
+          <td>PL-426BE78D4C</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>19</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-F1CB2E6648</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>20</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-1B739A676B</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        </tr><tr>
+          <td>21</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-9F370E81A1</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        </tr><tr>
+          <td>22</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-616F235376</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>23</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-5480130B2B</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Currie_Star_FC_Whites.html">Currie Star FC Whites</a></td>
+        </tr><tr>
+          <td>24</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-C96F72E963</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        </tr><tr>
+          <td>25</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-E725A234F8</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>26</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-BFFC506E23</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>27</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-32DBA962FA</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>28</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-B2570EB83F</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>29</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-EC2122FF61</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>30</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-3298E4B1EF</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>31</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-2CC5DA7D6F</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>32</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-B4FB3347C2</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>33</td>
+          <td data-num="3"><span class="scorer-badge">3</span></td>
+          <td>PL-0DB5FC887A</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        </tr><tr>
+          <td>34</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-7CF71FAD6C</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        </tr><tr>
+          <td>35</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-1C3D63C090</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>36</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-E179108772</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Currie_Star_FC_Whites.html">Currie Star FC Whites</a></td>
+        </tr><tr>
+          <td>37</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-4EBF2C38C3</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>38</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-9BE0E41CD8</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>39</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-2B8B0026A9</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>40</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-D469238AF3</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>41</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-7DF4A33C5B</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+        </tr><tr>
+          <td>42</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-ED93C23534</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+        </tr><tr>
+          <td>43</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-A7D8A28159</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        </tr><tr>
+          <td>44</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-639D35E7C3</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>45</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-33794143F2</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+        </tr><tr>
+          <td>46</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-2A71FDCDE3</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>47</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-112B162964</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+        </tr><tr>
+          <td>48</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-8CA84D3662</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>49</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-CDBC50F73A</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>50</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-1A44E7C8C4</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>51</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-9A8CEA30C5</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>52</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-FB3FDC7A87</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>53</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-C2093A9DF4</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        </tr><tr>
+          <td>54</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-C618AC85EC</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>55</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-AAC78B0FCE</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>56</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-4B01A551DD</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        </tr><tr>
+          <td>57</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-024701A62F</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+        </tr><tr>
+          <td>58</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-C3F3B7357F</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        </tr><tr>
+          <td>59</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-798636C85D</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>60</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-BBBD2665A8</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>61</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-976FB64454</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        </tr><tr>
+          <td>62</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-016C57145C</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>63</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-0CCEFD5C70</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+        </tr><tr>
+          <td>64</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-57C8D3E09E</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>65</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-C28AED88E9</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>66</td>
+          <td data-num="2"><span class="scorer-badge">2</span></td>
+          <td>PL-93F4C543E8</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+        </tr><tr>
+          <td>67</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-D4F9BA0EA4</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+        </tr><tr>
+          <td>68</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-67A8CAF623</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        </tr><tr>
+          <td>69</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-C14D9C18A6</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>70</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-8D9D9032ED</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+        </tr><tr>
+          <td>71</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-7FB35E75DC</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        </tr><tr>
+          <td>72</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-7C14438825</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+        </tr><tr>
+          <td>73</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-D46332ED1E</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+        </tr><tr>
+          <td>74</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-9C893630FD</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+        </tr><tr>
+          <td>75</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-D15A408397</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        </tr><tr>
+          <td>76</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-92B4D3AEDB</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>77</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-82BF6CCF15</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>78</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-D3DE2B8AC8</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        </tr><tr>
+          <td>79</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-0B9DAFECF9</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        </tr><tr>
+          <td>80</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-2773A79ABD</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+        </tr><tr>
+          <td>81</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-41E97D4D9B</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>82</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-BFA8232557</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>83</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-99B1F3964C</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        </tr><tr>
+          <td>84</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-922DE8CA71</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>85</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-7F0CC1BE38</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        </tr><tr>
+          <td>86</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-EF4E4D5FDE</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>87</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-AA8DD8C559</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>88</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-3CC4BA8BEB</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+        </tr><tr>
+          <td>89</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-66592C3F93</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Currie_Star_FC_Whites.html">Currie Star FC Whites</a></td>
+        </tr><tr>
+          <td>90</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-0DD8759A6F</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>91</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-20FD5589BF</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>92</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-D122C26616</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>93</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-33BA1BE5C4</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>94</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-6CC3357A5F</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>95</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-458E3F2579</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>96</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-31B9A0709E</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>97</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-E37EBBCF8E</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+        </tr><tr>
+          <td>98</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-BB9682C6FB</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+        </tr><tr>
+          <td>99</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-1E80A8D6F8</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+        </tr><tr>
+          <td>100</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-0A5CFE093A</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+        </tr><tr>
+          <td>101</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-4E0984F829</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+        </tr><tr>
+          <td>102</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-0C83078E35</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>103</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-9A25E70495</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>104</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-BA1D54FC70</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+        </tr><tr>
+          <td>105</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-51CB2BF300</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>106</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-42094DDC0F</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>107</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-73751E5764</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Easthouses_Lily_MWFC.html">Easthouses Lily MWFC</a></td>
+        </tr><tr>
+          <td>108</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-0E249A56AC</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+        </tr><tr>
+          <td>109</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-BDBD5ED1D5</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+        </tr><tr>
+          <td>110</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-ED37365D8D</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        </tr><tr>
+          <td>111</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-2C791C0509</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>112</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-59357286CB</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>113</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-6A04798086</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>114</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-30478ACCC5</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Currie_Star_FC_Whites.html">Currie Star FC Whites</a></td>
+        </tr><tr>
+          <td>115</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-2C5D6E380F</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+        </tr><tr>
+          <td>116</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-20CBA32869</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>117</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-795DC80563</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Currie_Star_FC_Whites.html">Currie Star FC Whites</a></td>
+        </tr><tr>
+          <td>118</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-6C43FCB7C7</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+        </tr><tr>
+          <td>119</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-10BBF36124</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+        </tr><tr>
+          <td>120</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-024631C59E</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr><tr>
+          <td>121</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-404A06C625</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+        </tr><tr>
+          <td>122</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-62C6F2D0B1</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+        </tr><tr>
+          <td>123</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-3F91BEB7A7</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+        </tr><tr>
+          <td>124</td>
+          <td data-num="1"><span class="scorer-badge">1</span></td>
+          <td>PL-B5226FF468</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+        </tr></tbody></table>
+        <div class="more-btn-wrap">
+          <button class="btn-more-scorers" onclick="toggleScorers(this)" data-more-text="Show More (114 more) ▼">
+            Show More (114 more) ▼
+          </button>
+        </div><h3>Disciplinary Record</h3><table class="sortable">
+        <thead><tr>
+          <th class="sortable" data-type="num" style="width:70px">Rank</th>
+          <th class="sortable" data-type="text">Team</th>
+          <th class="sortable" data-type="num" style="width:110px">🟨 Yellows</th>
+          <th class="sortable" data-type="num" style="width:110px">🟥 Reds</th>
+          <th class="sortable pts-head" data-type="num" style="width:110px">Total Cards</th>
+        </tr></thead>
+        <tbody><tr>
+          <td>1</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Inverkeithing_Hillfield_Swifts.html">Inverkeithing Hillfield Swifts</a></td>
+          <td data-num="17"><span class="card-badge yellow-card">17</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="19">19</td>
+        </tr><tr>
+          <td>2</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Bonnyrigg_Rose.html">Bonnyrigg Rose</a></td>
+          <td data-num="13"><span class="card-badge yellow-card">13</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="15">15</td>
+        </tr><tr>
+          <td>3</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Edinburgh_South_Community_CFC.html">Edinburgh South Community CFC</a></td>
+          <td data-num="15"><span class="card-badge yellow-card">15</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="15">15</td>
+        </tr><tr>
+          <td>4</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Tranent_FC.html">Tranent FC</a></td>
+          <td data-num="11"><span class="card-badge yellow-card">11</span></td>
+          <td data-num="2"><span class="card-badge red-card">2</span></td>
+          <td class="total-cards" data-num="13">13</td>
+        </tr><tr>
+          <td>5</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Dalkeith_Thistle_CFC.html">Dalkeith Thistle CFC</a></td>
+          <td data-num="12"><span class="card-badge yellow-card">12</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="12">12</td>
+        </tr><tr>
+          <td>6</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Penicuik_Athletic_FC.html">Penicuik Athletic FC</a></td>
+          <td data-num="10"><span class="card-badge yellow-card">10</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="10">10</td>
+        </tr><tr>
+          <td>7</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth_Blues.html">Spartans FC Youth Blues</a></td>
+          <td data-num="8"><span class="card-badge yellow-card">8</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="9">9</td>
+        </tr><tr>
+          <td>8</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Broxburn_Athletic_Colts.html">Broxburn Athletic Colts</a></td>
+          <td data-num="9"><span class="card-badge yellow-card">9</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="9">9</td>
+        </tr><tr>
+          <td>9</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Rapids.html">KSQ Rapids</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="8">8</td>
+        </tr><tr>
+          <td>10</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Corstorphine_Dynamo_FC_Blacks.html">Corstorphine Dynamo FC Blacks</a></td>
+          <td data-num="7"><span class="card-badge yellow-card">7</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="7">7</td>
+        </tr><tr>
+          <td>11</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Merchiston_FC.html">North Merchiston FC</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="1"><span class="card-badge red-card">1</span></td>
+          <td class="total-cards" data-num="6">6</td>
+        </tr><tr>
+          <td>12</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Spartans_FC_Youth.html">Spartans FC Youth</a></td>
+          <td data-num="6"><span class="card-badge yellow-card">6</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="6">6</td>
+        </tr><tr>
+          <td>13</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Currie_Star_FC_Whites.html">Currie Star FC Whites</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>14</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-KSQ_Galaxy.html">KSQ Galaxy</a></td>
+          <td data-num="5"><span class="card-badge yellow-card">5</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="5">5</td>
+        </tr><tr>
+          <td>15</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-North_Berwick_FC.html">North Berwick FC</a></td>
+          <td data-num="4"><span class="card-badge yellow-card">4</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="4">4</td>
+        </tr><tr>
+          <td>16</td>
+          <td><a class="team-link" href="Team-U18-Alpha_Trophies_2009s_Division_1_26_27-Easthouses_Lily_MWFC.html">Easthouses Lily MWFC</a></td>
+          <td data-num="2"><span class="card-badge yellow-card">2</span></td>
+          <td data-num="0"><span class="card-badge red-card">0</span></td>
+          <td class="total-cards" data-num="2">2</td>
+        </tr></tbody></table></div>
+  <script>
+  function toggleScorers(btn) {
+    const block = btn.closest('.division-block');
+    if (!block) return;
+    const table = block.querySelector('.scorers-table');
+    if (!table) return;
+
+    const isCollapsed = table.classList.contains('collapsed');
+    if (isCollapsed) {
+      table.classList.remove('collapsed');
+      btn.textContent = 'Show Less ▲';
+    } else {
+      table.classList.add('collapsed');
+      btn.textContent = btn.getAttribute('data-more-text') || 'Show More ▼';
+    }
+  }
+
   (function(){
     function numVal(td){
       const ds = td.getAttribute('data-num');
@@ -319,7 +1069,6 @@ Home
       if(type === 'num'){
         return (a,b)=>{ const ax=numVal(a.children[i]), bx=numVal(b.children[i]); return asc ? (ax-bx) : (bx-ax); };
       }
-      
       return (a,b)=>{
         const ax=a.children[i].textContent.trim();
         const bx=b.children[i].textContent.trim();
@@ -330,7 +1079,7 @@ Home
     function sortTable(table, colIdx, type, th){
       const tbody = table.querySelector('tbody'); if(!tbody) return;
       const hasState = th.classList.contains('asc') || th.classList.contains('desc');
-      const firstAsc = (type === 'text'); 
+      const firstAsc = (type === 'text');
       const asc = hasState ? th.classList.contains('desc') : firstAsc;
 
       const rows = Array.from(tbody.querySelectorAll('tr')).map((r,idx)=>[r,idx]);
@@ -346,7 +1095,7 @@ Home
         th.addEventListener('click', ()=> sortTable(t, th.cellIndex, th.dataset.type||'text', th));
       });
     });
-    
+
     const divFilter = document.getElementById('division-filter');
     function applyFilter(val){
       document.querySelectorAll('.division-block').forEach(d=>{
@@ -361,4 +1110,4 @@ Home
       applyFilter(divFilter.value || 'ALL');
     }
   })();
-  </script></body></html>
+  </script><footer>Website not affiliated to SERYFA. Results not warranted. Errors and omissions excepted.</footer></body></html>
